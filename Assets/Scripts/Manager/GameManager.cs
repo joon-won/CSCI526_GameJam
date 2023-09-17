@@ -5,6 +5,11 @@ using UnityEngine.SceneManagement;
 using Sirenix.OdinInspector;
 
 namespace CSCI526GameJam {
+
+    /// <summary>
+    /// Manage game state. 
+    /// </summary>
+
     public class GameManager : MonoBehaviourSingleton<GameManager> {
 
         public static bool IsApplicationQuitting { get; private set; } = false;
@@ -19,14 +24,14 @@ namespace CSCI526GameJam {
         #region Publics
         public float GameTime => gameTime;
 
+        /// <summary>
+        /// Load into the gameplay scene. 
+        /// </summary>
+        /// <param name="profileIndex">Profile data index. </param>
         public void LoadGameplayScene(int profileIndex) {
             //SaveManager.Instance.SelectProfile(profileIndex);
             SceneManager.LoadScene(Configs.GameplaySceneIndex);
         }
-
-        //public void EnterGameplay() {
-        //    InputManager.Instance.Toggle(true);
-        //}
         #endregion
 
         #region Internals

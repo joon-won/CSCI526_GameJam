@@ -42,7 +42,10 @@ namespace CSCI526GameJam {
         public bool IsControlPressed => isControlPressed;
         public bool IsAltPressed => isAltPressed;
 
-
+        /// <summary>
+        /// Toggle input. 
+        /// </summary>
+        /// <param name="isEnabled">If to enable. </param>
         public void Toggle(bool isEnabled) {
             if (inputActions == null) return;
 
@@ -54,6 +57,11 @@ namespace CSCI526GameJam {
             }
         }
 
+        /// <summary>
+        /// Toggle a input mode. 
+        /// </summary>
+        /// <param name="mode">Mode to toggle. </param>
+        /// <param name="isEnabled">If to enable. </param>
         public void Toggle(InputMode mode, bool isEnabled) {
             InputActionMap targetActions = null;
 
@@ -73,6 +81,10 @@ namespace CSCI526GameJam {
             }
         }
 
+        /// <summary>
+        /// Get mouse's world position. 
+        /// </summary>
+        /// <returns>Mouse's world position. </returns>
         public Vector3 GetMousePositionInWorld() {
             return Camera.main.ScreenToWorldPoint(Mouse.current.position.ReadValue());
         }

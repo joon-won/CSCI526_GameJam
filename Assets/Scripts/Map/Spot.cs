@@ -6,11 +6,9 @@ using UnityEngine.Tilemaps;
 
 namespace CSCI526GameJam {
 
-    //[Serializable]
-    //public class SpotData {
-    //    public DepositData DepositData;
-    //    public bool IsExplored;
-    //}
+    /// <summary>
+    /// Basic unit of the grid-based map. 
+    /// </summary>
 
     [Serializable]
     public class Spot {
@@ -40,11 +38,22 @@ namespace CSCI526GameJam {
             return obj != null;
         }
 
+        /// <summary>
+        /// Constructor for <see cref="Spot"/>. 
+        /// </summary>
+        /// <param name="x">The x index. </param>
+        /// <param name="y">The y index. </param>
+        /// <param name="position">World position. </param>
         public Spot(int x, int y, Vector3 position) {
             index = new Vector2Int(x, y);
             this.position = position;
         }
 
+        /// <summary>
+        /// Get an adjacent spot. 
+        /// </summary>
+        /// <param name="direction">Adjacent direction. </param>
+        /// <returns></returns>
         public Spot GetAdjacent(Direction direction) {
             int x = index.x;
             int y = index.y;
@@ -64,23 +73,6 @@ namespace CSCI526GameJam {
             }
             return MapManager.Instance.Get(x, y);
         }
-
-        //public SpotData SaveData() {
-        //    var data = new SpotData() {
-        //        IsExplored = isExplored
-        //    };
-        //    if (deposit) {
-        //        data.DepositData = deposit.SaveData();
-        //    }
-        //    return data;
-        //}
-
-        //public void ReadData(SpotData data) {
-        //    if (data.DepositData != null) {
-        //        deposit = new(data.DepositData);
-        //    }
-        //    isExplored = data.IsExplored;
-        //}
         #endregion
 
         #region Internals

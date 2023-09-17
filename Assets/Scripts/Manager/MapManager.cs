@@ -9,16 +9,10 @@ using UnityEngine.Tilemaps;
 
 namespace CSCI526GameJam {
 
-    //[Serializable]
-    //public class MapManagerData {
-    //    public int Seed;
-    //    [ShowInInspector]
-    //    public Dictionary<Vector2Int, SpotData> IndexToSpotData = new();
+    /// <summary>
+    /// Manage the map system. 
+    /// </summary>
 
-    //    public MinimapData MinimapData;
-    //}
-
-    //public class MapManager : MonoBehaviourSingleton<MapManager>, ISaveable<MapManagerData> {
     public class MapManager : MonoBehaviourSingleton<MapManager> {
 
         #region Fields
@@ -35,10 +29,7 @@ namespace CSCI526GameJam {
         [SerializeField] private Vector3 mapDimension;
         [SerializeField] private Vector3 mapCenter;
 
-        private HashSet<Vector2Int> aroundPlayer = new();
-
         private Grid grid;
-
         private GameplayTilemap gameplayTilemap;
         #endregion
 
@@ -55,16 +46,21 @@ namespace CSCI526GameJam {
         // From left bottom to right top
         public Matrix<Spot> Spots { get; private set; } = new();
 
-
+        /// <summary>
+        /// Get a spot. 
+        /// </summary>
+        /// <param name="x">The x index. </param>
+        /// <param name="y">The y index. </param>
+        /// <returns>Spot at given index. Null if the index is out of bounds. </returns>
         public Spot Get(int x, int y) {
             if (x < 0 || y < 0 || x >= Spots.Width || y >= Spots.Height)
                 return null;
             return Spots[x, y];
         }
 
-        public Action OnSpotRevealed;
-
-
+        /// <summary>
+        /// Generate the map. 
+        /// </summary>
         public void GenerateMap() {
             seed = UnityEngine.Random.Range(-10000, 10000);
             gameplayTilemap.Init(seed);
@@ -75,52 +71,26 @@ namespace CSCI526GameJam {
             mapCenter = result.Item2;
         }
 
-        public int RoundToIndex(float value) {
-            return Mathf.FloorToInt(value);
-        }
-
+        /// <summary>
+        /// Check if a world position is on the map. 
+        /// </summary>
+        /// <param name="position">World position. </param>
+        /// <returns>True if the position is on map. Else false. </returns>
         public bool IsOnMap(Vector3 position) {
             var rect = new Rect(MapCenter, Vector2.one * mapSize);
             return rect.Contains(position);
         }
 
+        /// <summary>
+        /// Find a spot by the given world position. 
+        /// </summary>
+        /// <param name="worldPosition">World position. </param>
+        /// <returns>The Spot that corresponds to the world position. </returns>
         public Spot RoundToSpot(Vector3 worldPosition) {
-            int x = RoundToIndex(worldPosition.x);
-            int y = RoundToIndex(worldPosition.y);
+            int x = Mathf.FloorToInt(worldPosition.x);
+            int y = Mathf.FloorToInt(worldPosition.y);
             return Get(x, y);
         }
-
-        //public MapManagerData SaveData() {
-        //    var data = new MapManagerData {
-        //        Seed = seed,
-        //        MinimapData = minimap.SaveData()
-        //    };
-
-        //    foreach (var spot in Spots) {
-        //        var spotData = spot.SaveData();
-        //        data.IndexToSpotData[spot.Index] = spotData;
-        //    }
-
-        //    return data;
-        //}
-
-        //public void ReadData(MapManagerData data) {
-        //    seed = data.Seed;
-
-        //    gameplayTilemap.Init(seed);
-        //    GenerateSpots();
-
-        //    var result = gameplayTilemap.ComputeSizeAndCenter();
-        //    mapDimension = result.Item1;
-        //    mapCenter = result.Item2;
-
-        //    foreach (var kvp in data.IndexToSpotData) {
-        //        var index = kvp.Key;
-        //        var spotData = kvp.Value;
-        //        index.GetSpot().ReadData(spotData);
-        //    }
-        //    minimap.ReadData(data.MinimapData);
-        //}
         #endregion
 
         #region Internals

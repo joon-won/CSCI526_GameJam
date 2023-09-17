@@ -1,5 +1,8 @@
-
 using UnityEngine;
+
+/// <summary>
+/// Generic singleton for <see cref="MonoBehaviour"/>. 
+/// </summary>
 
 public abstract class MonoBehaviourSingleton<T> : MonoBehaviour
     where T : MonoBehaviour {

@@ -4,6 +4,11 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 
 namespace CSCI526GameJam {
+
+    /// <summary>
+    /// Manage cameras. 
+    /// </summary>
+
     public class CameraManager : MonoBehaviourSingleton<CameraManager> {
 
         #region Fields
@@ -23,6 +28,9 @@ namespace CSCI526GameJam {
         #region Publics
         public Camera UICamera => uiCamera;
 
+        /// <summary>
+        /// Init states of cameras. 
+        /// </summary>
         public void Init() {
             var camera = Camera.main;
 
@@ -35,6 +43,10 @@ namespace CSCI526GameJam {
             //camera.orthographicSize = (rectHeight / 2) / aspectRatio;
         }
 
+        /// <summary>
+        /// Toggle camera to free or not. 
+        /// </summary>
+        /// <param name="isFree">If to free. </param>
         public void ToggleFreeCamera(bool isFree) {
             this.isFree = isFree;
         }

@@ -4,6 +4,10 @@ using System.Collections.Generic;
 using UnityEngine;
 
 namespace CSCI526GameJam {
+    
+    /// <summary>
+    /// A generic matrix. 
+    /// </summary>
 
     [Serializable]
     public class Matrix<T> : IEnumerable<T> {
@@ -17,10 +21,18 @@ namespace CSCI526GameJam {
         public int Height => data.GetLength(1);
         public int Count => data.Length;
 
+        /// <summary>
+        /// Default constructor. 
+        /// </summary>
         public Matrix() {
             data = new T[0, 0];
         }
 
+        /// <summary>
+        /// Constructor. 
+        /// </summary>
+        /// <param name="width">Width of the matrix. </param>
+        /// <param name="height">Height of the matrix. </param>
         public Matrix(int width, int height) {
             data = new T[width, height];
         }
@@ -46,6 +58,7 @@ namespace CSCI526GameJam {
         public IEnumerator<T> GetEnumerator() {
             return new Iterator(data);
         }
+
         IEnumerator IEnumerable.GetEnumerator() {
             return GetEnumerator();
         }
