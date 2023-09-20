@@ -33,23 +33,11 @@ namespace CSCI526GameJam {
             }
             return finalDamage;
         }
-
-        public override BuildingData SaveData() {
-            return new DefenseData(this);
-        }
         #endregion
 
         #region Internals
         protected abstract bool CanAttack();
         protected abstract void PerformAttack();
-
-        protected override void OnDataRead(BuildingData data) {
-            base.OnDataRead(data);
-
-            var defenseData = data.TryCast<DefenseData>();
-            attackCooldown = defenseData.AttackCooldown;
-            entity.transform.rotation = defenseData.Rotation;
-        }
 
         protected override void InitNumerics() {
             base.InitNumerics();
@@ -116,8 +104,6 @@ namespace CSCI526GameJam {
             base.Update();
 
             UpdateAttackCooldown();
-            if (!isRunning) return;
-
             TryAttack();
         }
 
