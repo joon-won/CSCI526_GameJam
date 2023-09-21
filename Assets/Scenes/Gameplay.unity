@@ -840,6 +840,7 @@ MonoBehaviour:
   hoveredTower: {fileID: 0}
   selectedTower: {fileID: 0}
   towerInstances: []
+  basePrefab: {fileID: -4548648733975016062, guid: 867ae6f51ba86ad4a93435f7feacd9ff, type: 3}
   towerPrefabs:
   - {fileID: 5325763293822199417, guid: e160ed99231d0ca4aa9ddb9a13cd43bb, type: 3}
   towerPrefabsPath: Assets/Prefabs/Tower
@@ -1118,6 +1119,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 62168fc2b47a32445ac13e1c517e5b5b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  blockerLayer:
+    serializedVersion: 2
+    m_Bits: 256
   isPreviewing: 0
   config: {fileID: 0}
   cachedSpot:

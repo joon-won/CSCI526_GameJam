@@ -26,7 +26,7 @@ namespace CSCI526GameJam {
 
         [SerializeField] private List<Tower> towerInstances = new();
 
-        //[SerializeField] private Building corePrefab;
+        [SerializeField] private PlayerBase basePrefab;
         [SerializeField] private List<Tower> towerPrefabs;
 
         private TowerPlacer placer;
@@ -45,29 +45,15 @@ namespace CSCI526GameJam {
         [Button("Find Tower Prefabs", ButtonSizes.Large)]
         private void FindAssets() {
             towerPrefabs = Utility.FindRefsInFolder<Tower>(towerPrefabsPath, AssetType.Prefab);
-
-            // Validate prefabs. 
-            //var isCoreFound = false;
-            //for (int i = 0; i < buildingPrefabs.Count; i++) {
-            //    var prefab = buildingPrefabs[i];
-            //    if (prefab is not UntitledGame.Core) continue;
-
-            //    if (isCoreFound) {
-            //        Debug.LogWarning($"There are duplicate prefabs of {typeof(Core)}. Fix it! ");
-            //    }
-            //    else {
-            //        isCoreFound = true;
-            //        corePrefab = prefab;
-            //        buildingPrefabs.Remove(prefab);
-            //    }
-            //}
-
-            //if (!isCoreFound) {
-            //    Debug.LogWarning($"{typeof(Core)} prefab is not found under {buildingPrefabsPath}. Fix it! ");
-            //}
-            //else {
             Debug.Log($"Found {towerPrefabs.Count} tower prefabs under {towerPrefabsPath}. ");
-            //}
+
+            var foundBase = Utility.FindRefsInFolder<PlayerBase>(towerPrefabsPath, AssetType.Prefab);
+            if (foundBase.Count == 0) {
+                Debug.LogWarning($"Player base prefab is not found under {towerPrefabsPath}. ");
+                return;
+            }
+            basePrefab = foundBase[0];
+            Debug.Log($"Player base prefab is found under {towerPrefabsPath}. ");
         }
 #endif
         #endregion
@@ -189,14 +175,8 @@ namespace CSCI526GameJam {
         /// Generate the base. 
         /// </summary>
         public void GenerateBase() {
-            //var core = Instantiate(corePrefab, buildingsHolder.transform);
-            //var mapSize = MapManager.Instance.MapSize;
-            //var spot = MapManager.Instance.Get(mapSize / 2, mapSize / 2);
-            //var area = new Area(core.Config, spot);
-            //core.Construct(area);
-
-            //buildings.Add(core);
-            //Core = core as Core;
+            var playerBase = Instantiate(basePrefab, towersHolder.transform);
+            playerBase.transform.position = MapManager.Instance.MapCenter;
         }
         #endregion
 

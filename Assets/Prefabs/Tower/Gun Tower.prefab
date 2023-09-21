@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 260753304506694372}
   - component: {fileID: 413479635177316459}
   - component: {fileID: 3505510601840442666}
-  m_Layer: 6
+  m_Layer: 7
   m_Name: Entity
   m_TagString: Building
   m_Icon: {fileID: 0}
@@ -103,7 +103,7 @@ BoxCollider2D:
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 0.75, y: 0.75}
+    oldSize: {x: 1, y: 1}
     newSize: {x: 1.92, y: 1.92}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
@@ -143,7 +143,7 @@ GameObject:
   m_Component:
   - component: {fileID: 75407745179464037}
   - component: {fileID: 5325763293822199417}
-  m_Layer: 6
+  m_Layer: 7
   m_Name: Gun Tower
   m_TagString: Building
   m_Icon: {fileID: 0}

@@ -8,6 +8,9 @@ namespace CSCI526GameJam {
     public class TowerPlacer : MonoBehaviour {
 
         #region Fields
+        [MandatoryFields]
+        [SerializeField] private LayerMask blockerLayer;
+
         [ComputedFields]
         [SerializeField] private bool isPreviewing = false;
         [SerializeField] private TowerConfig config;
@@ -89,7 +92,8 @@ namespace CSCI526GameJam {
 
             cachedSpot = spot ? spot : MapManager.Instance.MouseSpot;
 
-            canBuild = cachedTower.CanBuild(cachedSpot);
+            var isBlocked = Physics2D.OverlapBox(cachedSpot.Position, new(Configs.CellSize, Configs.CellSize), 0f, blockerLayer);
+            canBuild = isBlocked ? false : cachedTower.CanBuild(cachedSpot);
             spriteRenderer.color = canBuild ? Color.white : Color.red;
 
             transform.position = cachedSpot.Position;
