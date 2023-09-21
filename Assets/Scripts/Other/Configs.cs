@@ -18,6 +18,7 @@ namespace CSCI526GameJam {
     //    Lengendary,
     //}
 
+
     public static class Configs {
         //public const string Version = "0.1.0";
 

@@ -53,6 +53,7 @@ namespace CSCI526GameJam {
             InputManager.Instance.Toggle(true);
             MapManager.Instance.GenerateMap();
             CameraManager.Instance.Init();
+            TowerManager.Instance.GenerateBase();
         }
 
         private void OnSceneUnloaded(Scene scene) {
