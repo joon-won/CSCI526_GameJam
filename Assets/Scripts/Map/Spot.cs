@@ -17,7 +17,7 @@ namespace CSCI526GameJam {
         [ComputedFields]
         [SerializeField] private Vector2Int index;
         [SerializeField] private Vector3 position;
-        [SerializeField] private Building building;
+        [SerializeField] private Tower tower;
         #endregion
 
         #region Publics
@@ -26,7 +26,7 @@ namespace CSCI526GameJam {
 
         public Vector2Int Index => index;
         public Vector3 Position => position;
-        public Building Building => building;
+        public Tower Tower => tower;
 
         public Spot Top => GetAdjacent(Direction.Top);
         public Spot Bottom => GetAdjacent(Direction.Bottom);
@@ -72,6 +72,11 @@ namespace CSCI526GameJam {
                     break;
             }
             return MapManager.Instance.Get(x, y);
+        }
+
+        public void SetBuilding(Tower building) {
+            this.tower = building;
+            OnChange?.Invoke();
         }
         #endregion
 

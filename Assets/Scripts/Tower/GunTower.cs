@@ -6,7 +6,7 @@ using Random = UnityEngine.Random;
 
 namespace CSCI526GameJam {
 
-    public class GunTower : Defense {
+    public class GunTower : Tower {
 
         #region Fields
         [ClassHeader(typeof(GunTower))]
@@ -17,10 +17,9 @@ namespace CSCI526GameJam {
         [SerializeField] protected float bulletSpeed = 30f;
         [SerializeField] protected float bulletSpread = 30f;
         [SerializeField] protected float bulletImpact = 1f;
-        [SerializeField] protected ProductConfig ammo;
 
-        [ComputedFields]
-        [SerializeField] protected Enemy target;
+        //[ComputedFields]
+        //[SerializeField] protected Enemy target;
         #endregion
 
         #region Publics
@@ -28,13 +27,13 @@ namespace CSCI526GameJam {
 
         #region Internals
         protected override bool CanAttack() {
-            return target && Vector3.Angle(entity.transform.up, target.transform.position - transform.position) < attackDegree;
+            //return target && Vector3.Angle(entity.transform.up, target.transform.position - transform.position) < attackDegree;
+            return false;
         }
 
         protected override void PerformAttack() {
             // make a bullet
-            var bullet = GetAmmo<Bullet>(ammo);
-            if (!bullet) return;
+            var bullet = ProjectilePooler.Instance.Get<Bullet>();
 
             // calculate spread and fire
             var randomDegree = Random.Range(-bulletSpread * 0.5f, bulletSpread * 0.5f);
@@ -45,13 +44,13 @@ namespace CSCI526GameJam {
 
         protected override void PerformUpdate() {
             // find target
-            if (!target) {
-                target = transform.position.FindClosestByAngle(transform.up, attackRange, targetLayerMask) as Enemy;
-            }
-            if (!target) return;
+            //if (!target) {
+            //    target = transform.position.FindClosestByAngle(transform.up, attackRange, targetLayerMask) as Enemy;
+            //}
+            //if (!target) return;
 
-            // rotate to target
-            entity.transform.FaceTo(target.transform, rotateSpeed * Time.deltaTime);
+            //// rotate to target
+            //entity.transform.FaceTo(target.transform, rotateSpeed * Time.deltaTime);
         }
         #endregion
 
