@@ -7,8 +7,33 @@ using Sirenix.OdinInspector;
 
 namespace CSCI526GameJam {
 
+    // Example:
+    //private Numeric damage;
+    //private Numeric valueModifier;
+    //private Numeric scalarModifier;
+    //private void OnItemAdded() {
+    //    // Numeric formula:
+    //    // resolvedValue = (baseValue + valueModifiers.Value + bonusValue)
+    //    //    * (1f + scalarModifiers.Value + bonusScalar);
+
+    //    damage = new(5f); // Now damage = 5
+    //    valueModifier = new(10f); // Value modifier is a Numeric of 10
+    //    scalarModifier = new(3f); // Scalar modifier is a Numeric of 3
+
+    //    damage.IncreaseValue(10f); // Add 10 bonus value. Now damage = 15
+    //    damage.IncreaseScalar(1f); // Add 1 bonus scalar (double damage). Now damage = 30
+
+    //    // Add value modifier with a ratio of 3f.
+    //    // Now damage = (5 + 3 * 10 + 10) * (1 + 1) = 90
+    //    damage.AddValueModifier(3f, valueModifier);
+
+    //    // Add scalar modifier with a ratio of 0.5f.
+    //    // Now damage = (5 + 3 * 10 + 10) * (1 + 0.5 * 3 + 1) = 157.5
+    //    damage.AddScalarModifier(0.5f, scalarModifier);
+    //}
+
     /// <summary>
-    /// General numeric set. 
+    /// Shortcut for creating a pair of value and scalar modifier. 
     /// </summary>
     [Serializable]
     public class NumericSet {

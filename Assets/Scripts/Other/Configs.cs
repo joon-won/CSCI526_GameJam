@@ -12,21 +12,15 @@ namespace CSCI526GameJam {
         Right,
     }
 
-    //public enum ItemRank {
-    //    Common,
-    //    Rare,
-    //    Lengendary,
-    //}
+    public enum ItemRank {
+        Common,
+        Rare,
+        Lengendary,
+    }
 
 
     public static class Configs {
-        //public const string Version = "0.1.0";
-
-        //public const string SaveDirectory = "Save";
-        //public const string SaveFileName = "profiledata";
-        //public const string SaveExtension = ".sav";
-        //public const int ProfileMaxCount = 3;
-        //public const string EncryptionPassword = "";
+        public const string Version = "0.0.1";
 
         public const int MainMenuSceneIndex = 0;
         public const int GameplaySceneIndex = 1;
