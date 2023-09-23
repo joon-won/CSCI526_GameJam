@@ -122,7 +122,6 @@ namespace CSCI526GameJam {
 
             critDamage = new(config.CritDamage);
             critDamage.AddNumericSet(stats.CritDamage);
-
         }
 
         protected virtual void TryAttack() {
