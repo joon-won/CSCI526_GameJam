@@ -5,7 +5,7 @@ using UnityEngine.UI;
 
 namespace CSCI526GameJam
 {
-    public class Shop : MonoBehaviour
+    public class UIShop : MonoBehaviour
     {
         public GameObject ShopPanel;
         public Button shopButton;

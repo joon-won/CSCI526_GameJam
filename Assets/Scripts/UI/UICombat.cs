@@ -5,7 +5,7 @@ using UnityEngine.UI;
 
 namespace CSCI526GameJam
 {
-    public class Combat : MonoBehaviour
+    public class UICombat : MonoBehaviour
     {
         public GameObject CombatPanel;
         public GameObject ControlPanel;

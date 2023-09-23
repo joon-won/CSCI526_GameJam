@@ -5,7 +5,7 @@ using UnityEngine.SceneManagement;
 
 namespace CSCI526GameJam
 {
-    public class GameOver : MonoBehaviour
+    public class UIGameOver : MonoBehaviour
     {
         // Update is called once per frame
         void Update()
