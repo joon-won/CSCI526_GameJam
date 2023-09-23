@@ -26,37 +26,28 @@ namespace CSCI526GameJam {
             Debug.Log($"Found {itemConfigs.Count} item configs under {itemConfigsPath}. ");
         }
 #endif
-
-        // NOTE: Test
-        private void Debug_buy(string itemName) {
-            foreach (var config in itemConfigs) {
-                if (config.ItemName == itemName) Buy(config);
-            }
-        }
-
-        [Button("Buy Apple", ButtonSizes.Medium)]
-        private void BuyApple() {
-            Debug_buy("Apple");
-        }
-        [Button("Buy Banana", ButtonSizes.Medium)]
-        private void BuyBanana() {
-            Debug_buy("Banana");
-        }
-        [Button("Buy Cat", ButtonSizes.Medium)]
-        private void BuyCat() {
-            Debug_buy("Cat");
-        }
         #endregion
 
         #region Publics
         public event Action<Item> OnItemAdded;
 
+        public int Gold => gold;
+
+        /// <summary>
+        /// Get a random item from given rank. 
+        /// </summary>
+        /// <param name="rank">Rank of the item. </param>
+        /// <returns>A random item. </returns>
         public ItemConfig GetRandom(ItemRank rank) {
             var items = rankToItem[rank];
             var index = Random.Range(0, items.Count);
             return items[index].Config;
         }
 
+        /// <summary>
+        /// Try to buy a item. 
+        /// </summary>
+        /// <param name="config">Config of the item. </param>
         public void Buy(ItemConfig config) {
             if (config.Price > gold) return;
 
@@ -66,11 +57,16 @@ namespace CSCI526GameJam {
                 return;
             }
 
+            gold -= config.Price;
             item.Add();
             OnItemAdded?.Invoke(item);
         }
 
         // TODO: To be modified. 
+        /// <summary>
+        /// Try to sell an item. 
+        /// </summary>
+        /// <param name="config">Config of the item. </param>
         public void Sell(ItemConfig config) {
             var item = configToItem[config];
             if (item.NumStacked == 0) {
@@ -82,10 +78,16 @@ namespace CSCI526GameJam {
             gold += config.Price;
         }
 
-        public void Debug_addItems(int num) {
-            foreach (var data in itemConfigs) {
+        /// <summary>
+        /// (Debug) Add all items, ignoring numAvailable and price. 
+        /// </summary>
+        /// <param name="num">Num of each item to add. </param>
+        public void Debug_addItems(int num = 1) {
+            foreach (var config in itemConfigs) {
                 for (int i = 0; i < num; i++) {
-                    Buy(data);
+                    var item = configToItem[config];
+                    item.Add();
+                    OnItemAdded?.Invoke(item);
                 }
             }
         }
@@ -98,11 +100,12 @@ namespace CSCI526GameJam {
         protected override void Awake() {
             base.Awake();
 
-            foreach (var data in itemConfigs) {
-                var item = new Item(data);
-                configToItem.Add(data, item);
+            // Init items by its config and rank. 
+            foreach (var config in itemConfigs) {
+                var item = new Item(config);
+                configToItem.Add(config, item);
 
-                var rank = data.Rank;
+                var rank = config.Rank;
                 if (!rankToItem.ContainsKey(rank)) {
                     rankToItem[rank] = new();
                 }
