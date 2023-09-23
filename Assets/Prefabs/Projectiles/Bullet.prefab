@@ -11,7 +11,8 @@ GameObject:
   - component: {fileID: 505324428327409437}
   - component: {fileID: 4358428375969753001}
   - component: {fileID: 6713837265171120299}
-  m_Layer: 0
+  - component: {fileID: 2231010027997734635}
+  m_Layer: 10
   m_Name: Bullet
   m_TagString: Projectile
   m_Icon: {fileID: 0}
@@ -72,7 +73,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: -1078210813
-  m_SortingLayer: 2
+  m_SortingLayer: 3
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: b3a46395a183029489b1f8cd7a611e49, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -97,14 +98,25 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 83419237e5f31c64db36926c1a3b3622, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  radius: 0.15
   damage: 0
-  impact: 0
-  targetLayerMask:
-    serializedVersion: 2
-    m_Bits: 0
   speed: 0
   elapsed: 0
   duration: 0
   isPiercing: 0
   piercingNum: 0
+--- !u!70 &2231010027997734635
+CapsuleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6766796278711630172}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: -0.031826228, y: -0.05255544}
+  m_Size: {x: 0.40766937, y: 0.66807103}
+  m_Direction: 0
