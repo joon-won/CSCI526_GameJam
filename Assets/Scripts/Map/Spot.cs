@@ -18,6 +18,8 @@ namespace CSCI526GameJam {
         [SerializeField] private Vector2Int index;
         [SerializeField] private Vector3 position;
         [SerializeField] private Tower tower;
+
+        public int DistanceToBase;
         #endregion
 
         #region Publics
@@ -77,6 +79,13 @@ namespace CSCI526GameJam {
         public void SetBuilding(Tower building) {
             this.tower = building;
             OnChange?.Invoke();
+        }
+
+        public void ComputeDistanceToBase() {
+            DistanceToBase = Distance(this, TowerManager.Instance.PlayerBase.Spot);
+        }
+        private int Distance(Spot start, Spot end) {
+            return Mathf.Abs(start.Index.x - end.Index.x) + Mathf.Abs(start.Index.y - end.Index.y);
         }
         #endregion
 
