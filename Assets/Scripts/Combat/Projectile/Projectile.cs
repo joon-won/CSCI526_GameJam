@@ -11,16 +11,17 @@ namespace CSCI526GameJam {
         [ClassHeader(typeof(Projectile))]
 
         [ComputedFields]
+        [SerializeField] private bool isDisposed;
         [SerializeField] protected float damage;
         //[SerializeField] protected float impact;
         #endregion
 
         #region Publics
-
         /// <summary>
         /// Set up the basic properties. 
         /// </summary>
         public virtual void Setup(Vector3 position, float damage) {
+            isDisposed = false;
             transform.position = position;
             this.damage = damage;
         }
@@ -31,6 +32,9 @@ namespace CSCI526GameJam {
         protected abstract void OnDisposed();
 
         protected void Dispose() {
+            if (isDisposed) return;
+
+            isDisposed = true;
             OnDisposed();
             ProjectilePooler.Instance.Release(this);
         }

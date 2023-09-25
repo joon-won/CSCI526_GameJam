@@ -22,46 +22,76 @@ namespace CSCI526GameJam {
         #endregion
 
         #region Internals
-        // TODO: Modify + optimize.
+        private int Manhattan(Spot start, Spot end) {
+            return Mathf.Abs(start.Index.x - end.Index.x) + Mathf.Abs(start.Index.y - end.Index.y);
+        }
+
         private void AStar(Spot start, Spot end) {
-            foreach (var spot in MapManager.Instance.Spots) {
-                spot.ComputeDistanceToBase();
+            var allSpots = MapManager.Instance.Spots;
+            var nodes = new Matrix<Node>(allSpots.Width, allSpots.Height);
+            foreach (var spot in allSpots) {
+                var node = new Node();
+                node.spot = spot;
+                node.g = 0;
+                node.h = Manhattan(spot, end);
+                node.f = node.h;
+                node.parent = null;
+
+                nodes[spot.Index] = node;
             }
 
-            var spotToPre = new Dictionary<Spot, Spot>();
+            var opens = new PriorityQueue<Node>();
+            var closeds = new HashSet<Node>();
 
-            var opens = new PriorityQueue<Spot>();
-            var closeds = new HashSet<Spot>();
+            var startNode = nodes[start.Index];
+            opens.Enqueue(startNode, startNode.f);
 
-            opens.Enqueue(start, start.DistanceToBase);
+            var adjacents = new List<Vector2Int>();
             while (opens.Count > 0) {
-                var spot = opens.Dequeue();
-                closeds.Add(spot);
+                var currNode = opens.Dequeue();
+                closeds.Add(currNode);
+
+                var x = currNode.spot.Index.x;
+                var y = currNode.spot.Index.y;
+                adjacents.Clear();
+                adjacents.AddRange(new[] {
+                    new Vector2Int(x - 1, y),
+                    new Vector2Int(x + 1, y),
+                    new Vector2Int(x, y - 1),
+                    new Vector2Int(x, y + 1)
+                });
                 for (int i = 0; i < 4; i++) {
-                    var adjacent = spot.GetAdjacent((Direction)i);
+                    var index = adjacents[i];
+                    if (index.x < 0 || index.x >= nodes.Width
+                        || index.y < 0 || index.y >= nodes.Height)
+                        continue;
 
-                    if (!adjacent || closeds.Contains(adjacent)
-                        || adjacent.Tower && adjacent.Tower is not PlayerBase) continue;
+                    var adjacent = nodes[index];
+                    if (closeds.Contains(adjacent)
+                        || adjacent.spot.Tower && adjacent.spot.Tower is not PlayerBase)
+                        continue;
 
-                    if (adjacent.Index == end.Index) {
-                        spotToPre[adjacent] = spot;
+                    var cost = currNode.g + 1;
+                    if (index == end.Index) {
+                        nodes[end.Index].parent = currNode;
                         var curr = adjacent;
-                        while (curr) {
-                            spots.Insert(0, curr);
-                            if (!spotToPre.ContainsKey(curr)) break;
-
-                            curr = spotToPre[curr];
+                        while (curr != null) {
+                            spots.Insert(0, curr.spot);
+                            curr = curr.parent;
                         }
                         return;
                     }
                     else if (!opens.Contains(adjacent)) {
-                        opens.Enqueue(adjacent, adjacent.DistanceToBase);
-                        spotToPre[adjacent] = spot;
+                        adjacent.g = cost;
+                        adjacent.f = adjacent.h + adjacent.g;
+                        opens.Enqueue(adjacent, adjacent.f);
+                        adjacent.parent = currNode;
                     }
                     else {
-                        if (spot.DistanceToBase < adjacent.DistanceToBase) {
-                            spotToPre[adjacent] = spot;
-                            adjacent.DistanceToBase = spot.DistanceToBase;
+                        if (cost < adjacent.g) {
+                            //adjacent.parent = currNode;
+                            //adjacent.g = currNode.g;
+                            opens.Remove(adjacent);
                         }
                     }
                 }
@@ -72,32 +102,12 @@ namespace CSCI526GameJam {
         #region Unity Methods
         #endregion
 
-        public class PriorityQueue<T> {
-            private List<Tuple<T, int>> items = new List<Tuple<T, int>>();
-
-            public int Count => items.Count;
-
-            public void Enqueue(T item, int priority) {
-                items.Add(new Tuple<T, int>(item, priority));
-                items.Sort((x, y) => x.Item2.CompareTo(y.Item2));
-            }
-
-            public T Dequeue() {
-                if (items.Count == 0) {
-                    throw new InvalidOperationException("Queue is empty.");
-                }
-
-                T item = items[0].Item1;
-                items.RemoveAt(0);
-                return item;
-            }
-            public bool Contains(T item) {
-                foreach (var tuple in items) {
-                    if (EqualityComparer<T>.Default.Equals(tuple.Item1, item))
-                        return true;
-                }
-                return false;
-            }
+        private class Node {
+            public Spot spot;
+            public int g;
+            public int h;
+            public int f;
+            public Node parent;
         }
     }
 }
