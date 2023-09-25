@@ -42,33 +42,28 @@ namespace CSCI526GameJam {
                 col = Random.Range(0, 2) == 0 ? 0 : size - 1;
             }
             var spot = MapManager.Instance.Get(col, row);
-
-            var enemy = Instantiate(enemyPrefabs[0], spot.Position, Quaternion.identity, enemyHolder.transform);
-            var path = new Path(spot, TowerManager.Instance.PlayerBase.Spot);
-            enemy.Follow(path);
-            enemyInstances.Add(enemy);
-            //StartCoroutine(EnemyWaveRoutine(spot));
+            StartCoroutine(EnemyWaveRoutine(spot));
         }
         #endregion
 
         #region Internals
         private IEnumerator EnemyWaveRoutine(Spot spot) {
-            var elapsed = 0f;
             var num = 10;
             var interval = 0.5f;
+            var elapsed = interval;
 
             var path = new Path(spot, TowerManager.Instance.PlayerBase.Spot);
-            while (num > 0 && elapsed < interval) {
-                var enemy = Instantiate(enemyPrefabs[0], spot.Position, Quaternion.identity, enemyHolder.transform);
-                enemy.Follow(path);
-                enemyInstances.Add(enemy);
-                yield return null;
-
+            while (num > 0) {
                 elapsed += Time.deltaTime;
                 if (elapsed > interval) {
+                    var enemy = Instantiate(enemyPrefabs[0], spot.Position, Quaternion.identity, enemyHolder.transform);
+                    enemy.Follow(path);
+                    enemyInstances.Add(enemy);
+
                     elapsed = 0f;
                     num--;
                 }
+                yield return null;
             }
         }
         #endregion
