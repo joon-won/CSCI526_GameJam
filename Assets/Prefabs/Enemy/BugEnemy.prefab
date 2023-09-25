@@ -9,9 +9,10 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2591050519041031362}
-  - component: {fileID: 307079634751858902}
-  - component: {fileID: 2591050519041031365}
   - component: {fileID: 3399645088350530338}
+  - component: {fileID: 307079634751858902}
+  - component: {fileID: 4057482738588278006}
+  - component: {fileID: 7663806781496647365}
   m_Layer: 9
   m_Name: BugEnemy
   m_TagString: Enemy
@@ -35,103 +36,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!50 &307079634751858902
-Rigidbody2D:
-  serializedVersion: 4
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2591050519041031364}
-  m_BodyType: 0
-  m_Simulated: 1
-  m_UseFullKinematicContacts: 0
-  m_UseAutoMass: 0
-  m_Mass: 0.0001
-  m_LinearDrag: 0
-  m_AngularDrag: 0.05
-  m_GravityScale: 0
-  m_Material: {fileID: 0}
-  m_Interpolate: 0
-  m_SleepingMode: 1
-  m_CollisionDetection: 0
-  m_Constraints: 0
---- !u!114 &2591050519041031365
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2591050519041031364}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f2be990528a8e3d4c92f236b4044d3b1, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  config: {fileID: 0}
-  attackDamage:
-    baseValue: 0
-    valueModifiers:
-      rid: 1979114879791136828
-    bonusValue: 0
-    scalarModifiers:
-      rid: 1979114879791136829
-    bonusScalar: 0
-    isDirty: 1
-    resolvedValue: 0
-  moveSpeed:
-    baseValue: 0
-    valueModifiers:
-      rid: 1979114879791136830
-    bonusValue: 0
-    scalarModifiers:
-      rid: 1979114879791136831
-    bonusScalar: 0
-    isDirty: 1
-    resolvedValue: 0
-  hitPoint:
-    baseValue: 0
-    valueModifiers:
-      rid: 1979114879791136832
-    bonusValue: 0
-    scalarModifiers:
-      rid: 1979114879791136833
-    bonusScalar: 0
-    isDirty: 1
-    resolvedValue: 0
-  armor:
-    rid: -2
-  isAlive: 1
-  altname: Bug
-  references:
-    version: 2
-    RefIds:
-    - rid: -2
-      type: {class: , ns: , asm: }
-    - rid: 1979114879791136828
-      type: {class: Numeric/ModifierCollection, ns: CSCI526GameJam, asm: Assembly-CSharp}
-      data:
-        modifiers: []
-    - rid: 1979114879791136829
-      type: {class: Numeric/ModifierCollection, ns: CSCI526GameJam, asm: Assembly-CSharp}
-      data:
-        modifiers: []
-    - rid: 1979114879791136830
-      type: {class: Numeric/ModifierCollection, ns: CSCI526GameJam, asm: Assembly-CSharp}
-      data:
-        modifiers: []
-    - rid: 1979114879791136831
-      type: {class: Numeric/ModifierCollection, ns: CSCI526GameJam, asm: Assembly-CSharp}
-      data:
-        modifiers: []
-    - rid: 1979114879791136832
-      type: {class: Numeric/ModifierCollection, ns: CSCI526GameJam, asm: Assembly-CSharp}
-      data:
-        modifiers: []
-    - rid: 1979114879791136833
-      type: {class: Numeric/ModifierCollection, ns: CSCI526GameJam, asm: Assembly-CSharp}
-      data:
-        modifiers: []
 --- !u!212 &3399645088350530338
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -170,20 +74,160 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
-  m_SortingOrder: 2
-  m_Sprite: {fileID: 0}
+  m_SortingLayerID: -906057255
+  m_SortingLayer: 2
+  m_SortingOrder: 0
+  m_Sprite: {fileID: 21300000, guid: 9769d5bdcb14c9c478627a20b24b0cf2, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
-  m_Size: {x: 1, y: 1}
+  m_Size: {x: 2.56, y: 2.56}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
-  m_WasSpriteAssigned: 0
+  m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!50 &307079634751858902
+Rigidbody2D:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2591050519041031364}
+  m_BodyType: 1
+  m_Simulated: 1
+  m_UseFullKinematicContacts: 0
+  m_UseAutoMass: 0
+  m_Mass: 0.0001
+  m_LinearDrag: 0
+  m_AngularDrag: 0.05
+  m_GravityScale: 0
+  m_Material: {fileID: 0}
+  m_Interpolate: 0
+  m_SleepingMode: 1
+  m_CollisionDetection: 0
+  m_Constraints: 0
+--- !u!61 &4057482738588278006
+BoxCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2591050519041031364}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0.5, y: 0.5}
+    oldSize: {x: 2.56, y: 2.56}
+    newSize: {x: 2.56, y: 2.56}
+    adaptiveTilingThreshold: 0.5
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  serializedVersion: 2
+  m_Size: {x: 1, y: 1}
+  m_EdgeRadius: 0
+--- !u!114 &7663806781496647365
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2591050519041031364}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d4994b7f3ba30467695a40e4a745193e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  config: {fileID: 0}
+  attackDamage:
+    baseValue: 0
+    valueModifiers:
+      rid: 1979114918915342352
+    bonusValue: 0
+    scalarModifiers:
+      rid: 1979114918915342353
+    bonusScalar: 0
+    isDirty: 1
+    resolvedValue: 0
+  moveSpeed:
+    baseValue: 0
+    valueModifiers:
+      rid: 1979114918915342354
+    bonusValue: 0
+    scalarModifiers:
+      rid: 1979114918915342355
+    bonusScalar: 0
+    isDirty: 1
+    resolvedValue: 0
+  currentHitPoint: 0
+  maxHitPoint:
+    baseValue: 0
+    valueModifiers:
+      rid: 1979114918915342356
+    bonusValue: 0
+    scalarModifiers:
+      rid: 1979114918915342357
+    bonusScalar: 0
+    isDirty: 1
+    resolvedValue: 0
+  armor:
+    baseValue: 0
+    valueModifiers:
+      rid: 1979114918915342358
+    bonusValue: 0
+    scalarModifiers:
+      rid: 1979114918915342359
+    bonusScalar: 0
+    isDirty: 1
+    resolvedValue: 0
+  isAlive: 1
+  path:
+    spots: []
+  altname: Bug
+  references:
+    version: 2
+    RefIds:
+    - rid: 1979114918915342352
+      type: {class: Numeric/ModifierCollection, ns: CSCI526GameJam, asm: Assembly-CSharp}
+      data:
+        modifiers: []
+    - rid: 1979114918915342353
+      type: {class: Numeric/ModifierCollection, ns: CSCI526GameJam, asm: Assembly-CSharp}
+      data:
+        modifiers: []
+    - rid: 1979114918915342354
+      type: {class: Numeric/ModifierCollection, ns: CSCI526GameJam, asm: Assembly-CSharp}
+      data:
+        modifiers: []
+    - rid: 1979114918915342355
+      type: {class: Numeric/ModifierCollection, ns: CSCI526GameJam, asm: Assembly-CSharp}
+      data:
+        modifiers: []
+    - rid: 1979114918915342356
+      type: {class: Numeric/ModifierCollection, ns: CSCI526GameJam, asm: Assembly-CSharp}
+      data:
+        modifiers: []
+    - rid: 1979114918915342357
+      type: {class: Numeric/ModifierCollection, ns: CSCI526GameJam, asm: Assembly-CSharp}
+      data:
+        modifiers: []
+    - rid: 1979114918915342358
+      type: {class: Numeric/ModifierCollection, ns: CSCI526GameJam, asm: Assembly-CSharp}
+      data:
+        modifiers: []
+    - rid: 1979114918915342359
+      type: {class: Numeric/ModifierCollection, ns: CSCI526GameJam, asm: Assembly-CSharp}
+      data:
+        modifiers: []
 --- !u!1 &2591050520133373955
 GameObject:
   m_ObjectHideFlags: 0

@@ -14,6 +14,7 @@ namespace CSCI526GameJam {
         [ShowInInspector] private HashSet<Enemy> enemyInstances = new();
 
         [SerializeField] private List<Enemy> enemyPrefabs;
+
 #if UNITY_EDITOR
         [EditorOnlyFields]
         [FolderPath, SerializeField]
@@ -56,7 +57,7 @@ namespace CSCI526GameJam {
             while (num > 0) {
                 elapsed += Time.deltaTime;
                 if (elapsed > interval) {
-                    var enemy = Instantiate(enemyPrefabs[0], spot.Position, Quaternion.identity, enemyHolder.transform);
+                    var enemy = Instantiate(enemyPrefabs[Random.Range(0, enemyPrefabs.Count)], spot.Position, Quaternion.identity, enemyHolder.transform);
                     enemy.Follow(path);
                     enemyInstances.Add(enemy);
 

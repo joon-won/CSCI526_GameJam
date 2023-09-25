@@ -6,19 +6,9 @@ using Random = UnityEngine.Random;
 
 namespace CSCI526GameJam
 {
-    public class BeastEnemy : Enemy {
-        #region Fields
-        [ClassHeader(typeof(BugEnemy))]
-
-        [MandatoryFields]
-
-        [SerializeField] protected string altname = "Beast";
-        #endregion
-
-        #region Public
-
-        #endregion Public
-    
+    public class BeastEnemy : Enemy
+    {
+        // Start is called before the first frame update
         void Start()
         {
         

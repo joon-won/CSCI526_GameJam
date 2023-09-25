@@ -6,18 +6,8 @@ using Random = UnityEngine.Random;
 
 namespace CSCI526GameJam
 {
-    public class ShroomEnemy : Enemy {
-        #region Fields
-        [ClassHeader(typeof(ShroomEnemy))]
-
-        [MandatoryFields]
-
-        [SerializeField] protected string altname = "Shroom";
-        #endregion
-
-        #region Public
-        #endregion Public
-    
+    public class ShroomEnemy : Enemy 
+    {
         void Start()
         {
         
