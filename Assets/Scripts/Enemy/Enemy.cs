@@ -52,6 +52,7 @@ namespace CSCI526GameJam {
 
         private void Awake() {
             InitNumerics();
+            currentHitPoint = maxHitPoint;
         }
 
         // Start is called before the first frame update

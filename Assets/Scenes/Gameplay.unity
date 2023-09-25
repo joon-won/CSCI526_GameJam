@@ -1802,7 +1802,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Gun Tower
+  m_text: Ice Tower
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -2058,7 +2058,7 @@ GameObject:
   - component: {fileID: 586776383}
   - component: {fileID: 586776382}
   m_Layer: 5
-  m_Name: GunTower Button (1)
+  m_Name: Wall Button
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2134,7 +2134,7 @@ MonoBehaviour:
         m_MethodName: Preview
         m_Mode: 2
         m_Arguments:
-          m_ObjectArgument: {fileID: 11400000, guid: 4d28b0091e746f24da518fceee136802, type: 2}
+          m_ObjectArgument: {fileID: 11400000, guid: 512ff0b50bbfeef4ea79999559f67d82, type: 2}
           m_ObjectArgumentAssemblyTypeName: CSCI526GameJam.TowerConfig, Assembly-CSharp
           m_IntArgument: 0
           m_FloatArgument: 0
@@ -2603,6 +2603,7 @@ MonoBehaviour:
   enemyHolder: {fileID: 0}
   enemyPrefabs:
   - {fileID: -3711159064795247232, guid: c38d52c88aeb3944fa47e8678da9d721, type: 3}
+  - {fileID: 1651930257767535526, guid: 30ca1af2953100047819430575c6300e, type: 3}
   enemyPrefabsPath: Assets/Prefabs/Enemy
 --- !u!4 &727382758
 Transform:
@@ -2835,7 +2836,7 @@ GameObject:
   - component: {fileID: 793363432}
   - component: {fileID: 793363431}
   m_Layer: 5
-  m_Name: GunTower Button (2)
+  m_Name: GunTower Button
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3052,7 +3053,7 @@ GameObject:
   - component: {fileID: 863872095}
   - component: {fileID: 863872094}
   m_Layer: 5
-  m_Name: GunTower Button (3)
+  m_Name: IceTower Button
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3128,7 +3129,7 @@ MonoBehaviour:
         m_MethodName: Preview
         m_Mode: 2
         m_Arguments:
-          m_ObjectArgument: {fileID: 11400000, guid: 4d28b0091e746f24da518fceee136802, type: 2}
+          m_ObjectArgument: {fileID: 11400000, guid: a7fae8a0445f9b84ab7a7060a509152d, type: 2}
           m_ObjectArgumentAssemblyTypeName: CSCI526GameJam.TowerConfig, Assembly-CSharp
           m_IntArgument: 0
           m_FloatArgument: 0
@@ -3339,6 +3340,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   poolData:
   - prefab: {fileID: 6713837265171120299, guid: 2bf6338aa704d0740aae50286bf86ed2, type: 3}
+    defualtAmount: 50
+    pool:
+      instances: []
+  - prefab: {fileID: 1377346478151836098, guid: 2e8f295437d4f1a41b4947557b982f3a, type: 3}
     defualtAmount: 50
     pool:
       instances: []
@@ -3768,6 +3773,8 @@ MonoBehaviour:
   basePrefab: {fileID: -4548648733975016062, guid: 867ae6f51ba86ad4a93435f7feacd9ff, type: 3}
   towerPrefabs:
   - {fileID: 5325763293822199417, guid: e160ed99231d0ca4aa9ddb9a13cd43bb, type: 3}
+  - {fileID: 1622472448420040292, guid: c983c2264b67f794aa8acb24c8f02ca8, type: 3}
+  - {fileID: 300941189509297059, guid: 23cabbd5ccb4f16428b9f3a1aef61ecb, type: 3}
   towerPrefabsPath: Assets/Prefabs/Towers
 --- !u!4 &1163178153
 Transform:
@@ -5500,7 +5507,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Gun Tower
+  m_text: Wall
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}

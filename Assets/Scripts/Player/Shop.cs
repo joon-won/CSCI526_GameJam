@@ -30,6 +30,7 @@ namespace CSCI526GameJam {
 
         #region Publics
         public event Action<Item> OnItemAdded;
+        public event Action<int> OnGoldChanged;
 
         public int Gold => gold;
 
@@ -48,21 +49,23 @@ namespace CSCI526GameJam {
         /// Try to buy a item. 
         /// </summary>
         /// <param name="config">Config of the item. </param>
-        public void Buy(ItemConfig config) {
-            if (config.Price > gold) return;
+        public bool Buy(ItemConfig config) {
+            if (config.Price > gold) return false;
 
             var item = configToItem[config];
             if (item.NumAvailable == 0) {
                 Debug.LogWarning($"Trying to buy an item {config.ItemName} with 0 numAvailable. ");
-                return;
+                return false;
             }
 
             gold -= config.Price;
             item.Add();
+
             OnItemAdded?.Invoke(item);
+            OnGoldChanged?.Invoke(gold);
+            return true;
         }
 
-        // TODO: To be modified. 
         /// <summary>
         /// Try to sell an item. 
         /// </summary>
@@ -76,6 +79,30 @@ namespace CSCI526GameJam {
 
             item.Remove();
             gold += config.Price;
+
+            OnGoldChanged?.Invoke(gold);
+        }
+
+        /// <summary>
+        /// Try to buy a tower. 
+        /// </summary>
+        /// <param name="config">Config of the tower. </param>
+        public bool Buy(TowerConfig config) {
+            if (config.Price > gold) return false;
+
+            gold -= config.Price;
+
+            OnGoldChanged?.Invoke(gold);
+            return true;
+        }
+
+        /// <summary>
+        /// Try to sell a tower. 
+        /// </summary>
+        /// <param name="config">Config of the tower. </param>
+        public void Sell(TowerConfig config) {
+            gold += config.Price;
+            OnGoldChanged?.Invoke(gold);
         }
 
         /// <summary>

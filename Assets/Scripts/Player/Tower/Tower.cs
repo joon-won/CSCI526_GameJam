@@ -127,7 +127,7 @@ namespace CSCI526GameJam {
         #endregion
 
         #region Unity Methods
-        private void Awake() {
+        protected virtual void Awake() {
             previewImage = config.Preview;
             regularImage = config.Image;
 

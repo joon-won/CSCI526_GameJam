@@ -15,6 +15,7 @@ namespace CSCI526GameJam {
         [TextArea(5, 10)]
         [SerializeField] private string description;
 
+        [SerializeField] private int price;
         [SerializeField] private float attackDamage;
         [SerializeField] private float attackSpeed;
         [SerializeField] private float attackRange;
@@ -27,6 +28,7 @@ namespace CSCI526GameJam {
         public Sprite Image => image;
         public string Description => description;
 
+        public int Price => price;
         public float AttackDamage => attackDamage;
         public float AttackSpeed => attackSpeed;
         public float AttackRange => attackRange;

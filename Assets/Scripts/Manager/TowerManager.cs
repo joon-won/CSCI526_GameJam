@@ -92,7 +92,8 @@ namespace CSCI526GameJam {
 
             var tower = Instantiate(configToPrefab[config], towersHolder.transform);
             tower.gameObject.SetActive(isActive);
-            towerInstances.Add(tower);
+
+            tower.OnBuild += () => towerInstances.Add(tower);
             tower.OnDemolish += () => towerInstances.Remove(tower);
             return tower;
         }
@@ -107,7 +108,7 @@ namespace CSCI526GameJam {
                 ChangeMode(Mode.Build);
             }
             else {
-                placer.CancelPreview();
+                ChangeMode(Mode.None);
             }
         }
 
@@ -116,10 +117,9 @@ namespace CSCI526GameJam {
         /// </summary>
         /// <param name="tower">Tower to refund. </param>
         public void Refund(Tower tower) {
-            //if (building == Core) return;
+            if (tower == PlayerBase) return;
 
-            // TODO: refund
-
+            Shop.Instance.Sell(tower.Config);
             tower.Demolish();
         }
 

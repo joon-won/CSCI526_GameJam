@@ -11,14 +11,14 @@ namespace CSCI526GameJam {
         #region Fields
         [ClassHeader(typeof(GunTower))]
 
-        [ComputedFields]
-        [SerializeField] protected Enemy target;
-
+        [MandatoryFields]
         [SerializeField] protected float rotateSpeed = 60f;
         [SerializeField] protected float attackDegree = 30f;
         [SerializeField] protected float bulletSpeed = 30f;
         [SerializeField] protected float bulletSpread = 30f;
-        //[SerializeField] protected float bulletImpact = 1f;
+
+        [ComputedFields]
+        [SerializeField] protected Enemy target;
         #endregion
 
         #region Publics

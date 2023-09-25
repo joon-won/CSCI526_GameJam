@@ -122,63 +122,63 @@ namespace CSCI526GameJam {
         /// <summary>
         /// Find the closest target by distance. 
         /// </summary>
-        //public static Damageable FindClosestByDistance(this Vector3 position, float radius, LayerMask layerMask) {
-        //    Damageable result = null;
-        //    var closest = Mathf.Infinity;
-        //    var colliders = Physics2D.OverlapCircleAll(position, radius, layerMask);
-        //    foreach (var collider in colliders) {
-        //        var obj = collider.GetComponent<Entity>().Damageable;
-        //        var distance = Vector3.Distance(position, collider.ClosestPoint(position));
-        //        if (distance < closest) {
-        //            result = obj;
-        //            closest = distance;
-        //        }
-        //    }
-        //    return result;
-        //}
+        public static Enemy FindClosestByDistance(this Vector3 position, float radius, LayerMask layerMask) {
+            Enemy result = null;
+            var closest = Mathf.Infinity;
+            var colliders = Physics2D.OverlapCircleAll(position, radius, layerMask);
+            foreach (var collider in colliders) {
+                var obj = collider.GetComponent<Enemy>();
+                var distance = Vector3.Distance(position, collider.ClosestPoint(position));
+                if (distance < closest) {
+                    result = obj;
+                    closest = distance;
+                }
+            }
+            return result;
+        }
 
-        //public static List<Damageable> FindClosestByDistance(this Vector3 position, float radius, LayerMask layerMask, int num) {
-        //    var result = new List<Damageable>();
-        //    var distances = new List<float>();
+        public static List<Enemy> FindClosestByDistance(this Vector3 position, float radius, LayerMask layerMask, int num) {
+            var result = new List<Enemy>();
+            var distances = new List<float>();
 
-        //    var farthestIndex = 0;
-        //    var farthestDistance = Mathf.Infinity;
+            var farthestIndex = 0;
+            var farthestDistance = Mathf.Infinity;
 
-        //    var colliders = Physics2D.OverlapCircleAll(position, radius, layerMask);
-        //    foreach (var collider in colliders) {
-        //        var obj = collider.GetComponent<Entity>().Damageable;
-        //        var distance = Vector3.Distance(position, collider.ClosestPoint(position));
+            var colliders = Physics2D.OverlapCircleAll(position, radius, layerMask);
+            foreach (var collider in colliders) {
+                var obj = collider.GetComponent<Enemy>();
+                var distance = Vector3.Distance(position, collider.ClosestPoint(position));
 
-        //        if (result.Count < num) {
-        //            result.Add(obj);
-        //            distances.Add(distance);
-        //        }
-        //        else if (distance < farthestDistance) {
-        //            // replace
-        //            result[farthestIndex] = obj;
-        //            distances[farthestIndex] = distance;
+                if (result.Count < num) {
+                    result.Add(obj);
+                    distances.Add(distance);
+                }
+                else if (distance < farthestDistance) {
+                    // replace
+                    result[farthestIndex] = obj;
+                    distances[farthestIndex] = distance;
 
-        //            // update farthest
-        //            for (int i = 0; i < result.Count; i++) {
-        //                if (distances[i] > farthestDistance) {
-        //                    farthestDistance = distances[i];
-        //                    farthestIndex = i;
-        //                }
-        //            }
-        //        }
-        //    }
-        //    return result;
-        //}
+                    // update farthest
+                    for (int i = 0; i < result.Count; i++) {
+                        if (distances[i] > farthestDistance) {
+                            farthestDistance = distances[i];
+                            farthestIndex = i;
+                        }
+                    }
+                }
+            }
+            return result;
+        }
 
-        //public static List<Damageable> FindAllByDistance(this Vector3 position, float radius, LayerMask layerMask) {
-        //    var result = new List<Damageable>();
-        //    var colliders = Physics2D.OverlapCircleAll(position, radius, layerMask);
-        //    foreach (var collider in colliders) {
-        //        var obj = collider.GetComponent<Entity>().Damageable;
-        //        result.Add(obj);
-        //    }
-        //    return result;
-        //}
+        public static List<Enemy> FindAllByDistance(this Vector3 position, float radius, LayerMask layerMask) {
+            var result = new List<Enemy>();
+            var colliders = Physics2D.OverlapCircleAll(position, radius, layerMask);
+            foreach (var collider in colliders) {
+                var obj = collider.GetComponent<Enemy>();
+                result.Add(obj);
+            }
+            return result;
+        }
 
         /// <summary>
         /// Find the closest target by angle. 
