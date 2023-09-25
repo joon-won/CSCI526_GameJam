@@ -11,15 +11,14 @@ namespace CSCI526GameJam {
         #region Fields
         [ClassHeader(typeof(GunTower))]
 
-        [MandatoryFields]
+        [ComputedFields]
+        [SerializeField] protected Enemy target;
+
         [SerializeField] protected float rotateSpeed = 60f;
         [SerializeField] protected float attackDegree = 30f;
         [SerializeField] protected float bulletSpeed = 30f;
         [SerializeField] protected float bulletSpread = 30f;
-        [SerializeField] protected float bulletImpact = 1f;
-
-        //[ComputedFields]
-        //[SerializeField] protected Enemy target;
+        //[SerializeField] protected float bulletImpact = 1f;
         #endregion
 
         #region Publics
@@ -27,8 +26,11 @@ namespace CSCI526GameJam {
 
         #region Internals
         protected override bool CanAttack() {
-            //return target && Vector3.Angle(entity.transform.up, target.transform.position - transform.position) < attackDegree;
-            return false;
+            if (!target) return false;
+
+            var direction = target.transform.position - transform.position;
+            var angleDiff = Vector3.Angle(entity.transform.up, direction);
+            return angleDiff < attackDegree;
         }
 
         protected override void PerformAttack() {
@@ -38,23 +40,27 @@ namespace CSCI526GameJam {
             // calculate spread and fire
             var randomDegree = Random.Range(-bulletSpread * 0.5f, bulletSpread * 0.5f);
             var rot = Quaternion.AngleAxis(randomDegree, Vector3.forward);
-            bullet.Setup(transform.position, ComputeFinalDamage(), bulletImpact, targetLayerMask);
+            bullet.Setup(transform.position, attackDamage);
             bullet.Fire(rot * entity.transform.up, bulletSpeed, attackRange);
         }
 
         protected override void PerformUpdate() {
-            // find target
-            //if (!target) {
-            //    target = transform.position.FindClosestByAngle(transform.up, attackRange, targetLayerMask) as Enemy;
-            //}
-            //if (!target) return;
+            // Find a target. 
+            if (!target) {
+                target = transform.position.FindClosestByAngle(transform.up, attackRange, targetLayerMask);
+            }
+            if (!target) return;
 
-            //// rotate to target
-            //entity.transform.FaceTo(target.transform, rotateSpeed * Time.deltaTime);
+            // Rotate to target. 
+            entity.transform.FaceTo(target.transform, rotateSpeed * Time.deltaTime);
         }
         #endregion
 
         #region Unity Methods
+        private void OnDrawGizmos() {
+            Gizmos.color = Color.red;
+            Gizmos.DrawWireSphere(transform.position, attackRange);
+        }
         #endregion
     }
 }

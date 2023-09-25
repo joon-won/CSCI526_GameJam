@@ -24,7 +24,7 @@ namespace CSCI526GameJam {
         [SerializeField] protected Sprite regularImage;
         [SerializeField] protected TowerEntity entity;
 
-        [SerializeReference] protected Numeric attackDamage;
+        [SerializeReference] protected Damage attackDamage;
         [SerializeReference] protected Numeric attackSpeed;
         [SerializeReference] protected Numeric attackRange;
         [SerializeReference] protected Numeric critChance;
@@ -86,18 +86,6 @@ namespace CSCI526GameJam {
 
             OnDemolish?.Invoke();
         }
-
-        /// <summary>
-        /// Compute final damage (If this is a critical hit, deal more damage). 
-        /// </summary>
-        /// <returns>Final damage. </returns>
-        public virtual float ComputeFinalDamage() {
-            float finalDamage = attackDamage;
-            if (Random.Range(0f, 1f) < critChance) {
-                finalDamage *= 1f + critDamage;
-            }
-            return finalDamage;
-        }
         #endregion
 
         #region Internal
@@ -108,7 +96,13 @@ namespace CSCI526GameJam {
         protected virtual void InitNumerics() {
             var stats = Stats.Instance.Tower;
 
-            attackDamage = new(config.AttackDamage);
+            critChance = new(config.CritChance);
+            critChance.AddNumericSet(stats.CritChance);
+
+            critDamage = new(config.CritDamage);
+            critDamage.AddNumericSet(stats.CritDamage);
+
+            attackDamage = new(config.AttackDamage, critChance, critDamage);
             attackDamage.AddNumericSet(stats.AttackDamage);
 
             attackSpeed = new(config.AttackSpeed);
@@ -116,12 +110,6 @@ namespace CSCI526GameJam {
 
             attackRange = new(config.AttackRange);
             attackRange.AddNumericSet(stats.AttackRange);
-
-            critChance = new(config.CritChance);
-            critChance.AddNumericSet(stats.CritChance);
-
-            critDamage = new(config.CritDamage);
-            critDamage.AddNumericSet(stats.CritDamage);
         }
 
         protected virtual void TryAttack() {
@@ -156,5 +144,26 @@ namespace CSCI526GameJam {
             TryAttack();
         }
         #endregion
+
+        protected class Damage : Numeric {
+
+            private Numeric critChance;
+            private Numeric critDamage;
+
+            public override float Value {
+                get {
+                    var value = base.Value;
+                    if (Random.Range(0f, 1f) < critChance) {
+                        value *= 1f + critDamage;
+                    }
+                    return value;
+                }
+            }
+
+            public Damage(float baseDamage, Numeric critChance, Numeric critDamage) : base(baseDamage) {
+                this.critChance = critChance;
+                this.critDamage = critDamage;
+            }
+        }
     }
 }

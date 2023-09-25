@@ -16,8 +16,8 @@ TagManager:
   - 
   - Tower
   - Player Base
-  - 
-  - 
+  - Enemy
+  - Projectile
   - 
   - 
   - 
@@ -45,6 +45,9 @@ TagManager:
     locked: 0
   - name: Tower
     uniqueID: 165607029
+    locked: 0
+  - name: Enemy
+    uniqueID: 3388910041
     locked: 0
   - name: Projectile
     uniqueID: 3216756483

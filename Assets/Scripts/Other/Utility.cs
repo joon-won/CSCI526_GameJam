@@ -180,24 +180,26 @@ namespace CSCI526GameJam {
         //    return result;
         //}
 
-        ///// <summary>
-        ///// Find the closest target by angle. 
-        ///// </summary>
-        //public static Damageable FindClosestByAngle(this Vector3 position, Vector3 direction, float radius, LayerMask layerMask) {
-        //    Damageable result = null;
-        //    var closest = Mathf.Infinity;
-        //    var colliders = Physics2D.OverlapCircleAll(position, radius, layerMask);
-        //    foreach (var collider in colliders) {
-        //        var obj = collider.GetComponent<Entity>().Damageable;
-        //        var angle = Vector3.Angle(direction, obj.transform.position - position);
-        //        if (angle < closest) {
-        //            result = obj;
-        //            closest = angle;
-        //        }
-        //    }
-        //    return result;
-        //}
-        
+        /// <summary>
+        /// Find the closest target by angle. 
+        /// </summary>
+        public static Enemy FindClosestByAngle(this Vector3 position, Vector3 direction, float radius, LayerMask layerMask) {
+            Enemy result = null;
+            var closest = Mathf.Infinity;
+            var colliders = Physics2D.OverlapCircleAll(position, radius, layerMask);
+            foreach (var collider in colliders) {
+                var enemy = collider.GetComponent<Enemy>();
+                if (!enemy) continue;
+
+                var angle = Vector3.Angle(direction, enemy.transform.position - position);
+                if (angle < closest) {
+                    result = enemy;
+                    closest = angle;
+                }
+            }
+            return result;
+        }
+
         public static float DistanceTo(this Vector3 origin, Collider2D collider) {
             var closestPoint = collider.ClosestPoint(origin);
             var distance = Vector3.Distance(origin, closestPoint);

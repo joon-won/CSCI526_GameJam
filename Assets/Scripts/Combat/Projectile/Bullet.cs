@@ -15,7 +15,6 @@ namespace CSCI526GameJam {
 
         [SerializeField] private bool isPiercing = false;
         [SerializeField] private int piercingNum = 0;
-        //private HashSet<Enemy> hits = new HashSet<Enemy>();
         #endregion
 
         #region Publics
@@ -44,12 +43,11 @@ namespace CSCI526GameJam {
         #endregion
 
         #region Internals
-        protected override void OnDispose() {
-            base.OnDispose();
+        protected override void OnDisposed() {
+            damage = 0f;
             speed = 0f;
             elapsed = 0f;
             duration = 0f;
-            //hits.Clear();
         }
         #endregion
 
@@ -59,39 +57,27 @@ namespace CSCI526GameJam {
                 Dispose();
                 return;
             }
-
             elapsed += Time.deltaTime;
-
             transform.position += transform.up * speed * Time.deltaTime;
+        }
 
-            //if (!isPiercing) {
-            //    var target = transform.position.FindClosestByDistance(radius, targetLayerMask);
-            //    if (!target) return;
+        private void OnTriggerEnter2D(Collider2D collision) {
+            var target = collision.GetComponent<Enemy>();
+            if (!target) return;
 
-            //    target.TakeDamage(damage);
-            //    target.HitBack(transform.position, impact);
-            //    Dispose();
-            //}
-            //else {
-            //    var targets = transform.position.FindAllByDistance(radius, targetLayerMask);
-            //    foreach (var target in targets) {
-            //        if (hits.Contains(target)) continue;
+            target.TakeDamage(damage);
+            //target.HitBack(transform.position, impact);
 
-            //        hits.Add(target);
-            //        target.TakeDamage(damage);
-            //        target.HitBack(transform.position, impact);
-
-            //        // if piercingNum is set to negative, no limit
-            //        if (piercingNum < 0) continue;
-
-            //        // else, decrease num
-            //        piercingNum--;
-            //        if (piercingNum >= 0) continue;
-
-            //        Dispose();
-            //        return;
-            //    }
-            //}
+            // If not piercing, dispose immediately.
+            // Else if piercingNum is set to negative, no limit. 
+            // Else decrease piercing num then dispose if zero. 
+            if (!isPiercing) {
+                Dispose();
+            }
+            else if (piercingNum > 0) {
+                piercingNum--;
+                if (piercingNum >= 0) Dispose();
+            }
         }
         #endregion
 

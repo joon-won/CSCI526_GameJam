@@ -10,45 +10,38 @@ namespace CSCI526GameJam {
         #region Fields
         [ClassHeader(typeof(Projectile))]
 
-        [MandatoryFields]
-        [SerializeField] protected float radius;
-
         [ComputedFields]
+        [SerializeField] private bool isDisposed;
         [SerializeField] protected float damage;
-        [SerializeField] protected float impact;
-        [SerializeField] protected LayerMask targetLayerMask;
+        //[SerializeField] protected float impact;
         #endregion
 
         #region Publics
-        public float Radius => radius;
-
         /// <summary>
         /// Set up the basic properties. 
         /// </summary>
-        public virtual void Setup(Vector3 position, float damage, float impact, LayerMask targetLayerMask) {
+        public virtual void Setup(Vector3 position, float damage) {
+            isDisposed = false;
             transform.position = position;
             this.damage = damage;
-            this.impact = impact;
-            this.targetLayerMask = targetLayerMask;
         }
 
         #endregion
 
         #region Internals
-        protected virtual void Dispose() {
-            OnDispose();
+        protected abstract void OnDisposed();
+
+        protected void Dispose() {
+            if (isDisposed) return;
+
+            isDisposed = true;
+            OnDisposed();
             ProjectilePooler.Instance.Release(this);
         }
 
-        protected virtual void OnDispose() {
-            //damage = 0f;
-        }
         #endregion
 
         #region Unity Methods
-        protected virtual void OnDrawGizmos() {
-            Gizmos.DrawWireSphere(transform.position, radius);
-        }
         #endregion
     }
 }

@@ -135,7 +135,7 @@ namespace CSCI526GameJam {
         #region Publics
         public Action OnChanged;
 
-        public float Value {
+        public virtual float Value {
             get {
                 // Update if dirty. 
                 if (isDirty) {

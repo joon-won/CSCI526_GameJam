@@ -24,6 +24,7 @@ namespace CSCI526GameJam {
         [SerializeField] private Tower hoveredTower;
         [SerializeField] private Tower selectedTower;
 
+        [SerializeField] private PlayerBase baseInstance;
         [SerializeField] private List<Tower> towerInstances = new();
 
         [SerializeField] private PlayerBase basePrefab;
@@ -45,20 +46,35 @@ namespace CSCI526GameJam {
         [Button("Find Tower Prefabs", ButtonSizes.Large)]
         private void FindAssets() {
             towerPrefabs = Utility.FindRefsInFolder<Tower>(towerPrefabsPath, AssetType.Prefab);
-            Debug.Log($"Found {towerPrefabs.Count} tower prefabs under {towerPrefabsPath}. ");
 
-            var foundBase = Utility.FindRefsInFolder<PlayerBase>(towerPrefabsPath, AssetType.Prefab);
-            if (foundBase.Count == 0) {
-                Debug.LogWarning($"Player base prefab is not found under {towerPrefabsPath}. ");
-                return;
+            // Validate prefabs. 
+            var isBaseFound = false;
+            for (int i = 0; i < towerPrefabs.Count; i++) {
+                var prefab = towerPrefabs[i];
+                if (prefab is not CSCI526GameJam.PlayerBase) continue;
+
+                if (isBaseFound) {
+                    Debug.LogWarning($"There are duplicate prefabs of {typeof(PlayerBase)}. Fix it! ");
+                }
+                else {
+                    isBaseFound = true;
+                    basePrefab = prefab as PlayerBase;
+                    towerPrefabs.Remove(prefab);
+                }
             }
-            basePrefab = foundBase[0];
-            Debug.Log($"Player base prefab is found under {towerPrefabsPath}. ");
+
+            if (!isBaseFound) {
+                Debug.LogWarning($"{typeof(PlayerBase)} prefab is not found under {towerPrefabsPath}. Fix it! ");
+            }
+            else {
+                Debug.Log($"Found {towerPrefabs.Count + 1} building prefabs under {towerPrefabsPath}. ");
+            }
         }
 #endif
         #endregion
 
         #region Publics
+        public PlayerBase PlayerBase => baseInstance;
         public TowerPlacer Placer => placer;
         //public Core Core { get; private set; }
 
@@ -176,7 +192,10 @@ namespace CSCI526GameJam {
         /// </summary>
         public void GenerateBase() {
             var playerBase = Instantiate(basePrefab, towersHolder.transform);
-            playerBase.transform.position = MapManager.Instance.MapCenter;
+            var mapSize = MapManager.Instance.MapSize;
+            var centerSpot = MapManager.Instance.Get(mapSize / 2, mapSize / 2);
+            playerBase.Build(centerSpot);
+            baseInstance = playerBase;
         }
         #endregion
 
