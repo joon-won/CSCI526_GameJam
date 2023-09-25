@@ -2602,7 +2602,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   enemyHolder: {fileID: 0}
   enemyPrefabs:
-  - {fileID: -3711159064795247232, guid: c38d52c88aeb3944fa47e8678da9d721, type: 3}
+  - {fileID: 0}
   enemyPrefabsPath: Assets/Prefabs/Enemy
 --- !u!4 &727382758
 Transform:

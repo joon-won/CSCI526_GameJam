@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace CSCI526GameJam
 {
-    public class Enemy_Shroom : MonoBehaviour
+    public class Enemy_Shroom : Enemy
     {
         // Start is called before the first frame update
         void Start()

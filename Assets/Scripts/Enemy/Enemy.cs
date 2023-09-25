@@ -4,18 +4,20 @@ using System.Collections.Generic;
 using UnityEngine;
 
 namespace CSCI526GameJam {
-    public class Enemy : MonoBehaviour {
+    public abstract class Enemy : MonoBehaviour {
 
         #region Fields
         [SerializeField] protected EnemyConfig config;
+
         [SerializeField] protected Numeric attackDamage;
-        [SerializeField] protected Numeric attackSpeed;
-        [SerializeField] private Numeric attackRange;
         [SerializeField] private Numeric moveSpeed;
-        [SerializeField] private Numeric hitPoint;
-        [SerializeField] private Numeric hpMod;
-        [SerializeField] private Numeric barrier;
-        [SerializeField] private float attackCooldown = 0f;
+        [SerializeField] private float currentHitPoint;
+        [SerializeField] private Numeric maxHitPoint;
+        [SerializeField] private Numeric armor;
+        [SerializeField] protected bool isAlive = true;
+
+        [SerializeField] private Path path;
+        private Coroutine pathRoutine;
         #endregion
 
         #region Public
@@ -23,7 +25,7 @@ namespace CSCI526GameJam {
 
         #endregion
         public bool IsDead() {
-            return hitPoint.Value <= 0f;
+            return currentHitPoint <= 0f;
         }
 
         public void RemoveDeadEnemy() {
@@ -33,21 +35,36 @@ namespace CSCI526GameJam {
             }
         }
 
-        public void CalculateRealHP() {
-            hitPoint = new(100f);
-            hpMod = new(1f);
-            barrier = new(0f);
-
-            hitPoint.IncreaseScalar(hpMod);
-            hitPoint.IncreaseValue(barrier);
+        public void InitNumerics() {
+            maxHitPoint = new(100f);
+            maxHitPoint.IncreaseScalar(1f);
         }
 
         public void TakeDamage(float damage) {
-            hitPoint.IncreaseValue(-1 * barrier);
+            currentHitPoint -= damage;
+
+            if (IsDead()) {
+                isAlive = false;
+                Destroy(gameObject);
+                onDeath?.Invoke();
+            }
         }
 
-        [SerializeField] private Path path;
-        private Coroutine pathRoutine;
+        private void Awake()
+        {
+            InitNumerics();
+        }
+
+        // Start is called before the first frame update
+        void Start() {
+
+        }
+
+        // Update is called once per frame
+        void Update() {
+
+        }
+
         public void Follow(Path path) {
             if (pathRoutine != null) return;
             if (path.Spots.Count == 0) {
@@ -81,25 +98,6 @@ namespace CSCI526GameJam {
                 }
             }
             pathRoutine = null;
-        }
-
-        // Start is called before the first frame update
-        void Start() {
-            CalculateRealHP();
-        }
-
-        // Update is called once per frame
-        void Update() {
-            RemoveDeadEnemy();
-        }
-
-        private void OnDrawGizmos() {
-            var color = Color.red;
-            color.a = 0.5f;
-            Gizmos.color = color;
-            foreach (var spot in path.Spots) {
-                Gizmos.DrawCube(spot.Position, Vector3.one);
-            }
         }
     }
 }
