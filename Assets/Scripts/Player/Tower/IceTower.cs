@@ -11,6 +11,7 @@ namespace CSCI526GameJam {
 
         [MandatoryFields]
         [SerializeField] private float iceSpeed = 3f;
+        [SerializeField] private float iceFreezeDuration = 1f;
 
         [ComputedFields]
         [SerializeField] private Enemy target;
@@ -30,7 +31,7 @@ namespace CSCI526GameJam {
 
             // calculate spread and fire
             ice.Setup(transform.position, attackDamage);
-            ice.Fire(target.transform.position - entity.transform.position, iceSpeed, attackRange);
+            ice.Fire(target.transform.position - entity.transform.position, iceSpeed, attackRange, iceFreezeDuration);
         }
 
         protected override void PerformUpdate() {

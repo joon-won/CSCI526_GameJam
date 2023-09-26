@@ -6,11 +6,10 @@ using UnityEngine;
 using Random = UnityEngine.Random;
 
 namespace CSCI526GameJam {
-    public class Shop : MonoBehaviourSingleton<Shop> {
+    public class ItemManager : MonoBehaviourSingleton<ItemManager> {
 
         #region Fields
         [ComputedFields]
-        [SerializeField] private int gold;
         [ShowInInspector] private Dictionary<ItemConfig, Item> configToItem = new();
         [ShowInInspector] private Dictionary<ItemRank, List<Item>> rankToItem = new();
 
@@ -30,9 +29,7 @@ namespace CSCI526GameJam {
 
         #region Publics
         public event Action<Item> OnItemAdded;
-        public event Action<int> OnGoldChanged;
-
-        public int Gold => gold;
+        public event Action<Item> OnItemRemoved;
 
         /// <summary>
         /// Get a random item from given rank. 
@@ -49,21 +46,16 @@ namespace CSCI526GameJam {
         /// Try to buy a item. 
         /// </summary>
         /// <param name="config">Config of the item. </param>
-        public bool Buy(ItemConfig config) {
-            if (config.Price > gold) return false;
-
+        public void Buy(ItemConfig config) {
             var item = configToItem[config];
             if (item.NumAvailable == 0) {
                 Debug.LogWarning($"Trying to buy an item {config.ItemName} with 0 numAvailable. ");
-                return false;
+                return;
             }
+            if (!Player.Instance.TryPay(config.Price)) return;
 
-            gold -= config.Price;
             item.Add();
-
             OnItemAdded?.Invoke(item);
-            OnGoldChanged?.Invoke(gold);
-            return true;
         }
 
         /// <summary>
@@ -78,31 +70,8 @@ namespace CSCI526GameJam {
             }
 
             item.Remove();
-            gold += config.Price;
-
-            OnGoldChanged?.Invoke(gold);
-        }
-
-        /// <summary>
-        /// Try to buy a tower. 
-        /// </summary>
-        /// <param name="config">Config of the tower. </param>
-        public bool Buy(TowerConfig config) {
-            if (config.Price > gold) return false;
-
-            gold -= config.Price;
-
-            OnGoldChanged?.Invoke(gold);
-            return true;
-        }
-
-        /// <summary>
-        /// Try to sell a tower. 
-        /// </summary>
-        /// <param name="config">Config of the tower. </param>
-        public void Sell(TowerConfig config) {
-            gold += config.Price;
-            OnGoldChanged?.Invoke(gold);
+            Player.Instance.AddGold(config.Price);
+            OnItemRemoved?.Invoke(item);
         }
 
         /// <summary>

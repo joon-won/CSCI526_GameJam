@@ -286,6 +286,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1163178153}
+  - {fileID: 727382758}
   - {fileID: 1567393452}
   m_Father: {fileID: 0}
   m_RootOrder: 10
@@ -737,7 +738,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 1567393453}
-        m_TargetAssemblyTypeName: CSCI526GameJam.Shop, Assembly-CSharp
+        m_TargetAssemblyTypeName: CSCI526GameJam.ItemManager, Assembly-CSharp
         m_MethodName: Buy
         m_Mode: 2
         m_Arguments:
@@ -1551,7 +1552,6 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 1735038178}
   - {fileID: 1036743786}
   m_Father: {fileID: 0}
   m_RootOrder: 11
@@ -2602,9 +2602,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   enemyHolder: {fileID: 0}
   enemyPrefabs:
-  - {fileID: 0}
+  - {fileID: 220261220613477826, guid: c8ee6f52c06585744a277f683917b854, type: 3}
   - {fileID: 7663806781496647365, guid: 205587ee246e9b7418886642a4dc1e28, type: 3}
-  - {fileID: 1651930257767535526, guid: 30ca1af2953100047819430575c6300e, type: 3}
+  - {fileID: 5850992664518237915, guid: 30ca1af2953100047819430575c6300e, type: 3}
   enemyPrefabsPath: Assets/Prefabs/Enemy
 --- !u!4 &727382758
 Transform:
@@ -2613,13 +2613,13 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 727382756}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 0}
-  m_RootOrder: 12
+  m_Father: {fileID: 144020380}
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &748748299
 GameObject:
@@ -3361,7 +3361,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 502770872}
-  m_RootOrder: 1
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1055006926
 GameObject:
@@ -3468,6 +3468,37 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1055006926}
   m_CullTransparentMesh: 1
+--- !u!1 &1084759826
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1084759827}
+  m_Layer: 0
+  m_Name: ----------Player----------
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1084759827
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1084759826}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 18.750355, y: 34.99788, z: 0.16378105}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 12
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1109432849
 GameObject:
   m_ObjectHideFlags: 0
@@ -3688,7 +3719,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 1567393453}
-        m_TargetAssemblyTypeName: CSCI526GameJam.Shop, Assembly-CSharp
+        m_TargetAssemblyTypeName: CSCI526GameJam.ItemManager, Assembly-CSharp
         m_MethodName: Buy
         m_Mode: 2
         m_Arguments:
@@ -4626,7 +4657,7 @@ GameObject:
   - component: {fileID: 1567393452}
   - component: {fileID: 1567393453}
   m_Layer: 0
-  m_Name: Shop
+  m_Name: Item Manager
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -4645,7 +4676,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 144020380}
-  m_RootOrder: 1
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1567393453
 MonoBehaviour:
@@ -4659,7 +4690,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c7e2d1fcb0a6ece41b3fa0976db6d07f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  gold: 0
   itemConfigs:
   - {fileID: 11400000, guid: 2ff298a7513513040bb5e367471d3a50, type: 2}
   - {fileID: 11400000, guid: 0d7f891544c6de54eaf1bf1f74a07438, type: 2}
@@ -4776,6 +4806,51 @@ SpriteRenderer:
   m_WasSpriteAssigned: 0
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!1 &1625762363
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1625762365}
+  - component: {fileID: 1625762364}
+  m_Layer: 0
+  m_Name: Player
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1625762364
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1625762363}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 918bf66faf443334182a18570e853f98, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  gold: 0
+--- !u!4 &1625762365
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1625762363}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 13
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1681746913
 GameObject:
   m_ObjectHideFlags: 0
@@ -5072,8 +5147,8 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 502770872}
-  m_RootOrder: 0
+  m_Father: {fileID: 0}
+  m_RootOrder: 14
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1787285313
 GameObject:

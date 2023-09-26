@@ -9,6 +9,9 @@ namespace CSCI526GameJam {
         #region Fields
         [SerializeField] protected EnemyConfig config;
 
+        [SerializeField] private Sprite regularSprite;
+        [SerializeField] private Sprite frozenSprite;
+
         [SerializeField] protected Numeric attackDamage;
         [SerializeField] private Numeric moveSpeed;
         [SerializeField] private float currentHitPoint;
@@ -16,8 +19,10 @@ namespace CSCI526GameJam {
         [SerializeField] private Numeric armor;
         [SerializeField] protected bool isAlive = true;
 
-        [SerializeField] private Path path;
         private Coroutine pathRoutine;
+        private Coroutine freezeRoutine;
+
+        private SpriteRenderer spriteRenderer;
         #endregion
 
         #region Public
@@ -54,18 +59,31 @@ namespace CSCI526GameJam {
             if (!isAlive)
                 return;
 
-            Numeric originalMoveSpeed = moveSpeed;
-            moveSpeed = new(0f);            
-            StartCoroutine(RestoreMoveSpeedAfterDelay(duration, originalMoveSpeed));
+            if (freezeRoutine != null) return;
+
+            freezeRoutine = StartCoroutine(FreezeRoutine(duration));
         }
 
-        private IEnumerator RestoreMoveSpeedAfterDelay(float delay, Numeric originalMoveSpeed)
+        private IEnumerator FreezeRoutine(float duration) 
         {
-            yield return new WaitForSeconds(delay);
-            moveSpeed = originalMoveSpeed;                
+            var cooldown = 3f; // Get from config later
+
+            var prevSpeed = moveSpeed;
+            moveSpeed = new(0f);
+            spriteRenderer.sprite = frozenSprite;
+            yield return new WaitForSeconds(duration);
+
+            moveSpeed = prevSpeed;
+            spriteRenderer.sprite = regularSprite;
+            yield return new WaitForSeconds(cooldown);
+
+            freezeRoutine = null;
         }
 
         private void Awake() {
+            spriteRenderer = GetComponent<SpriteRenderer>();
+            spriteRenderer.sprite = regularSprite;
+
             InitNumerics();
             currentHitPoint = maxHitPoint;
         }
@@ -78,11 +96,10 @@ namespace CSCI526GameJam {
             }
 
             moveSpeed = new(2f);
-            this.path = path;
-            pathRoutine = StartCoroutine(FollowPathRoutine());
+            pathRoutine = StartCoroutine(FollowPathRoutine(path));
         }
 
-        private IEnumerator FollowPathRoutine() {
+        private IEnumerator FollowPathRoutine(Path path) {
             var index = 0;
             transform.position = path.Spots[index].Position;
 
