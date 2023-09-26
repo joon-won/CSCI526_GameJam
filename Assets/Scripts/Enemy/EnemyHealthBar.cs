@@ -35,7 +35,7 @@ namespace CSCI526GameJam {
 
         #region Internals
         private void Refresh() {
-            var percentage = 1f;
+            var percentage = enemy.CurrentHitPoint / enemy.MaxHitPoint;
             SetPercentage(percentage);
 
             if (!enemy.IsAlive) {
@@ -53,7 +53,7 @@ namespace CSCI526GameJam {
             if (!enemy) {
                 Debug.LogWarning($"No {typeof(Enemy)} is found in parent of {GetType()}");
             }
-            //enemy.OnInfoChange += Refresh;
+            enemy.OnHitPointChanged += (delta) => Refresh();
             Refresh();
         }
         #endregion

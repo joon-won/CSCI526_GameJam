@@ -1,0 +1,22 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2ba8f2e0c846b9645ba418c7c0229108, type: 3}
+  m_Name: BugEnemy
+  m_EditorClassIdentifier: 
+  regularSprite: {fileID: 21300000, guid: 9769d5bdcb14c9c478627a20b24b0cf2, type: 3}
+  frozenSprite: {fileID: 21300000, guid: c0bd663eeee1bdb4892b09ad7909056f, type: 3}
+  description: 
+  golddrop: 1
+  maxHitPoint: 100
+  attackDamage: 1
+  moveSpeed: 5
+  armor: 0

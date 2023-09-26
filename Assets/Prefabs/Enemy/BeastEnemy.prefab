@@ -147,9 +147,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e0d33a2c5ee554f08a4e9bf3f587b374, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  config: {fileID: 0}
-  regularSprite: {fileID: 21300000, guid: d998b5cef4c1d0a4d86557f2a3d4e2a8, type: 3}
-  frozenSprite: {fileID: 21300000, guid: 5ac1cafb47a9a6d4f865d64446e5cc16, type: 3}
+  config: {fileID: 11400000, guid: 59c332a341214034eadf22315ecfbd7a, type: 2}
   attackDamage:
     baseValue: 0
     valueModifiers:
@@ -161,7 +159,7 @@ MonoBehaviour:
     isDirty: 1
     resolvedValue: 0
   moveSpeed:
-    baseValue: 2
+    baseValue: 0
     valueModifiers:
       rid: 1979114918915342700
     bonusValue: 0
