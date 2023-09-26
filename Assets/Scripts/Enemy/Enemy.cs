@@ -106,7 +106,6 @@ namespace CSCI526GameJam {
                 Debug.LogWarning($"The path assigned to enemy {name} is empty. ");
                 return;
             }            
-            moveSpeed = new(2f);
             pathRoutine = StartCoroutine(FollowPathRoutine(path));
         }
 

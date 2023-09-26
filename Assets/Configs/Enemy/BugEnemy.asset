@@ -18,5 +18,5 @@ MonoBehaviour:
   golddrop: 1
   maxHitPoint: 100
   attackDamage: 1
-  moveSpeed: 1
+  moveSpeed: 5
   armor: 0
