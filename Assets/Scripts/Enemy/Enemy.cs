@@ -9,9 +9,6 @@ namespace CSCI526GameJam {
         #region Fields
         [SerializeField] protected EnemyConfig config;
 
-        [SerializeField] private Sprite regularSprite;
-        [SerializeField] private Sprite frozenSprite;
-
         [SerializeField] protected Numeric attackDamage;
         [SerializeField] private Numeric moveSpeed;
         [SerializeField] private float currentHitPoint;
@@ -27,13 +24,20 @@ namespace CSCI526GameJam {
 
         #region Public
         public Action onDeath;
+
         public EnemyConfig Config => config;
         public bool IsAlive => isAlive;
+
+        public float CurrentHitPoint => currentHitPoint;
+        public float MaxHitPoint => maxHitPoint;
+        public event Action<float> OnHitPointChanged;
         #endregion
 
         public void InitNumerics() {
-            maxHitPoint = new(100f);
-            maxHitPoint.IncreaseScalar(1f);
+            maxHitPoint = new(config.MaxHitPoint);
+            attackDamage = new(config.AttackDamage);
+            moveSpeed = new(config.MoveSpeed);
+            armor = new(config.Armor);
         }
 
         public void TakeDamage(float damage) {
@@ -43,6 +47,8 @@ namespace CSCI526GameJam {
                 isAlive = false;
                 Die();
             }
+
+            OnHitPointChanged?.Invoke(-damage);
         }
 
         private void Die(bool dropGold = true) {
@@ -76,11 +82,11 @@ namespace CSCI526GameJam {
 
             var prevSpeed = moveSpeed;
             moveSpeed = new(0f);
-            spriteRenderer.sprite = frozenSprite;
+            spriteRenderer.sprite = config.FrozenSprite;
             yield return new WaitForSeconds(duration);
 
             moveSpeed = prevSpeed;
-            spriteRenderer.sprite = regularSprite;
+            spriteRenderer.sprite = config.RegularSprite;
             yield return new WaitForSeconds(cooldown);
 
             freezeRoutine = null;
@@ -88,7 +94,7 @@ namespace CSCI526GameJam {
 
         private void Awake() {
             spriteRenderer = GetComponent<SpriteRenderer>();
-            spriteRenderer.sprite = regularSprite;
+            spriteRenderer.sprite = config.RegularSprite;
 
             InitNumerics();
             currentHitPoint = maxHitPoint;

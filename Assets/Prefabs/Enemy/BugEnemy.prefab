@@ -147,9 +147,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d4994b7f3ba30467695a40e4a745193e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  config: {fileID: 0}
-  regularSprite: {fileID: 21300000, guid: 9769d5bdcb14c9c478627a20b24b0cf2, type: 3}
-  frozenSprite: {fileID: 21300000, guid: 9769d5bdcb14c9c478627a20b24b0cf2, type: 3}
+  config: {fileID: 11400000, guid: 6e6f6070545271b4683f0045ff62b6c7, type: 2}
   attackDamage:
     baseValue: 0
     valueModifiers:
