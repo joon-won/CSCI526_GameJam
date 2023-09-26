@@ -1236,6 +1236,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   goldsInfo: {fileID: 221245797}
+  towerButtons:
+  - {fileID: 586776382}
+  - {fileID: 793363431}
+  - {fileID: 863872094}
 --- !u!1 &420801664
 GameObject:
   m_ObjectHideFlags: 0
@@ -1816,7 +1820,7 @@ GameObject:
   - component: {fileID: 586776383}
   - component: {fileID: 586776382}
   m_Layer: 5
-  m_Name: Wall Button
+  m_Name: Button 1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1886,19 +1890,7 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 586776383}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 1163178152}
-        m_TargetAssemblyTypeName: CSCI526GameJam.TowerManager, Assembly-CSharp
-        m_MethodName: Preview
-        m_Mode: 2
-        m_Arguments:
-          m_ObjectArgument: {fileID: 11400000, guid: 512ff0b50bbfeef4ea79999559f67d82, type: 2}
-          m_ObjectArgumentAssemblyTypeName: CSCI526GameJam.TowerConfig, Assembly-CSharp
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
+      m_Calls: []
 --- !u!114 &586776383
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2751,7 +2743,7 @@ GameObject:
   - component: {fileID: 793363432}
   - component: {fileID: 793363431}
   m_Layer: 5
-  m_Name: GunTower Button
+  m_Name: Button 2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2821,19 +2813,7 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 793363432}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 1163178152}
-        m_TargetAssemblyTypeName: CSCI526GameJam.TowerManager, Assembly-CSharp
-        m_MethodName: Preview
-        m_Mode: 2
-        m_Arguments:
-          m_ObjectArgument: {fileID: 11400000, guid: 4d28b0091e746f24da518fceee136802, type: 2}
-          m_ObjectArgumentAssemblyTypeName: CSCI526GameJam.TowerConfig, Assembly-CSharp
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
+      m_Calls: []
 --- !u!114 &793363432
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3114,7 +3094,7 @@ GameObject:
   - component: {fileID: 863872095}
   - component: {fileID: 863872094}
   m_Layer: 5
-  m_Name: IceTower Button
+  m_Name: Button 3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3184,19 +3164,7 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 863872095}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 1163178152}
-        m_TargetAssemblyTypeName: CSCI526GameJam.TowerManager, Assembly-CSharp
-        m_MethodName: Preview
-        m_Mode: 2
-        m_Arguments:
-          m_ObjectArgument: {fileID: 11400000, guid: a7fae8a0445f9b84ab7a7060a509152d, type: 2}
-          m_ObjectArgumentAssemblyTypeName: CSCI526GameJam.TowerConfig, Assembly-CSharp
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
+      m_Calls: []
 --- !u!114 &863872095
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3588,9 +3556,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 57fd435ee6e3183499352304d5a9bb24, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  mode: 0
-  hoveredTower: {fileID: 0}
-  selectedTower: {fileID: 0}
   baseInstance: {fileID: 0}
   towerInstances: []
   basePrefab: {fileID: -4548648733975016062, guid: 867ae6f51ba86ad4a93435f7feacd9ff, type: 3}
@@ -3610,8 +3575,7 @@ Transform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children:
-  - {fileID: 1596830985}
+  m_Children: []
   m_Father: {fileID: 144020380}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -4035,7 +3999,7 @@ GameObject:
   - component: {fileID: 1442543783}
   - component: {fileID: 1442543782}
   m_Layer: 5
-  m_Name: List
+  m_Name: Tower Buttons
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -4416,12 +4380,12 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1596830984}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 1163178153}
+  m_Father: {fileID: 1625762365}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1596830986
@@ -4440,7 +4404,6 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 256
   isPreviewing: 0
-  config: {fileID: 0}
   cachedSpot:
     rid: -2
   cachedTower: {fileID: 0}
@@ -4531,7 +4494,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 918bf66faf443334182a18570e853f98, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  mode: 0
+  hoveredTower: {fileID: 0}
+  selectedTower: {fileID: 0}
   gold: 0
+  towerPoolSize: 3
 --- !u!4 &1625762365
 Transform:
   m_ObjectHideFlags: 0
@@ -4543,7 +4510,8 @@ Transform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children: []
+  m_Children:
+  - {fileID: 1596830985}
   m_Father: {fileID: 0}
   m_RootOrder: 13
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}

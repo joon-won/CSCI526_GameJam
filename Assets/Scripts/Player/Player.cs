@@ -34,6 +34,8 @@ namespace CSCI526GameJam {
 
         #region Publics
         public event Action<int> OnGoldChanged;
+        public event Action OnTowerPoolChanged;
+
         public int Gold => gold;
         public int PoolSize => indexToTower.Count;
 
@@ -100,6 +102,7 @@ namespace CSCI526GameJam {
             var tower = TowerManager.Instance.CreateTower(config);
             tower.OnBuild += () => FillTowerPool(index);
             indexToTower[index] = tower;
+            OnTowerPoolChanged?.Invoke();
         }
 
         private void ChangeMode(Mode mode) {
