@@ -27,7 +27,7 @@ namespace CSCI526GameJam {
 
         #region Public
         public Action onDeath;
-
+        public EnemyConfig Config => config;
         public bool IsAlive => isAlive;
         #endregion
 
@@ -57,6 +57,10 @@ namespace CSCI526GameJam {
             Player.Instance.AddGold(gold);
         }
 
+        public void DamageBase() {
+            attackDamage = new(1);
+            TowerManager.Instance.PlayerBase.TakeDamage(attackDamage);
+        }
         public void FreezeEntity(float duration) {
             if (!isAlive)
                 return;
@@ -95,7 +99,7 @@ namespace CSCI526GameJam {
             if (path.Spots.Count == 0) {
                 Debug.LogWarning($"The path assigned to enemy {name} is empty. ");
                 return;
-            }
+            }            
             moveSpeed = new(2f);
             pathRoutine = StartCoroutine(FollowPathRoutine(path));
         }
@@ -123,7 +127,7 @@ namespace CSCI526GameJam {
 
             var end = path.Spots[path.Spots.Count - 1];
             if (end.Tower == TowerManager.Instance.PlayerBase) {
-                TowerManager.Instance.PlayerBase.TakeDamage(attackDamage);
+                DamageBase();
                 Die(false);
             }
 
