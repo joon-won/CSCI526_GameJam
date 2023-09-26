@@ -18,4 +18,4 @@ MonoBehaviour:
   numAvailable: 1
   description: '<Test> Bonus crit chance. '
   image: {fileID: 0}
-  bonusTowerCCValue: 5
+  bonusTowerCCValue: 0.5

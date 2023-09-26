@@ -17,10 +17,10 @@ namespace CSCI526GameJam {
 
         #region Fields
         [ComputedFields]
+        [SerializeField] private bool isLocked;
         [SerializeField] private Mode mode;
         [SerializeField] private Tower hoveredTower;
         [SerializeField] private Tower selectedTower;
-
 
         [SerializeField] private int gold;
         [SerializeField] private int towerPoolSize = 3;
@@ -106,6 +106,7 @@ namespace CSCI526GameJam {
         }
 
         private void ChangeMode(Mode mode) {
+            if (isLocked) return;
             if (this.mode == mode) return;
 
             this.mode = mode;
@@ -126,6 +127,8 @@ namespace CSCI526GameJam {
         }
 
         private void PerformMode() {
+            if (isLocked) return;
+
             switch (mode) {
                 case Mode.None:
                     if (selectedTower) {
@@ -158,12 +161,23 @@ namespace CSCI526GameJam {
                     break;
             }
         }
+
+        private void Lock() {
+            ChangeMode(Mode.None);
+            isLocked = true;
+        }
+
+        private void Unlock() {
+            isLocked = false;
+            ChangeMode(Mode.None);
+        }
         #endregion
 
         #region Unity Methods
         protected override void Awake() {
             base.Awake();
 
+            isLocked = false;
             changeModeToNone = () => ChangeMode(Mode.None);
             changeModeToDemolish = () => ChangeMode(Mode.Demolish);
 
@@ -179,6 +193,8 @@ namespace CSCI526GameJam {
         }
 
         private void OnEnable() {
+            GameManager.Instance.OnBuyingStarted += Unlock;
+            GameManager.Instance.OnFightingStarted += Lock;
             InputManager.Instance.OnMouseLeftDown += PerformMode;
             InputManager.Instance.OnMouseRightDown += changeModeToNone;
             InputManager.Instance.OnDemolishKeyDown += changeModeToDemolish;
@@ -186,6 +202,8 @@ namespace CSCI526GameJam {
 
         private void OnDisable() {
             if (!GameManager.IsApplicationQuitting) {
+                GameManager.Instance.OnBuyingStarted -= Unlock;
+                GameManager.Instance.OnFightingStarted -= Lock;
                 InputManager.Instance.OnMouseLeftDown -= PerformMode;
                 InputManager.Instance.OnMouseRightDown -= changeModeToNone;
                 InputManager.Instance.OnDemolishKeyDown -= changeModeToDemolish;

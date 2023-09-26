@@ -28,17 +28,8 @@ namespace CSCI526GameJam {
         #region Public
         public Action onDeath;
 
+        public bool IsAlive => isAlive;
         #endregion
-        public bool IsDead() {
-            return currentHitPoint <= 0f;
-        }
-
-        public void RemoveDeadEnemy() {
-            if (IsDead()) {
-                Destroy(gameObject);
-                onDeath?.Invoke();
-            }
-        }
 
         public void InitNumerics() {
             maxHitPoint = new(100f);
@@ -48,12 +39,18 @@ namespace CSCI526GameJam {
         public void TakeDamage(float damage) {
             currentHitPoint -= damage;
 
-            if (IsDead()) {
+            if (isAlive && currentHitPoint <= 0f) {
                 isAlive = false;
-                Destroy(gameObject);
-                DropGold(1);
-                onDeath?.Invoke();
+                Die();
             }
+        }
+
+        private void Die(bool dropGold = true) {
+            Destroy(gameObject);
+            if (dropGold) {
+                DropGold(1);
+            }
+            onDeath?.Invoke();
         }
 
         public void DropGold(int gold) {
@@ -123,6 +120,13 @@ namespace CSCI526GameJam {
                     distance += Vector3.Distance(path.Spots[index].Position, path.Spots[index - 1].Position);
                 }
             }
+
+            var end = path.Spots[path.Spots.Count - 1];
+            if (end.Tower == TowerManager.Instance.PlayerBase) {
+                TowerManager.Instance.PlayerBase.TakeDamage(attackDamage);
+                Die(false);
+            }
+
             pathRoutine = null;
         }
         

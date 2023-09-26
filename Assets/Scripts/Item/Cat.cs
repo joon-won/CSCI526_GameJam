@@ -15,7 +15,7 @@ namespace CSCI526GameJam {
         [ClassHeader(typeof(Cat))]
 
         [MandatoryFields]
-        [SerializeField] private int bonusTowerCCValue;
+        [SerializeField] private float bonusTowerCCValue;
         #endregion
 
         #region Publics

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using Sirenix.OdinInspector;
+using System;
 
 namespace CSCI526GameJam {
 
@@ -14,14 +15,29 @@ namespace CSCI526GameJam {
 
         public static bool IsApplicationQuitting { get; private set; } = false;
 
+        public enum State {
+            Buying,
+            Building,
+            Fighting,
+        }
+
         #region Fields
         [ComputedFields]
+        [SerializeField] private State state;
+        [SerializeField] private int level;
+
         [SerializeField] private float gameTime;
         [SerializeField] private int frameRate = 144;
         [SerializeField] private bool vsync = true;
         #endregion
 
         #region Publics
+        public event Action OnBuyingStarted;
+        public event Action OnBuildingStarted;
+        public event Action OnFightingStarted;
+
+        public State GameState => state;
+        public int Level => level;
         public float GameTime => gameTime;
 
         /// <summary>
@@ -35,6 +51,22 @@ namespace CSCI526GameJam {
         #endregion
 
         #region Internals
+        private void StartBuying() {
+            state = State.Buying;
+            level++;
+            OnBuyingStarted?.Invoke();
+        }
+
+        private void StartBuilding() {
+            state = State.Building;
+            OnBuildingStarted?.Invoke();
+        }
+
+        private void StartCombat() {
+            state = State.Fighting;
+            OnFightingStarted?.Invoke();
+        }
+
         private void OnSceneLoaded(Scene scene, LoadSceneMode mode) {
             switch (scene.buildIndex) {
                 case Configs.MainMenuSceneIndex:
@@ -86,16 +118,19 @@ namespace CSCI526GameJam {
         private void OnEnable() {
             SceneManager.sceneLoaded += OnSceneLoaded;
             SceneManager.sceneUnloaded += OnSceneUnloaded;
+            EnemyManager.Instance.OnEnemiesClear += StartBuying;
         }
 
         private void OnDisable() {
-            SceneManager.sceneLoaded -= OnSceneLoaded;
-            SceneManager.sceneUnloaded -= OnSceneUnloaded;
+            if (!IsApplicationQuitting) {
+                SceneManager.sceneLoaded -= OnSceneLoaded;
+                SceneManager.sceneUnloaded -= OnSceneUnloaded;
+                EnemyManager.Instance.OnEnemiesClear -= StartBuying;
+            }
         }
 
         private void Start() {
-            //InputManager.Instance.ToggleInput(InputMode.General, true);
-            //InputManager.Instance.ToggleInput(InputMode.Gameplay, false);
+            StartBuying();
         }
 
         private void Update() {
