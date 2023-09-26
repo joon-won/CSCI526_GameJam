@@ -77,7 +77,8 @@ namespace CSCI526GameJam {
             if (!target) return;
 
             target.TakeDamage(damage);
-            Debug.Log("TODO: Freeze enemy");
+            target.FreezeEntity(1f);
+            //Debug.Log("TODO: Freeze enemy");
         }
         #endregion
     }

@@ -15,7 +15,7 @@ namespace CSCI526GameJam
         // Update is called once per frame
         void Update()
         {
-            print
+            
         }
     }
 }

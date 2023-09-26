@@ -55,30 +55,19 @@ namespace CSCI526GameJam {
                 return;
 
             Numeric originalMoveSpeed = moveSpeed;
-            moveSpeed = 0;
+            moveSpeed = new(0f);            
             StartCoroutine(RestoreMoveSpeedAfterDelay(duration, originalMoveSpeed));
         }
 
         private IEnumerator RestoreMoveSpeedAfterDelay(float delay, Numeric originalMoveSpeed)
         {
             yield return new WaitForSeconds(delay);
-
-            moveSpeed = originalMoveSpeed;
+            moveSpeed = originalMoveSpeed;                
         }
 
         private void Awake() {
             InitNumerics();
             currentHitPoint = maxHitPoint;
-        }
-
-        // Start is called before the first frame update
-        void Start() {
-
-        }
-
-        // Update is called once per frame
-        void Update() {
-
         }
 
         public void Follow(Path path) {
