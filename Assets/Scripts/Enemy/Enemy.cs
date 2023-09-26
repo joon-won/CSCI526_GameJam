@@ -14,6 +14,8 @@ namespace CSCI526GameJam {
         [SerializeField] private float currentHitPoint;
         [SerializeField] private Numeric maxHitPoint;
         [SerializeField] private Numeric armor;
+        [SerializeField] private Numeric gold;
+
         [SerializeField] protected bool isAlive = true;
 
         private Coroutine pathRoutine;
@@ -38,6 +40,7 @@ namespace CSCI526GameJam {
             attackDamage = new(config.AttackDamage);
             moveSpeed = new(config.MoveSpeed);
             armor = new(config.Armor);
+            gold = new(config.GoldDrop);
         }
 
         public void TakeDamage(float damage) {
@@ -54,19 +57,11 @@ namespace CSCI526GameJam {
         private void Die(bool dropGold = true) {
             Destroy(gameObject);
             if (dropGold) {
-                DropGold(1);
+                Player.Instance.AddGold((int)gold);
             }
             onDeath?.Invoke();
         }
 
-        public void DropGold(int gold) {
-            Player.Instance.AddGold(gold);
-        }
-
-        public void DamageBase() {
-            attackDamage = new(1);
-            TowerManager.Instance.PlayerBase.TakeDamage(attackDamage);
-        }
         public void FreezeEntity(float duration) {
             if (!isAlive)
                 return;
@@ -132,7 +127,7 @@ namespace CSCI526GameJam {
 
             var end = path.Spots[path.Spots.Count - 1];
             if (end.Tower == TowerManager.Instance.PlayerBase) {
-                DamageBase();
+                TowerManager.Instance.PlayerBase.TakeDamage(attackDamage);
                 Die(false);
             }
 
