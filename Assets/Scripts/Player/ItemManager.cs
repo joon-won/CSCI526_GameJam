@@ -75,15 +75,6 @@ namespace CSCI526GameJam {
         }
 
         /// <summary>
-        /// Utility function that adds up gold dropped by killing enemy.
-        /// </summary>
-        /// <param name="gold">Amount of gold dropped.</param>
-        public void addReward(int goldAmount) {
-            gold += goldAmount;
-            OnGoldChanged?.Invoke(gold);
-        }
-
-        /// <summary>
         /// (Debug) Add all items, ignoring numAvailable and price. 
         /// </summary>
         /// <param name="num">Num of each item to add. </param>

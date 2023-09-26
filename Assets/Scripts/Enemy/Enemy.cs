@@ -57,7 +57,7 @@ namespace CSCI526GameJam {
         }
 
         public void DropGold(int gold) {
-            Shop.Instance.addReward(gold);
+            Player.Instance.AddGold(gold);
         }
 
         public void FreezeEntity(float duration) {
@@ -126,10 +126,5 @@ namespace CSCI526GameJam {
             pathRoutine = null;
         }
         
-        private void Awake() {
-            InitNumerics();
-            currentHitPoint = maxHitPoint;
-        }
-
     }
 }
