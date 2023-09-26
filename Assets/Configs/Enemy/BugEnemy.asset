@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: BugEnemy
   m_EditorClassIdentifier: 
   regularSprite: {fileID: 21300000, guid: 9769d5bdcb14c9c478627a20b24b0cf2, type: 3}
-  frozenSprite: {fileID: 21300000, guid: 9769d5bdcb14c9c478627a20b24b0cf2, type: 3}
+  frozenSprite: {fileID: 21300000, guid: c0bd663eeee1bdb4892b09ad7909056f, type: 3}
   description: 
   golddrop: 1
   maxHitPoint: 100
