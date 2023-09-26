@@ -10,32 +10,16 @@ namespace CSCI526GameJam {
 
     public class TowerManager : MonoBehaviourSingleton<TowerManager> {
 
-        public enum Mode {
-            None,
-
-            Build,
-            Demolish,
-        }
-
         #region Fields
         [ComputedFields]
-        [SerializeField] private Mode mode;
-
-        [SerializeField] private Tower hoveredTower;
-        [SerializeField] private Tower selectedTower;
-
         [SerializeField] private PlayerBase baseInstance;
         [SerializeField] private List<Tower> towerInstances = new();
 
         [SerializeField] private PlayerBase basePrefab;
         [SerializeField] private List<Tower> towerPrefabs;
 
-        private TowerPlacer placer;
         private GameObject towersHolder;
         private Dictionary<TowerConfig, Tower> configToPrefab = new();
-
-        private Action changeModeToNone;
-        private Action changeModeToDemolish;
 
 
 #if UNITY_EDITOR
@@ -75,8 +59,7 @@ namespace CSCI526GameJam {
 
         #region Publics
         public PlayerBase PlayerBase => baseInstance;
-        public TowerPlacer Placer => placer;
-        //public Core Core { get; private set; }
+        public TowerConfig[] TowerConfigs => configToPrefab.Keys.ToArray();
 
         /// <summary>
         /// Create an instance from the given tower config. 
@@ -99,20 +82,6 @@ namespace CSCI526GameJam {
         }
 
         /// <summary>
-        /// Preview a tower. 
-        /// </summary>
-        /// <param name="config">Config of the tower to preview. </param>
-        public void Preview(TowerConfig config) {
-            if (!placer.TowerConfig || placer.TowerConfig != config) {
-                placer.StartPreview(config);
-                ChangeMode(Mode.Build);
-            }
-            else {
-                ChangeMode(Mode.None);
-            }
-        }
-
-        /// <summary>
         /// Refund and demolish a tower. 
         /// </summary>
         /// <param name="tower">Tower to refund. </param>
@@ -121,70 +90,6 @@ namespace CSCI526GameJam {
 
             Player.Instance.AddGold(tower.Config.Price);
             tower.Demolish();
-        }
-
-        /// <summary>
-        /// Change current mode. 
-        /// </summary>
-        /// <param name="mode">Target mode. </param>
-        public void ChangeMode(Mode mode) {
-            if (this.mode == mode) return;
-
-            this.mode = mode;
-            switch (mode) {
-                case Mode.None:
-                    placer.CancelPreview();
-                    //Player.Instance.Inventory.PutbackHeld();
-                    //MapManager.Instance.ConstructionTilemap.Hide();
-                    break;
-
-                case Mode.Build:
-                    //MapManager.Instance.ConstructionTilemap.Show();
-                    break;
-
-                case Mode.Demolish:
-                    //MapManager.Instance.ConstructionTilemap.Show();
-                    break;
-
-                default:
-                    break;
-            }
-        }
-
-        /// <summary>
-        /// Perform current mode action. 
-        /// </summary>
-        public void PerformMode() {
-            var building = hoveredTower;
-            switch (mode) {
-                case Mode.None:
-                    if (selectedTower) {
-                        //selectedBuilding.OnUnselect();
-                        selectedTower = null;
-                    }
-
-                    if (building) {
-                        // inspect
-                        selectedTower = building;
-                    }
-                    else {
-
-                    }
-                    break;
-
-                case Mode.Build:
-                    placer.Place();
-                    break;
-
-                case Mode.Demolish:
-                    if (!building) return;
-
-                    Refund(building);
-                    break;
-
-                default:
-                    break;
-            }
         }
 
         /// <summary>
@@ -206,32 +111,11 @@ namespace CSCI526GameJam {
         protected override void Awake() {
             base.Awake();
 
-            placer = GetComponentInChildren<TowerPlacer>();
-
             towersHolder = new GameObject("Building Instances");
             towersHolder.transform.SetParent(transform);
 
             foreach (var prefab in towerPrefabs) {
                 configToPrefab.Add(prefab.Config, prefab);
-            }
-
-            changeModeToNone = () => ChangeMode(Mode.None);
-            changeModeToDemolish = () => ChangeMode(Mode.Demolish);
-        }
-
-        private void OnEnable() {
-            InputManager.Instance.OnMouseLeftDown += PerformMode;
-            InputManager.Instance.OnMouseRightDown += changeModeToNone;
-
-            InputManager.Instance.OnDemolishKeyDown += changeModeToDemolish;
-        }
-
-        private void OnDisable() {
-            if (!GameManager.IsApplicationQuitting) {
-                InputManager.Instance.OnMouseLeftDown -= PerformMode;
-                InputManager.Instance.OnMouseRightDown -= changeModeToNone;
-
-                InputManager.Instance.OnDemolishKeyDown -= changeModeToDemolish;
             }
         }
 
@@ -253,7 +137,6 @@ namespace CSCI526GameJam {
             //        }
             //    }
             //}
-            hoveredTower = MapManager.Instance.MouseSpot.Tower;
         }
         #endregion
     }

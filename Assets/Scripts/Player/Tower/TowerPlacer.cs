@@ -13,7 +13,7 @@ namespace CSCI526GameJam {
 
         [ComputedFields]
         [SerializeField] private bool isPreviewing = false;
-        [SerializeField] private TowerConfig config;
+        //[SerializeField] private TowerConfig config;
 
         [SerializeReference] private Spot cachedSpot;
         [SerializeField] private Tower cachedTower;
@@ -26,20 +26,18 @@ namespace CSCI526GameJam {
         public Action OnStop;
 
         public bool IsPreviewing => isPreviewing;
-        public TowerConfig TowerConfig => config;
 
         /// <summary>
         /// Start previewing a tower. 
         /// </summary>
         /// <param name="config">Config of the tower to be previewed. </param>
-        public void StartPreview(TowerConfig config) {
+        public void StartPreview(Tower tower) {
             if (isPreviewing) {
                 CancelPreview();
             }
-            this.config = config;
             isPreviewing = true;
-            spriteRenderer.sprite = config.Preview;
-            cachedTower = TowerManager.Instance.CreateTower(config);
+            spriteRenderer.sprite = tower.Config.Preview;
+            cachedTower = tower;
 
             Refresh();
         }
@@ -51,11 +49,9 @@ namespace CSCI526GameJam {
             if (!isPreviewing) return;
 
             isPreviewing = false;
-            config = null;
+            cachedTower = null;
+            cachedSpot = null;
             spriteRenderer.sprite = null;
-            if (cachedTower) {
-                Destroy(cachedTower.gameObject);
-            }
 
             OnStop?.Invoke();
         }
@@ -63,15 +59,13 @@ namespace CSCI526GameJam {
         /// <summary>
         /// Place currently previewed tower. 
         /// </summary>
-        public void Place() {
-            if (!canBuild) return;
-            if (!Player.Instance.TryPay(config.Price)) return;
+        public bool TryPlace() {
+            if (!canBuild) return false;
+            if (!Player.Instance.TryPay(cachedTower.Config.Price)) return false;
 
-            var prevConfig = cachedTower.Config;
             cachedTower.Build(cachedSpot);
-            cachedTower = null;
-            cachedSpot = null;
-            StartPreview(prevConfig);
+            CancelPreview();
+            return true;
         }
         #endregion
 
@@ -81,6 +75,7 @@ namespace CSCI526GameJam {
         #region Unity Methods
         private void Awake() {
             spriteRenderer = GetComponent<SpriteRenderer>();
+            isPreviewing = false;
         }
 
         private void Start() {
