@@ -11,12 +11,17 @@ namespace CSCI526GameJam {
 
         #region Fields
         [SerializeField] private List<Spot> spots = new();
+
+        private HashSet<Spot> extraBlocks = new();
         #endregion
 
         #region Publics
         public List<Spot> Spots => spots;
 
-        public Path(Spot start, Spot end) {
+        public Path(Spot start, Spot end, HashSet<Spot> extraBlocks = null) {
+            if (extraBlocks != null) {
+                this.extraBlocks = new(extraBlocks);
+            }
             AStar(start, end);
         }
         #endregion
@@ -68,6 +73,7 @@ namespace CSCI526GameJam {
 
                     var adjacent = nodes[index];
                     if (closeds.Contains(adjacent)
+                        || extraBlocks.Contains(adjacent.spot)
                         || adjacent.spot.Tower && adjacent.spot.Tower is not PlayerBase)
                         continue;
 

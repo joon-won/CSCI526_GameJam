@@ -61,6 +61,7 @@ namespace CSCI526GameJam {
         /// </summary>
         public bool TryPlace() {
             if (!canBuild) return false;
+            if (!IsBaseReachable(cachedSpot)) return false;
             if (!Player.Instance.TryPay(cachedTower.Config.Price)) return false;
 
             cachedTower.Build(cachedSpot);
@@ -70,6 +71,10 @@ namespace CSCI526GameJam {
         #endregion
 
         #region Internals
+        private bool IsBaseReachable(Spot spot) {
+            var path = new Path(MapManager.Instance.Spots[0, 0], TowerManager.Instance.PlayerBase.Spot, new() { spot });
+            return path.Spots.Count > 0;
+        }
         #endregion
 
         #region Unity Methods

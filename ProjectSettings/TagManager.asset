@@ -6,6 +6,7 @@ TagManager:
   tags:
   - Projectile
   - Building
+  - Enemy
   layers:
   - Default
   - TransparentFX
@@ -54,4 +55,7 @@ TagManager:
     locked: 0
   - name: Tower Preview
     uniqueID: 2040467247
+    locked: 0
+  - name: UI
+    uniqueID: 3005923827
     locked: 0
