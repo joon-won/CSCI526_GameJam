@@ -65,7 +65,7 @@ namespace CSCI526GameJam {
         /// </summary>
         public void Place() {
             if (!canBuild) return;
-            if (!Shop.Instance.Buy(config)) return;
+            if (!Player.Instance.TryPay(config.Price)) return;
 
             var prevConfig = cachedTower.Config;
             cachedTower.Build(cachedSpot);

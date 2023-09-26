@@ -125,7 +125,7 @@ BoxCollider2D:
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 2.56, y: 2.56}
+    oldSize: {x: 1, y: 1}
     newSize: {x: 2.56, y: 2.56}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
@@ -147,6 +147,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   config: {fileID: 0}
+  regularSprite: {fileID: 21300000, guid: d998b5cef4c1d0a4d86557f2a3d4e2a8, type: 3}
+  frozenSprite: {fileID: 21300000, guid: d998b5cef4c1d0a4d86557f2a3d4e2a8, type: 3}
   attackDamage:
     baseValue: 0
     valueModifiers:
@@ -189,8 +191,6 @@ MonoBehaviour:
     isDirty: 1
     resolvedValue: 0
   isAlive: 1
-  path:
-    spots: []
   references:
     version: 2
     RefIds:

@@ -18,6 +18,7 @@ namespace CSCI526GameJam {
         [SerializeField] private float speed;
         [SerializeField] private float elapsed = 0f;
         [SerializeField] private float duration;
+        [SerializeField] private float freezeDuration = 1f;
 
         private SpriteRenderer spriteRenderer;
         #endregion
@@ -30,10 +31,11 @@ namespace CSCI526GameJam {
         /// <param name="direction">Shooting direction. </param>
         /// <param name="speed">Bullet speed. </param>
         /// <param name="range">Max shooting distance. </param>
-        public void Fire(Vector3 direction, float speed, float range) {
+        public void Fire(Vector3 direction, float speed, float range, float freezeDuration) {
             transform.FaceTo(direction.normalized);
             this.speed = speed;
             duration = range / speed;
+            this.freezeDuration = freezeDuration;
             elapsed = 0f;
             transform.localScale = Vector3.one * scaleRange.x;
             spriteRenderer.color = Color.white;
@@ -77,8 +79,7 @@ namespace CSCI526GameJam {
             if (!target) return;
 
             target.TakeDamage(damage);
-            target.FreezeEntity(1f);
-            //Debug.Log("TODO: Freeze enemy");
+            target.FreezeEntity(freezeDuration);
         }
         #endregion
     }
