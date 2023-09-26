@@ -49,6 +49,22 @@ namespace CSCI526GameJam {
                 onDeath?.Invoke();
             }
         }
+        public void FreezeEntity(float duration)
+        {
+            if (!isAlive)
+                return;
+
+            Numeric originalMoveSpeed = moveSpeed;
+            moveSpeed = 0;
+            StartCoroutine(RestoreMoveSpeedAfterDelay(duration, originalMoveSpeed));
+        }
+
+        private IEnumerator RestoreMoveSpeedAfterDelay(float delay, Numeric originalMoveSpeed)
+        {
+            yield return new WaitForSeconds(delay);
+
+            moveSpeed = originalMoveSpeed;
+        }
 
         private void Awake() {
             InitNumerics();
