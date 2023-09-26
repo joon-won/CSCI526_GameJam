@@ -46,11 +46,16 @@ namespace CSCI526GameJam {
             if (IsDead()) {
                 isAlive = false;
                 Destroy(gameObject);
+                DropGold(1);
                 onDeath?.Invoke();
             }
         }
-        public void FreezeEntity(float duration)
-        {
+
+        public void DropGold(int gold) {
+            Shop.Instance.addReward(gold);
+        }
+
+        public void FreezeEntity(float duration) {
             if (!isAlive)
                 return;
 
@@ -59,15 +64,10 @@ namespace CSCI526GameJam {
             StartCoroutine(RestoreMoveSpeedAfterDelay(duration, originalMoveSpeed));
         }
 
-        private IEnumerator RestoreMoveSpeedAfterDelay(float delay, Numeric originalMoveSpeed)
-        {
+        private IEnumerator RestoreMoveSpeedAfterDelay(float delay, 
+                                                        Numeric originalMoveSpeed) {
             yield return new WaitForSeconds(delay);
             moveSpeed = originalMoveSpeed;                
-        }
-
-        private void Awake() {
-            InitNumerics();
-            currentHitPoint = maxHitPoint;
         }
 
         public void Follow(Path path) {
@@ -77,7 +77,7 @@ namespace CSCI526GameJam {
                 return;
             }
 
-            moveSpeed = new(2f);
+            moveSpeed = new(5f);
             this.path = path;
             pathRoutine = StartCoroutine(FollowPathRoutine());
         }
@@ -104,5 +104,11 @@ namespace CSCI526GameJam {
             }
             pathRoutine = null;
         }
+        
+        private void Awake() {
+            InitNumerics();
+            currentHitPoint = maxHitPoint;
+        }
+
     }
 }
