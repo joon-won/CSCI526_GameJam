@@ -6,7 +6,7 @@ using UnityEngine;
 using Random = UnityEngine.Random;
 
 namespace CSCI526GameJam {
-    public class ItemManager : MonoBehaviourSingleton<ItemManager> {
+    public class ItemManager : MonoBehaviourSingleton<ItemManager>, IAssetDependent {
 
         #region Fields
         [ComputedFields]
@@ -14,17 +14,6 @@ namespace CSCI526GameJam {
         [ShowInInspector] private Dictionary<ItemRank, List<Item>> rankToItem = new();
 
         [SerializeField] private List<ItemConfig> itemConfigs;
-#if UNITY_EDITOR
-        [EditorOnlyFields]
-        [FolderPath, SerializeField]
-        private string itemConfigsPath;
-
-        [Button("Find Item Configs", ButtonSizes.Large)]
-        private void FindAssets() {
-            itemConfigs = Utility.FindRefsInFolder<ItemConfig>(itemConfigsPath);
-            Debug.Log($"Found {itemConfigs.Count} item configs under {itemConfigsPath}. ");
-        }
-#endif
         #endregion
 
         #region Publics
@@ -86,7 +75,17 @@ namespace CSCI526GameJam {
                     OnItemAdded?.Invoke(item);
                 }
             }
-        }    
+        }
+
+#if UNITY_EDITOR
+        [EditorOnlyFields]
+        [FolderPath, SerializeField]
+        private string itemConfigsPath;
+        public void FindAssets() {
+            itemConfigs = Utility.FindRefsInFolder<ItemConfig>(itemConfigsPath);
+            Debug.Log($"Found {itemConfigs.Count} item configs under {itemConfigsPath}. ");
+        }
+#endif
         #endregion
 
         #region Internals

@@ -6,7 +6,7 @@ using UnityEngine;
 using Random = UnityEngine.Random;
 
 namespace CSCI526GameJam {
-    public class EnemyManager : MonoBehaviourSingleton<EnemyManager> {
+    public class EnemyManager : MonoBehaviourSingleton<EnemyManager>, IAssetDependent {
 
         #region Fields
         [ComputedFields]
@@ -17,24 +17,22 @@ namespace CSCI526GameJam {
         [ShowInInspector] private HashSet<Enemy> enemyInstances = new();
 
         [SerializeField] private List<Enemy> enemyPrefabs;
-
-#if UNITY_EDITOR
-        [EditorOnlyFields]
-        [FolderPath, SerializeField]
-        private string enemyPrefabsPath;
-
-        [Button("Find Enemy Prefabs", ButtonSizes.Large)]
-        private void FindAssets() {
-            enemyPrefabs = Utility.FindRefsInFolder<Enemy>(enemyPrefabsPath, AssetType.Prefab);
-            Debug.Log($"Found {enemyPrefabs.Count} enemy prefabs under {enemyPrefabsPath}. ");
-        }
-#endif
         #endregion
 
         #region Publics
         public event Action OnEnemiesClear;
 
         public int NumEnemies => enemyInstances.Count;
+
+#if UNITY_EDITOR
+        [EditorOnlyFields]
+        [FolderPath, SerializeField]
+        private string enemyPrefabsPath;
+        public void FindAssets() {
+            enemyPrefabs = Utility.FindRefsInFolder<Enemy>(enemyPrefabsPath, AssetType.Prefab);
+            Debug.Log($"Found {enemyPrefabs.Count} enemy prefabs under {enemyPrefabsPath}. ");
+        }
+#endif
         #endregion
 
         #region Internals

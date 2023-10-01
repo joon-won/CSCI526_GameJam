@@ -8,7 +8,7 @@ using UnityEngine.EventSystems;
 
 namespace CSCI526GameJam {
 
-    public class TowerManager : MonoBehaviourSingleton<TowerManager> {
+    public class TowerManager : MonoBehaviourSingleton<TowerManager>, IAssetDependent {
 
         #region Fields
         [ComputedFields]
@@ -20,41 +20,6 @@ namespace CSCI526GameJam {
 
         private GameObject towersHolder;
         private Dictionary<TowerConfig, Tower> configToPrefab = new();
-
-
-#if UNITY_EDITOR
-        [EditorOnlyFields]
-        [FolderPath, SerializeField]
-        private string towerPrefabsPath;
-
-        [Button("Find Tower Prefabs", ButtonSizes.Large)]
-        private void FindAssets() {
-            towerPrefabs = Utility.FindRefsInFolder<Tower>(towerPrefabsPath, AssetType.Prefab);
-
-            // Validate prefabs. 
-            var isBaseFound = false;
-            for (int i = 0; i < towerPrefabs.Count; i++) {
-                var prefab = towerPrefabs[i];
-                if (prefab is not CSCI526GameJam.PlayerBase) continue;
-
-                if (isBaseFound) {
-                    Debug.LogWarning($"There are duplicate prefabs of {typeof(PlayerBase)}. Fix it! ");
-                }
-                else {
-                    isBaseFound = true;
-                    basePrefab = prefab as PlayerBase;
-                    towerPrefabs.Remove(prefab);
-                }
-            }
-
-            if (!isBaseFound) {
-                Debug.LogWarning($"{typeof(PlayerBase)} prefab is not found under {towerPrefabsPath}. Fix it! ");
-            }
-            else {
-                Debug.Log($"Found {towerPrefabs.Count + 1} building prefabs under {towerPrefabsPath}. ");
-            }
-        }
-#endif
         #endregion
 
         #region Publics
@@ -102,6 +67,38 @@ namespace CSCI526GameJam {
             playerBase.Build(centerSpot);
             baseInstance = playerBase;
         }
+
+#if UNITY_EDITOR
+        [EditorOnlyFields]
+        [FolderPath, SerializeField]
+        private string towerPrefabsPath;
+        public void FindAssets() {
+            towerPrefabs = Utility.FindRefsInFolder<Tower>(towerPrefabsPath, AssetType.Prefab);
+
+            // Validate prefabs. 
+            var isBaseFound = false;
+            for (int i = 0; i < towerPrefabs.Count; i++) {
+                var prefab = towerPrefabs[i];
+                if (prefab is not CSCI526GameJam.PlayerBase) continue;
+
+                if (isBaseFound) {
+                    Debug.LogWarning($"There are duplicate prefabs of {typeof(PlayerBase)}. Fix it! ");
+                }
+                else {
+                    isBaseFound = true;
+                    basePrefab = prefab as PlayerBase;
+                    towerPrefabs.Remove(prefab);
+                }
+            }
+
+            if (!isBaseFound) {
+                Debug.LogWarning($"{typeof(PlayerBase)} prefab is not found under {towerPrefabsPath}. Fix it! ");
+            }
+            else {
+                Debug.Log($"Found {towerPrefabs.Count + 1} building prefabs under {towerPrefabsPath}. ");
+            }
+        }
+#endif
         #endregion
 
         #region Internals
