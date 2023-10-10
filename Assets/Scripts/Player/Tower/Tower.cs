@@ -52,7 +52,7 @@ namespace CSCI526GameJam {
         /// </summary>
         /// <param name="spot">Spot to be checked. </param>
         public bool CanBuild(Spot spot) {
-            return !spot.Tower;
+            return !spot.Tower && spot.Constructable;
         }
 
         /// <summary>
