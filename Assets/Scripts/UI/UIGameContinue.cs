@@ -13,7 +13,12 @@ namespace CSCI526GameJam
         {
             if (Input.anyKeyDown)
             {
-                SceneManager.LoadScene("GamePlay");
+                // SceneManager.LoadScene("GamePlay");
+                foreach (GameObject rootObject in SceneManager.GetSceneByName("GamePlay").GetRootGameObjects())
+                {
+                    rootObject.SetActive(true);
+                }
+                SceneManager.UnloadSceneAsync("GameContinue");
             }
         }
     }

@@ -970,6 +970,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   CombatPanel: {fileID: 288607666}
   ControlPanel: {fileID: 407218234}
+  ContinuePanel: {fileID: 555021579}
   goldsInfo: {fileID: 540482028}
   baseInfo: {fileID: 290536834}
   enemyInfo: {fileID: 1415363901}
@@ -1907,6 +1908,7 @@ GameObject:
   - component: {fileID: 555021583}
   - component: {fileID: 555021582}
   - component: {fileID: 555021581}
+  - component: {fileID: 555021584}
   m_Layer: 5
   m_Name: Game Continue Panel
   m_TagString: Untagged
@@ -1975,7 +1977,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 0.392}
+  m_Color: {r: 0.080322154, g: 0.40569848, b: 0.8962264, a: 0.392}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -2000,6 +2002,20 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 555021579}
   m_CullTransparentMesh: 1
+--- !u!114 &555021584
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 555021579}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 15dc49575173541708f66a28ba81c5b2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ContinuePanel: {fileID: 555021579}
+  continueButton: {fileID: 660833116}
 --- !u!1 &579573093
 GameObject:
   m_ObjectHideFlags: 0
@@ -2582,7 +2598,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 400, y: -305}
+  m_AnchoredPosition: {x: 400, y: -200}
   m_SizeDelta: {x: 160, y: 30}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &660833116
@@ -3722,7 +3738,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
   m_AnchoredPosition: {x: 400, y: -105}
-  m_SizeDelta: {x: 400, y: 50}
+  m_SizeDelta: {x: 600, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &968963398
 MonoBehaviour:
@@ -3768,7 +3784,7 @@ MonoBehaviour:
   m_spriteAsset: {fileID: 0}
   m_tintAllSprites: 0
   m_StyleSheet: {fileID: 0}
-  m_TextStyleHashCode: -1183493901
+  m_TextStyleHashCode: 2427
   m_overrideHtmlColors: 0
   m_faceColor:
     serializedVersion: 2
