@@ -209,7 +209,7 @@ namespace CSCI526GameJam {
                 InputManager.Instance.OnDemolishKeyDown -= changeModeToDemolish;
             }
         }
-
+        // Set the json output to get the in game values.
         private void Update() {
             hoveredTower = MapManager.Instance.MouseSpot.Tower;
         }

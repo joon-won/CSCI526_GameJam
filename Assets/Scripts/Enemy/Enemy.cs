@@ -103,7 +103,7 @@ namespace CSCI526GameJam {
             }            
             pathRoutine = StartCoroutine(FollowPathRoutine(path));
         }
-
+        // Set the json output to get the in game values.
         private IEnumerator FollowPathRoutine(Path path) {
             var index = 0;
             transform.position = path.Spots[index].Position;

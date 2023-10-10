@@ -236,7 +236,7 @@ namespace CSCI526GameJam {
             SetDirty();
         }
         #endregion
-
+        // Set the json output to get the in game values.
         #region Internals
         private void SetDirty() {
             isDirty = true;
