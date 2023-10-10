@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 namespace CSCI526GameJam
@@ -10,10 +11,13 @@ namespace CSCI526GameJam
     {
         public GameObject CombatPanel;
         public GameObject ControlPanel;
+        public GameObject ContinuePanel;
         public TextMeshProUGUI goldsInfo;
         public TextMeshProUGUI baseInfo;
         public TMP_Text enemyInfo;
         public Button StartCombat;
+        private bool combatStarted = false;
+
 
         [SerializeField] private TMP_Text levelText;
 
@@ -51,6 +55,7 @@ namespace CSCI526GameJam
 
         private void CombatStart()
         {
+            combatStarted = true; // Set the flag
             CombatPanel.SetActive(true);
             ControlPanel.SetActive(false);
             StartCoroutine(LevelTextRoutine());
@@ -67,6 +72,18 @@ namespace CSCI526GameJam
         private void CombatEnd() {
             CombatPanel.SetActive(false);
             ControlPanel.SetActive(true);
+            if (!combatStarted) 
+            {
+                return; // If combat hasn't started, just return
+            }
+
+            if (GameManager.Instance.Level <= 3)
+            {
+                ContinuePanel.SetActive(true);
+            }
+            else
+                SceneManager.LoadScene("GameOver");
+
         }
     }
 }
