@@ -85,6 +85,11 @@ namespace CSCI526GameJam {
             this.constructable = cons;
             OnChanged?.Invoke();
         }
+
+        // Set the spot to be not constructable
+        public void SetUnconstructable() {
+            this.constructable = false;
+        }
         #endregion
 
         #region Internals
