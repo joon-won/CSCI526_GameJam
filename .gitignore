@@ -73,3 +73,5 @@ crashlytics-build.properties
 
 # Other
 /Assets/Plugins/Sirenix/Demos/*.unitypackage.meta
+.vscode/
+.idea/
