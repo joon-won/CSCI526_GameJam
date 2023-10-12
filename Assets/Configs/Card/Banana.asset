@@ -12,10 +12,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 70c6e10eb4e2c1848902a97cc287ddd9, type: 3}
   m_Name: Banana
   m_EditorClassIdentifier: 
-  itemName: Banana
+  cardName: <Test> Add tower attack speed
   rank: 1
-  price: 5
-  numAvailable: 1
+  cost: 2
   description: '<Test> Bonus tower attack speed. '
   image: {fileID: 0}
-  bonusTowerASScalar: 0.5
+  lv1BonusTowerASScalar: 0.05
+  lv2BonusTowerASScalar: 0.1
+  lv3BonusTowerASScalar: 0.3

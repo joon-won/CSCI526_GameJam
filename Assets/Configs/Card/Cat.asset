@@ -12,10 +12,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c7ce742b4c2e5a74e9bf48c47e6a8a36, type: 3}
   m_Name: Cat
   m_EditorClassIdentifier: 
-  itemName: Cat
+  cardName: <Test> Add tower crit chance
   rank: 2
-  price: 5
-  numAvailable: 1
+  cost: 3
   description: '<Test> Bonus crit chance. '
   image: {fileID: 0}
-  bonusTowerCCValue: 0.5
+  lv1BonusTowerCCValue: 0.05
+  lv2BonusTowerCCValue: 0.1
+  lv3BonusTowerCCValue: 0.3

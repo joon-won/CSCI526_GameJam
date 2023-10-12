@@ -104,14 +104,14 @@ namespace CSCI526GameJam {
         }
 
         private void OnEnable() {
-            GameManager.Instance.OnBuyingStarted += GenerateSpawnSpots;
-            GameManager.Instance.OnFightingStarted += GenerateEnemies;
+            GameManager.Instance.OnPreparationStarted += GenerateSpawnSpots;
+            GameManager.Instance.OnCombatStarted += GenerateEnemies;
         }
 
         private void OnDisable() {
             if (!GameManager.IsApplicationQuitting) {
-                GameManager.Instance.OnBuyingStarted -= GenerateSpawnSpots;
-                GameManager.Instance.OnFightingStarted -= GenerateEnemies;
+                GameManager.Instance.OnPreparationStarted -= GenerateSpawnSpots;
+                GameManager.Instance.OnCombatStarted -= GenerateEnemies;
             }
         }
 

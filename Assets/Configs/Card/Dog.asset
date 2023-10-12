@@ -9,13 +9,14 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1ef63e1088bf5f94c969a10cc4be8e07, type: 3}
-  m_Name: Apple
+  m_Script: {fileID: 11500000, guid: c7ce742b4c2e5a74e9bf48c47e6a8a36, type: 3}
+  m_Name: Dog
   m_EditorClassIdentifier: 
-  itemName: Apple
-  rank: 0
-  price: 5
-  numAvailable: 1
-  description: '<Test> Bonus tower attack damage. '
+  cardName: <Test> Add tower crit chance
+  rank: 2
+  cost: 4
+  description: '<Test> Bonus crit chance. '
   image: {fileID: 0}
-  bonusTowerADScalar: 0.5
+  lv1BonusTowerCCValue: 0.05
+  lv2BonusTowerCCValue: 0.1
+  lv3BonusTowerCCValue: 0.3

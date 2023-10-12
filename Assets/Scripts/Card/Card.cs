@@ -2,19 +2,18 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 namespace CSCI526GameJam {
 
-    public abstract class ItemConfig : ScriptableObject {
+    public abstract class Card : ScriptableObject {
 
         #region Fields
-        [ClassHeader(typeof(ItemConfig))]
+        [ClassHeader(typeof(Card))]
 
-        [MandatoryFields]
-        [SerializeField] private string itemName;
+        [SerializeField] private string cardName;
         [SerializeField] private ItemRank rank;
-        [SerializeField] private int price;
-        [SerializeField] private int numAvailable;
+        [SerializeField] private int cost;
 
         [TextArea(5, 10)]
         [SerializeField] private string description;
@@ -22,16 +21,16 @@ namespace CSCI526GameJam {
         #endregion
 
         #region Publics
-        public string ItemName => itemName;
+        public string CardName => cardName;
         public ItemRank Rank => rank;
-        public int Price => price;
-        public int NumAvailable => numAvailable;
+        public int Cost => cost;
 
         public string Description => description;
         public Sprite Image => image;
 
-        public abstract void OnAdd();
-        public abstract void OnRemove();
+        public abstract void PlayLv1();
+        public abstract void PlayLv2();
+        public abstract void PlayLv3();
         #endregion
 
         #region Internals

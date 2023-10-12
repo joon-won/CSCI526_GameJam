@@ -193,8 +193,8 @@ namespace CSCI526GameJam {
         }
 
         private void OnEnable() {
-            GameManager.Instance.OnBuyingStarted += Unlock;
-            GameManager.Instance.OnFightingStarted += Lock;
+            GameManager.Instance.OnPreparationStarted += Unlock;
+            GameManager.Instance.OnCombatStarted += Lock;
             InputManager.Instance.OnMouseLeftDown += PerformMode;
             InputManager.Instance.OnMouseRightDown += changeModeToNone;
             InputManager.Instance.OnDemolishKeyDown += changeModeToDemolish;
@@ -202,8 +202,8 @@ namespace CSCI526GameJam {
 
         private void OnDisable() {
             if (!GameManager.IsApplicationQuitting) {
-                GameManager.Instance.OnBuyingStarted -= Unlock;
-                GameManager.Instance.OnFightingStarted -= Lock;
+                GameManager.Instance.OnPreparationStarted -= Unlock;
+                GameManager.Instance.OnCombatStarted -= Lock;
                 InputManager.Instance.OnMouseLeftDown -= PerformMode;
                 InputManager.Instance.OnMouseRightDown -= changeModeToNone;
                 InputManager.Instance.OnDemolishKeyDown -= changeModeToDemolish;

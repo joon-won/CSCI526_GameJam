@@ -32,9 +32,8 @@ namespace CSCI526GameJam {
         #endregion
 
         #region Publics
-        public event Action OnBuyingStarted;
-        public event Action OnBuildingStarted;
-        public event Action OnFightingStarted;
+        public event Action OnPreparationStarted;
+        public event Action OnCombatStarted;
 
         public State GameState => state;
         public int Level => level;
@@ -54,17 +53,12 @@ namespace CSCI526GameJam {
         private void StartBuying() {
             state = State.Buying;
             level++;
-            OnBuyingStarted?.Invoke();
-        }
-
-        private void StartBuilding() {
-            state = State.Building;
-            OnBuildingStarted?.Invoke();
+            OnPreparationStarted?.Invoke();
         }
 
         private void StartCombat() {
             state = State.Fighting;
-            OnFightingStarted?.Invoke();
+            OnCombatStarted?.Invoke();
         }
 
         private void OnSceneLoaded(Scene scene, LoadSceneMode mode) {
