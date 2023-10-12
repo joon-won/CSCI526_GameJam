@@ -28,7 +28,7 @@ namespace CSCI526GameJam {
 	    [ComputedFields]
 	    [SerializeField] private List<Card> cardConfigs;
 	    [SerializeField] private List<Card> deck = new();
-		[SerializeField] private List<Card> onHand = new();
+		[SerializeField] private List<Card> hand = new();
 		[SerializeField] private List<int> selectedIndices = new();
 		#endregion
 
@@ -44,21 +44,25 @@ namespace CSCI526GameJam {
 		/// <param name="index">Index of the card. </param>
 		/// <returns>The card. </returns>
 		public Card Get(int index) {
-			return onHand[index];
+			return hand[index];
         }
 
-		public void Draw(int num) {
-			if (num <= 0) {
-				Debug.LogWarning($"{num} is not a positive num. ");
+		/// <summary>
+		/// Draw cards from the deck. 
+		/// </summary>
+		/// <param name="numCards">Num of cards to draw. </param>
+		public void DrawFromDeck(int numCards) {
+			if (numCards <= 0) {
+				Debug.LogWarning($"{numCards} is not a positive num. ");
 				return;
 			}
 
-			if (onHand.Count >= maxOnHand) {
+			if (hand.Count >= maxOnHand) {
 				Debug.Log("TODO: onHand is full. ");
 				return;
 			}
 
-			for (int i = 0; i < num; i++) {
+			for (int i = 0; i < numCards; i++) {
 				if (deck.Count == 0) return;
 
 				var randIndex = Random.Range(0, deck.Count - 1);
@@ -67,17 +71,29 @@ namespace CSCI526GameJam {
 			}
 		}
 
+		/// <summary>
+		/// Select a card on hand. 
+		/// </summary>
+		/// <param name="index">Index of the card to select. </param>
 		public void Select(int index) {
 			selectedIndices.Add(index);
 			OnCardSelected?.Invoke(index);
         }
 
+		/// <summary>
+		/// Unselect a card on hand. 
+		/// </summary>
+		/// <param name="index">Index of the card to unselect. </param>
 		public void Unselect(int index) {
 			if (selectedIndices.Remove(index)) {
 				OnCardUnselected?.Invoke(index);
 			}
 		}
 
+		/// <summary>
+		/// Toggle if a card is selected on hand. 
+		/// </summary>
+		/// <param name="index">Index of the card to toggle. </param>
 		public void ToggleSelected(int index) {
 			if (selectedIndices.Contains(index)) {
 				Unselect(index);
@@ -87,10 +103,13 @@ namespace CSCI526GameJam {
 			}
         }
 
+		/// <summary>
+		/// Play the selected cards. 
+		/// </summary>
 		public void PlaySelected() {
 			if (selectedIndices.Count == 0) return;
 
-			var selected = selectedIndices.Select(index => onHand[index]).ToList();
+			var selected = selectedIndices.Select(index => hand[index]).ToList();
 			var pattern = CheckPattern(selected);
 			if (pattern == Pattern.None) return;
 
@@ -151,7 +170,7 @@ namespace CSCI526GameJam {
 					return;
 			}
 
-			selected.ForEach(c => onHand.Remove(c));
+			selected.ForEach(c => hand.Remove(c));
 			OnCardsPlayed?.Invoke(selectedIndices);
 			selectedIndices.Clear();
         }
@@ -169,24 +188,24 @@ namespace CSCI526GameJam {
 
 		#region Internals
 		private void DrawOnNewRound() {
-			Draw(10); // TODO: alg instead
+			DrawFromDeck(10); // TODO: alg instead
         }
 
 		private void InsertCard(Card card) {
-			var index = onHand.FindLastIndex(c => c == card);
+			var index = hand.FindLastIndex(c => c == card);
 			if (index == -1) {
-				index = onHand.FindIndex(c => c.Cost > card.Cost);
+				index = hand.FindIndex(c => c.Cost > card.Cost);
 				if (index == -1) {
-					index = onHand.Count;
-					onHand.Add(card);
+					index = hand.Count;
+					hand.Add(card);
                 }
 				else {
-					onHand.Insert(index, card);
+					hand.Insert(index, card);
                 }
 			}
 			else {
 				index++;
-				onHand.Insert(index, card);
+				hand.Insert(index, card);
             }
 
 			OnCardInserted?.Invoke(index);
