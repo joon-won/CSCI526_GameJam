@@ -1,0 +1,22 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c7ce742b4c2e5a74e9bf48c47e6a8a36, type: 3}
+  m_Name: Egg
+  m_EditorClassIdentifier: 
+  cardName: <Test> Add tower crit chance
+  rank: 2
+  cost: 5
+  description: '<Test> Bonus crit chance. '
+  image: {fileID: 0}
+  lv1BonusTowerCCValue: 0.05
+  lv2BonusTowerCCValue: 0.1
+  lv3BonusTowerCCValue: 0.3

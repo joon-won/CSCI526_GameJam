@@ -8,23 +8,28 @@ namespace CSCI526GameJam {
     /// <summary>
     /// Item for test. Increase tower crit chance value. 
     /// </summary>
-    [CreateAssetMenu(menuName = "Config/Item/Test/Cat")]
-    public class Cat : ItemConfig {
+    [CreateAssetMenu(menuName = "Config/Card/Test/Cat")]
+    public class Cat : Card {
 
         #region Fields
         [ClassHeader(typeof(Cat))]
 
-        [MandatoryFields]
-        [SerializeField] private float bonusTowerCCValue;
+        [SerializeField] private float lv1BonusTowerCCValue;
+        [SerializeField] private float lv2BonusTowerCCValue;
+        [SerializeField] private float lv3BonusTowerCCValue;
         #endregion
 
         #region Publics
-        public override void OnAdd() {
-            Stats.Instance.Tower.CritChance.Value.IncreaseValue(bonusTowerCCValue);
+        public override void PlayLv1() {
+            Stats.Instance.Tower.CritChance.Value.IncreaseValue(lv1BonusTowerCCValue);
         }
 
-        public override void OnRemove() {
-            Stats.Instance.Tower.CritChance.Value.IncreaseValue(bonusTowerCCValue);
+        public override void PlayLv2() {
+            Stats.Instance.Tower.CritChance.Value.IncreaseValue(lv2BonusTowerCCValue);
+        }
+
+        public override void PlayLv3() {
+            Stats.Instance.Tower.CritChance.Value.IncreaseValue(lv3BonusTowerCCValue);
         }
         #endregion
 
