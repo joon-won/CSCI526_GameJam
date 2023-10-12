@@ -10,7 +10,7 @@ namespace CSCI526GameJam {
 
     public class CardManager : MonoBehaviourSingleton<CardManager>, IAssetDependent {
 
-		public enum Pattern {
+		private enum Pattern {
 			None,
 			X,
 			XX,
@@ -91,7 +91,6 @@ namespace CSCI526GameJam {
 			if (selectedIndices.Count == 0) return;
 
 			var selected = selectedIndices.Select(index => onHand[index]).ToList();
-			selected.OrderBy(c => c.Cost);
 			var pattern = CheckPattern(selected);
 			if (pattern == Pattern.None) return;
 
@@ -195,6 +194,7 @@ namespace CSCI526GameJam {
 
 		private Pattern CheckPattern(List<Card> cards) {
 			var n = cards.Count;
+			cards.Sort((x, y) => x.Cost.CompareTo(y.Cost));
 
 			// Check for ABCD
 			if (n >= 4) {
@@ -214,13 +214,18 @@ namespace CSCI526GameJam {
 					return cards[0].Cost == cards[1].Cost ? Pattern.XX : Pattern.None;
 
 				case 4:
-					if (cards.All(c => c.Cost == cards[0].Cost)) return Pattern.XXXX;
-					if (cards.Take(3).All(c => c.Cost == cards[0].Cost)) return Pattern.XXXY;
+					if (cards.Count(c => c.Cost == cards[0].Cost) == 4) return Pattern.XXXX;
+					if (cards.Count(c => c.Cost == cards[0].Cost) == 3 
+						|| cards.Count(c => c.Cost == cards[n - 1].Cost) == 3) return Pattern.XXXY;
+
 					return Pattern.None;
 
 				case 5:
-					if (cards.Take(3).All(c => c.Cost == cards[0].Cost)
-						&& cards[n - 1].Cost == cards[n - 2].Cost) return Pattern.XXXYY;
+					if (cards.Count(c => c.Cost == cards[0].Cost) == 3 
+						&& cards.Count(c => c.Cost == cards[n - 1].Cost) == 2
+						|| cards.Count(c => c.Cost == cards[n - 1].Cost) == 3
+						&& cards.Count(c => c.Cost == cards[0].Cost) == 2) return Pattern.XXXYY;
+
 					return Pattern.None;
 
 				default:
