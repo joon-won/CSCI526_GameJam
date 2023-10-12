@@ -21,15 +21,21 @@ namespace CSCI526GameJam {
 
         #region Publics
         public override void PlayLv1() {
-            Stats.Instance.Tower.CritChance.Value.IncreaseValue(lv1BonusTowerCCValue);
+            EffectManager.Instance.AddEffect(
+                () => Stats.Instance.Tower.CritChance.Value.IncreaseValue(lv1BonusTowerCCValue),
+                () => Stats.Instance.Tower.CritChance.Value.DecreaseValue(lv1BonusTowerCCValue));
         }
 
         public override void PlayLv2() {
-            Stats.Instance.Tower.CritChance.Value.IncreaseValue(lv2BonusTowerCCValue);
+            EffectManager.Instance.AddEffect(
+                () => Stats.Instance.Tower.CritChance.Value.IncreaseValue(lv2BonusTowerCCValue),
+                () => Stats.Instance.Tower.CritChance.Value.DecreaseValue(lv2BonusTowerCCValue));
         }
 
         public override void PlayLv3() {
-            Stats.Instance.Tower.CritChance.Value.IncreaseValue(lv3BonusTowerCCValue);
+            EffectManager.Instance.AddEffect(
+                () => Stats.Instance.Tower.CritChance.Value.IncreaseValue(lv3BonusTowerCCValue),
+                () => Stats.Instance.Tower.CritChance.Value.DecreaseValue(lv3BonusTowerCCValue));
         }
         #endregion
 

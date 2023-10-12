@@ -21,15 +21,21 @@ namespace CSCI526GameJam {
 
         #region Publics
         public override void PlayLv1() {
-            Stats.Instance.Tower.AttackSpeed.Scalar.IncreaseValue(lv1BonusTowerASScalar);
+            EffectManager.Instance.AddEffect(
+                () => Stats.Instance.Tower.AttackSpeed.Scalar.IncreaseValue(lv1BonusTowerASScalar),
+                () => Stats.Instance.Tower.AttackSpeed.Scalar.DecreaseValue(lv1BonusTowerASScalar));
         }
 
         public override void PlayLv2() {
-            Stats.Instance.Tower.AttackSpeed.Scalar.IncreaseValue(lv2BonusTowerASScalar);
+            EffectManager.Instance.AddEffect(
+                () => Stats.Instance.Tower.AttackSpeed.Scalar.IncreaseValue(lv2BonusTowerASScalar),
+                () => Stats.Instance.Tower.AttackSpeed.Scalar.DecreaseValue(lv2BonusTowerASScalar));
         }
 
         public override void PlayLv3() {
-            Stats.Instance.Tower.AttackSpeed.Scalar.IncreaseValue(lv3BonusTowerASScalar);
+            EffectManager.Instance.AddEffect(
+                () => Stats.Instance.Tower.AttackSpeed.Scalar.IncreaseValue(lv3BonusTowerASScalar),
+                () => Stats.Instance.Tower.AttackSpeed.Scalar.DecreaseValue(lv3BonusTowerASScalar));
         }
         #endregion
 
