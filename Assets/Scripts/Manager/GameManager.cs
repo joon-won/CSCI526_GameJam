@@ -16,12 +16,16 @@ namespace CSCI526GameJam {
         public static bool IsApplicationQuitting { get; private set; } = false;
 
         public enum State {
-            Buying,
-            Building,
-            Fighting,
+            Preparation,
+            Combat,
+            GameOver,
+            Win,
         }
 
         #region Fields
+        [MandatoryFields]
+        [SerializeField] private int numLevels = 3;
+        
         [ComputedFields]
         [SerializeField] private State state;
         [SerializeField] private int level;
@@ -34,6 +38,9 @@ namespace CSCI526GameJam {
         #region Publics
         public event Action OnPreparationStarted;
         public event Action OnCombatStarted;
+        public event Action OnGameWon;
+        public event Action OnGameOver;
+        
 
         public State GameState => state;
         public int Level => level;
@@ -50,15 +57,34 @@ namespace CSCI526GameJam {
         #endregion
 
         #region Internals
-        private void StartBuying() {
-            state = State.Buying;
+        private void StartPreparation() {
+            if (level >= numLevels) {
+                state = State.Win;
+                OnGameWon?.Invoke();
+                return;
+            }
+            state = State.Preparation;
             level++;
             OnPreparationStarted?.Invoke();
         }
 
         private void StartCombat() {
-            state = State.Fighting;
+            state = State.Combat;
             OnCombatStarted?.Invoke();
+        }
+
+        private void SetGameOver() {
+            state = State.GameOver;
+            OnGameOver?.Invoke();
+        }
+
+        private void SetupGameplay() {
+            InputManager.Instance.Toggle(true);
+            MapManager.Instance.GenerateMap();
+            CameraManager.Instance.Init();
+            TowerManager.Instance.GenerateBase();
+
+            TowerManager.Instance.PlayerBase.OnDied += SetGameOver;
         }
 
         private void OnSceneLoaded(Scene scene, LoadSceneMode mode) {
@@ -73,13 +99,6 @@ namespace CSCI526GameJam {
             }
 
             Debug.Log($"Loaded scene (Mode: {mode}): {scene.name}. ");
-        }
-
-        private void SetupGameplay() {
-            InputManager.Instance.Toggle(true);
-            MapManager.Instance.GenerateMap();
-            CameraManager.Instance.Init();
-            TowerManager.Instance.GenerateBase();
         }
 
         private void OnSceneUnloaded(Scene scene) {
@@ -112,19 +131,19 @@ namespace CSCI526GameJam {
         private void OnEnable() {
             SceneManager.sceneLoaded += OnSceneLoaded;
             SceneManager.sceneUnloaded += OnSceneUnloaded;
-            EnemyManager.Instance.OnEnemiesClear += StartBuying;
+            EnemyManager.Instance.OnEnemiesClear += StartPreparation;
         }
 
         private void OnDisable() {
             if (!IsApplicationQuitting) {
                 SceneManager.sceneLoaded -= OnSceneLoaded;
                 SceneManager.sceneUnloaded -= OnSceneUnloaded;
-                EnemyManager.Instance.OnEnemiesClear -= StartBuying;
+                EnemyManager.Instance.OnEnemiesClear -= StartPreparation;
             }
         }
 
         private void Start() {
-            StartBuying();
+            StartPreparation();
         }
 
         private void Update() {

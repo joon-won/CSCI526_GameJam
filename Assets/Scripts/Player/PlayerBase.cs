@@ -18,18 +18,21 @@ namespace CSCI526GameJam {
 
         #region Publics
         public event Action OnDamaged;
+        public event Action OnDied;
 
         public float Health => health;
         public float MaxHealth => maxHealth;
 
         public void TakeDamage(float damage) {
+            if (health <= 0f) return;
+            
             health -= damage;
             health = Mathf.Max(0f, health);
 
             OnDamaged?.Invoke();
 
             if (health <= 0f) {
-                Debug.Log("Game over");
+                OnDied?.Invoke();
             }
         }
         #endregion
