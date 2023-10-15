@@ -1520,6 +1520,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c690dcb8680fd8f4e8b4b80aadf1102d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  numLevels: 3
   state: 0
   level: 0
   gameTime: 0
@@ -2269,7 +2270,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 586776383}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1625762364}
+        m_TargetAssemblyTypeName: CSCI526GameJam.Player, Assembly-CSharp
+        m_MethodName: PickTower
+        m_Mode: 2
+        m_Arguments:
+          m_ObjectArgument: {fileID: 11400000, guid: 512ff0b50bbfeef4ea79999559f67d82, type: 2}
+          m_ObjectArgumentAssemblyTypeName: CSCI526GameJam.TowerConfig, Assembly-CSharp
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &586776383
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3597,7 +3610,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 793363432}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1625762364}
+        m_TargetAssemblyTypeName: CSCI526GameJam.Player, Assembly-CSharp
+        m_MethodName: PickTower
+        m_Mode: 2
+        m_Arguments:
+          m_ObjectArgument: {fileID: 11400000, guid: 4d28b0091e746f24da518fceee136802, type: 2}
+          m_ObjectArgumentAssemblyTypeName: CSCI526GameJam.TowerConfig, Assembly-CSharp
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &793363432
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3994,7 +4019,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 863872095}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1625762364}
+        m_TargetAssemblyTypeName: CSCI526GameJam.Player, Assembly-CSharp
+        m_MethodName: PickTower
+        m_Mode: 2
+        m_Arguments:
+          m_ObjectArgument: {fileID: 11400000, guid: a7fae8a0445f9b84ab7a7060a509152d, type: 2}
+          m_ObjectArgumentAssemblyTypeName: CSCI526GameJam.TowerConfig, Assembly-CSharp
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &863872095
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5762,8 +5799,7 @@ MonoBehaviour:
   mode: 0
   hoveredTower: {fileID: 0}
   selectedTower: {fileID: 0}
-  gold: 0
-  towerPoolSize: 3
+  gold: 50
 --- !u!4 &1625762365
 Transform:
   m_ObjectHideFlags: 0
@@ -6119,7 +6155,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 9124e32c2ae3abf43a8dbb94d79a10a0, type: 2}
   - {fileID: 11400000, guid: 24a4ad7c36ca67f4184eeb50f774f9fa, type: 2}
   deck: []
-  onHand: []
+  hand: []
   selectedIndices: 
   cardsPath: Assets/Configs/Card
 --- !u!4 &1848850516

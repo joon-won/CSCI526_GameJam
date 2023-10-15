@@ -23,7 +23,8 @@ namespace CSCI526GameJam {
         #endregion
 
         #region Publics
-        public Action OnStop;
+        public event Action<TowerConfig> OnPlaced;
+        public event Action OnCanceled;
 
         public bool IsPreviewing => isPreviewing;
 
@@ -53,18 +54,25 @@ namespace CSCI526GameJam {
             cachedSpot = null;
             spriteRenderer.sprite = null;
 
-            OnStop?.Invoke();
+            OnCanceled?.Invoke();
         }
 
         /// <summary>
         /// Place currently previewed tower. 
         /// </summary>
         public bool TryPlace() {
-            if (!canBuild) return false;
-            if (!IsBaseReachable(cachedSpot)) return false;
-            if (!Player.Instance.TryPay(cachedTower.Config.Price)) return false;
+            if (!canBuild) {
+                // TODO: Invoke OnBuildBlocked
+                return false;
+            }
+            if (!IsBaseReachable(cachedSpot)) {
+                // TODO: Invoke OnPathBlocked
+                return false;
+            }
 
             cachedTower.Build(cachedSpot);
+            OnPlaced?.Invoke(cachedTower.Config);
+
             CancelPreview();
             return true;
         }

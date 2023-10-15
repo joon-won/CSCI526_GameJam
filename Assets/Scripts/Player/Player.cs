@@ -23,8 +23,7 @@ namespace CSCI526GameJam {
         [SerializeField] private Tower selectedTower;
 
         [SerializeField] private int gold;
-        [SerializeField] private int towerPoolSize = 3;
-        [ShowInInspector] private Dictionary<int, Tower> indexToTower = new(); // Tower pool
+        [ShowInInspector] private Dictionary<TowerConfig, int> towerConfigToNum = new();
 
         private TowerPlacer placer;
 
@@ -34,10 +33,9 @@ namespace CSCI526GameJam {
 
         #region Publics
         public event Action<int> OnGoldChanged;
-        public event Action OnTowerPoolChanged;
+        public event Action<TowerConfig, int> OnTowerNumChanged;
 
         public int Gold => gold;
-        public int PoolSize => indexToTower.Count;
 
         /// <summary>
         /// Check if gold is enough to pay a price. 
@@ -71,20 +69,25 @@ namespace CSCI526GameJam {
         }
 
         /// <summary>
-        /// Get a tower config from the tower pool by index. 
+        /// Get num of a tower. 
         /// </summary>
-        /// <param name="index">Index of the tower in pool. </param>
-        /// <returns></returns>
-        public TowerConfig GetTowerConfig(int index) {
-            return indexToTower[index].Config;
+        /// <param name="config">Config of the tower. </param>
+        /// <returns>Num of the tower. </returns>
+        public int GetTowerNum(TowerConfig config) {
+            if (towerConfigToNum.TryGetValue(config, out var num)) {
+                return num;
+            }
+            return 0;
         }
 
         /// <summary>
         /// Pick and preview a tower from the tower pool by index. 
         /// </summary>
         /// <param name="index">Index of the tower in pool. </param>
-        public void PickTower(int index) {
-            var tower = indexToTower[index];
+        public void PickTower(TowerConfig config) {
+            if (GetTowerNum(config) <= 0) return;
+
+            var tower = TowerManager.Instance.CreateTower(config);
             if (!placer.IsPreviewing) {
                 placer.StartPreview(tower);
                 ChangeMode(Mode.Build);
@@ -92,19 +95,29 @@ namespace CSCI526GameJam {
             else {
                 ChangeMode(Mode.None);
             }
+
+            OnTowerNumChanged?.Invoke(config, towerConfigToNum[config]);
+        }
+
+        /// <summary>
+        /// Add tower num. 
+        /// </summary>
+        /// <param name="config">Config of the tower to add. </param>
+        public void AddTower(TowerConfig config, int num = 1) {
+            if (num <= 0) {
+                Debug.LogWarning($"Trying to add a non-positive num {num}");
+                return;
+            }
+
+            if (towerConfigToNum.ContainsKey(config)) {
+                towerConfigToNum[config] += num;
+                return;
+            }
+            towerConfigToNum[config] = num;
         }
         #endregion
 
         #region Internals
-        private void FillTowerPool(int index) {
-            var configs = TowerManager.Instance.TowerConfigs;
-            var config = configs[Random.Range(0, configs.Length)]; // TODO: Random algorithm
-            var tower = TowerManager.Instance.CreateTower(config);
-            tower.OnBuild += () => FillTowerPool(index);
-            indexToTower[index] = tower;
-            OnTowerPoolChanged?.Invoke();
-        }
-
         private void ChangeMode(Mode mode) {
             if (isLocked) return;
             if (this.mode == mode) return;
@@ -171,6 +184,21 @@ namespace CSCI526GameJam {
             isLocked = false;
             ChangeMode(Mode.None);
         }
+
+        private void ConsumeOnPlaced(TowerConfig config) {
+            if (!towerConfigToNum.ContainsKey(config)) {
+                Debug.LogWarning($"{config} is not in the dict. ");
+                return;
+            }
+            towerConfigToNum[config]--;
+        }
+
+        [ContextMenu("<Debug> Add all towers")]
+        private void Debug_addAllTowers() {
+            foreach (var config in TowerManager.Instance.TowerConfigs) {
+                towerConfigToNum[config] = 100;
+            }
+        }
         #endregion
 
         #region Unity Methods
@@ -182,14 +210,7 @@ namespace CSCI526GameJam {
             changeModeToDemolish = () => ChangeMode(Mode.Demolish);
 
             placer = GetComponentInChildren<TowerPlacer>();
-
-            for (int i = 0; i < towerPoolSize; i++) {
-                FillTowerPool(i);
-            }
-
-            // Debug
-            gold = 1000000;
-            Debug.Log($"<Debug> Gold is set to {gold}. ");
+            placer.OnPlaced += ConsumeOnPlaced;
         }
 
         private void OnEnable() {
