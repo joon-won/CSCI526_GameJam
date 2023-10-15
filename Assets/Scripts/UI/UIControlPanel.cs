@@ -23,23 +23,23 @@ namespace CSCI526GameJam
         }
 
         private void RefreshTowerButtons() {
-            for (int i = 0; i < towerButtons.Count; i++) {
-                var button = towerButtons[i];
-                var config = Player.Instance.GetTowerConfig(i);
-                button.GetComponentInChildren<TMP_Text>().text = config.name;
-            }
+            //for (int i = 0; i < towerButtons.Count; i++) {
+            //    var button = towerButtons[i];
+            //    var config = Player.Instance.GetTowerConfig(i);
+            //    button.GetComponentInChildren<TMP_Text>().text = config.name;
+            //}
         }
 
         private void Start() {
 
             // Set up button onClick
-            for (int i = 0; i < towerButtons.Count; i++) {
-                var button = towerButtons[i];
-                var index = i;
-                button.onClick.AddListener(() => Player.Instance.PickTower(index));
-            }
-            Player.Instance.OnTowerPoolChanged += RefreshTowerButtons;
-            RefreshTowerButtons();
+            //for (int i = 0; i < towerButtons.Count; i++) {
+            //    var button = towerButtons[i];
+            //    var index = i;
+            //    button.onClick.AddListener(() => Player.Instance.PickTower(index));
+            //}
+            //Player.Instance.OnTowerPoolChanged += RefreshTowerButtons;
+            //RefreshTowerButtons();
         }
     }
 }

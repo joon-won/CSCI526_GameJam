@@ -53,7 +53,7 @@ namespace CSCI526GameJam {
         public void Refund(Tower tower) {
             if (tower == PlayerBase) return;
 
-            Player.Instance.AddGold(tower.Config.Price);
+            Player.Instance.AddTower(tower.Config);
             tower.Demolish();
         }
 
