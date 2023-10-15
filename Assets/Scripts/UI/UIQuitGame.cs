@@ -5,11 +5,12 @@ using UnityEngine.SceneManagement;
 
 namespace CSCI526GameJam
 {
-    public class MainMenu : MonoBehaviour
+    public class UIQuitGame : MonoBehaviour
     {
-        public void GameRule()
+        public void QuitGame()
         {
-            SceneManager.LoadScene("Rule");
+            Application.Quit();
+            Debug.Log("Quit Game!");
         }
     }
 }
