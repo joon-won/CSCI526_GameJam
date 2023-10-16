@@ -65,6 +65,8 @@ namespace CSCI526GameJam {
             }
             state = State.Preparation;
             level++;
+            //SendToGoogle analyticsComponent = GetComponent<SendToGoogle>();
+            //analyticsComponent.Send(level.ToString());
             OnPreparationStarted?.Invoke();
         }
 
