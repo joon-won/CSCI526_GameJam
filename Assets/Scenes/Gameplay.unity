@@ -6394,8 +6394,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0.000034332275, y: -26}
-  m_SizeDelta: {x: 765.9832, y: 758.7337}
+  m_AnchoredPosition: {x: 0.000045776367, y: -76}
+  m_SizeDelta: {x: 894.3464, y: 848.5881}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1925444456
 MonoBehaviour:
@@ -6629,11 +6629,12 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   m_text: "- 4 copies per card in one game loop\n- Each card has different cost of
-    golds\n\n\nPlay Cards Rule:\n- Two cards are same: Upgrade to lv. 2 \n\n- Three
-    cards are same + additional card: additional card cost * 0.5 \n\n- Three same
-    cards + additional same two cards : additional cards cost * 0.5, upgrade to lv.
-    2 \n\n- Four cards are same: Upgrade to lv. 3 \n\n- At least 4 consecutive, such
-    as 345678: Upgrade to lv. 2 \n\n"
+    golds\n\nSix types of card:\nGun tower, Ice Tower, Wall, HP ++, Damage ++, Draw
+    more cards.\n\n\nPlay Cards Rule:\n- Two cards are same: Upgrade to lv. 2 \n\n-
+    Three cards are same + additional card: additional card cost * 0.5 \n\n- Three
+    same cards + additional same two cards : additional cards cost * 0.5, upgrade
+    to lv. 2 \n\n- Four cards are same: Upgrade to lv. 3 \n\n- At least 4 consecutive,
+    such as 345678: Upgrade to lv. 2 \n\n"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -6660,8 +6661,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 36
-  m_fontSizeBase: 36
+  m_fontSize: 34
+  m_fontSizeBase: 34
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
