@@ -13,6 +13,7 @@ namespace CSCI526GameJam
         [SerializeField] private int numLv1;
         [SerializeField] private int numLv2;
         [SerializeField] private int numLv3;
+
         #endregion
 
         #region Publics
@@ -24,10 +25,12 @@ namespace CSCI526GameJam
         public override void PlayLv2()
         {
             Player.Instance.AddTower(config, numLv2);
+            Player.Instance.AddTower(config, numLv2);
         }
 
         public override void PlayLv3()
         {
+            Player.Instance.AddTower(config, numLv3);
             Player.Instance.AddTower(config, numLv3);
         }
         #endregion
