@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 64518d8845eb6428ca1003757d03aa56, type: 3}
   m_Name: Add Ice Tower Card
   m_EditorClassIdentifier: 
-  cardName: Unnamed Add Ice Tower
+  cardName: Ice Tower+
   rank: 0
   cost: 4
   description: 

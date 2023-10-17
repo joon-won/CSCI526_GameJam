@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f47d0d5c9fab22341b1d63358fa66e22, type: 3}
   m_Name: Temp Increase Tower Damage
   m_EditorClassIdentifier: 
-  cardName: Unnamed Increase Damage
+  cardName: Damage+
   rank: 0
   cost: 5
   description: 

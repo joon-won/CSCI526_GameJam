@@ -10,11 +10,20 @@ namespace CSCI526GameJam
     {
         public TextMeshProUGUI goldsInfo;
         [SerializeField] private List<Button> towerButtons;
+        public TextMeshProUGUI wallNumber;
+        public TowerConfig wallConfig;
+        public TextMeshProUGUI gunTowerNumber;
+        public TowerConfig gunTowerConfig;
+        public TextMeshProUGUI iceTowerNumber;
+        public TowerConfig iceTowerConfig;
 
         // Update is called once per frame
         void Update()
         {
             UpdateGoldsInfo();
+            wallNumber.text = "Build Wall(left"+Player.Instance.GetTowerNum(wallConfig).ToString()+")";
+            gunTowerNumber.text = "Build Gun Tower(left"+Player.Instance.GetTowerNum(gunTowerConfig).ToString()+")";
+            iceTowerNumber.text = "Build Ice Tower(left"+Player.Instance.GetTowerNum(iceTowerConfig).ToString()+")";
         }
 
         private void UpdateGoldsInfo()

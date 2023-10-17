@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3f5f40d4155014f6d9d3176a33df599a, type: 3}
   m_Name: Add Wall Card
   m_EditorClassIdentifier: 
-  cardName: Unnamed Add Wall
+  cardName: Wall+
   rank: 0
   cost: 1
   description: 
