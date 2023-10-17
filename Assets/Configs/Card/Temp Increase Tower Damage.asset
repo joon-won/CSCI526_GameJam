@@ -1,0 +1,22 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f47d0d5c9fab22341b1d63358fa66e22, type: 3}
+  m_Name: Temp Increase Tower Damage
+  m_EditorClassIdentifier: 
+  cardName: Unnamed Increase Damage
+  rank: 0
+  cost: 5
+  description: 
+  image: {fileID: 0}
+  lv1Increase: 5
+  lv2Increase: 10
+  lv3Increase: 15
