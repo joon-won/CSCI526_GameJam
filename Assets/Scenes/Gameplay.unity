@@ -7140,12 +7140,12 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "- Pick four cards for each round\n- Each card has different cost of golds
-    when you draw it\n\n\nPlay Cards Rule:\n- Two cards are same: Upgrade to lv.
-    2 \n\n- Three cards are same + additional card: additional card cost * 0.5 \n\n-
-    Three same cards + additional same two cards : additional cards cost * 0.5, upgrade
-    to lv. 2 \n\n- Four cards are same: Upgrade to lv. 3 \n\n- At least 4 consecutive,
-    such as 345678: Upgrade to lv. 2 \n\n"
+  m_text: "- 4 copies per card in one game loop\n- Each card has different cost of
+    golds when you draw it\n\n\nPlay Cards Rule:\n- Two cards are same: Upgrade to
+    lv. 2 \n\n- Three cards are same + additional card: additional card cost * 0.5
+    \n\n- Three same cards + additional same two cards : additional cards cost *
+    0.5, upgrade to lv. 2 \n\n- Four cards are same: Upgrade to lv. 3 \n\n- At least
+    4 consecutive, such as 345678: Upgrade to lv. 2 \n\n"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
