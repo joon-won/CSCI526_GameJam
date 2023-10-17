@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEditor;
 using UnityEngine;
+using Object = UnityEngine.Object;
 
 public class RefreshAssetDependents {
 
@@ -13,11 +14,23 @@ public class RefreshAssetDependents {
     #endregion
 
     #region Publics
-    [MenuItem("Tools/Refresh all AssetDependents")]
+    [MenuItem("Tools/Refresh All AssetDependents")]
     public static void Refresh() {
-        var ads = Utility.FindAllInActiveScene<IAssetDependent>();
+        var ads = new List<Object>();
+
+        var objs = UnityEngine.SceneManagement.SceneManager.GetActiveScene().GetRootGameObjects();
+        foreach (var obj in objs) {
+            var components = obj.GetComponentsInChildren<Component>();
+            foreach (var c in components) {
+                if (c is IAssetDependent) {
+                    ads.Add(c);
+                }
+            }
+        }
+
         foreach (var ad in ads) {
-            ad.FindAssets();
+            ((IAssetDependent)ad).FindAssets();
+            EditorUtility.SetDirty(ad);
         }
     }
     #endregion
