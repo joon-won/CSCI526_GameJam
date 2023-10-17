@@ -139,11 +139,11 @@ namespace CSCI526GameJam {
         }
 
         private void OnDisable() {
-            if (!IsApplicationQuitting) {
-                SceneManager.sceneLoaded -= OnSceneLoaded;
-                SceneManager.sceneUnloaded -= OnSceneUnloaded;
-                EnemyManager.Instance.OnEnemiesClear -= StartPreparation;
-            }
+            //if (!IsApplicationQuitting) {
+            //    SceneManager.sceneLoaded -= OnSceneLoaded;
+            //    SceneManager.sceneUnloaded -= OnSceneUnloaded;
+            //    EnemyManager.Instance.OnEnemiesClear -= StartPreparation;
+            //}
         }
 
         private void Start() {

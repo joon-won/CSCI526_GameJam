@@ -90,10 +90,10 @@ namespace CSCI526GameJam {
         }
 
         private void OnDisable() {
-            if (!GameManager.IsApplicationQuitting) {
-                InputManager.Instance.OnCameraMoveInputChanged -= DragCamera;
-                InputManager.Instance.OnCameraZoomInputChanged -= ZoomCamera;
-            }
+            //if (!GameManager.IsApplicationQuitting) {
+            //    InputManager.Instance.OnCameraMoveInputChanged -= DragCamera;
+            //    InputManager.Instance.OnCameraZoomInputChanged -= ZoomCamera;
+            //}
         }
 
         private void Update() {

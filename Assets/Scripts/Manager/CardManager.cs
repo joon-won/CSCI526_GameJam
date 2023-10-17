@@ -270,9 +270,9 @@ namespace CSCI526GameJam {
         }
 
         private void OnDisable() {
-            if (!GameManager.IsApplicationQuitting) {
-				GameManager.Instance.OnPreparationStarted -= DrawOnNewRound;
-			}
+   //         if (!GameManager.IsApplicationQuitting) {
+			//	GameManager.Instance.OnPreparationStarted -= DrawOnNewRound;
+			//}
         }
         #endregion
     }
