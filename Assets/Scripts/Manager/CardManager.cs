@@ -222,7 +222,7 @@ namespace CSCI526GameJam {
 				for (i = 1; i < n; i++) {
 					if (cards[i].Cost != cards[i - 1].Cost + 1) break;
 				}
-				if (i == n - 1) return Pattern.ABCD;
+				if (i == n) return Pattern.ABCD;
 			}
 
 			// Check others
