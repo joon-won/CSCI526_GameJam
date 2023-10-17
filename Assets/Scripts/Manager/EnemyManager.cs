@@ -61,14 +61,18 @@ namespace CSCI526GameJam {
             }
         }
 
+        // NOTE: Temp fix for wave clear detection. 
+        [SerializeField] private int totalNum;
         private void GenerateEnemies() {
+            totalNum = 0;
             foreach (var spot in spawnSpots) {
-                StartCoroutine(EnemyWaveRoutine(spot));
+                var num = 10;
+                var routine = StartCoroutine(EnemyWaveRoutine(spot, num));
+                totalNum += num;
             }
         }
 
-        private IEnumerator EnemyWaveRoutine(Spot start) {
-            var num = 10;
+        private IEnumerator EnemyWaveRoutine(Spot start, int num) {
             var interval = 0.5f;
             var elapsed = interval;
 
@@ -89,8 +93,9 @@ namespace CSCI526GameJam {
         }
 
         private void OnEnemyDied(Enemy enemy) {
+            totalNum--;
             enemyInstances.Remove(enemy);
-            if (enemyInstances.Count == 0) {
+            if (totalNum == 0) {
                 OnEnemiesClear?.Invoke();
             }
         }
