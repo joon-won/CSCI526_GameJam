@@ -22,7 +22,7 @@ namespace CSCI526GameJam
         #endregion
 
         #region Publics
-        public string CardName => cardName;
+        public string SkillName => skillName;
         public int CoolDown => coolDown;
 
         public string Description => description;
