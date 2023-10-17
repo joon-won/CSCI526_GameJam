@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace CSCI526GameJam
 {
-    [CreateAssetMenu(menuName = "Config/Card/<Temp>Add Ice Tower")]
+    [CreateAssetMenu(menuName = "Config/Card/<Temp> Add Ice Tower")]
     public class IceTowerCard : Card
     {
         #region Fields
