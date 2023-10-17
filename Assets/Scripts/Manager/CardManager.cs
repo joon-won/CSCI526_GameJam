@@ -24,6 +24,7 @@ namespace CSCI526GameJam {
 		[MandatoryFields]
 	    [SerializeField] private int numPerCard = 4;
 		[SerializeField] private int maxOnHand = 20;
+		[SerializeField] private int numDrawPerLevel = 6;
 
 	    [ComputedFields]
 	    [SerializeField] private List<Card> cardConfigs;
@@ -188,7 +189,7 @@ namespace CSCI526GameJam {
 
 		#region Internals
 		private void DrawOnNewRound() {
-			DrawFromDeck(10); // TODO: alg instead
+			DrawFromDeck(numDrawPerLevel); // TODO: alg instead
         }
 
 		private void InsertCard(Card card) {
