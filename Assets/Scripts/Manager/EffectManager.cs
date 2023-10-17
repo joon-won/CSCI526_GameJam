@@ -13,6 +13,13 @@ namespace CSCI526GameJam {
         #endregion
 
         #region Publics
+        /// <summary>
+        /// Add a new effect. 
+        /// </summary>
+        /// <param name="onAdd">Effect on added. </param>
+        /// <param name="onRemove">Effect on removed. </param>
+        /// <param name="onUpdate">Effect on updated. </param>
+        /// <param name="duration">Num of rounds to persist. Permanent if duration is negative. </param>
         public void AddEffect(Action onAdd, Action onRemove, Action onUpdate = null, int duration = -1) {
             var effect = new Effect(onAdd, onRemove, onUpdate, duration);
             effect.Add();

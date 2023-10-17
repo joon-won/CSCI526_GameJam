@@ -18,6 +18,7 @@ namespace CSCI526GameJam {
 
         #region Publics
         public event Action OnDamaged;
+        public event Action OnHealed;
         public event Action OnDied;
 
         public float Health => health;
@@ -34,6 +35,13 @@ namespace CSCI526GameJam {
             if (health <= 0f) {
                 OnDied?.Invoke();
             }
+        }
+
+        public void Heal(float amount) {
+            if (amount <= 0f) return;
+
+            health = Mathf.Min(maxHealth, health + amount);
+            OnHealed?.Invoke();
         }
         #endregion
 
