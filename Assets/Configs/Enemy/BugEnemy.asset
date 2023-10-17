@@ -16,7 +16,7 @@ MonoBehaviour:
   frozenSprite: {fileID: 21300000, guid: c0bd663eeee1bdb4892b09ad7909056f, type: 3}
   description: 
   golddrop: 1
-  maxHitPoint: 100
+  maxHitPoint: 30
   attackDamage: 1
   moveSpeed: 5
   armor: 0

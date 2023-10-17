@@ -18,6 +18,6 @@ MonoBehaviour:
   description: 
   image: {fileID: 0}
   config: {fileID: 11400000, guid: 512ff0b50bbfeef4ea79999559f67d82, type: 2}
-  numLv1: 1
-  numLv2: 2
-  numLv3: 4
+  numLv1: 5
+  numLv2: 10
+  numLv3: 15

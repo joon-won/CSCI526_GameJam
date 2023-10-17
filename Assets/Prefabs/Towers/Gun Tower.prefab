@@ -196,11 +196,11 @@ MonoBehaviour:
   targetLayerMask:
     serializedVersion: 2
     m_Bits: 0
-  target: {fileID: 0}
-  rotateSpeed: 60
+  rotateSpeed: 360
   attackDegree: 30
   bulletSpeed: 30
   bulletSpread: 5
+  target: {fileID: 0}
   references:
     version: 2
     RefIds:
