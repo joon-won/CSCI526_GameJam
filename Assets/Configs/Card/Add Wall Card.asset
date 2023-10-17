@@ -9,15 +9,15 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b41dab5d92aa94e76852fd7cc5d3159c, type: 3}
-  m_Name: New Gun Tower Card
+  m_Script: {fileID: 11500000, guid: 3f5f40d4155014f6d9d3176a33df599a, type: 3}
+  m_Name: Add Wall Card
   m_EditorClassIdentifier: 
-  cardName: 
+  cardName: Unnamed Add Wall
   rank: 0
-  cost: 0
+  cost: 1
   description: 
   image: {fileID: 0}
-  config: {fileID: 0}
-  numLv1: 0
-  numLv2: 0
-  numLv3: 0
+  config: {fileID: 11400000, guid: 512ff0b50bbfeef4ea79999559f67d82, type: 2}
+  numLv1: 1
+  numLv2: 2
+  numLv3: 4

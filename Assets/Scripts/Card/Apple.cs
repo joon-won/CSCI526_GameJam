@@ -13,7 +13,6 @@ namespace CSCI526GameJam {
 
         #region Fields
         [ClassHeader(typeof(Apple))]
-
         [SerializeField] private float lv1BonusTowerADScalar;
         [SerializeField] private float lv2BonusTowerADScalar;
         [SerializeField] private float lv3BonusTowerADScalar;

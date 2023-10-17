@@ -20,18 +20,15 @@ namespace CSCI526GameJam
         public override void PlayLv1()
         {
             Player.Instance.AddTower(config, numLv1);
-            Player.Instance.AddTower(config, numLv1);
         }
 
         public override void PlayLv2()
         {
             Player.Instance.AddTower(config, numLv2);
-            Player.Instance.AddTower(config, numLv2);
         }
 
         public override void PlayLv3()
         {
-            Player.Instance.AddTower(config, numLv3);
             Player.Instance.AddTower(config, numLv3);
         }
         #endregion
