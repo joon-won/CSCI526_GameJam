@@ -4,29 +4,32 @@ using UnityEngine;
 
 namespace CSCI526GameJam
 {
+    [CreateAssetMenu(menuName = "Config/Card/<Temp>Add Wall")]
     public class WallCard : Card
     {
         #region Fields
         [ClassHeader(typeof(WallCard))]
         [SerializeField] private TowerConfig config;
-
-        private Player player = FindObjectOfType<Player>();
+        [SerializeField] private int numLv1;
+        [SerializeField] private int numLv2;
+        [SerializeField] private int numLv3;
+        private Player player = Player.Instance;
         #endregion
 
         #region Publics
         public override void PlayLv1()
         {
-            player.AddTower(config, 1);
+            player.AddTower(config, numLv1);
         }
 
         public override void PlayLv2()
         {
-            player.AddTower(config, 3);
+            player.AddTower(config, numLv2);
         }
 
         public override void PlayLv3()
         {
-            player.AddTower(config, 6);
+            player.AddTower(config, numLv3);
         }
         #endregion
 
