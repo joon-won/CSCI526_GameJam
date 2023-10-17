@@ -114,6 +114,11 @@ namespace CSCI526GameJam {
 			var pattern = CheckPattern(selected);
 			if (pattern == Pattern.None) return;
 
+			// NOTE: Temp fix UI bug
+			OnCardsPlayed?.Invoke(selectedIndices); 
+			selected.ForEach(c => hand.Remove(c));
+			selectedIndices.Clear();
+			
 			var cost = 0;
 			switch (pattern) {
 				case Pattern.X:
@@ -170,10 +175,6 @@ namespace CSCI526GameJam {
 					Debug.LogWarning($"Undefined pattern {pattern}");
 					return;
 			}
-
-			selected.ForEach(c => hand.Remove(c));
-			OnCardsPlayed?.Invoke(selectedIndices);
-			selectedIndices.Clear();
         }
 
 #if UNITY_EDITOR
