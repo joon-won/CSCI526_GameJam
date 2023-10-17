@@ -1,0 +1,23 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3f5f40d4155014f6d9d3176a33df599a, type: 3}
+  m_Name: New Wall Card
+  m_EditorClassIdentifier: 
+  cardName: 
+  rank: 0
+  cost: 0
+  description: 
+  image: {fileID: 0}
+  config: {fileID: 0}
+  numLv1: 0
+  numLv2: 0
+  numLv3: 0
