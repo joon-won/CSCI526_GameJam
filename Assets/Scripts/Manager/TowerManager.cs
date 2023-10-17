@@ -25,6 +25,7 @@ namespace CSCI526GameJam {
         #region Publics
         public PlayerBase PlayerBase => baseInstance;
         public TowerConfig[] TowerConfigs => configToPrefab.Keys.ToArray();
+        public int NumTowers => towerInstances.Count;
 
         /// <summary>
         /// Create an instance from the given tower config. 
