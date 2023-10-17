@@ -65,11 +65,15 @@ namespace CSCI526GameJam {
             }
             state = State.Preparation;
             level++;
+            //SendToGoogle analyticsComponent = GetComponent<SendToGoogle>();
+            //analyticsComponent.Send(level.ToString());
             OnPreparationStarted?.Invoke();
         }
 
         private void StartCombat() {
             state = State.Combat;
+            SendToGoogle analyticsComponent = GetComponent<SendToGoogle>();
+            analyticsComponent.Send(level.ToString(), TowerManager.Instance.NumTowers.ToString());
             OnCombatStarted?.Invoke();
         }
 
