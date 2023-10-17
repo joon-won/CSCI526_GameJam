@@ -8,13 +8,19 @@ When the battle rages, you will wield the power to design your own maze, fortifi
 
 ## Card Features:
 Card cost: 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 15, 20 
+
 4 card in one game loop. 
 ### Rules of the card
-One card: No additional effect 
+One card: No additional effect
+
 Two same cards: Upgrade to lv. 2 
+
 Three same cards + one additonal card: one additonal card costs * 0.5 
+
 Three same cards + two additonal cards: two additonal cards cost * 0.5, upgrade to lv. 2 
+
 Four same cards: Upgrade to lv. 3 
+
 At least 4 consecutive, such as 345678: Upgrade to lv. 2 
 
 
