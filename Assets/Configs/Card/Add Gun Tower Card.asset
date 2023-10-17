@@ -9,15 +9,15 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 64518d8845eb6428ca1003757d03aa56, type: 3}
-  m_Name: New Ice Tower Card
+  m_Script: {fileID: 11500000, guid: b41dab5d92aa94e76852fd7cc5d3159c, type: 3}
+  m_Name: Add Gun Tower Card
   m_EditorClassIdentifier: 
-  cardName: 
+  cardName: Unnamed Add Gun Tower
   rank: 0
-  cost: 0
+  cost: 2
   description: 
   image: {fileID: 0}
-  config: {fileID: 0}
-  numLv1: 0
-  numLv2: 0
-  numLv3: 0
+  config: {fileID: 11400000, guid: 4d28b0091e746f24da518fceee136802, type: 2}
+  numLv1: 1
+  numLv2: 2
+  numLv3: 4
