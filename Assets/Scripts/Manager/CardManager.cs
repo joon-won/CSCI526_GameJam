@@ -110,7 +110,10 @@ namespace CSCI526GameJam {
 		public void PlaySelected() {
 			if (selectedIndices.Count == 0) return;
 
-			var selected = selectedIndices.Select(index => hand[index]).ToList();
+			var selected = selectedIndices
+				.Select(index => hand[index])
+				.OrderBy(c => c.Cost)
+				.ToList();
 			var pattern = CheckPattern(selected);
 			if (pattern == Pattern.None) return;
 
@@ -118,8 +121,9 @@ namespace CSCI526GameJam {
 			OnCardsPlayed?.Invoke(selectedIndices); 
 			selected.ForEach(c => hand.Remove(c));
 			selectedIndices.Clear();
-			
-			var cost = 0;
+
+			int xCost, yCost;
+			var finalCost = 0;
 			switch (pattern) {
 				case Pattern.X:
 					if (!Player.Instance.TryPay(selected[0].Cost)) return;
@@ -135,8 +139,18 @@ namespace CSCI526GameJam {
 					break;
 
 				case Pattern.XXXY:
-					cost = selected[0].Cost * 3 + selected[3].Cost / 2;
-					if (!Player.Instance.TryPay(cost)) return;
+					// XXXY
+					if (selected[0].Cost == selected[1].Cost) {
+						xCost = selected[0].Cost;
+						yCost = selected[3].Cost;
+                    }
+					// YXXX
+					else {
+						xCost = selected[1].Cost;
+						yCost = selected[0].Cost;
+					}
+					finalCost = xCost * 3 + yCost / 2;
+					if (!Player.Instance.TryPay(finalCost)) return;
 
 					selected[0].PlayLv1();
 					selected[1].PlayLv1();
@@ -145,8 +159,18 @@ namespace CSCI526GameJam {
 					break;
 
 				case Pattern.XXXYY:
-					cost = selected[0].Cost * 3 + selected[3].Cost;
-					if (!Player.Instance.TryPay(cost)) return;
+					// XXXYY
+					if (selected[1].Cost == selected[2].Cost) {
+						xCost = selected[0].Cost;
+						yCost = selected[3].Cost;
+					}
+					// YYXXX
+					else {
+						xCost = selected[2].Cost;
+						yCost = selected[0].Cost;
+					}
+					finalCost = xCost * 3 + yCost;
+					if (!Player.Instance.TryPay(finalCost)) return;
 
 					selected[0].PlayLv1();
 					selected[1].PlayLv1();
@@ -165,8 +189,8 @@ namespace CSCI526GameJam {
 					break;
 
 				case Pattern.ABCD:
-					cost = selected.Sum(c => c.Cost);
-					if (!Player.Instance.TryPay(cost)) return;
+					finalCost = selected.Sum(c => c.Cost);
+					if (!Player.Instance.TryPay(finalCost)) return;
 
 					selected.ForEach(c => c.PlayLv2());
 					break;
