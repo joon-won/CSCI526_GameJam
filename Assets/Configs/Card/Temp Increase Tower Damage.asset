@@ -17,6 +17,6 @@ MonoBehaviour:
   cost: 5
   description: 
   image: {fileID: 0}
-  lv1Increase: 5
-  lv2Increase: 10
-  lv3Increase: 15
+  lv1Increase: 0.5
+  lv2Increase: 0.1
+  lv3Increase: 0.15
