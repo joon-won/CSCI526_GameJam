@@ -11,7 +11,7 @@ namespace CSCI526GameJam {
     /// Abstract <see cref="Tower"/> class. 
     /// </summary>
 
-    public abstract class Tower : MonoBehaviour {
+    public abstract class Tower : Buffable {
 
         #region Fields
         [ClassHeader(typeof(Tower))]
@@ -45,6 +45,13 @@ namespace CSCI526GameJam {
         public Spot Spot => entity.Spot;
         public Collider2D Collider2D => entity.Collider2D;
         public Quaternion Rotation => entity.transform.rotation;
+
+        public Numeric AttackDamage => attackDamage;
+        public Numeric AttackSpeed => attackSpeed;
+        public Numeric AttackRange => attackRange;
+        public Numeric CritChance => critChance;
+        public Numeric CritDamage => critDamage;
+
         public float AttackCooldown => attackCooldown;
 
         /// <summary>
@@ -138,7 +145,9 @@ namespace CSCI526GameJam {
             InitNumerics();
         }
 
-        private void Update() {
+        protected override void Update() {
+            base.Update();
+
             PerformUpdate();
             UpdateAttackCooldown();
             TryAttack();

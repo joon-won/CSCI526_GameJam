@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 namespace CSCI526GameJam {
-    public abstract class Enemy : MonoBehaviour {
+    public abstract class Enemy : Buffable {
 
         #region Fields
         [SerializeField] protected EnemyConfig config;
@@ -33,6 +33,11 @@ namespace CSCI526GameJam {
         public float CurrentHitPoint => currentHitPoint;
         public float MaxHitPoint => maxHitPoint;
         public event Action<float> OnHitPointChanged;
+
+        public Numeric AttackDamage => attackDamage;
+        public Numeric MoveSpeed => moveSpeed;
+        public Numeric Armor => armor;
+        public Numeric Gold => gold;
         #endregion
 
         public void InitNumerics() {
