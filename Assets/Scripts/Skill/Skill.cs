@@ -11,22 +11,11 @@ namespace CSCI526GameJam
     {
 
         #region Fields
-        [ClassHeader(typeof(Skill))]
-
-        [SerializeField] private string skillName;
-        [SerializeField] private int coolDown;
-
-        [TextArea(5, 10)]
-        [SerializeField] private string description;
-        [SerializeField] private Sprite image;
+        [SerializeField] protected SkillConfig config;
         #endregion
 
         #region Publics
-        public string SkillName => skillName;
-        public int CoolDown => coolDown;
-
-        public string Description => description;
-        public Sprite Image => image;
+        public SkillConfig Config => config;
 
         public abstract void PlayLv1();
         public abstract void PlayLv2();
