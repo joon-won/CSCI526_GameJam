@@ -5198,6 +5198,7 @@ MonoBehaviour:
   towerInstances: []
   basePrefab: {fileID: -4548648733975016062, guid: 867ae6f51ba86ad4a93435f7feacd9ff, type: 3}
   towerPrefabs:
+  - {fileID: 8548945318588834231, guid: 18b69b497cbd9e94cbfc2d2c656eefeb, type: 3}
   - {fileID: 5325763293822199417, guid: e160ed99231d0ca4aa9ddb9a13cd43bb, type: 3}
   - {fileID: 1622472448420040292, guid: c983c2264b67f794aa8acb24c8f02ca8, type: 3}
   - {fileID: 300941189509297059, guid: 23cabbd5ccb4f16428b9f3a1aef61ecb, type: 3}

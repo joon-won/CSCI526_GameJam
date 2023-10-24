@@ -23,7 +23,7 @@ namespace CSCI526GameJam.Buffs {
         public bool IsEffectStackable => isEffectStackable;
         public bool IsDurationStackable => isDurationStackable;
 
-        public abstract Buff Make(Buffable target);
+        public abstract Buff ToBuff(Buffable target);
         #endregion
 
         #region Internals

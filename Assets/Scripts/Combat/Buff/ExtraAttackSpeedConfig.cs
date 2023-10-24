@@ -17,7 +17,7 @@ namespace CSCI526GameJam.Buffs.TowerBuffs {
         #region Publics
         public float ExtraScalar => extraScalar;
 
-        public override Buff Make(Buffable target) {
+        public override Buff ToBuff(Buffable target) {
             return new ExtraAttackSpeed(this, target);
         }
         #endregion

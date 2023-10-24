@@ -10,7 +10,7 @@ namespace CSCI526GameJam {
         [ClassHeader(typeof(TowerEntity))]
 
         [ComputedFields]
-        [SerializeField] private Tower building;
+        [SerializeField] private Tower tower;
 
         [SerializeField] private bool isSettled;
         [SerializeReference] private Spot spot;
@@ -20,7 +20,7 @@ namespace CSCI526GameJam {
         #endregion
 
         #region Public
-        public Tower Building => building;
+        public Tower Tower => tower;
         public Spot Spot => spot;
         public bool IsSettled => isSettled;
         public SpriteRenderer SpriteRenderer {
@@ -36,15 +36,15 @@ namespace CSCI526GameJam {
             }
         }
 
-        public void Init(Tower building) {
-            this.building = building;
+        public void Init(Tower other) {
+            tower = other;
         }
 
         public void Settle(Spot spot) {
             isSettled = true;
             this.spot = spot;
-            spot.SetBuilding(building);
-            SpriteRenderer.sprite = building.Image;
+            spot.SetBuilding(tower);
+            SpriteRenderer.sprite = tower.Image;
         }
 
         public void Unsettle() {
