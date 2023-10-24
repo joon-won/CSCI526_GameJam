@@ -6414,6 +6414,7 @@ MonoBehaviour:
   maxOnHand: 12
   numDrawPerLevel: 6
   cardConfigs:
+  - {fileID: 11400000, guid: 61c70b83fe2c7234db453d9cbabb5614, type: 2}
   - {fileID: 11400000, guid: fcceb2f16038747eeb67fef83b3bdc23, type: 2}
   - {fileID: 11400000, guid: 19acd152f19af46348445e7ade483193, type: 2}
   - {fileID: 11400000, guid: 9d533fa32fc864a06862476765440844, type: 2}

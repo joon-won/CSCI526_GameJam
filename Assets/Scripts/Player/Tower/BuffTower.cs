@@ -26,10 +26,11 @@ namespace CSCI526GameJam {
         protected override void PerformAttack() {
             var colliders = Physics2D.OverlapCircleAll(transform.position, attackRange, targetLayerMask);
             foreach (var collider in colliders) {
-                var obj = collider.GetComponent<TowerEntity>();
-                if (!obj) continue;
+                var tower = collider.GetComponent<TowerEntity>()?.Tower;
+                if (!tower) continue;
+                if (tower is BuffTower) continue;
 
-                obj.Tower.AddBuff(buffConfig.ToBuff(obj.Tower));
+                tower.AddBuff(buffConfig.ToBuff(tower));
             }
         }
 
