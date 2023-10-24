@@ -49,9 +49,9 @@ namespace CSCI526GameJam {
         }
 
         private void OnDisable() {
-            //if (!GameManager.IsApplicationQuitting) {
-            //    GameManager.Instance.OnPreparationStarted -= UpdateAllTemps;
-            //}
+            if (!GameManager.IsApplicationQuitting) {
+                GameManager.Instance.OnPreparationStarted -= UpdateAllTemps;
+            }
         }
         #endregion
 

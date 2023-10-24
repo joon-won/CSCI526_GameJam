@@ -25,7 +25,7 @@ namespace CSCI526GameJam {
         #region Fields
         [MandatoryFields]
         [SerializeField] private int numLevels = 3;
-        
+
         [ComputedFields]
         [SerializeField] private State state;
         [SerializeField] private int level;
@@ -40,7 +40,7 @@ namespace CSCI526GameJam {
         public event Action OnCombatStarted;
         public event Action OnGameWon;
         public event Action OnGameOver;
-        
+
 
         public State GameState => state;
         public int Level => level;
@@ -87,6 +87,7 @@ namespace CSCI526GameJam {
             TowerManager.Instance.GenerateBase();
 
             TowerManager.Instance.PlayerBase.OnDied += SetGameOver;
+            EnemyManager.Instance.OnEnemiesClear += StartPreparation;
         }
 
         private void OnSceneLoaded(Scene scene, LoadSceneMode mode) {
@@ -123,7 +124,7 @@ namespace CSCI526GameJam {
         protected override void Awake() {
             base.Awake();
 
-            //DontDestroyOnLoad(gameObject);
+            DontDestroyOnLoad(gameObject);
             //Cursor.lockState = CursorLockMode.Confined;
 
             Application.targetFrameRate = Mathf.Max(0, frameRate);
@@ -133,15 +134,11 @@ namespace CSCI526GameJam {
         private void OnEnable() {
             SceneManager.sceneLoaded += OnSceneLoaded;
             SceneManager.sceneUnloaded += OnSceneUnloaded;
-            EnemyManager.Instance.OnEnemiesClear += StartPreparation;
         }
 
         private void OnDisable() {
-            //if (!IsApplicationQuitting) {
-            //    SceneManager.sceneLoaded -= OnSceneLoaded;
-            //    SceneManager.sceneUnloaded -= OnSceneUnloaded;
-            //    EnemyManager.Instance.OnEnemiesClear -= StartPreparation;
-            //}
+            SceneManager.sceneLoaded -= OnSceneLoaded;
+            SceneManager.sceneUnloaded -= OnSceneUnloaded;
         }
 
         private void Start() {

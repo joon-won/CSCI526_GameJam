@@ -222,13 +222,13 @@ namespace CSCI526GameJam {
         }
 
         private void OnDisable() {
-            //if (!GameManager.IsApplicationQuitting) {
-            //    GameManager.Instance.OnPreparationStarted -= Unlock;
-            //    GameManager.Instance.OnCombatStarted -= Lock;
-            //    InputManager.Instance.OnMouseLeftDown -= PerformMode;
-            //    InputManager.Instance.OnMouseRightDown -= changeModeToNone;
-            //    InputManager.Instance.OnDemolishKeyDown -= changeModeToDemolish;
-            //}
+            if (!GameManager.IsApplicationQuitting) {
+                GameManager.Instance.OnPreparationStarted -= Unlock;
+                GameManager.Instance.OnCombatStarted -= Lock;
+                InputManager.Instance.OnMouseLeftDown -= PerformMode;
+                InputManager.Instance.OnMouseRightDown -= changeModeToNone;
+                InputManager.Instance.OnDemolishKeyDown -= changeModeToDemolish;
+            }
         }
         // Set the json output to get the in game values.
         private void Update() {
