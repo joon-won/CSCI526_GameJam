@@ -72,8 +72,6 @@ namespace CSCI526GameJam {
 
         private void StartCombat() {
             state = State.Combat;
-            SendToGoogle analyticsComponent = GetComponent<SendToGoogle>();
-            analyticsComponent.Send(level.ToString(), TowerManager.Instance.NumTowers.ToString());
             OnCombatStarted?.Invoke();
         }
 
