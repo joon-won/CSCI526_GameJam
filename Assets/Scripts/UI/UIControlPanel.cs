@@ -16,6 +16,8 @@ namespace CSCI526GameJam
         public TowerConfig gunTowerConfig;
         public TextMeshProUGUI iceTowerNumber;
         public TowerConfig iceTowerConfig;
+        public TextMeshProUGUI buffTowerNumber;
+        public TowerConfig buffTowerConfig;
 
         // Update is called once per frame
         void Update()
@@ -24,6 +26,7 @@ namespace CSCI526GameJam
             wallNumber.text = "Build Wall(left"+Player.Instance.GetTowerNum(wallConfig).ToString()+")";
             gunTowerNumber.text = "Build Gun Tower(left"+Player.Instance.GetTowerNum(gunTowerConfig).ToString()+")";
             iceTowerNumber.text = "Build Ice Tower(left"+Player.Instance.GetTowerNum(iceTowerConfig).ToString()+")";
+            buffTowerNumber.text = "Build Buff Tower(left"+Player.Instance.GetTowerNum(buffTowerConfig).ToString()+")";
         }
 
         private void UpdateGoldsInfo()
