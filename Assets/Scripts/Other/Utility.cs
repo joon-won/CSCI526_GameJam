@@ -76,6 +76,20 @@ public static class Utility {
         return (T)Enum.Parse(typeof(T), str);
     }
 
+    public static void ForEach<T>(this IEnumerable<T> collection, Action<T> action) {
+        if (collection == null) {
+            throw new ArgumentNullException(nameof(collection));
+        }
+
+        if (action == null) {
+            throw new ArgumentNullException(nameof(action));
+        }
+
+        foreach (T item in collection) {
+            action(item);
+        }
+    }
+    
     /// <summary>
     /// Sets the visibility and interactivity of the CanvasGroup.
     /// </summary>
