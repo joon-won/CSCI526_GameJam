@@ -102,36 +102,38 @@ namespace CSCI526GameJam {
 
         public void Follow(Path path) {
             if (pathRoutine != null) return;
-            if (path.GroundSpots.Count == 0) {
+
+            var pathSpots = IsFlying ? path.AirSpots : path.GroundSpots;
+            if (pathSpots.Count == 0) {
                 Debug.LogWarning($"The path assigned to enemy {name} is empty. ");
                 return;
             }
-            pathRoutine = StartCoroutine(FollowPathRoutine(path));
+            pathRoutine = StartCoroutine(FollowPathRoutine(pathSpots));
         }
 
         // Set the json output to get the in game values.
-        private IEnumerator FollowPathRoutine(Path path) {
+        private IEnumerator FollowPathRoutine(List<Spot> pathSpots) {
             var index = 0;
-            transform.position = path.GroundSpots[index].Position;
+            transform.position = pathSpots[index].Position;
 
             var distance = 0f;
-            while (index < path.GroundSpots.Count) {
+            while (index < pathSpots.Count) {
                 yield return null;
 
                 var step = moveSpeed * Time.deltaTime;
-                transform.position = Vector3.MoveTowards(transform.position, path.GroundSpots[index].Position, step);
+                transform.position = Vector3.MoveTowards(transform.position, pathSpots[index].Position, step);
                 distance -= step;
                 if (distance <= 0f) {
                     index++;
-                    if (index == path.GroundSpots.Count) break;
+                    if (index == pathSpots.Count) break;
 
                     // Handle overflowed step. 
-                    transform.position = Vector3.MoveTowards(transform.position, path.GroundSpots[index].Position, -distance);
-                    distance += Vector3.Distance(path.GroundSpots[index].Position, path.GroundSpots[index - 1].Position);
+                    transform.position = Vector3.MoveTowards(transform.position, pathSpots[index].Position, -distance);
+                    distance += Vector3.Distance(pathSpots[index].Position, pathSpots[index - 1].Position);
                 }
             }
 
-            var end = path.GroundSpots[path.GroundSpots.Count - 1];
+            var end = pathSpots[^1];
             if (end.Tower == TowerManager.Instance.PlayerBase) {
                 TowerManager.Instance.PlayerBase.TakeDamage(attackDamage);
                 Die(false);

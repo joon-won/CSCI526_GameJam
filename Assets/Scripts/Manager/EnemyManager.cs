@@ -118,6 +118,8 @@ namespace CSCI526GameJam {
                 elapsed += Time.deltaTime;
                 if (elapsed > interval) {
                     var enemy = wave.SpawnEnemy();
+                    if (!enemy) break;
+
                     enemy.transform.SetParent(enemyHolder.transform);
                     enemy.Follow(wave.Path);
                     enemy.onDeath += () => OnEnemyDied(enemy);
@@ -203,9 +205,10 @@ namespace CSCI526GameJam {
 
             public Enemy SpawnEnemy() {
                 if (path == null) return null;
+                if (enemies.Count == 0) return null;
 
                 var enemyPrefab = enemies[^1];
-                enemies.RemoveAt(enemies.Count);
+                enemies.RemoveAt(enemies.Count - 1);
 
                 var enemy = Instantiate(enemyPrefab, path.GroundSpots[0].Position, Quaternion.identity);
                 return enemy;
