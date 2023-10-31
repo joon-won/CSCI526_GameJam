@@ -81,7 +81,7 @@ namespace CSCI526GameJam {
         #region Internals
         private bool IsBaseReachable(Spot spot) {
             var path = new Path(MapManager.Instance.Spots[0, 0], TowerManager.Instance.PlayerBase.Spot, new() { spot });
-            return path.Spots.Count > 0;
+            return path.GroundSpots.Count > 0;
         }
         #endregion
 

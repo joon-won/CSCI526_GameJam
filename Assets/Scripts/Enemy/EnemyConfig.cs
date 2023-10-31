@@ -17,8 +17,10 @@ namespace CSCI526GameJam {
         [SerializeField] private float attackDamage;
         [SerializeField] private float moveSpeed;
         [SerializeField] private float armor;
+        [SerializeField] private bool isFlying;
         #endregion
 
+        #region Publics
         public Sprite RegularSprite => regularSprite;
         public Sprite FrozenSprite => frozenSprite;
         public string Description => description;
@@ -27,11 +29,13 @@ namespace CSCI526GameJam {
         public float AttackDamage => attackDamage;
         public float MoveSpeed => moveSpeed;
         public float Armor => armor;
+        public bool IsFlying => isFlying;
+        #endregion
 
         #region Internals
         #endregion
 
         #region Unity Methods
-        #endregion        
+        #endregion
     }
 }

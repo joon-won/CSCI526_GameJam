@@ -44,6 +44,9 @@ TagManager:
   - name: Default
     uniqueID: 0
     locked: 0
+  - name: Path Indicator
+    uniqueID: 1880287781
+    locked: 0
   - name: Tower
     uniqueID: 165607029
     locked: 0
@@ -52,9 +55,6 @@ TagManager:
     locked: 0
   - name: Projectile
     uniqueID: 3216756483
-    locked: 0
-  - name: Visual
-    uniqueID: 1880287781
     locked: 0
   - name: Tower Preview
     uniqueID: 2040467247

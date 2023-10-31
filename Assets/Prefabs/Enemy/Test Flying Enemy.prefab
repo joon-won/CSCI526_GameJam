@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1 &7923595398252711997
+--- !u!1 &5138150492238087183
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -8,40 +8,41 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 7923595398252711998}
-  - component: {fileID: 4868709687921007099}
-  - component: {fileID: 2555652210001265329}
-  - component: {fileID: 5971522994539946186}
+  - component: {fileID: 8891095369946992095}
+  - component: {fileID: -1195968751120258886}
+  - component: {fileID: 8156175678350886213}
+  - component: {fileID: -7073844933530562394}
+  - component: {fileID: 5850992664518237915}
   m_Layer: 9
-  m_Name: BeastEnemy
+  m_Name: Test Flying Enemy
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &7923595398252711998
+--- !u!4 &8891095369946992095
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7923595398252711997}
+  m_GameObject: {fileID: 5138150492238087183}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 3713797868851952206}
+  - {fileID: 2266962707537965147}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!212 &4868709687921007099
+--- !u!212 &-1195968751120258886
 SpriteRenderer:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7923595398252711997}
+  m_GameObject: {fileID: 5138150492238087183}
   m_Enabled: 1
   m_CastShadows: 0
   m_ReceiveShadows: 0
@@ -76,8 +77,8 @@ SpriteRenderer:
   m_SortingLayerID: -906057255
   m_SortingLayer: 3
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: d998b5cef4c1d0a4d86557f2a3d4e2a8, type: 3}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Sprite: {fileID: 21300000, guid: f7f0bf26f25bb5b4ea4f37db6ce71cb1, type: 3}
+  m_Color: {r: 0, g: 0.6564734, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -87,19 +88,19 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!50 &2555652210001265329
+--- !u!50 &8156175678350886213
 Rigidbody2D:
   serializedVersion: 4
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7923595398252711997}
+  m_GameObject: {fileID: 5138150492238087183}
   m_BodyType: 1
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
-  m_Mass: 1
+  m_Mass: 0.0001
   m_LinearDrag: 0
   m_AngularDrag: 0.05
   m_GravityScale: 0
@@ -107,14 +108,14 @@ Rigidbody2D:
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 0
-  m_Constraints: 4
---- !u!61 &5971522994539946186
+  m_Constraints: 0
+--- !u!61 &-7073844933530562394
 BoxCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7923595398252711997}
+  m_GameObject: {fileID: 5138150492238087183}
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
@@ -134,12 +135,120 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 1, y: 1}
   m_EdgeRadius: 0
---- !u!1001 &8222507024064543579
+--- !u!114 &5850992664518237915
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5138150492238087183}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e8489f78735e747f4a95a6e1997479a9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  config: {fileID: 11400000, guid: 9b6e5ccf34359b6428026375ff46a850, type: 2}
+  attackDamage:
+    baseValue: 0
+    valueModifiers:
+      rid: 1979114918915342802
+    bonusValue: 0
+    scalarModifiers:
+      rid: 1979114918915342803
+    bonusScalar: 0
+    isDirty: 1
+    resolvedValue: 0
+  moveSpeed:
+    baseValue: 0
+    valueModifiers:
+      rid: 1979114918915342804
+    bonusValue: 0
+    scalarModifiers:
+      rid: 1979114918915342805
+    bonusScalar: 0
+    isDirty: 1
+    resolvedValue: 0
+  currentHitPoint: 0
+  maxHitPoint:
+    baseValue: 0
+    valueModifiers:
+      rid: 1979114918915342806
+    bonusValue: 0
+    scalarModifiers:
+      rid: 1979114918915342807
+    bonusScalar: 0
+    isDirty: 1
+    resolvedValue: 0
+  armor:
+    baseValue: 0
+    valueModifiers:
+      rid: 1979114918915342808
+    bonusValue: 0
+    scalarModifiers:
+      rid: 1979114918915342809
+    bonusScalar: 0
+    isDirty: 1
+    resolvedValue: 0
+  gold:
+    baseValue: 0
+    valueModifiers:
+      rid: 1000
+    bonusValue: 0
+    scalarModifiers:
+      rid: 1001
+    bonusScalar: 0
+    isDirty: 1
+    resolvedValue: 0
+  isAlive: 1
+  references:
+    version: 2
+    RefIds:
+    - rid: 1000
+      type: {class: Numeric/ModifierCollection, ns: CSCI526GameJam, asm: Assembly-CSharp}
+      data:
+        modifiers: []
+    - rid: 1001
+      type: {class: Numeric/ModifierCollection, ns: CSCI526GameJam, asm: Assembly-CSharp}
+      data:
+        modifiers: []
+    - rid: 1979114918915342802
+      type: {class: Numeric/ModifierCollection, ns: CSCI526GameJam, asm: Assembly-CSharp}
+      data:
+        modifiers: []
+    - rid: 1979114918915342803
+      type: {class: Numeric/ModifierCollection, ns: CSCI526GameJam, asm: Assembly-CSharp}
+      data:
+        modifiers: []
+    - rid: 1979114918915342804
+      type: {class: Numeric/ModifierCollection, ns: CSCI526GameJam, asm: Assembly-CSharp}
+      data:
+        modifiers: []
+    - rid: 1979114918915342805
+      type: {class: Numeric/ModifierCollection, ns: CSCI526GameJam, asm: Assembly-CSharp}
+      data:
+        modifiers: []
+    - rid: 1979114918915342806
+      type: {class: Numeric/ModifierCollection, ns: CSCI526GameJam, asm: Assembly-CSharp}
+      data:
+        modifiers: []
+    - rid: 1979114918915342807
+      type: {class: Numeric/ModifierCollection, ns: CSCI526GameJam, asm: Assembly-CSharp}
+      data:
+        modifiers: []
+    - rid: 1979114918915342808
+      type: {class: Numeric/ModifierCollection, ns: CSCI526GameJam, asm: Assembly-CSharp}
+      data:
+        modifiers: []
+    - rid: 1979114918915342809
+      type: {class: Numeric/ModifierCollection, ns: CSCI526GameJam, asm: Assembly-CSharp}
+      data:
+        modifiers: []
+--- !u!1001 &6837563182225764686
 PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Modification:
-    m_TransformParent: {fileID: 7923595398252711998}
+    m_TransformParent: {fileID: 8891095369946992095}
     m_Modifications:
     - target: {fileID: 4682565867558061450, guid: add5eb47496a7d54d8b5690b20c77799, type: 3}
       propertyPath: m_Name
@@ -155,7 +264,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4726028557229261077, guid: add5eb47496a7d54d8b5690b20c77799, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.469
+      value: 0.434
       objectReference: {fileID: 0}
     - target: {fileID: 4726028557229261077, guid: add5eb47496a7d54d8b5690b20c77799, type: 3}
       propertyPath: m_LocalPosition.z
@@ -191,8 +300,8 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: add5eb47496a7d54d8b5690b20c77799, type: 3}
---- !u!4 &3713797868851952206 stripped
+--- !u!4 &2266962707537965147 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4726028557229261077, guid: add5eb47496a7d54d8b5690b20c77799, type: 3}
-  m_PrefabInstance: {fileID: 8222507024064543579}
+  m_PrefabInstance: {fileID: 6837563182225764686}
   m_PrefabAsset: {fileID: 0}
