@@ -29,6 +29,7 @@ namespace CSCI526GameJam {
 
         public EnemyConfig Config => config;
         public bool IsAlive => isAlive;
+        public bool IsFlying => config.IsFlying;
 
         public float CurrentHitPoint => currentHitPoint;
         public float MaxHitPoint => maxHitPoint;
@@ -76,8 +77,7 @@ namespace CSCI526GameJam {
             freezeRoutine = StartCoroutine(FreezeRoutine(duration));
         }
 
-        private IEnumerator FreezeRoutine(float duration) 
-        {
+        private IEnumerator FreezeRoutine(float duration) {
             var cooldown = 3f; // Get from config later
 
             var prevSpeed = moveSpeed;
@@ -102,35 +102,36 @@ namespace CSCI526GameJam {
 
         public void Follow(Path path) {
             if (pathRoutine != null) return;
-            if (path.Spots.Count == 0) {
+            if (path.GroundSpots.Count == 0) {
                 Debug.LogWarning($"The path assigned to enemy {name} is empty. ");
                 return;
-            }            
+            }
             pathRoutine = StartCoroutine(FollowPathRoutine(path));
         }
+
         // Set the json output to get the in game values.
         private IEnumerator FollowPathRoutine(Path path) {
             var index = 0;
-            transform.position = path.Spots[index].Position;
+            transform.position = path.GroundSpots[index].Position;
 
             var distance = 0f;
-            while (index < path.Spots.Count) {
+            while (index < path.GroundSpots.Count) {
                 yield return null;
 
                 var step = moveSpeed * Time.deltaTime;
-                transform.position = Vector3.MoveTowards(transform.position, path.Spots[index].Position, step);
+                transform.position = Vector3.MoveTowards(transform.position, path.GroundSpots[index].Position, step);
                 distance -= step;
                 if (distance <= 0f) {
                     index++;
-                    if (index == path.Spots.Count) break;
+                    if (index == path.GroundSpots.Count) break;
 
                     // Handle overflowed step. 
-                    transform.position = Vector3.MoveTowards(transform.position, path.Spots[index].Position, -distance);
-                    distance += Vector3.Distance(path.Spots[index].Position, path.Spots[index - 1].Position);
+                    transform.position = Vector3.MoveTowards(transform.position, path.GroundSpots[index].Position, -distance);
+                    distance += Vector3.Distance(path.GroundSpots[index].Position, path.GroundSpots[index - 1].Position);
                 }
             }
 
-            var end = path.Spots[path.Spots.Count - 1];
+            var end = path.GroundSpots[path.GroundSpots.Count - 1];
             if (end.Tower == TowerManager.Instance.PlayerBase) {
                 TowerManager.Instance.PlayerBase.TakeDamage(attackDamage);
                 Die(false);
@@ -138,6 +139,6 @@ namespace CSCI526GameJam {
 
             pathRoutine = null;
         }
-        
+
     }
 }

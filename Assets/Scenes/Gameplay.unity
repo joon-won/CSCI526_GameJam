@@ -4883,12 +4883,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0b82e55a410ef4a4282bae20716afb8b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  numSpawnSpots: 0
-  spawnSpots: []
+  pathIndicatorPrefab: {fileID: -2530126753543915862, guid: 9bc0b4f33ab4caa49b2fd75720c74451, type: 3}
+  numPaths: 0
   enemyHolder: {fileID: 0}
+  indicatorHolder: {fileID: 0}
+  indicatorInstances: []
   enemyPrefabs:
   - {fileID: 7663806781496647365, guid: 205587ee246e9b7418886642a4dc1e28, type: 3}
   - {fileID: 5850992664518237915, guid: 30ca1af2953100047819430575c6300e, type: 3}
+  - {fileID: 5850992664518237915, guid: 81e908c4c0057e7409eab4880ff99484, type: 3}
   enemyPrefabsPath: Assets/Prefabs/Enemy
   totalNum: 0
 --- !u!4 &727382758
@@ -8642,7 +8645,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 2040467247
-  m_SortingLayer: 4
+  m_SortingLayer: 5
   m_SortingOrder: 0
   m_Sprite: {fileID: 0}
   m_Color: {r: 1, g: 1, b: 1, a: 1}

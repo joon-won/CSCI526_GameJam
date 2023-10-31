@@ -10,19 +10,34 @@ namespace CSCI526GameJam {
     public class Path {
 
         #region Fields
-        [SerializeField] private List<Spot> spots = new();
+        [SerializeField] private List<Spot> groundSpots = new();
+        [SerializeField] private List<Spot> airSpots = new();
 
         private HashSet<Spot> extraBlocks = new();
         #endregion
 
         #region Publics
-        public List<Spot> Spots => spots;
+        public List<Spot> GroundSpots => groundSpots;
+        public List<Spot> AirSpots => airSpots;
 
         public Path(Spot start, Spot end, HashSet<Spot> extraBlocks = null) {
             if (extraBlocks != null) {
                 this.extraBlocks = new(extraBlocks);
             }
-            AStar(start, end);
+            groundSpots = AStar(start, end);
+            airSpots = AStar(start, end, true);
+        }
+
+        public bool IsValid() {
+            for (int i = 0; i < groundSpots.Count; i++) {
+                var spot = groundSpots[i];
+                if (IsSpotBlocked(spot)) return false;
+            }
+            return true;
+        }
+
+        public bool IsSpotBlocked(Spot spot) {
+            return spot.Tower && spot.Tower is not PlayerBase;
         }
         #endregion
 
@@ -31,7 +46,7 @@ namespace CSCI526GameJam {
             return Mathf.Abs(start.Index.x - end.Index.x) + Mathf.Abs(start.Index.y - end.Index.y);
         }
 
-        private void AStar(Spot start, Spot end) {
+        private List<Spot> AStar(Spot start, Spot end, bool ignoreBlocks = false) {
             var allSpots = MapManager.Instance.Spots;
             var nodes = new Matrix<Node>(allSpots.Width, allSpots.Height);
             foreach (var spot in allSpots) {
@@ -44,6 +59,8 @@ namespace CSCI526GameJam {
 
                 nodes[spot.Index] = node;
             }
+
+            var result = new List<Spot>();
 
             var opens = new PriorityQueue<Node>();
             var closeds = new HashSet<Node>();
@@ -65,6 +82,7 @@ namespace CSCI526GameJam {
                     new Vector2Int(x, y - 1),
                     new Vector2Int(x, y + 1)
                 });
+
                 for (int i = 0; i < 4; i++) {
                     var index = adjacents[i];
                     if (index.x < 0 || index.x >= nodes.Width
@@ -73,8 +91,9 @@ namespace CSCI526GameJam {
 
                     var adjacent = nodes[index];
                     if (closeds.Contains(adjacent)
-                        || extraBlocks.Contains(adjacent.spot)
-                        || adjacent.spot.Tower && adjacent.spot.Tower is not PlayerBase)
+                        || (!ignoreBlocks
+                        && (extraBlocks.Contains(adjacent.spot)
+                        || IsSpotBlocked(adjacent.spot))))
                         continue;
 
                     var cost = currNode.g + 1;
@@ -82,12 +101,13 @@ namespace CSCI526GameJam {
                         nodes[end.Index].parent = currNode;
                         var curr = adjacent;
                         while (curr != null) {
-                            spots.Insert(0, curr.spot);
+                            result.Insert(0, curr.spot);
                             curr = curr.parent;
                         }
-                        return;
+                        return result;
                     }
-                    else if (!opens.Contains(adjacent)) {
+
+                    if (!opens.Contains(adjacent)) {
                         adjacent.g = cost;
                         adjacent.f = adjacent.h + adjacent.g;
                         opens.Enqueue(adjacent, adjacent.f);
@@ -102,6 +122,8 @@ namespace CSCI526GameJam {
                     }
                 }
             }
+
+            return result;
         }
         #endregion
 

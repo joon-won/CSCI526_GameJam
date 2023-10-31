@@ -81,7 +81,7 @@ namespace CSCI526GameJam {
         #region Internals
         private bool IsBaseReachable(Spot spot) {
             var path = new Path(MapManager.Instance.Spots[0, 0], TowerManager.Instance.PlayerBase.Spot, new() { spot });
-            return path.Spots.Count > 0;
+            return path.GroundSpots.Count > 0;
         }
         #endregion
 
@@ -102,7 +102,8 @@ namespace CSCI526GameJam {
             cachedSpot = spot ? spot : MapManager.Instance.MouseSpot;
 
             var isBlocked = Physics2D.OverlapBox(cachedSpot.Position, new(Configs.CellSize, Configs.CellSize), 0f, blockerLayer);
-            canBuild = isBlocked ? false : cachedTower.CanBuild(cachedSpot);
+            canBuild = isBlocked || !IsBaseReachable(spot)
+                ? false : cachedTower.CanBuild(cachedSpot);
             spriteRenderer.color = canBuild ? Color.white : Color.red;
 
             transform.position = cachedSpot.Position;

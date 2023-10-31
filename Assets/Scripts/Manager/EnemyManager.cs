@@ -3,18 +3,26 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System.Linq;
 using Random = UnityEngine.Random;
 
 namespace CSCI526GameJam {
     public class EnemyManager : MonoBehaviourSingleton<EnemyManager>, IAssetDependent {
 
         #region Fields
+        [MandatoryFields]
+        [SerializeField] private EnemyPathIndicator pathIndicatorPrefab;
+
         [ComputedFields]
-        [SerializeField] private int numSpawnSpots;
-        [SerializeField] private List<Spot> spawnSpots = new();
+        [SerializeField] private int numPaths;
+        [ShowInInspector]
+        private Dictionary<Spot, EnemyWave> spawnSpotToWave = new();
 
         [SerializeField] private GameObject enemyHolder;
         [ShowInInspector] private HashSet<Enemy> enemyInstances = new();
+
+        [SerializeField] private GameObject indicatorHolder;
+        [SerializeField] private List<EnemyPathIndicator> indicatorInstances = new();
 
         [SerializeField] private List<Enemy> enemyPrefabs;
         #endregion
@@ -36,12 +44,12 @@ namespace CSCI526GameJam {
         #endregion
 
         #region Internals
-        private void GenerateSpawnSpots() {
-            numSpawnSpots = 3; // TODO: Growth algorithm
+        private void UpdateSpawnSpots() {
+            numPaths = 3; // TODO: Growth algorithm
 
-            spawnSpots.Clear();
+            spawnSpotToWave.Clear();
             var size = MapManager.Instance.MapSize;
-            for (int i = 0; i < numSpawnSpots; i++) {
+            for (int i = 0; i < numPaths; i++) {
                 int row;
                 int col;
                 if (Random.value < 0.5f) {
@@ -53,11 +61,42 @@ namespace CSCI526GameJam {
                     col = Random.Range(0, 2) == 0 ? 0 : size - 1;
                 }
                 var spot = MapManager.Instance.Get(col, row);
-                if (spawnSpots.Contains(spot)) {
+                if (spawnSpotToWave.ContainsKey(spot)) {
                     i--;
                     continue;
                 }
-                spawnSpots.Add(spot);
+
+                var enemyNum = 10;
+
+                var wave = new EnemyWave(enemyPrefabs, enemyNum);
+                spawnSpotToWave[spot] = wave;
+            }
+        }
+
+        private void UpdateEnemyPaths() {
+            foreach (var start in spawnSpotToWave.Keys.ToArray()) {
+                var path = spawnSpotToWave[start].Path;
+                if (path != null
+                    && path.GroundSpots[0].Index == start.Index
+                    && path.IsValid())
+                    continue;
+
+                spawnSpotToWave[start].GeneratePath(start);
+            }
+
+            indicatorInstances.ForEach(x => Destroy(x.gameObject));
+            indicatorInstances.Clear();
+
+            foreach (var wave in spawnSpotToWave.Values) {
+                var groundIndicator = Instantiate(pathIndicatorPrefab, indicatorHolder.transform);
+                groundIndicator.SetPath(wave.Path);
+                indicatorInstances.Add(groundIndicator);
+
+                if (wave.HasFlyingEnemies) {
+                    var airIndicator = Instantiate(pathIndicatorPrefab, indicatorHolder.transform);
+                    airIndicator.SetPath(wave.Path, true);
+                    indicatorInstances.Add(airIndicator);
+                }
             }
         }
 
@@ -65,28 +104,26 @@ namespace CSCI526GameJam {
         [SerializeField] private int totalNum;
         private void GenerateEnemies() {
             totalNum = 0;
-            foreach (var spot in spawnSpots) {
-                var num = 10;
-                var routine = StartCoroutine(EnemyWaveRoutine(spot, num));
-                totalNum += num;
+            foreach (var wave in spawnSpotToWave.Values) {
+                StartCoroutine(EnemyWaveRoutine(wave));
+                totalNum += wave.Enemies.Count;
             }
         }
 
-        private IEnumerator EnemyWaveRoutine(Spot start, int num) {
+        private IEnumerator EnemyWaveRoutine(EnemyWave wave) {
             var interval = 0.5f;
             var elapsed = interval;
 
-            var path = new Path(start, TowerManager.Instance.PlayerBase.Spot);
-            while (num > 0) {
+            while (wave.Enemies.Count > 0) {
                 elapsed += Time.deltaTime;
                 if (elapsed > interval) {
-                    var enemy = Instantiate(enemyPrefabs[Random.Range(0, enemyPrefabs.Count)], start.Position, Quaternion.identity, enemyHolder.transform);
-                    enemy.Follow(path);
+                    var enemy = wave.SpawnEnemy();
+                    enemy.transform.SetParent(enemyHolder.transform);
+                    enemy.Follow(wave.Path);
                     enemy.onDeath += () => OnEnemyDied(enemy);
                     enemyInstances.Add(enemy);
 
                     elapsed = 0f;
-                    num--;
                 }
                 yield return null;
             }
@@ -99,33 +136,80 @@ namespace CSCI526GameJam {
                 OnEnemiesClear?.Invoke();
             }
         }
+
+        private void OnPreparationStarted() {
+            UpdateSpawnSpots();
+            UpdateEnemyPaths();
+        }
         #endregion
 
         #region Unity Methods
         protected override void Awake() {
             base.Awake();
-            enemyHolder = new GameObject("EnemyHolder");
+            enemyHolder = new GameObject("Enemy Instances");
             enemyHolder.transform.SetParent(transform);
+
+            indicatorHolder = new GameObject("Indicator Instances");
+            indicatorHolder.transform.SetParent(transform);
+        }
+
+        private void Start() {
+            Player.Instance.OnTowerPlaced += config => UpdateEnemyPaths();
         }
 
         private void OnEnable() {
-            GameManager.Instance.OnPreparationStarted += GenerateSpawnSpots;
+            GameManager.Instance.OnPreparationStarted += OnPreparationStarted;
             GameManager.Instance.OnCombatStarted += GenerateEnemies;
         }
 
         private void OnDisable() {
             if (!GameManager.IsApplicationQuitting) {
-                GameManager.Instance.OnPreparationStarted -= GenerateSpawnSpots;
+                GameManager.Instance.OnPreparationStarted -= OnPreparationStarted;
                 GameManager.Instance.OnCombatStarted -= GenerateEnemies;
             }
         }
 
         private void OnDrawGizmos() {
-            foreach (var spot in spawnSpots) {
+            foreach (var wave in spawnSpotToWave.Values) {
                 Gizmos.color = Color.red;
-                Gizmos.DrawCube(spot.Position, Vector3.one * Configs.CellSize);
+                Gizmos.DrawCube(wave.Path.GroundSpots[0].Position, Vector3.one * Configs.CellSize);
             }
         }
         #endregion
+
+        private class EnemyWave {
+            private List<Enemy> enemies = new();
+            private Path path;
+            private bool hasFlyingEnemies = false;
+
+            public List<Enemy> Enemies => enemies;
+            public Path Path => path;
+            public bool HasFlyingEnemies => hasFlyingEnemies;
+
+            public EnemyWave(List<Enemy> enemyPrefabs, int num) {
+                for (int i = 0; i < num; i++) {
+                    var prefab = enemyPrefabs[Random.Range(0, enemyPrefabs.Count)];
+                    enemies.Add(prefab);
+
+                    if (prefab.IsFlying) {
+                        hasFlyingEnemies = true;
+                    }
+                }
+            }
+
+            public void GeneratePath(Spot startSpot) {
+                path = new(startSpot, TowerManager.Instance.PlayerBase.Spot);
+            }
+
+            public Enemy SpawnEnemy() {
+                if (path == null) return null;
+
+                var enemyPrefab = enemies[^1];
+                enemies.RemoveAt(enemies.Count);
+
+                var enemy = Instantiate(enemyPrefab, path.GroundSpots[0].Position, Quaternion.identity);
+                return enemy;
+            }
+        }
     }
 }

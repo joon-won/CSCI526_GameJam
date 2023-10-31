@@ -76,13 +76,6 @@ public static class Utility {
         return (T)Enum.Parse(typeof(T), str);
     }
 
-    public static IEnumerable<TSource> ForEach<TSource>(this IEnumerable<TSource> source, Action<TSource> action) {
-        foreach (var item in source) {
-            action(item);
-            yield return item;
-        }
-    }
-
     /// <summary>
     /// Sets the visibility and interactivity of the CanvasGroup.
     /// </summary>
