@@ -1,13 +1,14 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
 using UnityEngine.Serialization;
+using UnityEngine;
+using System;
+using System.Collections.Generic;
+using System.Collections;
+
 
 namespace CSCI526GameJam
 {
 
-    public abstract class Skill : ScriptableObject
+    public abstract class Skill : MonoBehaviour
     {
 
         #region Fields
@@ -17,9 +18,11 @@ namespace CSCI526GameJam
         #region Publics
         public SkillConfig Config => config;
 
-        public abstract void PlayLv1();
-        public abstract void PlayLv2();
+
+
         public abstract void PlayLv3();
+        public abstract void PlayLv2();
+        public abstract void PlayLv1();
 
         public abstract void SetCoolDown(int sec);
         #endregion
