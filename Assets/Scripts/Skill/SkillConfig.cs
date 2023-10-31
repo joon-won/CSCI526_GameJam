@@ -8,21 +8,25 @@ namespace CSCI526GameJam
     public class SkillConfig : ScriptableObject
     {
         #region Fields
-        [SerializeField] private string skillName;
-        [SerializeField] private int coolDown;
-        [SerializeField] private string description;
+
         [SerializeField] private Sprite image;
+        [SerializeField] private string description;
+        [SerializeField] private int coolDown;
+        [SerializeField] private string skillName;
+
         #endregion
 
-        public string SkillName => skillName;
-        public int CoolDown => coolDown;
-        public string Description => description;
         public Sprite Image => image;
 
+        public int CoolDown => coolDown;
+        public string SkillName => skillName;
+
+
+        public string Description => description;
         #region Internals
         #endregion
 
         #region Unity Methods
-        #endregion        
+        #endregion
     }
 }
