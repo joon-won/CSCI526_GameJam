@@ -24,6 +24,18 @@ namespace CSCI526GameJam {
             }
             AStar(start, end);
         }
+
+        public bool IsValid() {
+            for (int i = 0; i < spots.Count; i++) {
+                var spot = spots[i];
+                if (IsSpotBlocked(spot)) return false;
+            }
+            return true;
+        }
+
+        public bool IsSpotBlocked(Spot spot) {
+            return spot.Tower && spot.Tower is not PlayerBase;
+        }
         #endregion
 
         #region Internals
@@ -65,6 +77,7 @@ namespace CSCI526GameJam {
                     new Vector2Int(x, y - 1),
                     new Vector2Int(x, y + 1)
                 });
+
                 for (int i = 0; i < 4; i++) {
                     var index = adjacents[i];
                     if (index.x < 0 || index.x >= nodes.Width
@@ -74,7 +87,7 @@ namespace CSCI526GameJam {
                     var adjacent = nodes[index];
                     if (closeds.Contains(adjacent)
                         || extraBlocks.Contains(adjacent.spot)
-                        || adjacent.spot.Tower && adjacent.spot.Tower is not PlayerBase)
+                        || IsSpotBlocked(adjacent.spot))
                         continue;
 
                     var cost = currNode.g + 1;
@@ -87,7 +100,8 @@ namespace CSCI526GameJam {
                         }
                         return;
                     }
-                    else if (!opens.Contains(adjacent)) {
+
+                    if (!opens.Contains(adjacent)) {
                         adjacent.g = cost;
                         adjacent.f = adjacent.h + adjacent.g;
                         opens.Enqueue(adjacent, adjacent.f);

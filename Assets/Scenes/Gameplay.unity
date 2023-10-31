@@ -4871,9 +4871,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0b82e55a410ef4a4282bae20716afb8b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  pathIndicatorPrefab: {fileID: -2530126753543915862, guid: 9bc0b4f33ab4caa49b2fd75720c74451, type: 3}
   numSpawnSpots: 0
   spawnSpots: []
   enemyHolder: {fileID: 0}
+  indicatorHolder: {fileID: 0}
+  indicatorInstances: []
   enemyPrefabs:
   - {fileID: 7663806781496647365, guid: 205587ee246e9b7418886642a4dc1e28, type: 3}
   - {fileID: 5850992664518237915, guid: 30ca1af2953100047819430575c6300e, type: 3}

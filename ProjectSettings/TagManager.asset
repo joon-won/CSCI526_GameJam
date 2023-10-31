@@ -53,6 +53,9 @@ TagManager:
   - name: Projectile
     uniqueID: 3216756483
     locked: 0
+  - name: Visual
+    uniqueID: 1880287781
+    locked: 0
   - name: Tower Preview
     uniqueID: 2040467247
     locked: 0

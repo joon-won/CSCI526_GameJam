@@ -34,6 +34,7 @@ namespace CSCI526GameJam {
         #region Publics
         public event Action<int> OnGoldChanged;
         public event Action<TowerConfig, int> OnTowerNumChanged;
+        public event Action<TowerConfig> OnTowerPlaced;
 
         public int Gold => gold;
 
@@ -211,6 +212,7 @@ namespace CSCI526GameJam {
 
             placer = GetComponentInChildren<TowerPlacer>();
             placer.OnPlaced += ConsumeOnPlaced;
+            placer.OnPlaced += config => OnTowerPlaced?.Invoke(config);
         }
 
         private void OnEnable() {
