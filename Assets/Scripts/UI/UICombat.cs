@@ -22,15 +22,25 @@ namespace CSCI526GameJam
         [SerializeField] private TMP_Text levelText;
 
         // Start is called before the first frame update
-        void Start()
+        void Awake()
         {
             StartCombat.onClick.AddListener(CombatStart);
             CombatPanel.SetActive(false);
 
             levelText.gameObject.SetActive(false);
-            GameManager.Instance.OnPreparationStarted += CombatEnd;
         }
-        
+
+        private void OnEnable() {
+            GameManager.Instance.OnPreparationStarted += CombatEnd;
+
+        }
+
+        private void OnDisable() {
+            if (!GameManager.IsApplicationQuitting) {
+                GameManager.Instance.OnPreparationStarted -= CombatEnd;
+            }
+        }
+
         void Update()
         {
             UpdateGoldsInfo();

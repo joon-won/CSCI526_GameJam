@@ -88,6 +88,8 @@ namespace CSCI526GameJam {
 
             TowerManager.Instance.PlayerBase.OnDied += SetGameOver;
             EnemyManager.Instance.OnEnemiesClear += StartPreparation;
+
+            StartPreparation();
         }
 
         private void OnSceneLoaded(Scene scene, LoadSceneMode mode) {
@@ -139,10 +141,6 @@ namespace CSCI526GameJam {
         private void OnDisable() {
             SceneManager.sceneLoaded -= OnSceneLoaded;
             SceneManager.sceneUnloaded -= OnSceneUnloaded;
-        }
-
-        private void Start() {
-            StartPreparation();
         }
 
         private void Update() {

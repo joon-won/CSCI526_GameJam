@@ -116,6 +116,7 @@ namespace CSCI526GameJam {
 
             while (wave.Enemies.Count > 0) {
                 elapsed += Time.deltaTime;
+                yield return null;
                 if (elapsed > interval) {
                     var enemy = wave.SpawnEnemy();
                     if (!enemy) break;
@@ -127,7 +128,6 @@ namespace CSCI526GameJam {
 
                     elapsed = 0f;
                 }
-                yield return null;
             }
         }
 
