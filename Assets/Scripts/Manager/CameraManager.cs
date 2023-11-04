@@ -82,18 +82,14 @@ namespace CSCI526GameJam {
 
             Camera.main.transform.position = defaultPosition;
             ToggleFreeCamera(true);
-        }
 
-        private void OnEnable() {
             InputManager.Instance.OnCameraMoveInputChanged += DragCamera;
             InputManager.Instance.OnCameraZoomInputChanged += ZoomCamera;
-        }
 
-        private void OnDisable() {
-            if (!GameManager.IsApplicationQuitting) {
+            GameManager.Instance.OnCurrentSceneExiting += () => {
                 InputManager.Instance.OnCameraMoveInputChanged -= DragCamera;
                 InputManager.Instance.OnCameraZoomInputChanged -= ZoomCamera;
-            }
+            };
         }
 
         private void Update() {

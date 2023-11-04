@@ -153,22 +153,17 @@ namespace CSCI526GameJam {
 
             indicatorHolder = new GameObject("Indicator Instances");
             indicatorHolder.transform.SetParent(transform);
+
+            GameManager.Instance.OnPreparationStarted += OnPreparationStarted;
+            GameManager.Instance.OnCombatStarted += GenerateEnemies;
+            GameManager.Instance.OnCurrentSceneExiting += () => {
+                GameManager.Instance.OnPreparationStarted -= OnPreparationStarted;
+                GameManager.Instance.OnCombatStarted -= GenerateEnemies;
+            };
         }
 
         private void Start() {
             Player.Instance.OnTowerPlaced += config => UpdateEnemyPaths();
-        }
-
-        private void OnEnable() {
-            GameManager.Instance.OnPreparationStarted += OnPreparationStarted;
-            GameManager.Instance.OnCombatStarted += GenerateEnemies;
-        }
-
-        private void OnDisable() {
-            if (!GameManager.IsApplicationQuitting) {
-                GameManager.Instance.OnPreparationStarted -= OnPreparationStarted;
-                GameManager.Instance.OnCombatStarted -= GenerateEnemies;
-            }
         }
 
         private void OnDrawGizmos() {

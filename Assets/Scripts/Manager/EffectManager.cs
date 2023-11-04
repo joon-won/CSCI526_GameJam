@@ -44,14 +44,13 @@ namespace CSCI526GameJam {
         #endregion
 
         #region Unity Methods
-        private void OnEnable() {
-            GameManager.Instance.OnPreparationStarted += UpdateAllTemps;
-        }
+        protected override void Awake() {
+            base.Awake();
 
-        private void OnDisable() {
-            if (!GameManager.IsApplicationQuitting) {
+            GameManager.Instance.OnPreparationStarted += UpdateAllTemps;
+            GameManager.Instance.OnCurrentSceneExiting += () => {
                 GameManager.Instance.OnPreparationStarted -= UpdateAllTemps;
-            }
+            };
         }
         #endregion
 

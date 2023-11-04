@@ -287,16 +287,12 @@ namespace CSCI526GameJam {
                     deck.Add(config);
                 }
             }
-        }
 
-        private void OnEnable() {
             GameManager.Instance.OnPreparationStarted += DrawOnNewRound;
-        }
 
-        private void OnDisable() {
-            if (!GameManager.IsApplicationQuitting) {
+            GameManager.Instance.OnCurrentSceneExiting += () => {
                 GameManager.Instance.OnPreparationStarted -= DrawOnNewRound;
-            }
+            };
         }
         #endregion
     }

@@ -30,7 +30,7 @@ namespace CSCI526GameJam {
         #endregion
 
         #region Unity Methods
-        private void Start() {
+        private void Awake() {
             GameManager.Instance.OnGameOver += Show;
             GameManager.Instance.OnGameWon += Show;
             GameManager.Instance.OnCurrentSceneExiting += () => {

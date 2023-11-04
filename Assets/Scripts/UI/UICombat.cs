@@ -28,17 +28,11 @@ namespace CSCI526GameJam
             CombatPanel.SetActive(false);
 
             levelText.gameObject.SetActive(false);
-        }
 
-        private void OnEnable() {
             GameManager.Instance.OnPreparationStarted += CombatEnd;
-
-        }
-
-        private void OnDisable() {
-            if (!GameManager.IsApplicationQuitting) {
+            GameManager.Instance.OnCurrentSceneExiting += () => {
                 GameManager.Instance.OnPreparationStarted -= CombatEnd;
-            }
+            };
         }
 
         void Update()

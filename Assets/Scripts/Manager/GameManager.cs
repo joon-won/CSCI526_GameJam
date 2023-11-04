@@ -13,8 +13,6 @@ namespace CSCI526GameJam {
 
     public class GameManager : MonoBehaviourSingleton<GameManager> {
 
-        public static bool IsApplicationQuitting { get; private set; } = false;
-
         public enum State {
             Preparation,
             Combat,
@@ -52,7 +50,6 @@ namespace CSCI526GameJam {
         /// </summary>
         /// <param name="profileIndex">Profile data index. </param>
         public void LoadGameplayScene() {
-            //SaveManager.Instance.SelectProfile(profileIndex);
             OnCurrentSceneExiting?.Invoke();
             SceneManager.LoadScene(Configs.GameplaySceneIndex);
         }
@@ -147,10 +144,6 @@ namespace CSCI526GameJam {
 
         private void Update() {
             gameTime = Time.time;
-        }
-
-        private void OnApplicationQuit() {
-            IsApplicationQuitting = true;
         }
         #endregion
     }

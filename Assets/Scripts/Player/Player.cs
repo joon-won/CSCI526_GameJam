@@ -213,25 +213,22 @@ namespace CSCI526GameJam {
             placer = GetComponentInChildren<TowerPlacer>();
             placer.OnPlaced += ConsumeOnPlaced;
             placer.OnPlaced += config => OnTowerPlaced?.Invoke(config);
-        }
 
-        private void OnEnable() {
             GameManager.Instance.OnPreparationStarted += Unlock;
             GameManager.Instance.OnCombatStarted += Lock;
             InputManager.Instance.OnMouseLeftDown += PerformMode;
             InputManager.Instance.OnMouseRightDown += changeModeToNone;
             InputManager.Instance.OnDemolishKeyDown += changeModeToDemolish;
-        }
 
-        private void OnDisable() {
-            if (!GameManager.IsApplicationQuitting) {
+            GameManager.Instance.OnCurrentSceneExiting += () => {
                 GameManager.Instance.OnPreparationStarted -= Unlock;
                 GameManager.Instance.OnCombatStarted -= Lock;
                 InputManager.Instance.OnMouseLeftDown -= PerformMode;
                 InputManager.Instance.OnMouseRightDown -= changeModeToNone;
                 InputManager.Instance.OnDemolishKeyDown -= changeModeToDemolish;
-            }
+            };
         }
+
         // Set the json output to get the in game values.
         private void Update() {
             hoveredTower = MapManager.Instance.MouseSpot.Tower;
