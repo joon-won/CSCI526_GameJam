@@ -2,7 +2,6 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.SceneManagement;
 
 namespace CSCI526GameJam {
     public class TempEnding : MonoBehaviour {
@@ -12,7 +11,7 @@ namespace CSCI526GameJam {
 
         #region Publics
         public void PlayAgain() {
-            SceneManager.LoadScene(Configs.GameplaySceneIndex);
+            GameManager.Instance.LoadGameplayScene();
         }
 
         public void Quit() {
@@ -34,6 +33,10 @@ namespace CSCI526GameJam {
         private void Start() {
             GameManager.Instance.OnGameOver += Show;
             GameManager.Instance.OnGameWon += Show;
+            GameManager.Instance.OnCurrentSceneExiting += () => {
+                GameManager.Instance.OnGameOver -= Show;
+                GameManager.Instance.OnGameWon -= Show;
+            };
             gameObject.SetActive(false);
         }
         #endregion

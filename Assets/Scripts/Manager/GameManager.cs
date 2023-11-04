@@ -41,6 +41,7 @@ namespace CSCI526GameJam {
         public event Action OnGameWon;
         public event Action OnGameOver;
 
+        public event Action OnCurrentSceneExiting;
 
         public State GameState => state;
         public int Level => level;
@@ -50,9 +51,15 @@ namespace CSCI526GameJam {
         /// Load into the gameplay scene. 
         /// </summary>
         /// <param name="profileIndex">Profile data index. </param>
-        public void LoadGameplayScene(int profileIndex) {
+        public void LoadGameplayScene() {
             //SaveManager.Instance.SelectProfile(profileIndex);
+            OnCurrentSceneExiting?.Invoke();
             SceneManager.LoadScene(Configs.GameplaySceneIndex);
+        }
+
+        public void StartCombat() {
+            state = State.Combat;
+            OnCombatStarted?.Invoke();
         }
         #endregion
 
@@ -65,14 +72,7 @@ namespace CSCI526GameJam {
             }
             state = State.Preparation;
             level++;
-            //SendToGoogle analyticsComponent = GetComponent<SendToGoogle>();
-            //analyticsComponent.Send(level.ToString());
             OnPreparationStarted?.Invoke();
-        }
-
-        private void StartCombat() {
-            state = State.Combat;
-            OnCombatStarted?.Invoke();
         }
 
         private void SetGameOver() {
@@ -89,6 +89,7 @@ namespace CSCI526GameJam {
             TowerManager.Instance.PlayerBase.OnDied += SetGameOver;
             EnemyManager.Instance.OnEnemiesClear += StartPreparation;
 
+            level = 0;
             StartPreparation();
         }
 
@@ -112,6 +113,7 @@ namespace CSCI526GameJam {
                     CleanupGameplay();
                     break;
             }
+            OnCurrentSceneExiting = null;
 
             Debug.Log($"Unloaded scene: {scene.name}. ");
         }

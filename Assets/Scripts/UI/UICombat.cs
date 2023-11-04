@@ -22,8 +22,8 @@ namespace CSCI526GameJam
         [SerializeField] private TMP_Text levelText;
 
         // Start is called before the first frame update
-        void Awake()
-        {
+        void Awake() {
+            StartCombat.onClick.AddListener(GameManager.Instance.StartCombat);
             StartCombat.onClick.AddListener(CombatStart);
             CombatPanel.SetActive(false);
 
