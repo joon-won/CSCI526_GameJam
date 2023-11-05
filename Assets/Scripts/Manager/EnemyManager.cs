@@ -11,10 +11,10 @@ namespace CSCI526GameJam {
 
         #region Fields
         [MandatoryFields]
+        [SerializeField] private LevelConfig levelConfig;
         [SerializeField] private EnemyPathIndicator pathIndicatorPrefab;
 
         [ComputedFields]
-        [SerializeField] private int numPaths;
         [ShowInInspector]
         private Dictionary<Spot, EnemyWave> spawnSpotToWave = new();
 
@@ -24,7 +24,8 @@ namespace CSCI526GameJam {
         [SerializeField] private GameObject indicatorHolder;
         [SerializeField] private List<EnemyPathIndicator> indicatorInstances = new();
 
-        [SerializeField] private List<Enemy> enemyPrefabs;
+        [SerializeField] private List<Enemy> enemyPrefabs = new();
+        [ShowInInspector] private Dictionary<EnemyConfig, Enemy> enemyConfigToPrefab = new();
         #endregion
 
         #region Publics
@@ -45,7 +46,10 @@ namespace CSCI526GameJam {
 
         #region Internals
         private void UpdateSpawnSpots() {
-            numPaths = 3; // TODO: Growth algorithm
+            var levelIndex = GameManager.Instance.Level - 1;
+            if (levelIndex >= levelConfig.NumLevels) return;
+
+            var numPaths = levelConfig.LevelInfos[levelIndex].NumWaves;
 
             spawnSpotToWave.Clear();
             var size = MapManager.Instance.MapSize;
@@ -66,9 +70,8 @@ namespace CSCI526GameJam {
                     continue;
                 }
 
-                var enemyNum = 10;
-
-                var wave = new EnemyWave(enemyPrefabs, enemyNum);
+                var waveInfo = levelConfig.LevelInfos[levelIndex].WaveInfos[i];
+                var wave = new EnemyWave(waveInfo);
                 spawnSpotToWave[spot] = wave;
             }
         }
@@ -100,13 +103,9 @@ namespace CSCI526GameJam {
             }
         }
 
-        // NOTE: Temp fix for wave clear detection. 
-        [SerializeField] private int totalNum;
         private void GenerateEnemies() {
-            totalNum = 0;
             foreach (var wave in spawnSpotToWave.Values) {
                 StartCoroutine(EnemyWaveRoutine(wave));
-                totalNum += wave.Enemies.Count;
             }
         }
 
@@ -114,13 +113,14 @@ namespace CSCI526GameJam {
             var interval = 0.5f;
             var elapsed = interval;
 
-            while (wave.Enemies.Count > 0) {
+            while (wave.Num > 0) {
                 elapsed += Time.deltaTime;
                 yield return null;
                 if (elapsed > interval) {
-                    var enemy = wave.SpawnEnemy();
-                    if (!enemy) break;
+                    var config = wave.ExtractEnemy();
+                    if (!config) break;
 
+                    var enemy = Instantiate(enemyConfigToPrefab[config], wave.Path.GroundSpots[0].Position, Quaternion.identity);
                     enemy.transform.SetParent(enemyHolder.transform);
                     enemy.Follow(wave.Path);
                     enemy.onDeath += () => OnEnemyDied(enemy);
@@ -132,9 +132,9 @@ namespace CSCI526GameJam {
         }
 
         private void OnEnemyDied(Enemy enemy) {
-            totalNum--;
             enemyInstances.Remove(enemy);
-            if (totalNum == 0) {
+            if (spawnSpotToWave.Values.All(x => x.Num == 0)
+                && enemyInstances.Count == 0) {
                 OnEnemiesClear?.Invoke();
             }
         }
@@ -148,6 +148,9 @@ namespace CSCI526GameJam {
         #region Unity Methods
         protected override void Awake() {
             base.Awake();
+
+            enemyConfigToPrefab = enemyPrefabs.ToDictionary(x => x.Config, x => x);
+
             enemyHolder = new GameObject("Enemy Instances");
             enemyHolder.transform.SetParent(transform);
 
@@ -175,37 +178,30 @@ namespace CSCI526GameJam {
         #endregion
 
         private class EnemyWave {
-            private List<Enemy> enemies = new();
+            private List<EnemyConfig> enemies = new();
             private Path path;
             private bool hasFlyingEnemies = false;
 
-            public List<Enemy> Enemies => enemies;
+            public int Num => enemies.Count;
             public Path Path => path;
             public bool HasFlyingEnemies => hasFlyingEnemies;
 
-            public EnemyWave(List<Enemy> enemyPrefabs, int num) {
-                for (int i = 0; i < num; i++) {
-                    var prefab = enemyPrefabs[Random.Range(0, enemyPrefabs.Count)];
-                    enemies.Add(prefab);
+            public EnemyWave(WaveInfo waveInfo) {
+                enemies = waveInfo.Enemies.Reverse().ToList();
 
-                    if (prefab.IsFlying) {
-                        hasFlyingEnemies = true;
-                    }
-                }
+                hasFlyingEnemies = enemies.Any(x => x.IsFlying);
             }
 
             public void GeneratePath(Spot startSpot) {
                 path = new(startSpot, TowerManager.Instance.PlayerBase.Spot);
             }
 
-            public Enemy SpawnEnemy() {
+            public EnemyConfig ExtractEnemy() {
                 if (path == null) return null;
                 if (enemies.Count == 0) return null;
 
-                var enemyPrefab = enemies[^1];
+                var enemy = enemies[^1];
                 enemies.RemoveAt(enemies.Count - 1);
-
-                var enemy = Instantiate(enemyPrefab, path.GroundSpots[0].Position, Quaternion.identity);
                 return enemy;
             }
         }

@@ -1,0 +1,84 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 958a2b996be72284386b7184becb288f, type: 3}
+  m_Name: Level Config
+  m_EditorClassIdentifier: 
+  levelInfos:
+  - WaveInfos:
+    - Enemies:
+      - {fileID: 11400000, guid: 6e6f6070545271b4683f0045ff62b6c7, type: 2}
+      - {fileID: 11400000, guid: 6e6f6070545271b4683f0045ff62b6c7, type: 2}
+      - {fileID: 11400000, guid: 6e6f6070545271b4683f0045ff62b6c7, type: 2}
+      - {fileID: 11400000, guid: 59c332a341214034eadf22315ecfbd7a, type: 2}
+      - {fileID: 11400000, guid: 59c332a341214034eadf22315ecfbd7a, type: 2}
+      - {fileID: 11400000, guid: 59c332a341214034eadf22315ecfbd7a, type: 2}
+      - {fileID: 11400000, guid: 59c332a341214034eadf22315ecfbd7a, type: 2}
+      - {fileID: 11400000, guid: 321563a695f91ab42b9213e780881b38, type: 2}
+      - {fileID: 11400000, guid: 321563a695f91ab42b9213e780881b38, type: 2}
+      - {fileID: 11400000, guid: 321563a695f91ab42b9213e780881b38, type: 2}
+  - WaveInfos:
+    - Enemies:
+      - {fileID: 11400000, guid: 6e6f6070545271b4683f0045ff62b6c7, type: 2}
+      - {fileID: 11400000, guid: 6e6f6070545271b4683f0045ff62b6c7, type: 2}
+      - {fileID: 11400000, guid: 6e6f6070545271b4683f0045ff62b6c7, type: 2}
+      - {fileID: 11400000, guid: 59c332a341214034eadf22315ecfbd7a, type: 2}
+      - {fileID: 11400000, guid: 59c332a341214034eadf22315ecfbd7a, type: 2}
+      - {fileID: 11400000, guid: 59c332a341214034eadf22315ecfbd7a, type: 2}
+      - {fileID: 11400000, guid: 59c332a341214034eadf22315ecfbd7a, type: 2}
+      - {fileID: 11400000, guid: 321563a695f91ab42b9213e780881b38, type: 2}
+      - {fileID: 11400000, guid: 321563a695f91ab42b9213e780881b38, type: 2}
+      - {fileID: 11400000, guid: 321563a695f91ab42b9213e780881b38, type: 2}
+    - Enemies:
+      - {fileID: 11400000, guid: 6e6f6070545271b4683f0045ff62b6c7, type: 2}
+      - {fileID: 11400000, guid: 6e6f6070545271b4683f0045ff62b6c7, type: 2}
+      - {fileID: 11400000, guid: 6e6f6070545271b4683f0045ff62b6c7, type: 2}
+      - {fileID: 11400000, guid: 59c332a341214034eadf22315ecfbd7a, type: 2}
+      - {fileID: 11400000, guid: 59c332a341214034eadf22315ecfbd7a, type: 2}
+      - {fileID: 11400000, guid: 59c332a341214034eadf22315ecfbd7a, type: 2}
+      - {fileID: 11400000, guid: 59c332a341214034eadf22315ecfbd7a, type: 2}
+      - {fileID: 11400000, guid: 321563a695f91ab42b9213e780881b38, type: 2}
+      - {fileID: 11400000, guid: 321563a695f91ab42b9213e780881b38, type: 2}
+      - {fileID: 11400000, guid: 321563a695f91ab42b9213e780881b38, type: 2}
+  - WaveInfos:
+    - Enemies:
+      - {fileID: 11400000, guid: 6e6f6070545271b4683f0045ff62b6c7, type: 2}
+      - {fileID: 11400000, guid: 6e6f6070545271b4683f0045ff62b6c7, type: 2}
+      - {fileID: 11400000, guid: 6e6f6070545271b4683f0045ff62b6c7, type: 2}
+      - {fileID: 11400000, guid: 59c332a341214034eadf22315ecfbd7a, type: 2}
+      - {fileID: 11400000, guid: 59c332a341214034eadf22315ecfbd7a, type: 2}
+      - {fileID: 11400000, guid: 59c332a341214034eadf22315ecfbd7a, type: 2}
+      - {fileID: 11400000, guid: 59c332a341214034eadf22315ecfbd7a, type: 2}
+      - {fileID: 11400000, guid: 321563a695f91ab42b9213e780881b38, type: 2}
+      - {fileID: 11400000, guid: 321563a695f91ab42b9213e780881b38, type: 2}
+      - {fileID: 11400000, guid: 321563a695f91ab42b9213e780881b38, type: 2}
+    - Enemies:
+      - {fileID: 11400000, guid: 6e6f6070545271b4683f0045ff62b6c7, type: 2}
+      - {fileID: 11400000, guid: 6e6f6070545271b4683f0045ff62b6c7, type: 2}
+      - {fileID: 11400000, guid: 6e6f6070545271b4683f0045ff62b6c7, type: 2}
+      - {fileID: 11400000, guid: 59c332a341214034eadf22315ecfbd7a, type: 2}
+      - {fileID: 11400000, guid: 59c332a341214034eadf22315ecfbd7a, type: 2}
+      - {fileID: 11400000, guid: 59c332a341214034eadf22315ecfbd7a, type: 2}
+      - {fileID: 11400000, guid: 59c332a341214034eadf22315ecfbd7a, type: 2}
+      - {fileID: 11400000, guid: 321563a695f91ab42b9213e780881b38, type: 2}
+      - {fileID: 11400000, guid: 321563a695f91ab42b9213e780881b38, type: 2}
+      - {fileID: 11400000, guid: 321563a695f91ab42b9213e780881b38, type: 2}
+    - Enemies:
+      - {fileID: 11400000, guid: 6e6f6070545271b4683f0045ff62b6c7, type: 2}
+      - {fileID: 11400000, guid: 6e6f6070545271b4683f0045ff62b6c7, type: 2}
+      - {fileID: 11400000, guid: 6e6f6070545271b4683f0045ff62b6c7, type: 2}
+      - {fileID: 11400000, guid: 59c332a341214034eadf22315ecfbd7a, type: 2}
+      - {fileID: 11400000, guid: 59c332a341214034eadf22315ecfbd7a, type: 2}
+      - {fileID: 11400000, guid: 321563a695f91ab42b9213e780881b38, type: 2}
+      - {fileID: 11400000, guid: 321563a695f91ab42b9213e780881b38, type: 2}
+      - {fileID: 11400000, guid: 9b6e5ccf34359b6428026375ff46a850, type: 2}
+      - {fileID: 11400000, guid: 9b6e5ccf34359b6428026375ff46a850, type: 2}
+      - {fileID: 11400000, guid: 9b6e5ccf34359b6428026375ff46a850, type: 2}

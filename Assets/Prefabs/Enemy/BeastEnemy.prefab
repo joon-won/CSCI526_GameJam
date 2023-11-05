@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 4868709687921007099}
   - component: {fileID: 2555652210001265329}
   - component: {fileID: 5971522994539946186}
+  - component: {fileID: 8260779891816387324}
   m_Layer: 9
   m_Name: BeastEnemy
   m_TagString: Untagged
@@ -134,6 +135,114 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 1, y: 1}
   m_EdgeRadius: 0
+--- !u!114 &8260779891816387324
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7923595398252711997}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 83a5659a76aab2c45bcc4fada0a79404, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  config: {fileID: 11400000, guid: 59c332a341214034eadf22315ecfbd7a, type: 2}
+  attackDamage:
+    baseValue: 0
+    valueModifiers:
+      rid: 9059746111911362698
+    bonusValue: 0
+    scalarModifiers:
+      rid: 9059746111911362699
+    bonusScalar: 0
+    isDirty: 1
+    resolvedValue: 0
+  moveSpeed:
+    baseValue: 0
+    valueModifiers:
+      rid: 9059746111911362700
+    bonusValue: 0
+    scalarModifiers:
+      rid: 9059746111911362701
+    bonusScalar: 0
+    isDirty: 1
+    resolvedValue: 0
+  currentHitPoint: 0
+  maxHitPoint:
+    baseValue: 0
+    valueModifiers:
+      rid: 9059746111911362702
+    bonusValue: 0
+    scalarModifiers:
+      rid: 9059746111911362703
+    bonusScalar: 0
+    isDirty: 1
+    resolvedValue: 0
+  armor:
+    baseValue: 0
+    valueModifiers:
+      rid: 9059746111911362704
+    bonusValue: 0
+    scalarModifiers:
+      rid: 9059746111911362705
+    bonusScalar: 0
+    isDirty: 1
+    resolvedValue: 0
+  gold:
+    baseValue: 0
+    valueModifiers:
+      rid: 9059746111911362706
+    bonusValue: 0
+    scalarModifiers:
+      rid: 9059746111911362707
+    bonusScalar: 0
+    isDirty: 1
+    resolvedValue: 0
+  isAlive: 1
+  references:
+    version: 2
+    RefIds:
+    - rid: 9059746111911362698
+      type: {class: Numeric/ModifierCollection, ns: CSCI526GameJam, asm: Assembly-CSharp}
+      data:
+        modifiers: []
+    - rid: 9059746111911362699
+      type: {class: Numeric/ModifierCollection, ns: CSCI526GameJam, asm: Assembly-CSharp}
+      data:
+        modifiers: []
+    - rid: 9059746111911362700
+      type: {class: Numeric/ModifierCollection, ns: CSCI526GameJam, asm: Assembly-CSharp}
+      data:
+        modifiers: []
+    - rid: 9059746111911362701
+      type: {class: Numeric/ModifierCollection, ns: CSCI526GameJam, asm: Assembly-CSharp}
+      data:
+        modifiers: []
+    - rid: 9059746111911362702
+      type: {class: Numeric/ModifierCollection, ns: CSCI526GameJam, asm: Assembly-CSharp}
+      data:
+        modifiers: []
+    - rid: 9059746111911362703
+      type: {class: Numeric/ModifierCollection, ns: CSCI526GameJam, asm: Assembly-CSharp}
+      data:
+        modifiers: []
+    - rid: 9059746111911362704
+      type: {class: Numeric/ModifierCollection, ns: CSCI526GameJam, asm: Assembly-CSharp}
+      data:
+        modifiers: []
+    - rid: 9059746111911362705
+      type: {class: Numeric/ModifierCollection, ns: CSCI526GameJam, asm: Assembly-CSharp}
+      data:
+        modifiers: []
+    - rid: 9059746111911362706
+      type: {class: Numeric/ModifierCollection, ns: CSCI526GameJam, asm: Assembly-CSharp}
+      data:
+        modifiers: []
+    - rid: 9059746111911362707
+      type: {class: Numeric/ModifierCollection, ns: CSCI526GameJam, asm: Assembly-CSharp}
+      data:
+        modifiers: []
 --- !u!1001 &8222507024064543579
 PrefabInstance:
   m_ObjectHideFlags: 0
