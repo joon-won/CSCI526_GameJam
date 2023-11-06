@@ -116,6 +116,11 @@ namespace CSCI526GameJam {
             }
             towerConfigToNum[config] = num;
         }
+
+        public void LoadTutorial(TutorialConfig tutorialConfig) {
+            gold = tutorialConfig.Gold;
+            OnGoldChanged?.Invoke(gold);
+        }
         #endregion
 
         #region Internals

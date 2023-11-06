@@ -226,6 +226,19 @@ namespace CSCI526GameJam {
             selectedCards.Clear();
         }
 
+        public void LoadTutorial(TutorialConfig tutorialConfig) {
+            deck.Clear();
+            foreach (var config in tutorialConfig.DeckPreset) {
+                deck.Add(new(config));
+            }
+
+            OnCardsPlayed?.Invoke(hand);
+            hand.Clear();
+            foreach (var config in tutorialConfig.OnHandCardsPreset) {
+                InsertCard(new(config));
+            }
+        }
+
 #if UNITY_EDITOR
         [EditorOnlyFields]
         [FolderPath, SerializeField]
