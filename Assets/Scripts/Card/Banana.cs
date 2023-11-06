@@ -9,7 +9,7 @@ namespace CSCI526GameJam {
     /// Item for test. Inscrease tower attack speed scalar. 
     /// </summary>
     [CreateAssetMenu(menuName = "Config/Card/Test/Banana")]
-    public class Banana : Card {
+    public class Banana : CardConfig {
 
         #region Fields
         [ClassHeader(typeof(Banana))]

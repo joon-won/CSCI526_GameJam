@@ -1,0 +1,33 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3dfa9adff78dd7648bcb7465e98bdae0, type: 3}
+  m_Name: Tutorial Config
+  m_EditorClassIdentifier: 
+  gold: 36
+  deckPreset:
+  - {fileID: 11400000, guid: 9d533fa32fc864a06862476765440844, type: 2}
+  - {fileID: 11400000, guid: 9d533fa32fc864a06862476765440844, type: 2}
+  - {fileID: 11400000, guid: 6bfe11732170e524e8939f1ad74551b6, type: 2}
+  - {fileID: 11400000, guid: 6bfe11732170e524e8939f1ad74551b6, type: 2}
+  onHandCardsPreset:
+  - {fileID: 11400000, guid: 712df716da146814db46929a8f1d4156, type: 2}
+  - {fileID: 11400000, guid: 712df716da146814db46929a8f1d4156, type: 2}
+  - {fileID: 11400000, guid: 61c70b83fe2c7234db453d9cbabb5614, type: 2}
+  - {fileID: 11400000, guid: fcceb2f16038747eeb67fef83b3bdc23, type: 2}
+  - {fileID: 11400000, guid: fcceb2f16038747eeb67fef83b3bdc23, type: 2}
+  - {fileID: 11400000, guid: 19acd152f19af46348445e7ade483193, type: 2}
+  - {fileID: 11400000, guid: 19acd152f19af46348445e7ade483193, type: 2}
+  - {fileID: 11400000, guid: 9d533fa32fc864a06862476765440844, type: 2}
+  - {fileID: 11400000, guid: 9d533fa32fc864a06862476765440844, type: 2}
+  - {fileID: 11400000, guid: 54da557240eaa624f8d99849c86cf914, type: 2}
+  - {fileID: 11400000, guid: 54da557240eaa624f8d99849c86cf914, type: 2}
+  - {fileID: 11400000, guid: 6bfe11732170e524e8939f1ad74551b6, type: 2}

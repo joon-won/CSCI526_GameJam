@@ -5,7 +5,7 @@ using UnityEngine;
 namespace CSCI526GameJam
 {
     [CreateAssetMenu(menuName = "Config/Card/<Temp> Add Wall")]
-    public class WallCard : Card
+    public class WallCard : CardConfig
     {
         #region Fields
         [ClassHeader(typeof(WallCard))]

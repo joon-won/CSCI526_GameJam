@@ -3,48 +3,59 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using System.Linq;
 
 namespace CSCI526GameJam {
     public class TestCards : MonoBehaviour {
 
         #region Fields
         [SerializeField] private TestCard testCardPrefab;
-        [SerializeField] private List<TestCard> cards = new();
+        [SerializeField] private List<TestCard> uiCards = new();
         #endregion
 
         #region Publics
         #endregion
 
         #region Internals
-        private void Insert(int index) {
+        private void Insert(Card insertedCard) {
             var card = Instantiate(testCardPrefab, transform);
-            card.Init(CardManager.Instance.Get(index));
+            card.Init(insertedCard);
+
+            var index = CardManager.Instance.IndexOf(insertedCard);
             card.transform.SetSiblingIndex(index);
             card.GetComponent<Button>().onClick.AddListener(
-                () => CardManager.Instance.ToggleSelected(cards.IndexOf(card)));
+                () => CardManager.Instance.ToggleSelected(uiCards.IndexOf(card)));
 
-            cards.Insert(index, card);
+            uiCards.Insert(index, card);
         }
 
-        private void Select(int index) {
-            cards[index].GetComponent<Image>().color = Color.red;
+        private void Select(Card card) {
+            GetUICard(card).GetComponent<Image>().color = Color.red;
         }
 
-        private void Unselect(int index) {
-            cards[index].GetComponent<Image>().color = Color.white;
+        private void Unselect(Card card) {
+            GetUICard(card).GetComponent<Image>().color = Color.white;
         }
 
-        private void Play(List<int> indices) {
-            indices.Sort((i, j) => j.CompareTo(i));
-            for (int i = 0; i < indices.Count; i++) {
-                Destroy(cards[indices[i]].gameObject);
-                cards.RemoveAt(indices[i]);
+        private void Play(List<Card> cards) {
+            foreach (var card in cards) {
+                var uiCard = GetUICard(card);
+                if (!uiCard) {
+                    Debug.LogWarning($"{card.Config.name} is not found in UI cards. ");
+                    continue;
+                }
+                Destroy(uiCard.gameObject);
+                uiCards.Remove(uiCard);
             }
+        }
+
+        private TestCard GetUICard(Card card) {
+            return uiCards.FirstOrDefault(uiCard => uiCard.Card == card);
         }
         #endregion
 
         #region Unity Methods
-        private void OnEnable() {
+        private void Awake() {
             CardManager.Instance.OnCardInserted += Insert;
             CardManager.Instance.OnCardSelected += Select;
             CardManager.Instance.OnCardUnselected += Unselect;

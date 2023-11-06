@@ -6,7 +6,7 @@ using UnityEngine;
 namespace CSCI526GameJam {
 
     [CreateAssetMenu(menuName = "Config/Card/<Temp> Increase Tower Damage")]
-    public class TempIncreaseTowerDamage : Card {
+    public class TempIncreaseTowerDamage : CardConfig {
 
 
         #region Fields

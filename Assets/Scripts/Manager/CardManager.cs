@@ -27,17 +27,21 @@ namespace CSCI526GameJam {
         [SerializeField] private int numDrawPerLevel = 6;
 
         [ComputedFields]
-        [SerializeField] private List<Card> cardConfigs;
+        [SerializeField] private List<CardConfig> cardConfigs;
         [SerializeField] private List<Card> deck = new();
         [SerializeField] private List<Card> hand = new();
-        [SerializeField] private List<int> selectedIndices = new();
+        [SerializeField] private List<Card> selectedCards = new();
+
+        private Dictionary<CardConfig, int> cardConfigToUsageNum = new();
         #endregion
 
         #region Publics
-        public event Action<int> OnCardInserted;
-        public event Action<int> OnCardSelected;
-        public event Action<int> OnCardUnselected;
-        public event Action<List<int>> OnCardsPlayed;
+        public event Action<Card> OnCardInserted;
+        public event Action<Card> OnCardSelected;
+        public event Action<Card> OnCardUnselected;
+        public event Action<List<Card>> OnCardsPlayed;
+
+        public Dictionary<CardConfig, int> CardConfigToUsageNum => cardConfigToUsageNum;
 
         /// <summary>
         /// Get a card on hand. 
@@ -46,6 +50,15 @@ namespace CSCI526GameJam {
         /// <returns>The card. </returns>
         public Card Get(int index) {
             return hand[index];
+        }
+
+        /// <summary>
+        /// Get the index of a card. 
+        /// </summary>
+        /// <param name="card">Card to get index. </param>
+        /// <returns>The index. </returns>
+        public int IndexOf(Card card) {
+            return hand.IndexOf(card);
         }
 
         /// <summary>
@@ -77,8 +90,9 @@ namespace CSCI526GameJam {
         /// </summary>
         /// <param name="index">Index of the card to select. </param>
         public void Select(int index) {
-            selectedIndices.Add(index);
-            OnCardSelected?.Invoke(index);
+            var card = hand[index];
+            selectedCards.Add(card);
+            OnCardSelected?.Invoke(card);
         }
 
         /// <summary>
@@ -86,8 +100,9 @@ namespace CSCI526GameJam {
         /// </summary>
         /// <param name="index">Index of the card to unselect. </param>
         public void Unselect(int index) {
-            if (selectedIndices.Remove(index)) {
-                OnCardUnselected?.Invoke(index);
+            var card = hand[index];
+            if (selectedCards.Remove(card)) {
+                OnCardUnselected?.Invoke(card);
             }
         }
 
@@ -96,7 +111,8 @@ namespace CSCI526GameJam {
         /// </summary>
         /// <param name="index">Index of the card to toggle. </param>
         public void ToggleSelected(int index) {
-            if (selectedIndices.Contains(index)) {
+            var card = hand[index];
+            if (selectedCards.Contains(card)) {
                 Unselect(index);
             }
             else {
@@ -108,19 +124,14 @@ namespace CSCI526GameJam {
         /// Play the selected cards. 
         /// </summary>
         public void PlaySelected() {
-            if (selectedIndices.Count == 0) return;
+            if (selectedCards.Count == 0) return;
 
-            var selected = selectedIndices
-                .Select(index => hand[index])
+            var selected = selectedCards
+                .Select(x => x.Config)
                 .OrderBy(c => c.Cost)
                 .ToList();
             var pattern = CheckPattern(selected);
             if (pattern == Pattern.None) return;
-
-            // NOTE: Temp fix UI bug
-            OnCardsPlayed?.Invoke(selectedIndices);
-            selected.ForEach(c => hand.Remove(c));
-            selectedIndices.Clear();
 
             int xCost, yCost;
             var finalCost = 0;
@@ -199,6 +210,33 @@ namespace CSCI526GameJam {
                     Debug.LogWarning($"Undefined pattern {pattern}");
                     return;
             }
+
+            // For analytics. 
+            foreach (var card in selectedCards) {
+                if (cardConfigToUsageNum.TryGetValue(card.Config, out var num)) {
+                    num++;
+                    continue;
+                }
+                cardConfigToUsageNum[card.Config] = 1;
+            }
+
+
+            OnCardsPlayed?.Invoke(selectedCards);
+            selectedCards.ForEach(x => hand.Remove(x));
+            selectedCards.Clear();
+        }
+
+        public void LoadTutorial(TutorialConfig tutorialConfig) {
+            deck.Clear();
+            foreach (var config in tutorialConfig.DeckPreset) {
+                deck.Add(new(config));
+            }
+
+            OnCardsPlayed?.Invoke(hand);
+            hand.Clear();
+            foreach (var config in tutorialConfig.OnHandCardsPreset) {
+                InsertCard(new(config));
+            }
         }
 
 #if UNITY_EDITOR
@@ -206,7 +244,7 @@ namespace CSCI526GameJam {
         [FolderPath, SerializeField]
         private string cardsPath;
         public void FindAssets() {
-            cardConfigs = Utility.FindRefsInFolder<Card>(cardsPath, AssetType.ScriptableObject);
+            cardConfigs = Utility.FindRefsInFolder<CardConfig>(cardsPath, AssetType.ScriptableObject);
             Debug.Log($"Found {cardConfigs.Count} cards under {cardsPath}. ");
         }
 #endif
@@ -218,9 +256,9 @@ namespace CSCI526GameJam {
         }
 
         private void InsertCard(Card card) {
-            var index = hand.FindLastIndex(c => c == card);
+            var index = hand.FindLastIndex(c => c.Config == card.Config);
             if (index == -1) {
-                index = hand.FindIndex(c => c.Cost > card.Cost);
+                index = hand.FindIndex(c => c.Config.Cost > card.Config.Cost);
                 if (index == -1) {
                     index = hand.Count;
                     hand.Add(card);
@@ -234,12 +272,14 @@ namespace CSCI526GameJam {
                 hand.Insert(index, card);
             }
 
-            OnCardInserted?.Invoke(index);
+            OnCardInserted?.Invoke(card);
         }
 
-        private Pattern CheckPattern(List<Card> cards) {
+        private Pattern CheckPattern(List<CardConfig> cards) {
             var n = cards.Count;
-            cards.Sort((x, y) => x.Cost.CompareTo(y.Cost));
+            cards = cards
+                .OrderBy(x => x.Cost)
+                .ToList();
 
             // Check for ABCD
             if (n >= 4) {
@@ -284,7 +324,7 @@ namespace CSCI526GameJam {
             base.Awake();
             foreach (var config in cardConfigs) {
                 for (int i = 0; i < numPerCard; i++) {
-                    deck.Add(config);
+                    deck.Add(new(config));
                 }
             }
 

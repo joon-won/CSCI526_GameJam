@@ -2301,6 +2301,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   numLevels: 3
+  tutorialConfig: {fileID: 11400000, guid: a22472807198e7846b5cc21da76c6c76, type: 2}
   state: 0
   level: 0
   gameTime: 0
@@ -9066,7 +9067,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   testCardPrefab: {fileID: -2718466218940826151, guid: 27e78b2816a9d7e4297af0998de0d0d0, type: 3}
-  cards: []
+  uiCards: []
 --- !u!114 &1579192257
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -9837,7 +9838,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 6bfe11732170e524e8939f1ad74551b6, type: 2}
   deck: []
   hand: []
-  selectedIndices: 
+  selectedCards: []
   cardsPath: Assets/Configs/Card
 --- !u!4 &1848850516
 Transform:

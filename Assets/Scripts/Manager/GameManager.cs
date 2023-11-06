@@ -23,6 +23,7 @@ namespace CSCI526GameJam {
         #region Fields
         [MandatoryFields]
         [SerializeField] private int numLevels = 3;
+        [SerializeField] private TutorialConfig tutorialConfig;
 
         [ComputedFields]
         [SerializeField] private State state;
@@ -38,6 +39,7 @@ namespace CSCI526GameJam {
         public event Action OnCombatStarted;
         public event Action OnGameWon;
         public event Action OnGameOver;
+        public event Action OnTutorialStarted;
 
         public event Action OnCurrentSceneExiting;
 
@@ -57,6 +59,13 @@ namespace CSCI526GameJam {
         public void StartCombat() {
             state = State.Combat;
             OnCombatStarted?.Invoke();
+        }
+
+        [ContextMenu("Start Tutorial")]
+        public void StartTutorial() {
+            Player.Instance.LoadTutorial(tutorialConfig);
+            CardManager.Instance.LoadTutorial(tutorialConfig);
+            OnTutorialStarted?.Invoke();
         }
         #endregion
 

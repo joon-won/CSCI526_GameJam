@@ -9,7 +9,7 @@ namespace CSCI526GameJam {
     /// Item for test. Increase tower crit chance value. 
     /// </summary>
     [CreateAssetMenu(menuName = "Config/Card/Test/Cat")]
-    public class Cat : Card {
+    public class Cat : CardConfig {
 
         #region Fields
         [ClassHeader(typeof(Cat))]
