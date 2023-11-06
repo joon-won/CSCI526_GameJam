@@ -39,6 +39,7 @@ namespace CSCI526GameJam {
         public event Action OnCombatStarted;
         public event Action OnGameWon;
         public event Action OnGameOver;
+        public event Action OnTutorialStarted;
 
         public event Action OnCurrentSceneExiting;
 
@@ -64,6 +65,7 @@ namespace CSCI526GameJam {
         public void StartTutorial() {
             Player.Instance.LoadTutorial(tutorialConfig);
             CardManager.Instance.LoadTutorial(tutorialConfig);
+            OnTutorialStarted?.Invoke();
         }
         #endregion
 
