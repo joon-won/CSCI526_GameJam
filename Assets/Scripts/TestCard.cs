@@ -11,10 +11,15 @@ namespace CSCI526GameJam {
         #region Fields
         [SerializeField] private TMP_Text costText;
         [SerializeField] private TMP_Text nameText;
+        [SerializeField] private Card card;
         #endregion
 
         #region Publics
+        public Card Card => card;
+
         public void Init(Card card) {
+            this.card = card;
+
             costText.text = "Cost: " + card.Config.Cost.ToString();
             nameText.text = card.Config.CardName;
         }
