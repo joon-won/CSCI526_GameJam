@@ -31,6 +31,8 @@ namespace CSCI526GameJam {
         [SerializeField] private List<Card> deck = new();
         [SerializeField] private List<Card> hand = new();
         [SerializeField] private List<Card> selectedCards = new();
+
+        private Dictionary<CardConfig, int> cardConfigToUsageNum = new();
         #endregion
 
         #region Publics
@@ -38,6 +40,8 @@ namespace CSCI526GameJam {
         public event Action<Card> OnCardSelected;
         public event Action<Card> OnCardUnselected;
         public event Action<List<Card>> OnCardsPlayed;
+
+        public Dictionary<CardConfig, int> CardConfigToUsageNum => cardConfigToUsageNum;
 
         /// <summary>
         /// Get a card on hand. 
@@ -207,7 +211,16 @@ namespace CSCI526GameJam {
                     return;
             }
 
-            // NOTE: Temp fix UI bug
+            // For analytics. 
+            foreach (var card in selectedCards) {
+                if (cardConfigToUsageNum.TryGetValue(card.Config, out var num)) {
+                    num++;
+                    continue;
+                }
+                cardConfigToUsageNum[card.Config] = 1;
+            }
+
+
             OnCardsPlayed?.Invoke(selectedCards);
             selectedCards.ForEach(x => hand.Remove(x));
             selectedCards.Clear();
