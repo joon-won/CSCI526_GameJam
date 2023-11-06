@@ -6,7 +6,7 @@ using UnityEngine;
 namespace CSCI526GameJam {
 
     [CreateAssetMenu(menuName = "Config/Card/<Temp> Draw card")]
-    public class TempDrawCard : Card {
+    public class TempDrawCard : CardConfig {
 
         #region Fields
         [ClassHeader(typeof(TempDrawCard))]

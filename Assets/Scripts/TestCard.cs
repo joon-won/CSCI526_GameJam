@@ -15,8 +15,8 @@ namespace CSCI526GameJam {
 
         #region Publics
         public void Init(Card card) {
-            costText.text = "Cost: "+card.Cost.ToString();
-            nameText.text = card.CardName;
+            costText.text = "Cost: " + card.Config.Cost.ToString();
+            nameText.text = card.Config.CardName;
         }
         #endregion
 

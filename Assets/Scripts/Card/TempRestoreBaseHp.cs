@@ -6,7 +6,7 @@ using UnityEngine;
 namespace CSCI526GameJam {
 
     [CreateAssetMenu(menuName = "Config/Card/<Temp> Restore Base HP")]
-    public class TempRestoreBaseHp : Card {
+    public class TempRestoreBaseHp : CardConfig {
 
         #region Fields
         [ClassHeader(typeof(TempRestoreBaseHp))]
