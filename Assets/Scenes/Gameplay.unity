@@ -3453,6 +3453,8 @@ MonoBehaviour:
   tutorialConfig: {fileID: 11400000, guid: a22472807198e7846b5cc21da76c6c76, type: 2}
   state: 0
   level: 0
+  doTutorial: 1
+  isInTutorial: 0
   gameTime: 0
   frameRate: 144
   vsync: 1
@@ -12067,6 +12069,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 918bf66faf443334182a18570e853f98, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  initialGold: 15
   isLocked: 0
   mode: 0
   hoveredTower: {fileID: 0}
