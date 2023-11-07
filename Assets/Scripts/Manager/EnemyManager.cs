@@ -32,6 +32,7 @@ namespace CSCI526GameJam {
         public event Action OnEnemiesClear;
 
         public int NumEnemies => enemyInstances.Count;
+        public int MaxWaves => levelConfig.LevelInfos.Length;
 
 #if UNITY_EDITOR
         [EditorOnlyFields]

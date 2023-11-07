@@ -215,6 +215,7 @@ namespace CSCI526GameJam {
             foreach (var card in selectedCards) {
                 if (cardConfigToUsageNum.TryGetValue(card.Config, out var num)) {
                     num++;
+                    cardConfigToUsageNum[card.Config] = num;
                     continue;
                 }
                 cardConfigToUsageNum[card.Config] = 1;

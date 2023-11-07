@@ -22,7 +22,6 @@ namespace CSCI526GameJam {
 
         #region Fields
         [MandatoryFields]
-        [SerializeField] private int numLevels = 3;
         [SerializeField] private TutorialConfig tutorialConfig;
 
         [ComputedFields]
@@ -71,7 +70,7 @@ namespace CSCI526GameJam {
 
         #region Internals
         private void StartPreparation() {
-            if (level >= numLevels) {
+            if (level >= EnemyManager.Instance.MaxWaves) {
                 state = State.Win;
                 OnGameWon?.Invoke();
                 return;
