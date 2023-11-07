@@ -473,7 +473,7 @@ MonoBehaviour:
       m_Calls: []
   m_text: '3. Play as Rule 1
 
-    Choose Draw Card*2 to get four more cards.'
+    Choose "Draw Card" two times to get four more cards.'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -2720,8 +2720,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: '5. Play as Rule 3
 
-    Choose HP+*3, Damage+*2 to add more base HP and
-    strengthen your towers'
+    Choose "HP+" three time, "Damage+" two times to
+    add more base HP and strengthen your towers'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -3747,7 +3747,7 @@ MonoBehaviour:
       m_Calls: []
   m_text: '4. Play as Rule 4
 
-    Choose Wall+*4 to get 60 walls.'
+    Choose "Wall+" four times to get 32 walls.'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -9759,8 +9759,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: '1. Play Single card
 
-    Choose IceTower+ once, play cards to get 1 Ice
-    Tower
+    Choose "IceTower+" once, click play cards botton
+    to get 1 Ice Tower
 
 '
   m_isRightToLeft: 0
@@ -10422,8 +10422,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: '2. Play as Rule 2
 
-    Choose Buff Tower+*1, Gun Tower+*2, Ice Tower+*1
-    to get Towers with less cost.'
+    Choose "Buff Tower+" for one , "Gun Tower+" for
+    two, "Ice Tower+" for one to get Towers with less cost.'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
