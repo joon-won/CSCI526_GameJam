@@ -16,6 +16,9 @@ namespace CSCI526GameJam {
         }
 
         #region Fields
+        [MandatoryFields]
+        [SerializeField] private int initialGold;
+
         [ComputedFields]
         [SerializeField] private bool isLocked;
         [SerializeField] private Mode mode;
@@ -119,6 +122,11 @@ namespace CSCI526GameJam {
 
         public void LoadTutorial(TutorialConfig tutorialConfig) {
             gold = tutorialConfig.Gold;
+            OnGoldChanged?.Invoke(gold);
+        }
+
+        public void EndTutorial() {
+            gold = initialGold;
             OnGoldChanged?.Invoke(gold);
         }
         #endregion

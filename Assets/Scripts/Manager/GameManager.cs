@@ -28,6 +28,9 @@ namespace CSCI526GameJam {
         [SerializeField] private State state;
         [SerializeField] private int level;
 
+        [SerializeField] private bool doTutorial;
+        [SerializeField] private bool isInTutorial;
+
         [SerializeField] private float gameTime;
         [SerializeField] private int frameRate = 144;
         [SerializeField] private bool vsync = true;
@@ -38,7 +41,9 @@ namespace CSCI526GameJam {
         public event Action OnCombatStarted;
         public event Action OnGameWon;
         public event Action OnGameOver;
+
         public event Action OnTutorialStarted;
+        public event Action OnTutorialEnded;
 
         public event Action OnCurrentSceneExiting;
 
@@ -62,8 +67,12 @@ namespace CSCI526GameJam {
 
         [ContextMenu("Start Tutorial")]
         public void StartTutorial() {
+            isInTutorial = true;
+            level = 0;
+
             Player.Instance.LoadTutorial(tutorialConfig);
             CardManager.Instance.LoadTutorial(tutorialConfig);
+
             OnTutorialStarted?.Invoke();
         }
         #endregion
@@ -75,6 +84,16 @@ namespace CSCI526GameJam {
                 OnGameWon?.Invoke();
                 return;
             }
+
+            if (isInTutorial) {
+                isInTutorial = false;
+
+                Player.Instance.EndTutorial();
+                CardManager.Instance.EndTutorial();
+
+                OnTutorialEnded?.Invoke();
+            }
+
             state = State.Preparation;
             level++;
             OnPreparationStarted?.Invoke();
@@ -96,6 +115,11 @@ namespace CSCI526GameJam {
 
             level = 0;
             StartPreparation();
+
+            if (doTutorial) {
+                doTutorial = false;
+                StartTutorial();
+            }
         }
 
         private void OnSceneLoaded(Scene scene, LoadSceneMode mode) {
