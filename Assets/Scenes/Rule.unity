@@ -419,7 +419,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   m_text: "Welcome to our Card-Based Tower Defense game!\n\nDefend your base through
-    three challenging levels \n\nEach player starts with 50 gold and 100 HP.\n\nDrawing
+    three challenging levels \n\nEach player starts with 36 gold and 100 HP.\n\nDrawing
     cards each round to build different kinds of tower to kill enemies\n\n\nCLICK
     ON THE \"HELP\" BUTTON TO READ THE RULE OF CARD\n\n"
   m_isRightToLeft: 0
