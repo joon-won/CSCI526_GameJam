@@ -197,8 +197,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: -208.95203, y: -74.97}
-  m_SizeDelta: {x: 350, y: 50}
+  m_AnchoredPosition: {x: -208.95203, y: -381.39}
+  m_SizeDelta: {x: 350, y: 165.51}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &4812581
 GameObject:
@@ -1517,6 +1517,18 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 796484213}
+        m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
+        m_MethodName: SetActive
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &206716486
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2142,8 +2154,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: -208.95203, y: -74.97}
-  m_SizeDelta: {x: 350, y: 50}
+  m_AnchoredPosition: {x: -208.95203, y: -113.49}
+  m_SizeDelta: {x: 350, y: 127.03}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &272452283
 MonoBehaviour:
@@ -8718,8 +8730,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: -208.95203, y: -74.97}
-  m_SizeDelta: {x: 350, y: 50}
+  m_AnchoredPosition: {x: -208.95203, y: -214.80002}
+  m_SizeDelta: {x: 350, y: 167.67}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &1036743784
 GameObject:
@@ -9262,8 +9274,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 175, y: -25}
-  m_SizeDelta: {x: 200, y: 50}
+  m_AnchoredPosition: {x: 175, y: -82.75502}
+  m_SizeDelta: {x: 350, y: 165.51}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1094735112
 MonoBehaviour:
@@ -9285,7 +9297,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Buff Tower description
+  m_text: Buff Tower can't attack the enemies, but it can provide buffs to others
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -10545,8 +10557,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 175, y: -25}
-  m_SizeDelta: {x: 200, y: 50}
+  m_AnchoredPosition: {x: 175, y: -63.515003}
+  m_SizeDelta: {x: 350, y: 127.03}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1318496186
 MonoBehaviour:
@@ -10568,7 +10580,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Gun Tower description
+  m_text: Gun Tower is the default attacking tower, shoot fast and hard
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -12047,8 +12059,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: -208.95203, y: -74.97}
-  m_SizeDelta: {x: 350, y: 50}
+  m_AnchoredPosition: {x: -208.95203, y: -304.36}
+  m_SizeDelta: {x: 350, y: 165.51}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &1625762363
 GameObject:
@@ -12344,8 +12356,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 778, y: 210}
-  m_SizeDelta: {x: -1634.6, y: -693.4473}
+  m_AnchoredPosition: {x: 773.7548, y: 143.56}
+  m_SizeDelta: {x: -1626.1096, y: -560.56}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1683205464
 MonoBehaviour:
@@ -12902,8 +12914,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 175, y: -25}
-  m_SizeDelta: {x: 200, y: 50}
+  m_AnchoredPosition: {x: 175, y: -63.515003}
+  m_SizeDelta: {x: 350, y: 127.03}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1784250111
 MonoBehaviour:
@@ -12925,7 +12937,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Wall description
+  m_text: Wall only can protect the base without any attacking
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -13865,8 +13877,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 175, y: -25}
-  m_SizeDelta: {x: 200, y: 50}
+  m_AnchoredPosition: {x: 175, y: -63.515003}
+  m_SizeDelta: {x: 350, y: 127.03}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &2030634113
 MonoBehaviour:
@@ -13888,7 +13900,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Ice Tower description
+  m_text: Ice Tower has less DMG, it can freeze the enemies at their current location
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
