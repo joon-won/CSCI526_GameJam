@@ -10,7 +10,7 @@ namespace CSCI526GameJam {
 
     public class CardManager : MonoBehaviourSingleton<CardManager>, IAssetDependent {
 
-        private enum Pattern {
+        public enum Pattern {
             None,
             X,
             XX,
@@ -27,10 +27,11 @@ namespace CSCI526GameJam {
         [SerializeField] private int numDrawPerLevel = 6;
 
         [ComputedFields]
-        [SerializeField] private List<CardConfig> cardConfigs;
+        [SerializeField] private Pattern currentPattern;
         [SerializeField] private List<Card> deck = new();
         [SerializeField] private List<Card> hand = new();
         [SerializeField] private List<Card> selectedCards = new();
+        [SerializeField] private List<CardConfig> cardConfigs;
 
         private Dictionary<CardConfig, int> cardConfigToUsageNum = new();
         #endregion
@@ -41,6 +42,7 @@ namespace CSCI526GameJam {
         public event Action<Card> OnCardUnselected;
         public event Action<List<Card>> OnCardsPlayed;
 
+        public Pattern CurrentPattern => currentPattern;
         public Dictionary<CardConfig, int> CardConfigToUsageNum => cardConfigToUsageNum;
 
         /// <summary>
@@ -92,6 +94,7 @@ namespace CSCI526GameJam {
         public void Select(int index) {
             var card = hand[index];
             selectedCards.Add(card);
+            UpdatePattern();
             OnCardSelected?.Invoke(card);
         }
 
@@ -102,6 +105,7 @@ namespace CSCI526GameJam {
         public void Unselect(int index) {
             var card = hand[index];
             if (selectedCards.Remove(card)) {
+                UpdatePattern();
                 OnCardUnselected?.Invoke(card);
             }
         }
@@ -130,12 +134,12 @@ namespace CSCI526GameJam {
                 .Select(x => x.Config)
                 .OrderBy(c => c.Cost)
                 .ToList();
-            var pattern = CheckPattern(selected);
-            if (pattern == Pattern.None) return;
+
+            if (currentPattern == Pattern.None) return;
 
             int xCost, yCost;
             var finalCost = 0;
-            switch (pattern) {
+            switch (currentPattern) {
                 case Pattern.X:
                     if (!Player.Instance.TryPay(selected[0].Cost)) return;
 
@@ -207,7 +211,7 @@ namespace CSCI526GameJam {
                     break;
 
                 default:
-                    Debug.LogWarning($"Undefined pattern {pattern}");
+                    Debug.LogWarning($"Undefined pattern {currentPattern}");
                     return;
             }
 
@@ -289,47 +293,55 @@ namespace CSCI526GameJam {
             OnCardInserted?.Invoke(card);
         }
 
-        private Pattern CheckPattern(List<CardConfig> cards) {
-            var n = cards.Count;
-            cards = cards
-                .OrderBy(x => x.Cost)
+        private void UpdatePattern() {
+
+            var cards = selectedCards
+                .Select(x => x.Config)
+                .OrderBy(c => c.Cost)
                 .ToList();
 
+            var n = cards.Count;
+
+            var pattern = Pattern.None;
             // Check for ABCD
             if (n >= 4) {
                 var i = 1;
                 for (i = 1; i < n; i++) {
                     if (cards[i].Cost != cards[i - 1].Cost + 1) break;
                 }
-                if (i == n) return Pattern.ABCD;
+                if (i == n) pattern = Pattern.ABCD;
             }
 
             // Check others
             switch (n) {
                 case 1:
-                    return Pattern.X;
+                    pattern = Pattern.X;
+                    break;
 
                 case 2:
-                    return cards[0].Cost == cards[1].Cost ? Pattern.XX : Pattern.None;
+                    pattern = cards[0].Cost == cards[1].Cost ? Pattern.XX : Pattern.None;
+                    break;
 
                 case 4:
-                    if (cards.Count(c => c.Cost == cards[0].Cost) == 4) return Pattern.XXXX;
+                    if (cards.Count(c => c.Cost == cards[0].Cost) == 4) pattern = Pattern.XXXX;
                     if (cards.Count(c => c.Cost == cards[0].Cost) == 3
-                        || cards.Count(c => c.Cost == cards[n - 1].Cost) == 3) return Pattern.XXXY;
+                        || cards.Count(c => c.Cost == cards[n - 1].Cost) == 3) pattern = Pattern.XXXY;
 
-                    return Pattern.None;
+                    break;
 
                 case 5:
                     if (cards.Count(c => c.Cost == cards[0].Cost) == 3
                         && cards.Count(c => c.Cost == cards[n - 1].Cost) == 2
                         || cards.Count(c => c.Cost == cards[n - 1].Cost) == 3
-                        && cards.Count(c => c.Cost == cards[0].Cost) == 2) return Pattern.XXXYY;
+                        && cards.Count(c => c.Cost == cards[0].Cost) == 2) pattern = Pattern.XXXYY;
 
-                    return Pattern.None;
+                    break;
 
                 default:
-                    return Pattern.None;
+                    break;
             }
+
+            currentPattern = pattern;
         }
         #endregion
 
