@@ -13171,17 +13171,19 @@ MonoBehaviour:
   numPerCard: 4
   maxOnHand: 12
   numDrawPerLevel: 6
+  currentPattern: 0
+  deck: []
+  hand: []
+  selectedCards: []
   cardConfigs:
   - {fileID: 11400000, guid: 61c70b83fe2c7234db453d9cbabb5614, type: 2}
   - {fileID: 11400000, guid: fcceb2f16038747eeb67fef83b3bdc23, type: 2}
   - {fileID: 11400000, guid: 19acd152f19af46348445e7ade483193, type: 2}
   - {fileID: 11400000, guid: 9d533fa32fc864a06862476765440844, type: 2}
   - {fileID: 11400000, guid: 712df716da146814db46929a8f1d4156, type: 2}
+  - {fileID: 11400000, guid: 5ee886bdbee6e44b9abc327df7ab6b24, type: 2}
   - {fileID: 11400000, guid: 54da557240eaa624f8d99849c86cf914, type: 2}
   - {fileID: 11400000, guid: 6bfe11732170e524e8939f1ad74551b6, type: 2}
-  deck: []
-  hand: []
-  selectedCards: []
   cardsPath: Assets/Configs/Card
 --- !u!4 &1848850516
 Transform:
