@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Serialization;
+using System.Linq;
 
 namespace CSCI526GameJam {
 
@@ -12,20 +13,18 @@ namespace CSCI526GameJam {
         [ClassHeader(typeof(CardConfig))]
 
         [SerializeField] private string cardName;
-        [SerializeField] private ItemRank rank;
         [SerializeField] private int cost;
 
         [TextArea(5, 10)]
-        [SerializeField] private string description;
+        [SerializeField] private string[] descriptions;
         [SerializeField] private Sprite image;
         #endregion
 
         #region Publics
         public string CardName => cardName;
-        public ItemRank Rank => rank;
         public int Cost => cost;
 
-        public string Description => description;
+        public string[] Descriptions => descriptions;
         public Sprite Image => image;
 
         public abstract void PlayLv1();
@@ -37,6 +36,11 @@ namespace CSCI526GameJam {
         #endregion
 
         #region Unity Methods
+        private void OnValidate() {
+            if (descriptions == null || descriptions.Length != 3) {
+                Array.Resize(ref descriptions, 3);
+            }
+        }
         #endregion
     }
 }

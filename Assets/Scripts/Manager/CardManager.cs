@@ -131,7 +131,6 @@ namespace CSCI526GameJam {
             if (selectedCards.Count == 0) return;
 
             var selected = selectedCards
-                .Select(x => x.Config)
                 .OrderBy(c => c.Cost)
                 .ToList();
 
@@ -143,14 +142,14 @@ namespace CSCI526GameJam {
                 case Pattern.X:
                     if (!Player.Instance.TryPay(selected[0].Cost)) return;
 
-                    selected[0].PlayLv1();
+                    selected[0].Play(Card.Level.One);
                     break;
 
                 case Pattern.XX:
                     if (!Player.Instance.TryPay(selected[0].Cost * 2)) return;
 
-                    selected[0].PlayLv2();
-                    selected[1].PlayLv2();
+                    selected[0].Play(Card.Level.Two);
+                    selected[1].Play(Card.Level.Two);
                     break;
 
                 case Pattern.XXXY:
@@ -167,10 +166,10 @@ namespace CSCI526GameJam {
                     finalCost = xCost * 3 + yCost / 2;
                     if (!Player.Instance.TryPay(finalCost)) return;
 
-                    selected[0].PlayLv1();
-                    selected[1].PlayLv1();
-                    selected[2].PlayLv1();
-                    selected[3].PlayLv1();
+                    selected[0].Play(Card.Level.One);
+                    selected[1].Play(Card.Level.One);
+                    selected[2].Play(Card.Level.One);
+                    selected[3].Play(Card.Level.One);
                     break;
 
                 case Pattern.XXXYY:
@@ -187,27 +186,27 @@ namespace CSCI526GameJam {
                     finalCost = xCost * 3 + yCost;
                     if (!Player.Instance.TryPay(finalCost)) return;
 
-                    selected[0].PlayLv1();
-                    selected[1].PlayLv1();
-                    selected[2].PlayLv1();
-                    selected[3].PlayLv2();
-                    selected[4].PlayLv2();
+                    selected[0].Play(Card.Level.One);
+                    selected[1].Play(Card.Level.One);
+                    selected[2].Play(Card.Level.One);
+                    selected[3].Play(Card.Level.Two);
+                    selected[4].Play(Card.Level.Two);
                     break;
 
                 case Pattern.XXXX:
                     if (!Player.Instance.TryPay(selected[0].Cost * 4)) return;
 
-                    selected[0].PlayLv3();
-                    selected[1].PlayLv3();
-                    selected[2].PlayLv3();
-                    selected[3].PlayLv3();
+                    selected[0].Play(Card.Level.Three);
+                    selected[1].Play(Card.Level.Three);
+                    selected[2].Play(Card.Level.Three);
+                    selected[3].Play(Card.Level.Three);
                     break;
 
                 case Pattern.ABCD:
                     finalCost = selected.Sum(c => c.Cost);
                     if (!Player.Instance.TryPay(finalCost)) return;
 
-                    selected.ForEach(c => c.PlayLv2());
+                    selected.ForEach(c => c.Play(Card.Level.Two));
                     break;
 
                 default:

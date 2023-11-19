@@ -12,12 +12,6 @@ namespace CSCI526GameJam {
         Right,
     }
 
-    public enum ItemRank {
-        Common,
-        Rare,
-        Lengendary,
-    }
-
 
     public static class Configs {
         public const string Version = "0.0.1";
