@@ -5,11 +5,11 @@ using UnityEngine;
 
 namespace CSCI526GameJam {
 
-    [CreateAssetMenu(menuName = "Config/Card/<Temp> Increase Tower Crit Chance")]
-    public class TempIncreaseTowerCritChance : CardConfig {
+    [CreateAssetMenu(menuName = "Config/Card/Increase Crit Chance")]
+    public class IncreaseCritChance : CardConfig {
 
         #region Fields
-        [ClassHeader(typeof(TempIncreaseTowerCritChance))]
+        [ClassHeader(typeof(IncreaseCritChance))]
 
         [SerializeField] private float lv1Increase;
         [SerializeField] private float lv2Increase;

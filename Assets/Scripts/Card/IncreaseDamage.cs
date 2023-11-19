@@ -5,12 +5,12 @@ using UnityEngine;
 
 namespace CSCI526GameJam {
 
-    [CreateAssetMenu(menuName = "Config/Card/<Temp> Increase Tower Damage")]
-    public class TempIncreaseTowerDamage : CardConfig {
+    [CreateAssetMenu(menuName = "Config/Card/Increase Damage")]
+    public class IncreaseDamage : CardConfig {
 
 
         #region Fields
-        [ClassHeader(typeof(TempIncreaseTowerDamage))]
+        [ClassHeader(typeof(IncreaseDamage))]
 
         [SerializeField] private float lv1Increase;
         [SerializeField] private float lv2Increase;

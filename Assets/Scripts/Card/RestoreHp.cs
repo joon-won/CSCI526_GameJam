@@ -5,11 +5,11 @@ using UnityEngine;
 
 namespace CSCI526GameJam {
 
-    [CreateAssetMenu(menuName = "Config/Card/<Temp> Restore Base HP")]
-    public class TempRestoreBaseHp : CardConfig {
+    [CreateAssetMenu(menuName = "Config/Card/Restore HP")]
+    public class RestoreHp : CardConfig {
 
         #region Fields
-        [ClassHeader(typeof(TempRestoreBaseHp))]
+        [ClassHeader(typeof(RestoreHp))]
 
         [SerializeField] private int lv1Heal;
         [SerializeField] private int lv2Heal;

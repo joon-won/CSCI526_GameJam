@@ -5,11 +5,11 @@ using UnityEngine;
 
 namespace CSCI526GameJam {
 
-    [CreateAssetMenu(menuName = "Config/Card/<Temp> Draw card")]
-    public class TempDrawCard : CardConfig {
+    [CreateAssetMenu(menuName = "Config/Card/Draw cards")]
+    public class DrawCards : CardConfig {
 
         #region Fields
-        [ClassHeader(typeof(TempDrawCard))]
+        [ClassHeader(typeof(DrawCards))]
 
         [SerializeField] private int lv1NumCard;
         [SerializeField] private int lv2NumCard;

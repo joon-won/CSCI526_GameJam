@@ -4,15 +4,16 @@ using UnityEngine;
 
 namespace CSCI526GameJam
 {
-    [CreateAssetMenu(menuName = "Config/Card/<Temp> Add Wall")]
-    public class WallCard : CardConfig
+    [CreateAssetMenu(menuName = "Config/Card/Add Ice Towers")]
+    public class AddIceTowers : CardConfig
     {
         #region Fields
-        [ClassHeader(typeof(WallCard))]
+        [ClassHeader(typeof(AddIceTowers))]
         [SerializeField] private TowerConfig config;
         [SerializeField] private int numLv1;
         [SerializeField] private int numLv2;
         [SerializeField] private int numLv3;
+
         #endregion
 
         #region Publics
