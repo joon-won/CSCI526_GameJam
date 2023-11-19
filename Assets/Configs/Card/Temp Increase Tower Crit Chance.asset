@@ -13,9 +13,11 @@ MonoBehaviour:
   m_Name: Temp Increase Tower Crit Chance
   m_EditorClassIdentifier: 
   cardName: Crit Chance+
-  rank: 0
   cost: 5
-  description: 
+  descriptions:
+  - 0
+  - 1
+  - 2
   image: {fileID: 0}
   lv1Increase: 0.1
   lv2Increase: 0.2

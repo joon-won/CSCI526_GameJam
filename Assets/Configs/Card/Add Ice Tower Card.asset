@@ -13,9 +13,11 @@ MonoBehaviour:
   m_Name: Add Ice Tower Card
   m_EditorClassIdentifier: 
   cardName: Ice Tower+
-  rank: 0
   cost: 4
-  description: 
+  descriptions:
+  - 0
+  - 1
+  - 2
   image: {fileID: 0}
   config: {fileID: 11400000, guid: a7fae8a0445f9b84ab7a7060a509152d, type: 2}
   numLv1: 1

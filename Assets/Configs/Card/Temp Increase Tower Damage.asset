@@ -13,9 +13,11 @@ MonoBehaviour:
   m_Name: Temp Increase Tower Damage
   m_EditorClassIdentifier: 
   cardName: Damage+
-  rank: 0
   cost: 5
-  description: 
+  descriptions:
+  - 0
+  - 1
+  - 2
   image: {fileID: 0}
   lv1Increase: 0.5
   lv2Increase: 0.1

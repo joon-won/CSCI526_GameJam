@@ -16,17 +16,24 @@ namespace CSCI526GameJam {
 
         #region Fields
         [SerializeField] private CardConfig config;
+        [SerializeField] private Level level;
+        [SerializeField] private bool isCostHalved;
         #endregion
 
         #region Publics
+        public event Action OnLevelChanged;
+
         public CardConfig Config => config;
-        public int Cost => config.Cost;
+        public string Name => config.CardName;
+        public int Cost => isCostHalved ? config.Cost / 2 : config.Cost;
+        public Sprite Image => config.Image;
+        public Level CurrentLevel => level;
 
         public Card(CardConfig config) {
             this.config = config;
         }
 
-        public void Play(Level level) {
+        public void Play() {
             switch (level) {
                 case Level.One:
                     config.PlayLv1();
@@ -42,8 +49,22 @@ namespace CSCI526GameJam {
             }
         }
 
-        public string GetDescription(Level level) {
+        public string GetDescription() {
             return config.Descriptions[(int)level];
+        }
+
+        public void SetLevel(Level level) {
+            this.level = level;
+            OnLevelChanged?.Invoke();
+        }
+
+        public void HalveCost() {
+            isCostHalved = true;
+        }
+
+        public void Reset() {
+            level = Level.One;
+            isCostHalved = false;
         }
         #endregion
 

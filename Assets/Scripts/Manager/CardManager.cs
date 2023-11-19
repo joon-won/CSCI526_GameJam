@@ -104,10 +104,13 @@ namespace CSCI526GameJam {
         /// <param name="index">Index of the card to unselect. </param>
         public void Unselect(int index) {
             var card = hand[index];
-            if (selectedCards.Remove(card)) {
-                UpdatePattern();
-                OnCardUnselected?.Invoke(card);
+            if (!selectedCards.Remove(card)) {
+                Debug.LogWarning($"Trying to remove a non-existing card on hand. ");
+                return;
             }
+
+            UpdatePattern();
+            OnCardUnselected?.Invoke(card);
         }
 
         /// <summary>
@@ -130,90 +133,11 @@ namespace CSCI526GameJam {
         public void PlaySelected() {
             if (selectedCards.Count == 0) return;
 
-            var selected = selectedCards
-                .OrderBy(c => c.Cost)
-                .ToList();
+            var cost = selectedCards.Sum(x => x.Cost);
+            if (!Player.Instance.TryPay(cost)) return;
 
-            if (currentPattern == Pattern.None) return;
-
-            int xCost, yCost;
-            var finalCost = 0;
-            switch (currentPattern) {
-                case Pattern.X:
-                    if (!Player.Instance.TryPay(selected[0].Cost)) return;
-
-                    selected[0].Play(Card.Level.One);
-                    break;
-
-                case Pattern.XX:
-                    if (!Player.Instance.TryPay(selected[0].Cost * 2)) return;
-
-                    selected[0].Play(Card.Level.Two);
-                    selected[1].Play(Card.Level.Two);
-                    break;
-
-                case Pattern.XXXY:
-                    // XXXY
-                    if (selected[0].Cost == selected[1].Cost) {
-                        xCost = selected[0].Cost;
-                        yCost = selected[3].Cost;
-                    }
-                    // YXXX
-                    else {
-                        xCost = selected[1].Cost;
-                        yCost = selected[0].Cost;
-                    }
-                    finalCost = xCost * 3 + yCost / 2;
-                    if (!Player.Instance.TryPay(finalCost)) return;
-
-                    selected[0].Play(Card.Level.One);
-                    selected[1].Play(Card.Level.One);
-                    selected[2].Play(Card.Level.One);
-                    selected[3].Play(Card.Level.One);
-                    break;
-
-                case Pattern.XXXYY:
-                    // XXXYY
-                    if (selected[1].Cost == selected[2].Cost) {
-                        xCost = selected[0].Cost;
-                        yCost = selected[3].Cost;
-                    }
-                    // YYXXX
-                    else {
-                        xCost = selected[2].Cost;
-                        yCost = selected[0].Cost;
-                    }
-                    finalCost = xCost * 3 + yCost;
-                    if (!Player.Instance.TryPay(finalCost)) return;
-
-                    selected[0].Play(Card.Level.One);
-                    selected[1].Play(Card.Level.One);
-                    selected[2].Play(Card.Level.One);
-                    selected[3].Play(Card.Level.Two);
-                    selected[4].Play(Card.Level.Two);
-                    break;
-
-                case Pattern.XXXX:
-                    if (!Player.Instance.TryPay(selected[0].Cost * 4)) return;
-
-                    selected[0].Play(Card.Level.Three);
-                    selected[1].Play(Card.Level.Three);
-                    selected[2].Play(Card.Level.Three);
-                    selected[3].Play(Card.Level.Three);
-                    break;
-
-                case Pattern.ABCD:
-                    finalCost = selected.Sum(c => c.Cost);
-                    if (!Player.Instance.TryPay(finalCost)) return;
-
-                    selected.ForEach(c => c.Play(Card.Level.Two));
-                    break;
-
-                default:
-                    Debug.LogWarning($"Undefined pattern {currentPattern}");
-                    return;
-            }
-
+            selectedCards.ForEach(x => x.Play());
+            
             // For analytics. 
             foreach (var card in selectedCards) {
                 if (cardConfigToUsageNum.TryGetValue(card.Config, out var num)) {
@@ -223,7 +147,6 @@ namespace CSCI526GameJam {
                 }
                 cardConfigToUsageNum[card.Config] = 1;
             }
-
 
             OnCardsPlayed?.Invoke(selectedCards);
             selectedCards.ForEach(x => hand.Remove(x));
@@ -293,20 +216,20 @@ namespace CSCI526GameJam {
         }
 
         private void UpdatePattern() {
+            hand.ForEach(x => x.Reset());
 
-            var cards = selectedCards
-                .Select(x => x.Config)
+            var selected = selectedCards
                 .OrderBy(c => c.Cost)
                 .ToList();
 
-            var n = cards.Count;
+            var n = selected.Count;
 
             var pattern = Pattern.None;
             // Check for ABCD
             if (n >= 4) {
                 var i = 1;
                 for (i = 1; i < n; i++) {
-                    if (cards[i].Cost != cards[i - 1].Cost + 1) break;
+                    if (selected[i].Cost != selected[i - 1].Cost + 1) break;
                 }
                 if (i == n) pattern = Pattern.ABCD;
             }
@@ -318,21 +241,21 @@ namespace CSCI526GameJam {
                     break;
 
                 case 2:
-                    pattern = cards[0].Cost == cards[1].Cost ? Pattern.XX : Pattern.None;
+                    pattern = selected[0].Cost == selected[1].Cost ? Pattern.XX : Pattern.None;
                     break;
 
                 case 4:
-                    if (cards.Count(c => c.Cost == cards[0].Cost) == 4) pattern = Pattern.XXXX;
-                    if (cards.Count(c => c.Cost == cards[0].Cost) == 3
-                        || cards.Count(c => c.Cost == cards[n - 1].Cost) == 3) pattern = Pattern.XXXY;
+                    if (selected.Count(c => c.Cost == selected[0].Cost) == 4) pattern = Pattern.XXXX;
+                    if (selected.Count(c => c.Cost == selected[0].Cost) == 3
+                        || selected.Count(c => c.Cost == selected[n - 1].Cost) == 3) pattern = Pattern.XXXY;
 
                     break;
 
                 case 5:
-                    if (cards.Count(c => c.Cost == cards[0].Cost) == 3
-                        && cards.Count(c => c.Cost == cards[n - 1].Cost) == 2
-                        || cards.Count(c => c.Cost == cards[n - 1].Cost) == 3
-                        && cards.Count(c => c.Cost == cards[0].Cost) == 2) pattern = Pattern.XXXYY;
+                    if (selected.Count(c => c.Cost == selected[0].Cost) == 3
+                        && selected.Count(c => c.Cost == selected[n - 1].Cost) == 2
+                        || selected.Count(c => c.Cost == selected[n - 1].Cost) == 3
+                        && selected.Count(c => c.Cost == selected[0].Cost) == 2) pattern = Pattern.XXXYY;
 
                     break;
 
@@ -341,6 +264,68 @@ namespace CSCI526GameJam {
             }
 
             currentPattern = pattern;
+            if (currentPattern == Pattern.None) return;
+
+            switch (currentPattern) {
+                case Pattern.X:
+                    selected[0].SetLevel(Card.Level.One);
+                    break;
+
+                case Pattern.XX:
+                    selected[0].SetLevel(Card.Level.Two);
+                    selected[1].SetLevel(Card.Level.Two);
+                    break;
+
+                case Pattern.XXXY:
+                    // XXXY
+                    if (selected[0].Cost == selected[1].Cost) {
+                        selected[3].HalveCost();
+                    }
+                    // YXXX
+                    else {
+                        selected[0].HalveCost();
+                    }
+
+                    selected[0].SetLevel(Card.Level.One);
+                    selected[1].SetLevel(Card.Level.One);
+                    selected[2].SetLevel(Card.Level.One);
+                    selected[3].SetLevel(Card.Level.One);
+                    break;
+
+                case Pattern.XXXYY:
+                    // XXXYY
+                    if (selected[1].Cost == selected[2].Cost) {
+                        selected[3].HalveCost();
+                        selected[4].HalveCost();
+                    }
+                    // YYXXX
+                    else {
+                        selected[0].HalveCost();
+                        selected[1].HalveCost();
+                    }
+
+                    selected[0].SetLevel(Card.Level.One);
+                    selected[1].SetLevel(Card.Level.One);
+                    selected[2].SetLevel(Card.Level.One);
+                    selected[3].SetLevel(Card.Level.Two);
+                    selected[4].SetLevel(Card.Level.Two);
+                    break;
+
+                case Pattern.XXXX:
+                    selected[0].SetLevel(Card.Level.Three);
+                    selected[1].SetLevel(Card.Level.Three);
+                    selected[2].SetLevel(Card.Level.Three);
+                    selected[3].SetLevel(Card.Level.Three);
+                    break;
+
+                case Pattern.ABCD:
+                    selected.ForEach(c => c.SetLevel(Card.Level.Two));
+                    break;
+
+                default:
+                    Debug.LogWarning($"Undefined pattern {currentPattern}");
+                    return;
+            }
         }
         #endregion
 

@@ -31,10 +31,12 @@ namespace CSCI526GameJam {
 
         private void Select(Card card) {
             GetUICard(card).GetComponent<Image>().color = Color.red;
+            uiCards.ForEach(x => x.Refresh());
         }
 
         private void Unselect(Card card) {
             GetUICard(card).GetComponent<Image>().color = Color.white;
+            uiCards.ForEach(x => x.Refresh());
         }
 
         private void Play(List<Card> cards) {

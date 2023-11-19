@@ -9,8 +9,13 @@ namespace CSCI526GameJam {
     public class TestCard : MonoBehaviour {
 
         #region Fields
+        [MandatoryFields]
         [SerializeField] private TMP_Text costText;
         [SerializeField] private TMP_Text nameText;
+        [SerializeField] private TMP_Text descriptionText;
+        [SerializeField] private Image image;
+
+        [ComputedFields]
         [SerializeField] private Card card;
         #endregion
 
@@ -19,9 +24,14 @@ namespace CSCI526GameJam {
 
         public void Init(Card card) {
             this.card = card;
+            Refresh();
+        }
 
-            costText.text = "Cost: " + card.Config.Cost.ToString();
-            nameText.text = card.Config.CardName;
+        public void Refresh() {
+            costText.text = card.Cost.ToString();
+            nameText.text = card.Name;
+            descriptionText.text = card.GetDescription();
+            image.sprite = card.Image;
         }
         #endregion
 

@@ -13,9 +13,11 @@ MonoBehaviour:
   m_Name: Temp Draw Card
   m_EditorClassIdentifier: 
   cardName: Draw Card
-  rank: 0
   cost: 3
-  description: 
+  descriptions:
+  - 0
+  - 1
+  - 2
   image: {fileID: 0}
   lv1NumCard: 1
   lv2NumCard: 2

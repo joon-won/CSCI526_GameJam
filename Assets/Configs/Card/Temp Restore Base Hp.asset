@@ -13,9 +13,11 @@ MonoBehaviour:
   m_Name: Temp Restore Base Hp
   m_EditorClassIdentifier: 
   cardName: HP+
-  rank: 0
   cost: 3
-  description: 
+  descriptions:
+  - 0
+  - 1
+  - 2
   image: {fileID: 0}
   lv1Heal: 2
   lv2Heal: 5

@@ -13,9 +13,11 @@ MonoBehaviour:
   m_Name: Add Gun Tower Card
   m_EditorClassIdentifier: 
   cardName: Gun Tower+
-  rank: 0
   cost: 2
-  description: 
+  descriptions:
+  - 0
+  - 1
+  - 2
   image: {fileID: 0}
   config: {fileID: 11400000, guid: 4d28b0091e746f24da518fceee136802, type: 2}
   numLv1: 1
