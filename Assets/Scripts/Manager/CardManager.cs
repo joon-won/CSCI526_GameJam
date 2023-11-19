@@ -43,6 +43,7 @@ namespace CSCI526GameJam {
         public event Action<List<Card>> OnCardsPlayed;
 
         public Pattern CurrentPattern => currentPattern;
+        public int CurrentCost => selectedCards.Sum(x => x.Cost);
         public Dictionary<CardConfig, int> CardConfigToUsageNum => cardConfigToUsageNum;
 
         /// <summary>
