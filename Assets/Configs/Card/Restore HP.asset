@@ -9,17 +9,16 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3f5f40d4155014f6d9d3176a33df599a, type: 3}
-  m_Name: Add Wall Card
+  m_Script: {fileID: 11500000, guid: dd5c618d9b6d3a94d88cd9101b22c1ea, type: 3}
+  m_Name: Restore HP
   m_EditorClassIdentifier: 
-  cardName: Wall+
-  cost: 1
+  cardName: Restore HP
+  cost: 3
   descriptions:
-  - 0
-  - 1
-  - 2
+  - 'Restore 2 HP. '
+  - 'Restore 5 HP. '
+  - 'Restore 15 HP. '
   image: {fileID: 0}
-  config: {fileID: 11400000, guid: 512ff0b50bbfeef4ea79999559f67d82, type: 2}
-  numLv1: 2
-  numLv2: 4
-  numLv3: 8
+  lv1Heal: 2
+  lv2Heal: 5
+  lv3Heal: 15

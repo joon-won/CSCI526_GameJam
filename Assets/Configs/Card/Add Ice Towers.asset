@@ -9,16 +9,17 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 81f116acacc1d469f9545f0ce7f86723, type: 3}
-  m_Name: Temp Increase Tower Crit Chance
+  m_Script: {fileID: 11500000, guid: 64518d8845eb6428ca1003757d03aa56, type: 3}
+  m_Name: Add Ice Towers
   m_EditorClassIdentifier: 
-  cardName: Crit Chance+
-  cost: 5
+  cardName: Add Ice Towers
+  cost: 4
   descriptions:
-  - 0
-  - 1
-  - 2
+  - 'Add 1 ice tower. '
+  - 'Add 3 ice towers. '
+  - 'Add 6 ice towers. '
   image: {fileID: 0}
-  lv1Increase: 0.1
-  lv2Increase: 0.2
-  lv3Increase: 0.4
+  config: {fileID: 11400000, guid: a7fae8a0445f9b84ab7a7060a509152d, type: 2}
+  numLv1: 1
+  numLv2: 3
+  numLv3: 6

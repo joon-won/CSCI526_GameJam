@@ -9,17 +9,17 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b41dab5d92aa94e76852fd7cc5d3159c, type: 3}
-  m_Name: Add Gun Tower Card
+  m_Script: {fileID: 11500000, guid: 3f5f40d4155014f6d9d3176a33df599a, type: 3}
+  m_Name: Add Walls
   m_EditorClassIdentifier: 
-  cardName: Gun Tower+
-  cost: 2
+  cardName: Add Walls
+  cost: 1
   descriptions:
-  - 0
-  - 1
-  - 2
+  - 'Add 2 walls. '
+  - 'Add 4 walls. '
+  - 'Add 8 walls. '
   image: {fileID: 0}
-  config: {fileID: 11400000, guid: 4d28b0091e746f24da518fceee136802, type: 2}
-  numLv1: 1
-  numLv2: 3
-  numLv3: 6
+  config: {fileID: 11400000, guid: 512ff0b50bbfeef4ea79999559f67d82, type: 2}
+  numLv1: 2
+  numLv2: 4
+  numLv3: 8

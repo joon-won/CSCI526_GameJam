@@ -9,16 +9,16 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b74d57b0fa82d5044b76ddd7f59e87e2, type: 3}
-  m_Name: Temp Draw Card
+  m_Script: {fileID: 11500000, guid: f47d0d5c9fab22341b1d63358fa66e22, type: 3}
+  m_Name: Increase Damage
   m_EditorClassIdentifier: 
-  cardName: Draw Card
-  cost: 3
+  cardName: Increase Damage
+  cost: 5
   descriptions:
-  - 0
-  - 1
-  - 2
+  - Increase 5% damage.
+  - Increase 10% damage.
+  - Increase 15% damage.
   image: {fileID: 0}
-  lv1NumCard: 1
-  lv2NumCard: 2
-  lv3NumCard: 4
+  lv1Increase: 0.05
+  lv2Increase: 0.1
+  lv3Increase: 0.15

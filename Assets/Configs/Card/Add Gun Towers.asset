@@ -9,16 +9,17 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: dd5c618d9b6d3a94d88cd9101b22c1ea, type: 3}
-  m_Name: Temp Restore Base Hp
+  m_Script: {fileID: 11500000, guid: b41dab5d92aa94e76852fd7cc5d3159c, type: 3}
+  m_Name: Add Gun Towers
   m_EditorClassIdentifier: 
-  cardName: HP+
-  cost: 3
+  cardName: Add Gun Towers
+  cost: 2
   descriptions:
-  - 0
-  - 1
-  - 2
+  - 'Add 1 gun tower. '
+  - 'Add 3 gun towers. '
+  - 'Add 6 gun towers. '
   image: {fileID: 0}
-  lv1Heal: 2
-  lv2Heal: 5
-  lv3Heal: 15
+  config: {fileID: 11400000, guid: 4d28b0091e746f24da518fceee136802, type: 2}
+  numLv1: 1
+  numLv2: 3
+  numLv3: 6

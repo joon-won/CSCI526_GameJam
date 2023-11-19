@@ -10,14 +10,14 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: d1d019fd95da3074fb3f7cd72ffede7a, type: 3}
-  m_Name: Add Buff Tower Card
+  m_Name: Add Buff Towers
   m_EditorClassIdentifier: 
-  cardName: Buff Tower+
+  cardName: Add Buff Towers
   cost: 2
   descriptions:
-  - 0
-  - 1
-  - 2
+  - 'Add 1 buff tower. '
+  - 'Add 3 buff towers. '
+  - 'Add 6 buff towers. '
   image: {fileID: 0}
   config: {fileID: 11400000, guid: bd915f10ef27e8b48b074e4284a75b2d, type: 2}
   numLv1: 1
