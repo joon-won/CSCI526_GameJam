@@ -7,8 +7,12 @@ namespace CSCI526GameJam {
     public abstract class Enemy : Buffable {
 
         #region Fields
+        [ClassHeader(typeof(Enemy))]
+        
+        [MandatoryFields]
         [SerializeField] protected EnemyConfig config;
 
+        [ComputedFields]
         [SerializeField] protected Numeric attackDamage;
         [SerializeField] private Numeric moveSpeed;
         [SerializeField] private float currentHitPoint;
@@ -120,8 +124,14 @@ namespace CSCI526GameJam {
             while (index < pathSpots.Count) {
                 yield return null;
 
+                var targetPos = pathSpots[index].Position;
+                
+                var xDiff = (targetPos - transform.position).x;
+                if (xDiff > 0f) spriteRenderer.flipX = true;
+                else if (xDiff < 0f) spriteRenderer.flipX = false;
+                
                 var step = moveSpeed * Time.deltaTime;
-                transform.position = Vector3.MoveTowards(transform.position, pathSpots[index].Position, step);
+                transform.position = Vector3.MoveTowards(transform.position, targetPos, step);
                 distance -= step;
                 if (distance <= 0f) {
                     index++;
@@ -141,6 +151,5 @@ namespace CSCI526GameJam {
 
             pathRoutine = null;
         }
-
     }
 }

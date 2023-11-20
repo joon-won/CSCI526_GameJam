@@ -3,6 +3,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Tilemaps;
+using Random = UnityEngine.Random;
+using System.Linq;
 
 namespace CSCI526GameJam {
     public class GameplayTilemap : MonoBehaviour {
@@ -10,12 +12,12 @@ namespace CSCI526GameJam {
         #region Fields
         [MandatoryFields]
         [SerializeField] private Tilemap tilemap;
-        [SerializeField] private Tile baseTile;
+        [SerializeField] private TileInfo[] baseTileInfos;
         #endregion
 
         #region Publics
         public void Draw(Spot spot) {
-            Tile tile = baseTile;
+            var tile = GetRandomTile();
             var index = spot.Index;
             //var spread = GetSpread(index.x, index.y);
             //if (spread) {
@@ -80,9 +82,26 @@ namespace CSCI526GameJam {
         #endregion
 
         #region Internals
+        private Tile GetRandomTile() {
+            var totalChance = baseTileInfos.Sum(x => x.Chance);
+            var randomValue = Random.Range(0f, totalChance);
+
+            foreach (var tileInfo in baseTileInfos) {
+                if (randomValue <= tileInfo.Chance) return tileInfo.Tile;
+                randomValue -= tileInfo.Chance;
+            }
+            return baseTileInfos[0].Tile;
+        }
         #endregion
 
         #region Unity Methods
         #endregion
+
+        [Serializable]
+        private struct TileInfo {
+            public Tile Tile;
+            [Range(0f, 1f)]
+            public float Chance;
+        }
     }
 }
