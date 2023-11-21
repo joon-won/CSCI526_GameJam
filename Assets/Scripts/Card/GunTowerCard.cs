@@ -10,16 +10,18 @@ namespace CSCI526GameJam
         #region Fields
         [ClassHeader(typeof(GunTowerCard))]
         [SerializeField] private TowerConfig config;
-        [SerializeField] private int numLv1;
-        [SerializeField] private int numLv2;
         [SerializeField] private int numLv3;
+        [SerializeField] private int numLv2;
+        [SerializeField] private int numLv1;
+
+
 
         #endregion
 
         #region Publics
-        public override void PlayLv1()
+        public override void PlayLv3()
         {
-            Player.Instance.AddTower(config, numLv1);
+            Player.Instance.AddTower(config, numLv3);
         }
 
         public override void PlayLv2()
@@ -27,10 +29,11 @@ namespace CSCI526GameJam
             Player.Instance.AddTower(config, numLv2);
         }
 
-        public override void PlayLv3()
+        public override void PlayLv1()
         {
-            Player.Instance.AddTower(config, numLv3);
+            Player.Instance.AddTower(config, numLv1);
         }
+
         #endregion
 
         #region Internals
