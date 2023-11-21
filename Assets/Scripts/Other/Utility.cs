@@ -16,6 +16,18 @@ public enum AssetType {
     ScriptableObject,
 }
 
+public static class ApplicationHelper {
+    public static void Quit() {
+#if UNITY_EDITOR
+        UnityEditor.EditorApplication.isPlaying = false;
+#elif UNITY_STANDALONE
+        Application.Quit();
+#elif UNITY_WEBGL
+        Application.OpenURL("about:blank");
+#endif
+    }
+}
+
 public static class Utility {
 
     /// <summary>
@@ -89,7 +101,7 @@ public static class Utility {
             action(item);
         }
     }
-    
+
     /// <summary>
     /// Sets the visibility and interactivity of the CanvasGroup.
     /// </summary>

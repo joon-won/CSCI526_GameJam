@@ -15,11 +15,7 @@ namespace CSCI526GameJam {
         }
 
         public void Quit() {
-#if UNITY_EDITOR
-            UnityEditor.EditorApplication.isPlaying = false;
-#else
-            Application.Quit();
-#endif
+            ApplicationHelper.Quit();
         }
         #endregion
 
