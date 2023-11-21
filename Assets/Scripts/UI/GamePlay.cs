@@ -8,7 +8,7 @@ namespace CSCI526GameJam
     {   
         public void GameStart()
         {
-            SceneManager.LoadScene("GamePlay");
+            SceneManager.UnloadSceneAsync("HelpPanel");
         }
     }
 }

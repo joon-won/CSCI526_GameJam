@@ -9,7 +9,7 @@ namespace CSCI526GameJam
     {
         public void HelpPage()
         {
-            SceneManager.LoadScene("HelpPanel");
+            SceneManager.LoadScene("HelpPanel",LoadSceneMode.Additive);
         }
     }
 }
