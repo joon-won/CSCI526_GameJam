@@ -1,10 +1,14 @@
-# CSCI526 RogueStronghold - Beta Version
+# CSCI526 RogueStronghold - Gold Version
 
 ## Introduction
 
 Welcome to the captivating realm of RogueStronghold, where you are the stalwart defender and master builder of towers. Your mission is nothing short of monumental – to thwart the relentless onslaught of menacing monsters before they breach the sanctity of your stronghold. In this battle, no expense is too great, and no tactic is too extreme. You must harness every resource at your disposal to delay the inexorable advance of the enemy horde.
 
 When the battle rages, you will wield the power to design your own maze, fortified with strategic tower placement and sturdy walls. Each time, you will have an option to build from three different buildings that are randomly chosen. Once you build one building, the option will be replenished with randomly chosen buildings. Sometimes, you might only have walls to defend your base. However, you will need towers to crush the enemies. Will you be able to pull the great towers? That depends on the player’s luck! Players should also be careful with the maze building, as enemies can come out of nowhere, and try to raid your base! In RogueStronghold, you will need to be creative, intuitive, and think out of the box. Expect the worst, prepare to defend your base using every single resource you have in your hand.
+
+RogueStronghold is a Tower Defense game with randomized elements where players must find the best strategy each time utilizing available resources. With support of a unique card system, players can build mazes to counter unseen enemies.
+
+In RogueStronghold, your objective is to master the art of tower defense and strategic maze building. One-way door type decisions will be required, do not look back. Defend your stronghold against relentless waves of monsters by carefully placing towers, walls, and utilizing your resources wisely. Your goal is to withstand the enemy onslaught and see how long you can protect your stronghold. Test your luck in building the perfect towers and craft the ultimate defense in this thrilling and challenging battle for survival.
 
 ## Card Features:
 Card cost: 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 15, 20 
@@ -28,9 +32,10 @@ At least 4 consecutive, such as 345678: Upgrade to lv. 2
 
 ## Useful Links
 - [Game Design Document](https://docs.google.com/document/d/19GBW6DUg2nxx7mbpawbeLZM2G1hNHMcoKJdMVOQFWxQ/edit#heading=h.a2s9dmlvwxp2)
-- [Beta Play Link](https://)
+- [Gold Play Link](https://github.com/joon-won/RogueStrongholds_Gold)
 
 ## Old Resources
 - [Prototype Game Design Document](https://docs.google.com/document/d/1jXbeThlcIHKCVpYC_C7eyhcrONmBhVtk/edit?usp=sharing&ouid=111815505834149310152&rtpof=true&sd=true)
 - [Prototype Play Demo Link](https://)
 - [Alpha Play Link](https://joon-won.github.io/CSCI526_RogueStrongholds_Alpha_Final/)
+- [Beta Play Link](https://github.com/joon-won/CSCI526_RogueStrongholds_Beta)
