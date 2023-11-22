@@ -1166,7 +1166,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 245418683}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e91512495645f421f8ce1e0ee9d8489d, type: 3}
+  m_Script: {fileID: 11500000, guid: f2ce5b7a9f53d482aa9cd7be1295a79e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1 &289778500
@@ -1906,7 +1906,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 1642049935}
-        m_TargetAssemblyTypeName: CSCI526GameJam.GamePlay, Assembly-CSharp
+        m_TargetAssemblyTypeName: CSCI526GameJam.HelpPanel, Assembly-CSharp
         m_MethodName: GameStart
         m_Mode: 1
         m_Arguments:
@@ -1964,7 +1964,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 439174311}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: afc517d2ee61d4169936fa3225ac67e4, type: 3}
+  m_Script: {fileID: 11500000, guid: f2ce5b7a9f53d482aa9cd7be1295a79e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1 &440650874
@@ -2014,7 +2014,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 440650874}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e91512495645f421f8ce1e0ee9d8489d, type: 3}
+  m_Script: {fileID: 11500000, guid: f2ce5b7a9f53d482aa9cd7be1295a79e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1 &472000285
@@ -4210,7 +4210,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 1802582272}
-        m_TargetAssemblyTypeName: CSCI526GameJam.GamePlay, Assembly-CSharp
+        m_TargetAssemblyTypeName: CSCI526GameJam.HelpPanel, Assembly-CSharp
         m_MethodName: GameStart
         m_Mode: 1
         m_Arguments:
@@ -5263,6 +5263,7 @@ GameObject:
   - component: {fileID: 1170576181}
   - component: {fileID: 1170576180}
   - component: {fileID: 1170576179}
+  - component: {fileID: 1170576182}
   m_Layer: 5
   m_Name: ExitBtn
   m_TagString: Untagged
@@ -5336,7 +5337,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 440650876}
-        m_TargetAssemblyTypeName: CSCI526GameJam.GamePlay, Assembly-CSharp
+        m_TargetAssemblyTypeName: CSCI526GameJam.HelpPanel, Assembly-CSharp
         m_MethodName: GameStart
         m_Mode: 1
         m_Arguments:
@@ -5385,6 +5386,18 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1170576177}
   m_CullTransparentMesh: 1
+--- !u!114 &1170576182
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1170576177}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f2ce5b7a9f53d482aa9cd7be1295a79e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1173811139
 GameObject:
   m_ObjectHideFlags: 0
@@ -6029,7 +6042,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 1322805146}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e91512495645f421f8ce1e0ee9d8489d, type: 3}
+  m_Script: {fileID: 11500000, guid: f2ce5b7a9f53d482aa9cd7be1295a79e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1 &1331142604
@@ -6330,7 +6343,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 1322805148}
-        m_TargetAssemblyTypeName: CSCI526GameJam.GamePlay, Assembly-CSharp
+        m_TargetAssemblyTypeName: CSCI526GameJam.HelpPanel, Assembly-CSharp
         m_MethodName: GameStart
         m_Mode: 1
         m_Arguments:
@@ -8215,7 +8228,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 1642049933}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e91512495645f421f8ce1e0ee9d8489d, type: 3}
+  m_Script: {fileID: 11500000, guid: f2ce5b7a9f53d482aa9cd7be1295a79e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1 &1643477643
@@ -8230,6 +8243,7 @@ GameObject:
   - component: {fileID: 1643477647}
   - component: {fileID: 1643477646}
   - component: {fileID: 1643477645}
+  - component: {fileID: 1643477648}
   m_Layer: 5
   m_Name: ExitBtn
   m_TagString: Untagged
@@ -8302,8 +8316,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 2014818566}
-        m_TargetAssemblyTypeName: CSCI526GameJam.GamePlay, Assembly-CSharp
+      - m_Target: {fileID: 1643477648}
+        m_TargetAssemblyTypeName: CSCI526GameJam.HelpPanel, Assembly-CSharp
         m_MethodName: GameStart
         m_Mode: 1
         m_Arguments:
@@ -8352,6 +8366,18 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1643477643}
   m_CullTransparentMesh: 1
+--- !u!114 &1643477648
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1643477643}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f2ce5b7a9f53d482aa9cd7be1295a79e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1651028643
 GameObject:
   m_ObjectHideFlags: 0
@@ -8881,7 +8907,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 1802582270}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e91512495645f421f8ce1e0ee9d8489d, type: 3}
+  m_Script: {fileID: 11500000, guid: f2ce5b7a9f53d482aa9cd7be1295a79e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1 &1856433111
@@ -9662,7 +9688,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 245418685}
-        m_TargetAssemblyTypeName: CSCI526GameJam.GamePlay, Assembly-CSharp
+        m_TargetAssemblyTypeName: CSCI526GameJam.HelpPanel, Assembly-CSharp
         m_MethodName: GameStart
         m_Mode: 1
         m_Arguments:
@@ -9758,7 +9784,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 2014818564}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e91512495645f421f8ce1e0ee9d8489d, type: 3}
+  m_Script: {fileID: 11500000, guid: f2ce5b7a9f53d482aa9cd7be1295a79e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1 &2021033122
