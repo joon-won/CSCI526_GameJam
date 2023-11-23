@@ -61,7 +61,12 @@ namespace CSCI526GameJam {
             player = Player.Instance;
             cardManager.OnCardSelected += OnCardSelectedHandler;
             cardManager.OnCardUnselected += OnCardUnselectedHandler;
-            playButton.onClick.AddListener(() => cardManager.PlaySelected());
+            playButton.onClick.AddListener(
+                    () => {
+                        cardManager.PlaySelected();
+                        gameObject.SetActive(false);
+                    }
+                );
         }
         #endregion
     }
