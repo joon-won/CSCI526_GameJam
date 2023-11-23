@@ -20,6 +20,7 @@ namespace CSCI526GameJam {
         [SerializeField] private float playAnimDuration;
         [SerializeField] private float playOffsetY;
 
+        [SerializeField] private Color selectedColor;
         [SerializeField] private Color costRegularColor;
         [SerializeField] private Color costReducedColor;
         [SerializeField] private Color[] levelColors;
@@ -92,13 +93,11 @@ namespace CSCI526GameJam {
         }
 
         public void Select() {
-            body.GetComponent<Image>().color = Color.red;
-
+            body.GetComponent<Image>().color = selectedColor;
         }
 
         public void UnSelect() {
             body.GetComponent<Image>().color = Color.white;
-
         }
 
         public void Refresh() {

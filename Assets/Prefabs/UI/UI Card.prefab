@@ -376,9 +376,9 @@ GameObject:
   - component: {fileID: 4887286450290849651}
   - component: {fileID: 6316024417927124495}
   - component: {fileID: 2659397024918005644}
-  - component: {fileID: -2718466218940826151}
   - component: {fileID: 378335565475878577}
   - component: {fileID: 8137548957223281102}
+  - component: {fileID: -2718466218940826151}
   m_Layer: 5
   m_Name: UI Card
   m_TagString: Untagged
@@ -512,42 +512,6 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
---- !u!114 &-2718466218940826151
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1549715394503146631}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 35240a6225d081a48ac4ac9a19e22783, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  startAnimDuration: 1
-  startScale: 0.5
-  playAnimDuration: 1
-  playOffsetY: 50
-  costRegularColor: {r: 0.99607843, g: 0.8666667, b: 0.36862746, a: 1}
-  costReducedColor: {r: 0.41925037, g: 1, b: 0.3150943, a: 1}
-  levelColors:
-  - {r: 0.9960785, g: 0.86666673, b: 0.36862746, a: 1}
-  - {r: 0.26817372, g: 0.8773585, b: 0.8773585, a: 1}
-  - {r: 0.8396226, g: 0.25381792, b: 0.22495545, a: 1}
-  costIcon: {fileID: 9050721005583415051}
-  levelIcon: {fileID: 87717746259892327}
-  imageBackground: {fileID: 2363376442352865747}
-  costText: {fileID: 8015905487472077178}
-  levelText: {fileID: 6415368985067074282}
-  nameText: {fileID: 7080276911624472160}
-  descriptionText: {fileID: 2136814131242282717}
-  image: {fileID: 7019330946579883525}
-  button: {fileID: 6316024417927124495}
-  body: {fileID: 57602776406024781}
-  card:
-    config: {fileID: 0}
-    level: 0
-    isCostHalved: 0
 --- !u!223 &378335565475878577
 Canvas:
   m_ObjectHideFlags: 0
@@ -586,6 +550,43 @@ MonoBehaviour:
   m_BlockingMask:
     serializedVersion: 2
     m_Bits: 1975
+--- !u!114 &-2718466218940826151
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1549715394503146631}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 35240a6225d081a48ac4ac9a19e22783, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  startAnimDuration: 1
+  startScale: 0.5
+  playAnimDuration: 1
+  playOffsetY: 50
+  selectedColor: {r: 0, g: 0.754717, b: 0.04271975, a: 1}
+  costRegularColor: {r: 0.99607843, g: 0.8666667, b: 0.36862746, a: 1}
+  costReducedColor: {r: 0.41925037, g: 1, b: 0.3150943, a: 1}
+  levelColors:
+  - {r: 0.9960785, g: 0.86666673, b: 0.36862746, a: 1}
+  - {r: 0.26817372, g: 0.8773585, b: 0.8773585, a: 1}
+  - {r: 0.8396226, g: 0.25381792, b: 0.22495545, a: 1}
+  costIcon: {fileID: 9050721005583415051}
+  levelIcon: {fileID: 87717746259892327}
+  imageBackground: {fileID: 2363376442352865747}
+  costText: {fileID: 8015905487472077178}
+  levelText: {fileID: 6415368985067074282}
+  nameText: {fileID: 7080276911624472160}
+  descriptionText: {fileID: 2136814131242282717}
+  image: {fileID: 7019330946579883525}
+  button: {fileID: 6316024417927124495}
+  body: {fileID: 57602776406024781}
+  card:
+    config: {fileID: 0}
+    level: 0
+    isCostHalved: 0
 --- !u!1 &3015054620647794258
 GameObject:
   m_ObjectHideFlags: 0
