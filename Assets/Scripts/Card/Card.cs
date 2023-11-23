@@ -25,6 +25,7 @@ namespace CSCI526GameJam {
 
         public CardConfig Config => config;
         public string Name => config.CardName;
+        public bool IsCostHalved => isCostHalved;
         public int Cost => isCostHalved ? config.Cost / 2 : config.Cost;
         public Sprite Image => config.Image;
         public Level CurrentLevel => level;

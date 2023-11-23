@@ -37,11 +37,13 @@ namespace CSCI526GameJam {
         #endregion
 
         #region Publics
-        public event Action<Card> OnCardInserted;
+        public event Action<Card[]> OnCardsInserted;
         public event Action<Card> OnCardSelected;
         public event Action<Card> OnCardUnselected;
-        public event Action<List<Card>> OnCardsPlayed;
+        public event Action<Card[]> OnCardsPlayed;
+        public event Action OnForceClearOnHand;
 
+        public int NumInDeck => deck.Count;
         public Pattern CurrentPattern => currentPattern;
         public int CurrentCost => selectedCards.Sum(x => x.Cost);
         public Dictionary<CardConfig, int> CardConfigToUsageNum => cardConfigToUsageNum;
@@ -79,13 +81,16 @@ namespace CSCI526GameJam {
                 return;
             }
 
+            var cards = new List<Card>();
             for (int i = 0; i < numCards; i++) {
-                if (deck.Count == 0) return;
+                if (deck.Count == 0) break;
 
-                var randIndex = Random.Range(0, deck.Count - 1);
-                InsertCard(deck[randIndex]);
-                deck.RemoveAt(randIndex);
+                var index = Random.Range(0, deck.Count);
+                cards.Add(deck[index]);
+                deck.RemoveAt(index);
             }
+
+            InsertCards(cards.ToArray());
         }
 
         /// <summary>
@@ -138,7 +143,7 @@ namespace CSCI526GameJam {
             if (!Player.Instance.TryPay(cost)) return;
 
             selectedCards.ForEach(x => x.Play());
-            
+
             // For analytics. 
             foreach (var card in selectedCards) {
                 if (cardConfigToUsageNum.TryGetValue(card.Config, out var num)) {
@@ -149,7 +154,7 @@ namespace CSCI526GameJam {
                 cardConfigToUsageNum[card.Config] = 1;
             }
 
-            OnCardsPlayed?.Invoke(selectedCards);
+            OnCardsPlayed?.Invoke(selectedCards.ToArray());
             selectedCards.ForEach(x => hand.Remove(x));
             selectedCards.Clear();
         }
@@ -160,11 +165,9 @@ namespace CSCI526GameJam {
                 deck.Add(new(config));
             }
 
-            OnCardsPlayed?.Invoke(hand);
+            OnForceClearOnHand?.Invoke();
             hand.Clear();
-            foreach (var config in tutorialConfig.OnHandCardsPreset) {
-                InsertCard(new(config));
-            }
+            InsertCards(tutorialConfig.OnHandCardsPreset.Select(x => new Card(x)).ToArray());
         }
 
         public void EndTutorial() {
@@ -176,7 +179,7 @@ namespace CSCI526GameJam {
                 }
             }
 
-            OnCardsPlayed?.Invoke(hand);
+            OnForceClearOnHand?.Invoke();
             hand.Clear();
         }
 
@@ -192,11 +195,18 @@ namespace CSCI526GameJam {
         #endregion
 
         #region Internals
+        [ContextMenu("Draw")]
         private void DrawOnNewRound() {
             DrawFromDeck(numDrawPerLevel); // TODO: alg instead
         }
 
-        private void InsertCard(Card card) {
+        private void InsertCards(Card[] cards) {
+            cards.ForEach(x => InsertToCorrectIndex(x));
+
+            OnCardsInserted?.Invoke(cards);
+        }
+
+        private void InsertToCorrectIndex(Card card) {
             var index = hand.FindLastIndex(c => c.Config == card.Config);
             if (index == -1) {
                 index = hand.FindIndex(c => c.Config.Cost > card.Config.Cost);
@@ -212,8 +222,6 @@ namespace CSCI526GameJam {
                 index++;
                 hand.Insert(index, card);
             }
-
-            OnCardInserted?.Invoke(card);
         }
 
         private void UpdatePattern() {
