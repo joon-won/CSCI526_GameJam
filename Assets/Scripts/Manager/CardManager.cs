@@ -46,6 +46,7 @@ namespace CSCI526GameJam {
         public int NumInDeck => deck.Count;
         public Pattern CurrentPattern => currentPattern;
         public int CurrentCost => selectedCards.Sum(x => x.Cost);
+        public int NumSelected => selectedCards.Count;
         public Dictionary<CardConfig, int> CardConfigToUsageNum => cardConfigToUsageNum;
 
         /// <summary>
@@ -138,6 +139,7 @@ namespace CSCI526GameJam {
         /// </summary>
         public void PlaySelected() {
             if (selectedCards.Count == 0) return;
+            if (currentPattern == Pattern.None) return;
 
             var cost = selectedCards.Sum(x => x.Cost);
             if (!Player.Instance.TryPay(cost)) return;
