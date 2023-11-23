@@ -10,6 +10,7 @@ namespace CSCI526GameJam {
         #region Fields
         [MandatoryFields]
         [SerializeField] private LayerMask blockerLayer;
+        [SerializeField] private Transform rangeIndicator;
 
         [ComputedFields]
         [SerializeField] private bool isPreviewing = false;
@@ -40,6 +41,9 @@ namespace CSCI526GameJam {
             spriteRenderer.sprite = tower.Config.Preview;
             cachedTower = tower;
 
+            rangeIndicator.gameObject.SetActive(true);
+            rangeIndicator.localScale = tower.Config.AttackRange * 2f * Vector3.one;
+
             Refresh();
         }
 
@@ -53,6 +57,7 @@ namespace CSCI526GameJam {
             cachedTower = null;
             cachedSpot = null;
             spriteRenderer.sprite = null;
+            rangeIndicator.gameObject.SetActive(false);
 
             OnCanceled?.Invoke();
         }
@@ -107,6 +112,13 @@ namespace CSCI526GameJam {
         private void Start() {
             MapManager.Instance.OnMouseSpotChanged += Refresh;
             Refresh();
+            CancelPreview();
+        }
+
+        private void OnDrawGizmos() {
+            if (cachedTower) {
+                Gizmos.DrawWireSphere(transform.position, cachedTower.Config.AttackRange);
+            }
         }
         #endregion
     }
