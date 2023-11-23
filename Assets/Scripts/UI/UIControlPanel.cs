@@ -23,10 +23,10 @@ namespace CSCI526GameJam
         void Update()
         {
             UpdateGoldsInfo();
-            wallNumber.text = "Build Wall(left"+Player.Instance.GetTowerNum(wallConfig).ToString()+")";
-            gunTowerNumber.text = "Build Gun Tower(left"+Player.Instance.GetTowerNum(gunTowerConfig).ToString()+")";
-            iceTowerNumber.text = "Build Ice Tower(left"+Player.Instance.GetTowerNum(iceTowerConfig).ToString()+")";
-            buffTowerNumber.text = "Build Buff Tower(left"+Player.Instance.GetTowerNum(buffTowerConfig).ToString()+")";
+            //wallNumber.text = "Build Wall(left"+Player.Instance.GetTowerNum(wallConfig).ToString()+")";
+            //gunTowerNumber.text = "Build Gun Tower(left"+Player.Instance.GetTowerNum(gunTowerConfig).ToString()+")";
+            //iceTowerNumber.text = "Build Ice Tower(left"+Player.Instance.GetTowerNum(iceTowerConfig).ToString()+")";
+            //buffTowerNumber.text = "Build Buff Tower(left"+Player.Instance.GetTowerNum(buffTowerConfig).ToString()+")";
         }
 
         private void UpdateGoldsInfo()
