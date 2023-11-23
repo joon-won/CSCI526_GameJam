@@ -83,18 +83,6 @@ namespace CSCI526GameJam {
             var path = new Path(MapManager.Instance.Spots[0, 0], TowerManager.Instance.PlayerBase.Spot, new() { spot });
             return path.GroundSpots.Count > 0;
         }
-        #endregion
-
-        #region Unity Methods
-        private void Awake() {
-            spriteRenderer = GetComponent<SpriteRenderer>();
-            isPreviewing = false;
-        }
-
-        private void Start() {
-            MapManager.Instance.OnMouseSpotChanged += Refresh;
-            Refresh();
-        }
 
         private void Refresh(Spot spot = null) {
             if (!isPreviewing) return;
@@ -107,6 +95,18 @@ namespace CSCI526GameJam {
             spriteRenderer.color = canBuild ? Color.white : Color.red;
 
             transform.position = cachedSpot.Position;
+        }
+        #endregion
+
+        #region Unity Methods
+        private void Awake() {
+            spriteRenderer = GetComponent<SpriteRenderer>();
+            isPreviewing = false;
+        }
+
+        private void Start() {
+            MapManager.Instance.OnMouseSpotChanged += Refresh;
+            Refresh();
         }
         #endregion
     }
