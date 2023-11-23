@@ -1,14 +1,16 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Security.Cryptography;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
 using DG.Tweening;
 using Sirenix.OdinInspector;
+using UnityEngine.EventSystems;
 
 namespace CSCI526GameJam {
-    public class UITowerButton : MonoBehaviour {
+    public class UITowerButton : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler {
 
         #region Fields
         [MandatoryFields]
@@ -20,10 +22,13 @@ namespace CSCI526GameJam {
 
         [Title("UI")]
         [SerializeField] private TowerConfig config;
+        
         [SerializeField] private Image icon;
         [SerializeField] private Button button;
         [SerializeField] private TMP_Text numText;
-
+        
+        [SerializeField] private RectTransform infoAnchor;
+        
         private Player player;
         private int prevNum;
 
@@ -72,5 +77,12 @@ namespace CSCI526GameJam {
             }
         }
         #endregion
+        public void OnPointerEnter(PointerEventData eventData) {
+            UIPopups.Instance.TowerInfo.Show(config, infoAnchor);
+        }
+        
+        public void OnPointerExit(PointerEventData eventData) {
+            UIPopups.Instance.TowerInfo.Hide();
+        }
     }
 }
