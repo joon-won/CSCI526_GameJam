@@ -23,8 +23,20 @@ public static class ApplicationHelper {
 #elif UNITY_STANDALONE
         Application.Quit();
 #elif UNITY_WEBGL
-        Application.OpenURL("about:blank");
+        
 #endif
+    }
+}
+
+public static class UIHelper {
+
+    /// <summary>
+    /// Sets the visibility and interactivity of the CanvasGroup.
+    /// </summary>
+    public static void Toggle(this CanvasGroup canvasGroup, bool isActive) {
+        canvasGroup.alpha = isActive ? 1f : 0f;
+        canvasGroup.interactable = isActive;
+        canvasGroup.blocksRaycasts = isActive;
     }
 }
 
@@ -100,15 +112,6 @@ public static class Utility {
         foreach (T item in collection) {
             action(item);
         }
-    }
-
-    /// <summary>
-    /// Sets the visibility and interactivity of the CanvasGroup.
-    /// </summary>
-    public static void Toggle(this CanvasGroup canvasGroup, bool isActive) {
-        canvasGroup.alpha = isActive ? 1f : 0f;
-        canvasGroup.interactable = isActive;
-        canvasGroup.blocksRaycasts = isActive;
     }
 
     public static void FollowMouse(this Transform target) {
