@@ -5,15 +5,22 @@ using UnityEngine;
 using TMPro;
 using UnityEngine.UI;
 using DG.Tweening;
+using Sirenix.OdinInspector;
 
 namespace CSCI526GameJam {
     public class UICard : MonoBehaviour {
 
         #region Fields
         [MandatoryFields]
-        [SerializeField] private float animDuration;
+        
+        [Title("Anim")]
+        [SerializeField] private float startAnimDuration;
         [SerializeField] private float startScale;
 
+        [SerializeField] private float playAnimDuration;
+        [SerializeField] private float playOffsetY;
+
+        [Title("UI")]
         [SerializeField] private TMP_Text costText;
         [SerializeField] private TMP_Text nameText;
         [SerializeField] private TMP_Text descriptionText;
@@ -31,6 +38,7 @@ namespace CSCI526GameJam {
         private Vector2 size;
 
         private Sequence startAnimSeq;
+        private Sequence playAnimSeq;
         #endregion
 
         #region Publics
@@ -45,20 +53,34 @@ namespace CSCI526GameJam {
             content.localScale = Vector3.one * startScale;
         }
 
-        public void PlayStartAnim(Vector3 startPos) {
+        public void DoStartAnim(Vector3 startPos) {
             startAnimSeq.Kill();
             startAnimSeq = DOTween.Sequence();
 
             canvasGroup.Toggle(true);
-            startAnimSeq.Join(layoutElement.DOPreferredSize(size, animDuration));
+            startAnimSeq.Join(layoutElement.DOPreferredSize(size, startAnimDuration).SetEase(Ease.OutQuad));
             content.position = startPos;
 
-            startAnimSeq.Join(content.DOLocalMove(Vector3.zero, animDuration).SetEase(Ease.OutQuad));
+            startAnimSeq.Join(content.DOLocalMove(Vector3.zero, startAnimDuration).SetEase(Ease.OutQuad));
             startAnimSeq.Join(
-                content.DOScale(Vector3.one, animDuration).SetEase(Ease.OutQuad)
+                content.DOScale(Vector3.one, startAnimDuration).SetEase(Ease.OutQuad)
                 .OnComplete(() => {
                     button.interactable = true;
                 }));
+        }
+
+        public void DoPlayAnim(Action onCompleted) {
+            playAnimSeq.Kill();
+            playAnimSeq = DOTween.Sequence();
+
+            canvasGroup.interactable = false;
+
+            playAnimSeq.Join(canvasGroup.DOFade(0f, playAnimDuration).SetEase(Ease.OutQuad));
+            playAnimSeq.Join(content.DOLocalMoveY(playOffsetY, playAnimDuration).SetEase(Ease.OutQuad));
+            playAnimSeq.Append(
+                layoutElement.DOPreferredSize(new(0f, size.y), playAnimDuration * 0.5f)
+                .SetEase(Ease.OutQuad)
+                .OnComplete(() => onCompleted?.Invoke()));
         }
 
         public void Select() {

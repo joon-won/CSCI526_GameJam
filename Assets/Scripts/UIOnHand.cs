@@ -21,6 +21,10 @@ namespace CSCI526GameJam {
         #endregion
 
         #region Publics
+        public void ForceClearUICards() {
+            uiCards.ForEach(x => Destroy(x.gameObject));
+            uiCards.Clear();
+        }
         #endregion
 
         #region Internals
@@ -46,7 +50,7 @@ namespace CSCI526GameJam {
 
             if (!card) yield break;
 
-            card.PlayStartAnim(cardAnimStart.position);
+            card.DoStartAnim(cardAnimStart.position);
         }
 
         private void Select(Card card) {
@@ -59,16 +63,21 @@ namespace CSCI526GameJam {
             uiCards.ForEach(x => x.Refresh());
         }
 
-        private void Play(List<Card> cards) {
+        private void Play(Card[] cards) {
             foreach (var card in cards) {
                 var uiCard = GetUICard(card);
                 if (!uiCard) {
                     Debug.LogWarning($"{card.Config.name} is not found in UI cards. ");
                     continue;
                 }
-                Destroy(uiCard.gameObject);
-                uiCards.Remove(uiCard);
+                uiCard.DoPlayAnim(() => {
+                    Destroy(uiCard.gameObject);
+                    uiCards.Remove(uiCard);
+                });
             }
+        }
+
+        private void Discard(Card[] cards) {
         }
 
         private UICard GetUICard(Card card) {
@@ -84,6 +93,7 @@ namespace CSCI526GameJam {
             CardManager.Instance.OnCardSelected += Select;
             CardManager.Instance.OnCardUnselected += Unselect;
             CardManager.Instance.OnCardsPlayed += Play;
+            CardManager.Instance.OnForceClearOnHand += ForceClearUICards;
         }
         #endregion
     }

@@ -40,7 +40,8 @@ namespace CSCI526GameJam {
         public event Action<Card[]> OnCardsInserted;
         public event Action<Card> OnCardSelected;
         public event Action<Card> OnCardUnselected;
-        public event Action<List<Card>> OnCardsPlayed;
+        public event Action<Card[]> OnCardsPlayed;
+        public event Action OnForceClearOnHand;
 
         public Pattern CurrentPattern => currentPattern;
         public int CurrentCost => selectedCards.Sum(x => x.Cost);
@@ -152,7 +153,7 @@ namespace CSCI526GameJam {
                 cardConfigToUsageNum[card.Config] = 1;
             }
 
-            OnCardsPlayed?.Invoke(selectedCards);
+            OnCardsPlayed?.Invoke(selectedCards.ToArray());
             selectedCards.ForEach(x => hand.Remove(x));
             selectedCards.Clear();
         }
@@ -163,7 +164,7 @@ namespace CSCI526GameJam {
                 deck.Add(new(config));
             }
 
-            OnCardsPlayed?.Invoke(hand);
+            OnForceClearOnHand?.Invoke();
             hand.Clear();
             InsertCards(tutorialConfig.OnHandCardsPreset.Select(x => new Card(x)).ToArray());
         }
@@ -177,7 +178,7 @@ namespace CSCI526GameJam {
                 }
             }
 
-            OnCardsPlayed?.Invoke(hand);
+            OnForceClearOnHand?.Invoke();
             hand.Clear();
         }
 
