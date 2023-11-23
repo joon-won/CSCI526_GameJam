@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using Random = UnityEngine.Random;
 using Sirenix.OdinInspector;
+using UnityEngine.EventSystems;
 
 namespace CSCI526GameJam {
     public class Player : MonoBehaviourSingleton<Player> {
@@ -16,6 +17,9 @@ namespace CSCI526GameJam {
         }
 
         #region Fields
+
+        public static bool IsMouseOverUI { get; private set; }
+
         [MandatoryFields]
         [SerializeField] private int initialGold;
 
@@ -154,6 +158,7 @@ namespace CSCI526GameJam {
         }
 
         private void PerformMode() {
+            if (IsMouseOverUI) return;
             if (isLocked) return;
 
             switch (mode) {
@@ -244,6 +249,7 @@ namespace CSCI526GameJam {
 
         // Set the json output to get the in game values.
         private void Update() {
+            IsMouseOverUI = EventSystem.current.IsPointerOverGameObject();
             hoveredTower = MapManager.Instance.MouseSpot.Tower;
         }
         #endregion
