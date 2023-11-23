@@ -79,12 +79,6 @@ namespace CSCI526GameJam {
 
         private void UpdateEnemyPaths() {
             foreach (var start in spawnSpotToWave.Keys.ToArray()) {
-                var path = spawnSpotToWave[start].Path;
-                if (path != null
-                    && path.GroundSpots[0].Index == start.Index
-                    && path.IsValid())
-                    continue;
-
                 spawnSpotToWave[start].GeneratePath(start);
             }
 
@@ -167,7 +161,8 @@ namespace CSCI526GameJam {
         }
 
         private void Start() {
-            Player.Instance.OnTowerPlaced += config => UpdateEnemyPaths();
+            Player.Instance.OnTowerPlaced += _ => UpdateEnemyPaths();
+            Player.Instance.OnTowerDemolished += _ => UpdateEnemyPaths();
         }
 
         private void OnDrawGizmos() {
@@ -194,7 +189,13 @@ namespace CSCI526GameJam {
             }
 
             public void GeneratePath(Spot startSpot) {
-                path = new(startSpot, TowerManager.Instance.PlayerBase.Spot);
+                var newPath = new Path(startSpot, TowerManager.Instance.PlayerBase.Spot);
+                if (path == null
+                    || !path.IsValid()
+                    || newPath.GroundSpots.Count < path.GroundSpots.Count
+                    || newPath.AirSpots.Count < path.AirSpots.Count) {
+                    path = newPath;
+                }
             }
 
             public EnemyConfig ExtractEnemy() {

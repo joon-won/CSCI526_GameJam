@@ -42,6 +42,7 @@ namespace CSCI526GameJam {
         public event Action<int> OnGoldChanged;
         public event Action<TowerConfig, int> OnTowerNumChanged;
         public event Action<TowerConfig> OnTowerPlaced;
+        public event Action<TowerConfig> OnTowerDemolished; 
 
         public int Gold => gold;
 
@@ -187,6 +188,7 @@ namespace CSCI526GameJam {
                     if (!hoveredTower) return;
 
                     TowerManager.Instance.Refund(hoveredTower);
+                    OnTowerDemolished?.Invoke(hoveredTower.Config);
                     break;
 
                 default:
