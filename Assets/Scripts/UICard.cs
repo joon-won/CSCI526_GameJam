@@ -20,13 +20,21 @@ namespace CSCI526GameJam {
         [SerializeField] private float playAnimDuration;
         [SerializeField] private float playOffsetY;
 
+        [SerializeField] private Color costRegularColor;
+        [SerializeField] private Color costReducedColor;
+        [SerializeField] private Color[] levelColors;
+
         [Title("UI")]
+        [SerializeField] private Image costIcon;
+        [SerializeField] private Image levelIcon;
+        [SerializeField] private Image imageBackground;
         [SerializeField] private TMP_Text costText;
+        [SerializeField] private TMP_Text levelText;
         [SerializeField] private TMP_Text nameText;
         [SerializeField] private TMP_Text descriptionText;
         [SerializeField] private Image image;
         [SerializeField] private Button button;
-        [SerializeField] private RectTransform content;
+        [SerializeField] private RectTransform body;
 
         [ComputedFields]
         [SerializeField] private Card card;
@@ -50,7 +58,7 @@ namespace CSCI526GameJam {
             Refresh();
 
             layoutElement.preferredWidth = 0f;
-            content.localScale = Vector3.one * startScale;
+            body.localScale = Vector3.one * startScale;
         }
 
         public void DoStartAnim(Vector3 startPos) {
@@ -59,11 +67,11 @@ namespace CSCI526GameJam {
 
             canvasGroup.Toggle(true);
             startAnimSeq.Join(layoutElement.DOPreferredSize(size, startAnimDuration).SetEase(Ease.OutQuad));
-            content.position = startPos;
+            body.position = startPos;
 
-            startAnimSeq.Join(content.DOLocalMove(Vector3.zero, startAnimDuration).SetEase(Ease.OutQuad));
+            startAnimSeq.Join(body.DOLocalMove(Vector3.zero, startAnimDuration).SetEase(Ease.OutQuad));
             startAnimSeq.Join(
-                content.DOScale(Vector3.one, startAnimDuration).SetEase(Ease.OutQuad)
+                body.DOScale(Vector3.one, startAnimDuration).SetEase(Ease.OutQuad)
                 .OnComplete(() => {
                     button.interactable = true;
                 }));
@@ -76,7 +84,7 @@ namespace CSCI526GameJam {
             canvasGroup.interactable = false;
 
             playAnimSeq.Join(canvasGroup.DOFade(0f, playAnimDuration).SetEase(Ease.OutQuad));
-            playAnimSeq.Join(content.DOLocalMoveY(playOffsetY, playAnimDuration).SetEase(Ease.OutQuad));
+            playAnimSeq.Join(body.DOLocalMoveY(playOffsetY, playAnimDuration).SetEase(Ease.OutQuad));
             playAnimSeq.Append(
                 layoutElement.DOPreferredSize(new(0f, size.y), playAnimDuration * 0.5f)
                 .SetEase(Ease.OutQuad)
@@ -84,17 +92,24 @@ namespace CSCI526GameJam {
         }
 
         public void Select() {
-            content.GetComponent<Image>().color = Color.red;
+            body.GetComponent<Image>().color = Color.red;
 
         }
 
         public void UnSelect() {
-            content.GetComponent<Image>().color = Color.white;
+            body.GetComponent<Image>().color = Color.white;
 
         }
 
         public void Refresh() {
+            costIcon.color = card.IsCostHalved ? costReducedColor : costRegularColor;
             costText.text = card.Cost.ToString();
+
+            var level = (int)card.CurrentLevel;
+            levelIcon.color = levelColors[level];
+            levelText.text = (level + 1).ToString();
+
+            imageBackground.color = levelColors[level];
             nameText.text = card.Name;
             descriptionText.text = card.GetDescription();
             image.sprite = card.Image;
