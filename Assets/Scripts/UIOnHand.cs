@@ -76,15 +76,9 @@ namespace CSCI526GameJam {
                 });
             }
         }
-
-        private void Discard(Card[] cards) {
-        }
-
         private UICard GetUICard(Card card) {
             return uiCards.FirstOrDefault(uiCard => uiCard.Card == card);
         }
-
-
         #endregion
 
         #region Unity Methods

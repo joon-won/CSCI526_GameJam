@@ -4,11 +4,13 @@ using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
 using UnityEngine.UI;
+using DG.Tweening;
 
 namespace CSCI526GameJam {
     public class UIDeck : MonoBehaviour {
 
         #region Fields
+        [MandatoryFields]
         [SerializeField] private TMP_Text deckNumText;
         #endregion
 
