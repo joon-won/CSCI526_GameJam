@@ -120,6 +120,11 @@ namespace CSCI526GameJam {
             OnCardUnselected?.Invoke(card);
         }
 
+        public void UnselectAll() {
+            var indices = selectedCards.Select(x => hand.IndexOf(x)).ToArray();
+            indices.ForEach(x => Unselect(x));
+        }
+
         /// <summary>
         /// Toggle if a card is selected on hand. 
         /// </summary>
@@ -137,12 +142,12 @@ namespace CSCI526GameJam {
         /// <summary>
         /// Play the selected cards. 
         /// </summary>
-        public void PlaySelected() {
-            if (selectedCards.Count == 0) return;
-            if (currentPattern == Pattern.None) return;
+        public bool PlaySelected() {
+            if (selectedCards.Count == 0) return false;
+            if (currentPattern == Pattern.None) return false;
 
             var cost = selectedCards.Sum(x => x.Cost);
-            if (!Player.Instance.TryPay(cost)) return;
+            if (!Player.Instance.TryPay(cost)) return false;
 
             selectedCards.ForEach(x => x.Play());
 
@@ -159,6 +164,8 @@ namespace CSCI526GameJam {
             OnCardsPlayed?.Invoke(selectedCards.ToArray());
             selectedCards.ForEach(x => hand.Remove(x));
             selectedCards.Clear();
+
+            return true;
         }
 
         public void LoadTutorial(TutorialConfig tutorialConfig) {

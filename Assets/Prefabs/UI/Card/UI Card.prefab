@@ -564,7 +564,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   startAnimDuration: 1
   startScale: 0.5
-  playAnimDuration: 1
+  playAnimDuration: 0.5
   playOffsetY: 50
   selectedColor: {r: 0, g: 0.754717, b: 0.04271975, a: 1}
   costRegularColor: {r: 0.99607843, g: 0.8666667, b: 0.36862746, a: 1}

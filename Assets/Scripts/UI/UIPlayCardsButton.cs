@@ -13,6 +13,7 @@ namespace CSCI526GameJam {
         [SerializeField] private TMP_Text patternText;
         [SerializeField] private TMP_Text costText;
         [SerializeField] private Button playButton;
+        [SerializeField] private Button unselectButton;
 
         private CardManager cardManager;
         private Player player;
@@ -59,14 +60,18 @@ namespace CSCI526GameJam {
 
             cardManager = CardManager.Instance;
             player = Player.Instance;
+
             cardManager.OnCardSelected += OnCardSelectedHandler;
             cardManager.OnCardUnselected += OnCardUnselectedHandler;
+
             playButton.onClick.AddListener(
                     () => {
-                        cardManager.PlaySelected();
-                        gameObject.SetActive(false);
+                        if (cardManager.PlaySelected()) {
+                            gameObject.SetActive(false);
+                        }
                     }
                 );
+            unselectButton.onClick.AddListener(() => cardManager.UnselectAll());
         }
         #endregion
     }
