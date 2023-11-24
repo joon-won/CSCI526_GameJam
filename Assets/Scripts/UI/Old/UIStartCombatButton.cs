@@ -12,6 +12,9 @@ namespace CSCI526GameJam {
         [SerializeField] private Button startCombatButton;
         [SerializeField] private UILevelInfo levelInfo;
         [SerializeField] private float levelDisplayDuration;
+
+        [SerializeField] private Transform combatInfo;
+        [SerializeField] private TMP_Text numEnemiesText;
         #endregion
 
         #region Publics
@@ -19,7 +22,8 @@ namespace CSCI526GameJam {
 
         #region Internals
         private void OnCombatEnded() {
-            gameObject.SetActive(true);
+            startCombatButton.gameObject.SetActive(true);
+            combatInfo.gameObject.SetActive(false);
         }
         #endregion
 
@@ -29,14 +33,22 @@ namespace CSCI526GameJam {
                 GameManager.Instance.StartCombat();
                 levelInfo.Show(GameManager.Instance.Level, levelDisplayDuration);
                 startCombatButton.gameObject.SetActive(false);
+                combatInfo.gameObject.SetActive(true);
             });
 
-            gameObject.SetActive(true);
+            startCombatButton.gameObject.SetActive(true);
+            combatInfo.gameObject.SetActive(false);
 
             GameManager.Instance.OnPreparationStarted += OnCombatEnded;
             GameManager.Instance.OnCurrentSceneExiting += () => {
                 GameManager.Instance.OnPreparationStarted -= OnCombatEnded;
             };
+        }
+
+        private void Update() {
+            if (combatInfo.gameObject.activeSelf) {
+                numEnemiesText.text = EnemyManager.Instance.NumEnemies.ToString();
+            }
         }
         #endregion
     }
