@@ -134,7 +134,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   tilemap: {fileID: 3790595471751475002}
-  baseTile: {fileID: 11400000, guid: cc8f571cfc33bb643b058250a4135ffd, type: 2}
+  baseTileInfos: []
+  towerTile: {fileID: 0}
 --- !u!1 &3790595472239875455
 GameObject:
   m_ObjectHideFlags: 0
@@ -183,6 +184,8 @@ MonoBehaviour:
   mouseSpot:
     index: {x: 0, y: 0}
     position: {x: 0, y: 0, z: 0}
+    tower: {fileID: 0}
+    constructable: 0
   mapSize: 50
   seed: 0
   mapDimension: {x: 0, y: 0, z: 0}

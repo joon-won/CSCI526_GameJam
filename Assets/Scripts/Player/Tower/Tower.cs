@@ -80,6 +80,7 @@ namespace CSCI526GameJam {
 
             entity.Settle(spot);
             transform.position = spot.Position;
+            MapManager.Instance.GameplayTilemap.SetTowerTile(spot.Index, true);
 
             OnBuild?.Invoke();
         }
@@ -88,6 +89,7 @@ namespace CSCI526GameJam {
         /// Demolish the tower.
         /// </summary>
         public virtual void Demolish() {
+            MapManager.Instance.GameplayTilemap.SetTowerTile(entity.Spot.Index, false);
             entity.Unsettle();
             Destroy(gameObject);
 

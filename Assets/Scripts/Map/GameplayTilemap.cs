@@ -13,11 +13,12 @@ namespace CSCI526GameJam {
         [MandatoryFields]
         [SerializeField] private Tilemap tilemap;
         [SerializeField] private TileInfo[] baseTileInfos;
+        [SerializeField] private Tile towerTile;
         #endregion
 
         #region Publics
         public void Draw(Spot spot) {
-            var tile = GetRandomTile();
+            var tile = GetRandomBaseTile();
             var index = spot.Index;
             //var spread = GetSpread(index.x, index.y);
             //if (spread) {
@@ -27,15 +28,12 @@ namespace CSCI526GameJam {
             tilemap.SetTile(new Vector3Int(index.x, index.y, 0), tile);
         }
 
-        //public void SetTile(ProductConfig data, int x, int y) {
-        //    Vector3Int position = new Vector3Int(x, y, 0);
-        //    var spread = GetSpread(data);
-        //    Tile tile = baseTile;
-        //    if (spread)
-        //        tile = spread.Tile;
+        public void SetTowerTile(Vector2Int index, bool isEnabled) {
+            var position = new Vector3Int(index.x, index.y, 0);
 
-        //    tilemap.SetTile(position, tile);
-        //}
+            var tile = isEnabled ? towerTile : GetRandomBaseTile();
+            tilemap.SetTile(position, tile);
+        }
 
         //public void CreateDeposit(DepositSpread spread, Spot spot) {
         //    var deposit = new Deposit(spread.Config, 1000, spread.Color, spread.ExtractedBy); // TODO: change amount later
@@ -82,7 +80,7 @@ namespace CSCI526GameJam {
         #endregion
 
         #region Internals
-        private Tile GetRandomTile() {
+        private Tile GetRandomBaseTile() {
             var totalChance = baseTileInfos.Sum(x => x.Chance);
             var randomValue = Random.Range(0f, totalChance);
 
