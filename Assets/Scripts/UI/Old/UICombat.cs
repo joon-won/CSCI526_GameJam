@@ -15,7 +15,7 @@ namespace CSCI526GameJam
         public TextMeshProUGUI goldsInfo;
         public TextMeshProUGUI baseInfo;
         public TMP_Text enemyInfo;
-        public Button StartCombat;
+        //public Button StartCombat;
         private bool combatStarted = false;
 
 
@@ -23,8 +23,8 @@ namespace CSCI526GameJam
 
         // Start is called before the first frame update
         void Awake() {
-            StartCombat.onClick.AddListener(GameManager.Instance.StartCombat);
-            StartCombat.onClick.AddListener(CombatStart);
+            //StartCombat.onClick.AddListener(GameManager.Instance.StartCombat);
+            //StartCombat.onClick.AddListener(CombatStart);
             CombatPanel.SetActive(false);
 
             levelText.gameObject.SetActive(false);
