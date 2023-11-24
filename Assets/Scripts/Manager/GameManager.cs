@@ -14,6 +14,7 @@ namespace CSCI526GameJam {
     public class GameManager : MonoBehaviourSingleton<GameManager> {
 
         public enum State {
+            None,
             Preparation,
             Combat,
             GameOver,
@@ -44,7 +45,6 @@ namespace CSCI526GameJam {
         public event Action OnGameWon;
         public event Action OnGameOver;
 
-        public event Action OnTutorialStarted;
         public event Action OnTutorialEnded;
 
         public event Action OnCurrentSceneExiting;
@@ -53,6 +53,14 @@ namespace CSCI526GameJam {
         public int Level => level;
         public float GameTime => gameTime;
         public bool IsInTutorial => isInTutorial;
+        public bool DoTutorial {
+            get {
+                return doTutorial;
+            }
+            set {
+                doTutorial = value;
+            }
+        }
         public int TutorialLevel => tutorialLevel;
 
         /// <summary>
@@ -67,12 +75,6 @@ namespace CSCI526GameJam {
         public void StartCombat() {
             state = State.Combat;
             OnCombatStarted?.Invoke();
-        }
-
-        [ContextMenu("Start Tutorial")]
-        public void StartTutorial() {
-            isInTutorial = true;
-            OnTutorialStarted?.Invoke();
         }
 
         public LevelInfo GetCurrentLevelInfo() {
@@ -131,7 +133,7 @@ namespace CSCI526GameJam {
             tutorialLevel = 0;
             if (doTutorial) {
                 doTutorial = false;
-                StartTutorial();
+                isInTutorial = true;
             }
             StartPreparation();
         }
@@ -140,6 +142,7 @@ namespace CSCI526GameJam {
             switch (scene.buildIndex) {
                 case Configs.MainMenuSceneIndex:
                     InputManager.Instance.Toggle(InputMode.General, false);
+                    state = State.None;
                     break;
 
                 case Configs.GameplaySceneIndex:

@@ -10,6 +10,7 @@ namespace CSCI526GameJam {
         #region Fields
         [MandatoryFields]
         [SerializeField] private Button startButton;
+        [SerializeField] private Toggle tutorialToggle;
         #endregion
 
         #region Publics
@@ -21,6 +22,7 @@ namespace CSCI526GameJam {
         #region Unity Methods
         private void Awake() {
             startButton.onClick.AddListener(() => SceneManager.LoadScene(Configs.GameplaySceneIndex));
+            tutorialToggle.onValueChanged.AddListener(isToggled => GameManager.Instance.DoTutorial = isToggled);
         }
         #endregion
     }
