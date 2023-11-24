@@ -23,7 +23,6 @@ namespace CSCI526GameJam {
         #region Fields
         [MandatoryFields]
         [SerializeField] private int numPerCard = 4;
-        [SerializeField] private int maxOnHand = 20;
         [SerializeField] private int numDrawPerLevel = 6;
 
         [ComputedFields]
@@ -74,11 +73,6 @@ namespace CSCI526GameJam {
         public void DrawFromDeck(int numCards) {
             if (numCards <= 0) {
                 Debug.LogWarning($"{numCards} is not a positive num. ");
-                return;
-            }
-
-            if (hand.Count >= maxOnHand) {
-                Debug.Log("TODO: onHand is full. ");
                 return;
             }
 
