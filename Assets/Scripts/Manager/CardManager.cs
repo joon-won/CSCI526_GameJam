@@ -162,15 +162,15 @@ namespace CSCI526GameJam {
             return true;
         }
 
-        public void LoadTutorial(TutorialConfig tutorialConfig) {
+        public void LoadTutorial(TutorialInfo info) {
             deck.Clear();
-            foreach (var config in tutorialConfig.DeckPreset) {
+            foreach (var config in info.Deck) {
                 deck.Add(new(config));
             }
 
             OnForceClearOnHand?.Invoke();
             hand.Clear();
-            InsertCards(tutorialConfig.OnHandCardsPreset.Select(x => new Card(x)).ToArray());
+            InsertCards(info.OnHandCards.Select(x => new Card(x)).ToArray());
         }
 
         public void EndTutorial() {

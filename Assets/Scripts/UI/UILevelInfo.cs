@@ -11,24 +11,29 @@ namespace CSCI526GameJam {
         #region Fields
         [MandatoryFields]
         [SerializeField] private TMP_Text levelText;
+        [SerializeField] private float duration;
 
         private Coroutine showRoutine;
+        private GameManager gameManager;
         #endregion
 
         #region Publics
-        public void Show(int level, float duration) {
+        #endregion
+
+        #region Internals
+        private void Show() {
             gameObject.SetActive(true);
 
             if (showRoutine != null) {
                 StopCoroutine(showRoutine);
             }
-            showRoutine = StartCoroutine(ShowRoutine(level, duration));
+            showRoutine = StartCoroutine(ShowRoutine(duration));
         }
-        #endregion
 
-        #region Internals
-        private IEnumerator ShowRoutine(int level, float duration) {
-            levelText.text = $"Level {level}";
+        private IEnumerator ShowRoutine(float duration) {
+            var level = gameManager.IsInTutorial ? gameManager.TutorialLevel : gameManager.Level;
+            level++;
+            levelText.text = gameManager.IsInTutorial ? $"Tutorial {level}" : $"Level {level}";
             yield return new WaitForSeconds(duration);
 
             gameObject.SetActive(false);
@@ -38,6 +43,12 @@ namespace CSCI526GameJam {
         #region Unity Methods
         private void Awake() {
             gameObject.SetActive(false);
+            gameManager = GameManager.Instance;
+
+            gameManager.OnPreparationStarted += Show;
+            gameManager.OnCurrentSceneExiting += () => {
+                gameManager.OnPreparationStarted -= Show;
+            };
         }
         #endregion
     }

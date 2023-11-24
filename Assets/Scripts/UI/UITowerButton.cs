@@ -36,6 +36,13 @@ namespace CSCI526GameJam {
         #endregion
 
         #region Publics
+        public void OnPointerEnter(PointerEventData eventData) {
+            UIPopups.Instance.TowerInfo.Show(config, infoAnchor);
+        }
+
+        public void OnPointerExit(PointerEventData eventData) {
+            UIPopups.Instance.TowerInfo.Hide();
+        }
         #endregion
 
         #region Internals
@@ -77,12 +84,5 @@ namespace CSCI526GameJam {
             }
         }
         #endregion
-        public void OnPointerEnter(PointerEventData eventData) {
-            UIPopups.Instance.TowerInfo.Show(config, infoAnchor);
-        }
-        
-        public void OnPointerExit(PointerEventData eventData) {
-            UIPopups.Instance.TowerInfo.Hide();
-        }
     }
 }

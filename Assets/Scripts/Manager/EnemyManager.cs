@@ -11,7 +11,6 @@ namespace CSCI526GameJam {
 
         #region Fields
         [MandatoryFields]
-        [SerializeField] private LevelConfig levelConfig;
         [SerializeField] private EnemyPathIndicator pathIndicatorPrefab;
 
         [ComputedFields]
@@ -32,7 +31,6 @@ namespace CSCI526GameJam {
         public event Action OnEnemiesClear;
 
         public int NumEnemies => enemyInstances.Count;
-        public int MaxWaves => levelConfig.LevelInfos.Length;
 
 #if UNITY_EDITOR
         [EditorOnlyFields]
@@ -47,10 +45,8 @@ namespace CSCI526GameJam {
 
         #region Internals
         private void UpdateSpawnSpots() {
-            var levelIndex = GameManager.Instance.Level - 1;
-            if (levelIndex >= levelConfig.NumLevels) return;
-
-            var numPaths = levelConfig.LevelInfos[levelIndex].NumWaves;
+            var levelInfo = GameManager.Instance.GetCurrentLevelInfo();
+            var numPaths = levelInfo.NumWaves;
 
             spawnSpotToWave.Clear();
             var size = MapManager.Instance.MapSize;
@@ -71,7 +67,7 @@ namespace CSCI526GameJam {
                     continue;
                 }
 
-                var waveInfo = levelConfig.LevelInfos[levelIndex].WaveInfos[i];
+                var waveInfo = levelInfo.WaveInfos[i];
                 var wave = new EnemyWave(waveInfo);
                 spawnSpotToWave[spot] = wave;
             }

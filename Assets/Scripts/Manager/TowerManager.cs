@@ -103,6 +103,13 @@ namespace CSCI526GameJam {
         #endregion
 
         #region Internals
+        private void OnTutorialEndedHandler() {
+            PlayerBase.Heal(PlayerBase.MaxHealth);
+
+            var towers = towerInstances.ToArray();
+            towers.ForEach(x => x.Demolish());
+            towerInstances.Clear();
+        }
         #endregion
 
         #region Unity Methods
@@ -115,6 +122,11 @@ namespace CSCI526GameJam {
             foreach (var prefab in towerPrefabs) {
                 configToPrefab.Add(prefab.Config, prefab);
             }
+
+            GameManager.Instance.OnTutorialEnded += OnTutorialEndedHandler;
+            GameManager.Instance.OnCurrentSceneExiting += () => {
+                GameManager.Instance.OnTutorialEnded -= OnTutorialEndedHandler;
+            };
         }
 
         private void Update() {

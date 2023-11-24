@@ -5,19 +5,23 @@ using UnityEngine;
 
 namespace CSCI526GameJam {
 
+    [Serializable]
+    public struct TutorialInfo {
+        public int Gold;
+        public CardConfig[] Deck;
+        public CardConfig[] OnHandCards;
+        public LevelInfo LevelInfo;
+    }
+
     [CreateAssetMenu(menuName = "Config/Tutorial")]
     public class TutorialConfig : ScriptableObject {
 
         #region Fields
-        [SerializeField] private int gold;
-        [SerializeField] private CardConfig[] deckPreset;
-        [SerializeField] private CardConfig[] onHandCardsPreset;
+        [SerializeField] private TutorialInfo[] tutorialInfos;
         #endregion
 
         #region Publics
-        public int Gold => gold;
-        public CardConfig[] DeckPreset => deckPreset;
-        public CardConfig[] OnHandCardsPreset => onHandCardsPreset;
+        public TutorialInfo[] TutorialInfos => tutorialInfos;
         #endregion
 
         #region Internals

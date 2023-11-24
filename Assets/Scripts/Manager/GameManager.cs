@@ -23,10 +23,12 @@ namespace CSCI526GameJam {
         #region Fields
         [MandatoryFields]
         [SerializeField] private TutorialConfig tutorialConfig;
+        [SerializeField] private LevelConfig levelConfig;
 
         [ComputedFields]
         [SerializeField] private State state;
         [SerializeField] private int level;
+        [SerializeField] private int tutorialLevel;
 
         [SerializeField] private bool doTutorial;
         [SerializeField] private bool isInTutorial;
@@ -50,14 +52,16 @@ namespace CSCI526GameJam {
         public State GameState => state;
         public int Level => level;
         public float GameTime => gameTime;
+        public bool IsInTutorial => isInTutorial;
+        public int TutorialLevel => tutorialLevel;
 
         /// <summary>
-        /// Load into the gameplay scene. 
+        /// Load into a scene. 
         /// </summary>
         /// <param name="profileIndex">Profile data index. </param>
-        public void LoadGameplayScene() {
+        public void LoadGameplayScene(int sceneIndex) {
             OnCurrentSceneExiting?.Invoke();
-            SceneManager.LoadScene(Configs.GameplaySceneIndex);
+            SceneManager.LoadScene(sceneIndex);
         }
 
         public void StartCombat() {
@@ -68,35 +72,45 @@ namespace CSCI526GameJam {
         [ContextMenu("Start Tutorial")]
         public void StartTutorial() {
             isInTutorial = true;
-            level = 0;
-
-            Player.Instance.LoadTutorial(tutorialConfig);
-            CardManager.Instance.LoadTutorial(tutorialConfig);
-
             OnTutorialStarted?.Invoke();
+        }
+
+        public LevelInfo GetCurrentLevelInfo() {
+            if (isInTutorial) {
+                return tutorialConfig.TutorialInfos[tutorialLevel].LevelInfo;
+            }
+            else {
+                return levelConfig.LevelInfos[level];
+            }
         }
         #endregion
 
         #region Internals
         private void StartPreparation() {
-            if (level >= EnemyManager.Instance.MaxWaves) {
+            if (level >= levelConfig.NumLevels) {
                 state = State.Win;
                 OnGameWon?.Invoke();
                 return;
             }
 
-            if (isInTutorial) {
+            if (isInTutorial && tutorialLevel >= tutorialConfig.TutorialInfos.Length) {
                 isInTutorial = false;
-
                 Player.Instance.EndTutorial();
                 CardManager.Instance.EndTutorial();
-
                 OnTutorialEnded?.Invoke();
             }
 
             state = State.Preparation;
-            level++;
             OnPreparationStarted?.Invoke();
+
+            if (isInTutorial) {
+                Player.Instance.LoadTutorial(tutorialConfig.TutorialInfos[tutorialLevel]);
+                CardManager.Instance.LoadTutorial(tutorialConfig.TutorialInfos[tutorialLevel]);
+                tutorialLevel++;
+            }
+            else {
+                level++;
+            }
         }
 
         private void SetGameOver() {
@@ -114,12 +128,12 @@ namespace CSCI526GameJam {
             EnemyManager.Instance.OnEnemiesClear += StartPreparation;
 
             level = 0;
-            StartPreparation();
-
+            tutorialLevel = 0;
             if (doTutorial) {
                 doTutorial = false;
                 StartTutorial();
             }
+            StartPreparation();
         }
 
         private void OnSceneLoaded(Scene scene, LoadSceneMode mode) {

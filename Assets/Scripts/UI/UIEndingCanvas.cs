@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 namespace CSCI526GameJam {
     public class UIEndingCanvas : MonoBehaviour {
@@ -10,12 +11,10 @@ namespace CSCI526GameJam {
         #region Fields
         [MandatoryFields]
         [SerializeField] private Button restartButton;
+        [SerializeField] private Button mainMenuButton;
         #endregion
 
         #region Publics
-        public void RestartGame() {
-            GameManager.Instance.LoadGameplayScene();
-        }
         #endregion
 
         #region Internals
@@ -34,7 +33,8 @@ namespace CSCI526GameJam {
             };
             gameObject.SetActive(false);
 
-            restartButton.onClick.AddListener(RestartGame);
+            restartButton.onClick.AddListener(() => GameManager.Instance.LoadGameplayScene(Configs.GameplaySceneIndex));
+            mainMenuButton.onClick.AddListener(() => GameManager.Instance.LoadGameplayScene(Configs.MainMenuSceneIndex));
         }
 
         private void OnEnable() {

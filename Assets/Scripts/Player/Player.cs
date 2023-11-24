@@ -130,13 +130,14 @@ namespace CSCI526GameJam {
             towerConfigToNum[config] = num;
         }
 
-        public void LoadTutorial(TutorialConfig tutorialConfig) {
-            gold = tutorialConfig.Gold;
+        public void LoadTutorial(TutorialInfo info) {
+            gold = info.Gold;
             OnGoldChanged?.Invoke(gold);
         }
 
         public void EndTutorial() {
             gold = initialGold;
+            towerConfigToNum.Clear();
             OnGoldChanged?.Invoke(gold);
         }
         #endregion
