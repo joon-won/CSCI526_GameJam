@@ -969,6 +969,63 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1598486574}
   m_CullTransparentMesh: 1
+--- !u!1001 &1618330049
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 75407745179464037, guid: e160ed99231d0ca4aa9ddb9a13cd43bb, type: 3}
+      propertyPath: m_RootOrder
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 75407745179464037, guid: e160ed99231d0ca4aa9ddb9a13cd43bb, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 75407745179464037, guid: e160ed99231d0ca4aa9ddb9a13cd43bb, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 75407745179464037, guid: e160ed99231d0ca4aa9ddb9a13cd43bb, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 75407745179464037, guid: e160ed99231d0ca4aa9ddb9a13cd43bb, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 75407745179464037, guid: e160ed99231d0ca4aa9ddb9a13cd43bb, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 75407745179464037, guid: e160ed99231d0ca4aa9ddb9a13cd43bb, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 75407745179464037, guid: e160ed99231d0ca4aa9ddb9a13cd43bb, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 75407745179464037, guid: e160ed99231d0ca4aa9ddb9a13cd43bb, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 75407745179464037, guid: e160ed99231d0ca4aa9ddb9a13cd43bb, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 75407745179464037, guid: e160ed99231d0ca4aa9ddb9a13cd43bb, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8415196289564338421, guid: e160ed99231d0ca4aa9ddb9a13cd43bb, type: 3}
+      propertyPath: m_Name
+      value: Gun Tower
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: e160ed99231d0ca4aa9ddb9a13cd43bb, type: 3}
 --- !u!1 &1664088215
 GameObject:
   m_ObjectHideFlags: 0

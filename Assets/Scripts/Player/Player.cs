@@ -23,6 +23,11 @@ namespace CSCI526GameJam {
         [MandatoryFields]
         [SerializeField] private int initialGold;
 
+        [SerializeField] private Transform rangeIndicator;
+        [SerializeField] private SpriteRenderer spotIndicator;
+        [SerializeField] private Sprite highlightSprite;
+        [SerializeField] private Sprite demolishSprite;
+
         [ComputedFields]
         [SerializeField] private bool isLocked;
         [SerializeField] private Mode mode;
@@ -42,7 +47,7 @@ namespace CSCI526GameJam {
         public event Action<int> OnGoldChanged;
         public event Action<TowerConfig, int> OnTowerNumChanged;
         public event Action<TowerConfig> OnTowerPlaced;
-        public event Action<TowerConfig> OnTowerDemolished; 
+        public event Action<TowerConfig> OnTowerDemolished;
 
         public int Gold => gold;
 
@@ -252,7 +257,22 @@ namespace CSCI526GameJam {
         // Set the json output to get the in game values.
         private void Update() {
             IsMouseOverUI = EventSystem.current.IsPointerOverGameObject();
+
             hoveredTower = MapManager.Instance.MouseSpot.Tower;
+            if (hoveredTower && hoveredTower is not PlayerBase) {
+                spotIndicator.gameObject.SetActive(true);
+                spotIndicator.transform.position = hoveredTower.Spot.Position;
+                spotIndicator.sprite = mode == Mode.Demolish ? demolishSprite : highlightSprite;
+                spotIndicator.color = mode == Mode.Demolish ? Color.red : Color.green;
+
+                rangeIndicator.gameObject.SetActive(true);
+                rangeIndicator.transform.position = hoveredTower.Spot.Position;
+                rangeIndicator.localScale = hoveredTower.Config.AttackRange * 2f * Vector3.one;
+            }
+            else {
+                spotIndicator.gameObject.SetActive(false);
+                rangeIndicator.gameObject.SetActive(false);
+            }
         }
         #endregion
     }

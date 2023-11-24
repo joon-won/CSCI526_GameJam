@@ -57,10 +57,6 @@ namespace CSCI526GameJam {
         #endregion
 
         #region Unity Methods
-        private void OnDrawGizmos() {
-            Gizmos.color = Color.red;
-            Gizmos.DrawWireSphere(transform.position, attackRange);
-        }
         #endregion
     }
 }

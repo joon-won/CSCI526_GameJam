@@ -12,7 +12,10 @@ namespace CSCI526GameJam {
         [SerializeField] private Vector3 stepOffset;
         [SerializeField] private float stepDuration;
 
-        private Vector3 origin;
+        [ComputedFields]
+        [SerializeField] private Vector3 origin;
+
+        private RectTransform rectTransform;
         #endregion
 
         #region Publics
@@ -20,17 +23,18 @@ namespace CSCI526GameJam {
 
         #region Internals
         private void OnCombatStartedHandler() {
-            transform.DOMove(transform.position + stepOffset, stepDuration).SetEase(Ease.OutQuad);
+            rectTransform.DOMove(rectTransform.position + stepOffset, stepDuration).SetEase(Ease.OutQuad);
         }
 
         private void OnPreparationStartedHandler() {
-            transform.DOMove(origin, stepDuration).SetEase(Ease.OutQuad);
+            rectTransform.DOMove(origin, stepDuration).SetEase(Ease.OutQuad);
         }
         #endregion
 
         #region Unity Methods
-        private void Awake() {
-            origin = transform.position;
+        private void Start() {
+            rectTransform = transform as RectTransform;
+            origin = rectTransform.position;
 
             GameManager.Instance.OnCombatStarted += OnCombatStartedHandler;
             GameManager.Instance.OnPreparationStarted += OnPreparationStartedHandler;
