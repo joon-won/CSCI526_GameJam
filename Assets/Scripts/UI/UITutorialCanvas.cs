@@ -2,6 +2,8 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Sirenix.OdinInspector;
+using System.Linq;
 
 namespace CSCI526GameJam {
     public class UITutorialCanvas : MonoBehaviour {
@@ -13,12 +15,9 @@ namespace CSCI526GameJam {
 
         [SerializeField] private GameObject groundPathTip;
 
-        [SerializeField] private UIPerforatableMask level1Step1;
-        [SerializeField] private UIPerforatableMask level1Step2;
-        [SerializeField] private UIPerforatableMask level1Step3;
-        [SerializeField] private UIPerforatableMask level1Step4;
-        [SerializeField] private UIPerforatableMask level1Step5;
-        [SerializeField] private UIPerforatableMask level1Step6;
+        [SerializeField] private Transform tutorialsHolder;
+
+        private List<List<UIPerforatableMask>> tutorialSteps = new();
 
         private GameManager gameManager;
         private InputManager inputManager;
@@ -30,6 +29,23 @@ namespace CSCI526GameJam {
         #endregion
 
         #region Internals
+        private void InitTutorials() {
+            tutorialSteps.Clear();
+            foreach (Transform tutorial in tutorialsHolder) {
+                var steps = new List<UIPerforatableMask>();
+                foreach (Transform child in tutorial) {
+                    if (child.TryGetComponent<UIPerforatableMask>(out var step)) {
+                        step.gameObject.SetActive(false);
+                        steps.Add(step);
+                    }
+                    else {
+                        Debug.LogWarning($"{typeof(UIPerforatableMask)} is not found in {child.name}");
+                    }
+                }
+                tutorialSteps.Add(steps);
+            }
+        }
+
         private void Begin() {
             gameObject.SetActive(true);
             StartCoroutine(BeginRoutine());
@@ -43,99 +59,192 @@ namespace CSCI526GameJam {
 
             inputManager.Toggle(true);
             raycastBlocker.SetActive(false);
-            Level1Step1();
+            DoTutorial(0, 0);
         }
 
-        // Introduce card selecting.  
-        private void Level1Step1() {
-            level1Step1.gameObject.SetActive(true);
 
-            Action<Card> handler = null;
-            handler = _ => {
-                if (cardManager.NumSelected != cardManager.NumOnHand) return;
+        private void DoTutorial(int tutorialIndex, int stepIndex) {
+            void DoNext() {
+                DoTutorial(tutorialIndex, stepIndex + 1);
+            }
 
-                level1Step1.gameObject.SetActive(false);
-                Level1Step2();
-                cardManager.OnCardSelected -= handler;
-            };
-            cardManager.OnCardSelected += handler;
-        }
+            void Close() {
+                tutorialSteps[tutorialIndex][stepIndex].gameObject.SetActive(false);
+            }
 
-        // Introduce play and unselect buttons.  
-        private void Level1Step2() {
-            level1Step2.gameObject.SetActive(true);
-            raycastBlocker.SetActive(true);
+            tutorialSteps[tutorialIndex][stepIndex].gameObject.SetActive(true);
 
-            Action handler = null;
-            handler = () => {
-                level1Step2.gameObject.SetActive(false);
-                Level1Step3();
-                inputManager.OnMouseLeftUp -= handler;
-            };
-            inputManager.OnMouseLeftUp += handler;
-        }
+            switch (tutorialIndex) {
 
-        // Introduce selected info.  
-        private void Level1Step3() {
-            level1Step3.gameObject.SetActive(true);
+                // Tutorial level 1
+                case 0: {
+                    switch (stepIndex) {
 
-            Action handler = null;
-            handler = () => {
-                level1Step3.gameObject.SetActive(false);
-                Level1Step4();
-                inputManager.OnMouseLeftUp -= handler;
-            };
-            inputManager.OnMouseLeftUp += handler;
-        }
+                        // Introduce card cost. 
+                        case 0: {
+                            raycastBlocker.SetActive(true);
 
-        // Wait for player to play a card.  
-        private void Level1Step4() {
-            level1Step4.gameObject.SetActive(true);
-            raycastBlocker.SetActive(false);
+                            Action handler = null;
+                            handler = () => {
+                                Close();
+                                DoNext();
+                                inputManager.OnMouseLeftUp -= handler;
+                            };
+                            inputManager.OnMouseLeftUp += handler;
 
-            Action<Card[]> handler = null;
-            handler = _ => {
-                if (cardManager.NumOnHand != 0) return;
+                            break;
+                        }
+                        
+                        // Introduce card name. 
+                        case 1: {
+                            Action handler = null;
+                            handler = () => {
+                                Close();
+                                DoNext();
+                                inputManager.OnMouseLeftUp -= handler;
+                            };
+                            inputManager.OnMouseLeftUp += handler;
 
-                level1Step4.gameObject.SetActive(false);
-                Level1Step5();
-                cardManager.OnCardsPlayed -= handler;
-            };
-            cardManager.OnCardsPlayed += handler;
-        }
+                            break;
+                        }
+                        
+                        // Introduce card level. 
+                        case 2: {
+                            Action handler = null;
+                            handler = () => {
+                                Close();
+                                DoNext();
+                                inputManager.OnMouseLeftUp -= handler;
+                            };
+                            inputManager.OnMouseLeftUp += handler;
 
-        // Introduce tower buttons and tower placing. 
-        private void Level1Step5() {
-            level1Step5.gameObject.SetActive(true);
+                            break;
+                        }
+                        
+                        // Introduce card effect. 
+                        case 3: {
+                            Action handler = null;
+                            handler = () => {
+                                Close();
+                                DoNext();
+                                inputManager.OnMouseLeftUp -= handler;
+                            };
+                            inputManager.OnMouseLeftUp += handler;
 
-            Action<TowerConfig> onPickedHandler = null;
-            onPickedHandler = _ => {
-                level1Step5.gameObject.SetActive(false);
-                groundPathTip.SetActive(true);
-                player.OnTowerPicked -= onPickedHandler;
-            };
-            player.OnTowerPicked += onPickedHandler;
+                            break;
+                        }
 
-            Action<TowerConfig> onPlacedHandler = null;
-            onPlacedHandler = _ => {
-                Level1Step6();
-                groundPathTip.SetActive(false);
-                player.OnTowerPlaced -= onPlacedHandler;
-            };
-            player.OnTowerPlaced += onPlacedHandler;
-        }
+                        // Introduce card selection. 
+                        case 4: {
+                            raycastBlocker.SetActive(false);
 
-        // Introduce start combat button. 
-        private void Level1Step6() {
-            level1Step6.gameObject.SetActive(true);
+                            Action<Card> handler = null;
+                            handler = _ => {
+                                if (cardManager.NumSelected != cardManager.NumOnHand) return;
 
-            Action handler = null;
-            handler = () => {
-                level1Step6.gameObject.SetActive(false);
-                //Level1Step7();
-                gameManager.OnCombatStarted -= handler;
-            };
-            gameManager.OnCombatStarted += handler;
+                                Close();
+                                DoNext();
+                                cardManager.OnCardSelected -= handler;
+                            };
+                            cardManager.OnCardSelected += handler;
+
+                            break;
+                        }
+
+                        // Introduce play and unselect buttons.  
+                        case 5: {
+                            raycastBlocker.SetActive(true);
+
+                            Action handler = null;
+                            handler = () => {
+                                Close();
+                                DoNext();
+                                inputManager.OnMouseLeftUp -= handler;
+                            };
+                            inputManager.OnMouseLeftUp += handler;
+
+                            break;
+                        }
+
+                        // Introduce selected info.  
+                        case 6: {
+                            Action handler = null;
+                            handler = () => {
+                                Close();
+                                DoNext();
+                                inputManager.OnMouseLeftUp -= handler;
+                            };
+                            inputManager.OnMouseLeftUp += handler;
+
+                            break;
+                        }
+
+                        // Wait for player to play a card.  
+                        case 7: {
+                            raycastBlocker.SetActive(false);
+
+                            Action<Card[]> handler = null;
+                            handler = _ => {
+                                if (cardManager.NumOnHand != 0) return;
+
+                                Close();
+                                DoNext();
+                                cardManager.OnCardsPlayed -= handler;
+                            };
+                            cardManager.OnCardsPlayed += handler;
+
+                            break;
+                        }
+
+                        // Introduce tower buttons and tower placing. 
+                        case 8: {
+                            Action<TowerConfig> onPickedHandler = null;
+                            onPickedHandler = _ => {
+                                Close();
+                                groundPathTip.SetActive(true);
+                                player.OnTowerPicked -= onPickedHandler;
+                            };
+                            player.OnTowerPicked += onPickedHandler;
+
+                            Action<TowerConfig> onPlacedHandler = null;
+                            onPlacedHandler = _ => {
+                                DoNext();
+                                groundPathTip.SetActive(false);
+                                player.OnTowerPlaced -= onPlacedHandler;
+                            };
+                            player.OnTowerPlaced += onPlacedHandler;
+
+                            break;
+                        }
+
+                        // Introduce start combat button. 
+                        case 9: {
+                            Action handler = null;
+                            handler = () => {
+                                Close();
+                                gameManager.OnCombatStarted -= handler;
+                            };
+                            gameManager.OnCombatStarted += handler;
+
+                            break;
+                        }
+                    }
+
+                    break;
+                }
+
+                // Tutorial level 2
+                case 1: {
+
+                    break;
+                }
+
+                // Tutorial level 3
+                case 2: {
+
+                    break;
+                }
+            }
         }
         #endregion
 
@@ -146,9 +255,7 @@ namespace CSCI526GameJam {
             cardManager = CardManager.Instance;
             player = Player.Instance;
 
-            foreach (var mask in GetComponentsInChildren<UIPerforatableMask>()) {
-                mask.gameObject.SetActive(false);
-            }
+            InitTutorials();
             groundPathTip.SetActive(false);
 
             gameManager.OnTutorialStarted += Begin;
