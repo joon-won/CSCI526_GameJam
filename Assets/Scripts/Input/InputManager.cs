@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using System;
+using UnityEngine.EventSystems;
 
 namespace CSCI526GameJam {
 
@@ -12,6 +13,8 @@ namespace CSCI526GameJam {
     }
 
     public class InputManager : MonoBehaviourSingleton<InputManager> {
+
+        public static bool IsMouseOverUI { get; private set; }
 
         #region Fields
         [ComputedFields]
@@ -24,6 +27,7 @@ namespace CSCI526GameJam {
 
         #region Publics
         public event Action OnMouseLeftDown;
+        public event Action OnMouseLeftUp;
         public event Action OnMouseRightDown;
 
         public event Action<int> OnNumberDown;
@@ -100,6 +104,7 @@ namespace CSCI526GameJam {
 
         private void OnMouseLeftUp_performed() {
             isMouseLeftPressed = false;
+            OnMouseLeftUp?.Invoke();
         }
 
         private void OnMouseRightDown_performed() {
@@ -174,6 +179,10 @@ namespace CSCI526GameJam {
 
         private void OnDisable() {
             Toggle(false);
+        }
+
+        private void Update() {
+            IsMouseOverUI = EventSystem.current.IsPointerOverGameObject();
         }
         #endregion
     }

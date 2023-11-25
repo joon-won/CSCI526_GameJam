@@ -46,6 +46,7 @@ namespace CSCI526GameJam {
         public Pattern CurrentPattern => currentPattern;
         public int CurrentCost => selectedCards.Sum(x => x.Cost);
         public int NumSelected => selectedCards.Count;
+        public int NumOnHand => hand.Count;
         public Dictionary<CardConfig, int> CardConfigToUsageNum => cardConfigToUsageNum;
 
         /// <summary>
@@ -155,10 +156,11 @@ namespace CSCI526GameJam {
                 cardConfigToUsageNum[card.Config] = 1;
             }
 
-            OnCardsPlayed?.Invoke(selectedCards.ToArray());
+            var playedCards = selectedCards.ToArray();
             selectedCards.ForEach(x => hand.Remove(x));
             selectedCards.Clear();
 
+            OnCardsPlayed?.Invoke(playedCards);
             return true;
         }
 

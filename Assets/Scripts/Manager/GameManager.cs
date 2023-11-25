@@ -45,6 +45,7 @@ namespace CSCI526GameJam {
         public event Action OnGameWon;
         public event Action OnGameOver;
 
+        public event Action OnTutorialStarted;
         public event Action OnTutorialEnded;
 
         public event Action OnCurrentSceneExiting;
@@ -134,6 +135,7 @@ namespace CSCI526GameJam {
             if (doTutorial) {
                 doTutorial = false;
                 isInTutorial = true;
+                OnTutorialStarted?.Invoke();
             }
             StartPreparation();
         }
@@ -165,8 +167,8 @@ namespace CSCI526GameJam {
         }
 
         private void CleanupGameplay() {
-            //Destroy(Player.Instance.gameObject);
-            //Destroy(InputManager.Instance.gameObject);
+            doTutorial = false;
+            isInTutorial = false;
         }
         #endregion
 

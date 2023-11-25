@@ -6,9 +6,10 @@ using TMPro;
 using UnityEngine.UI;
 using DG.Tweening;
 using Sirenix.OdinInspector;
+using UnityEngine.EventSystems;
 
 namespace CSCI526GameJam {
-    public class UICard : MonoBehaviour {
+    public class UICard : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler {
 
         #region Fields
         [MandatoryFields]
@@ -26,6 +27,7 @@ namespace CSCI526GameJam {
         [SerializeField] private Color[] levelColors;
 
         [Title("UI")]
+        [SerializeField] private string onHoveredSortingLayer;
         [SerializeField] private Image costIcon;
         [SerializeField] private Image levelIcon;
         [SerializeField] private Image imageBackground;
@@ -42,6 +44,7 @@ namespace CSCI526GameJam {
 
         private RectTransform rectTransform;
         private LayoutElement layoutElement;
+        private Canvas canvas;
         private CanvasGroup canvasGroup;
 
         private Vector2 size;
@@ -122,6 +125,7 @@ namespace CSCI526GameJam {
         private void Awake() {
             rectTransform = GetComponent<RectTransform>();
             layoutElement = GetComponent<LayoutElement>();
+            canvas = GetComponent<Canvas>();
             canvasGroup = GetComponent<CanvasGroup>();
 
             button.interactable = false;
@@ -131,6 +135,17 @@ namespace CSCI526GameJam {
 
         private void OnDestroy() {
             startAnimSeq.Kill();
+        }
+
+        public void OnPointerEnter(PointerEventData eventData) {
+            canvas.overrideSorting = true;
+            canvas.sortingLayerName = onHoveredSortingLayer;
+            canvas.sortingOrder = 1;
+        }
+
+        public void OnPointerExit(PointerEventData eventData) {
+            canvas.overrideSorting = false;
+            canvas.sortingOrder = 0;
         }
         #endregion
     }

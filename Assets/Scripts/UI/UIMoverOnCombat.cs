@@ -5,17 +5,20 @@ using UnityEngine;
 using DG.Tweening;
 
 namespace CSCI526GameJam {
+
+    [RequireComponent(typeof(CanvasGroup))]
     public class UIMoverOnCombat : MonoBehaviour {
 
         #region Fields
         [MandatoryFields]
-        [SerializeField] private Vector3 stepOffset;
+        [SerializeField] private Vector2 stepOffset;
         [SerializeField] private float stepDuration;
 
         [ComputedFields]
-        [SerializeField] private Vector3 origin;
+        [SerializeField] private Vector2 origin;
 
         private RectTransform rectTransform;
+        private CanvasGroup canvasGroup;
         #endregion
 
         #region Publics
@@ -23,18 +26,25 @@ namespace CSCI526GameJam {
 
         #region Internals
         private void OnCombatStartedHandler() {
-            rectTransform.DOMove(rectTransform.position + stepOffset, stepDuration).SetEase(Ease.OutQuad);
+            canvasGroup.interactable = false;
+
+            var pos = rectTransform.anchoredPosition + stepOffset;
+            rectTransform.DOAnchorPos(pos, stepDuration).SetEase(Ease.OutQuad);
         }
 
+        [ContextMenu("t")]
         private void OnPreparationStartedHandler() {
-            rectTransform.DOMove(origin, stepDuration).SetEase(Ease.OutQuad);
+            rectTransform.DOAnchorPos(origin, stepDuration).SetEase(Ease.OutQuad)
+                .OnComplete(() => canvasGroup.interactable = true);
         }
         #endregion
 
         #region Unity Methods
         private void Start() {
+            canvasGroup = GetComponent<CanvasGroup>();
+
             rectTransform = transform as RectTransform;
-            origin = rectTransform.position;
+            origin = rectTransform.anchoredPosition;
 
             GameManager.Instance.OnCombatStarted += OnCombatStartedHandler;
             GameManager.Instance.OnPreparationStarted += OnPreparationStartedHandler;

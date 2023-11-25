@@ -9,7 +9,7 @@ using UnityEngine.EventSystems;
 namespace CSCI526GameJam {
     public class Player : MonoBehaviourSingleton<Player> {
 
-        private enum Mode {
+        public enum Mode {
             None,
 
             Build,
@@ -17,9 +17,6 @@ namespace CSCI526GameJam {
         }
 
         #region Fields
-
-        public static bool IsMouseOverUI { get; private set; }
-
         [MandatoryFields]
         [SerializeField] private int initialGold;
 
@@ -44,8 +41,9 @@ namespace CSCI526GameJam {
         #endregion
 
         #region Publics
+        public event Action<Mode> OnModeChanged;
         public event Action<int> OnGoldChanged;
-        public event Action<TowerConfig, int> OnTowerNumChanged;
+        public event Action<TowerConfig> OnTowerPicked;
         public event Action<TowerConfig> OnTowerPlaced;
         public event Action<TowerConfig> OnTowerDemolished;
 
@@ -110,7 +108,7 @@ namespace CSCI526GameJam {
                 ChangeMode(Mode.None);
             }
 
-            OnTowerNumChanged?.Invoke(config, towerConfigToNum[config]);
+            OnTowerPicked?.Invoke(config);
         }
 
         /// <summary>
@@ -162,10 +160,12 @@ namespace CSCI526GameJam {
                 default:
                     break;
             }
+
+            OnModeChanged?.Invoke(mode);
         }
 
         private void PerformMode() {
-            if (IsMouseOverUI) return;
+            if (InputManager.IsMouseOverUI) return;
             if (isLocked) return;
 
             switch (mode) {
@@ -257,9 +257,7 @@ namespace CSCI526GameJam {
 
         // Set the json output to get the in game values.
         private void Update() {
-            IsMouseOverUI = EventSystem.current.IsPointerOverGameObject();
-
-            hoveredTower = MapManager.Instance.MouseSpot.Tower;
+            hoveredTower = InputManager.IsMouseOverUI ? null : MapManager.Instance.MouseSpot.Tower;
             if (hoveredTower && hoveredTower is not PlayerBase) {
                 spotIndicator.gameObject.SetActive(true);
                 spotIndicator.transform.position = hoveredTower.Spot.Position;
