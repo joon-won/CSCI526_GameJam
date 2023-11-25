@@ -17,6 +17,6 @@ MonoBehaviour:
   description: 
   attackDamage: 0
   attackSpeed: 0.25
-  attackRange: 5
+  attackRange: 2.5
   critChance: 0
   critDamage: 0

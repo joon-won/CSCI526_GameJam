@@ -10,13 +10,14 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 2ba8f2e0c846b9645ba418c7c0229108, type: 3}
-  m_Name: ShroomEnemy
+  m_Name: Trunk
   m_EditorClassIdentifier: 
-  regularSprite: {fileID: 21300000, guid: f7f0bf26f25bb5b4ea4f37db6ce71cb1, type: 3}
-  frozenSprite: {fileID: 21300000, guid: af8b8918e292fd344bdd0629f1782031, type: 3}
+  regularSprite: {fileID: 21300000, guid: 9769d5bdcb14c9c478627a20b24b0cf2, type: 3}
+  frozenSprite: {fileID: 21300000, guid: c0bd663eeee1bdb4892b09ad7909056f, type: 3}
   description: 
-  golddrop: 1
-  maxHitPoint: 50
-  attackDamage: 1
-  moveSpeed: 2.5
+  golddrop: 2
+  maxHitPoint: 5
+  attackDamage: 2
+  moveSpeed: 2
   armor: 0
+  isFlying: 0

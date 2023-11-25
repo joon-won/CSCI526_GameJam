@@ -21,4 +21,4 @@ MonoBehaviour:
   image: {fileID: 0}
   lv1NumCard: 1
   lv2NumCard: 2
-  lv3NumCard: 4
+  lv3NumCard: 3

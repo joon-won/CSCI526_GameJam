@@ -21,4 +21,4 @@ MonoBehaviour:
   image: {fileID: 0}
   lv1Heal: 2
   lv2Heal: 5
-  lv3Heal: 15
+  lv3Heal: 10

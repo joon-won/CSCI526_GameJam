@@ -15,9 +15,8 @@ MonoBehaviour:
   preview: {fileID: 21300000, guid: 2d13b44c682a56c49b226dc57d19ad3c, type: 3}
   image: {fileID: 21300000, guid: 2d13b44c682a56c49b226dc57d19ad3c, type: 3}
   description: Todo
-  price: 10
-  attackDamage: 2
-  attackSpeed: 10
-  attackRange: 10
+  attackDamage: 1
+  attackSpeed: 2
+  attackRange: 5
   critChance: 0
   critDamage: 0.5

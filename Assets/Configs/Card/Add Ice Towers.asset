@@ -21,5 +21,5 @@ MonoBehaviour:
   image: {fileID: 0}
   config: {fileID: 11400000, guid: a7fae8a0445f9b84ab7a7060a509152d, type: 2}
   numLv1: 1
-  numLv2: 3
-  numLv3: 6
+  numLv2: 2
+  numLv3: 3
