@@ -73,7 +73,7 @@ namespace CSCI526GameJam {
             startAnimSeq.Join(layoutElement.DOPreferredSize(size, startAnimDuration).SetEase(Ease.OutQuad));
             body.position = startPos;
 
-            startAnimSeq.Join(body.DOLocalMove(Vector3.zero, startAnimDuration).SetEase(Ease.OutQuad));
+            startAnimSeq.Join(body.DOAnchorPos(Vector2.zero, startAnimDuration).SetEase(Ease.OutQuad));
             startAnimSeq.Join(
                 body.DOScale(Vector3.one, startAnimDuration).SetEase(Ease.OutQuad)
                 .OnComplete(() => {
@@ -88,7 +88,7 @@ namespace CSCI526GameJam {
             canvasGroup.interactable = false;
 
             playAnimSeq.Join(canvasGroup.DOFade(0f, playAnimDuration).SetEase(Ease.OutQuad));
-            playAnimSeq.Join(body.DOLocalMoveY(playOffsetY, playAnimDuration).SetEase(Ease.OutQuad));
+            playAnimSeq.Join(body.DOAnchorPosY(playOffsetY, playAnimDuration).SetEase(Ease.OutQuad));
             playAnimSeq.Append(
                 layoutElement.DOPreferredSize(new(0f, size.y), playAnimDuration * 0.5f)
                 .SetEase(Ease.OutQuad)
@@ -116,6 +116,17 @@ namespace CSCI526GameJam {
             descriptionText.text = card.GetDescription();
             image.sprite = card.Image;
         }
+        
+        public void OnPointerEnter(PointerEventData eventData) {
+            canvas.overrideSorting = true;
+            canvas.sortingLayerName = onHoveredSortingLayer;
+            canvas.sortingOrder = 1;
+        }
+
+        public void OnPointerExit(PointerEventData eventData) {
+            canvas.overrideSorting = false;
+            canvas.sortingOrder = 0;
+        }
         #endregion
 
         #region Internals
@@ -135,17 +146,6 @@ namespace CSCI526GameJam {
 
         private void OnDestroy() {
             startAnimSeq.Kill();
-        }
-
-        public void OnPointerEnter(PointerEventData eventData) {
-            canvas.overrideSorting = true;
-            canvas.sortingLayerName = onHoveredSortingLayer;
-            canvas.sortingOrder = 1;
-        }
-
-        public void OnPointerExit(PointerEventData eventData) {
-            canvas.overrideSorting = false;
-            canvas.sortingOrder = 0;
         }
         #endregion
     }

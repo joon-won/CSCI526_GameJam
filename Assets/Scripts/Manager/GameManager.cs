@@ -10,7 +10,6 @@ namespace CSCI526GameJam {
     /// <summary>
     /// Manage game state. 
     /// </summary>
-
     public class GameManager : MonoBehaviourSingleton<GameManager> {
 
         public enum State {
@@ -45,7 +44,7 @@ namespace CSCI526GameJam {
         public event Action OnGameWon;
         public event Action OnGameOver;
 
-        public event Action OnTutorialStarted;
+        public event Action<int> OnTutorialStarted;
         public event Action OnTutorialEnded;
 
         public event Action OnCurrentSceneExiting;
@@ -62,7 +61,14 @@ namespace CSCI526GameJam {
                 doTutorial = value;
             }
         }
-        public int TutorialLevel => tutorialLevel;
+        public int TutorialLevel {
+            get {
+                return tutorialLevel;
+            }
+            set {
+                tutorialLevel = Mathf.Clamp(value, 0, tutorialConfig.TutorialInfos.Length);
+            }
+        }
 
         /// <summary>
         /// Load into a scene. 
@@ -96,11 +102,16 @@ namespace CSCI526GameJam {
                 return;
             }
 
-            if (isInTutorial && tutorialLevel >= tutorialConfig.TutorialInfos.Length) {
-                isInTutorial = false;
-                Player.Instance.EndTutorial();
-                CardManager.Instance.EndTutorial();
-                OnTutorialEnded?.Invoke();
+            if (isInTutorial) {
+                if (tutorialLevel >= tutorialConfig.TutorialInfos.Length) {
+                    isInTutorial = false;
+                    Player.Instance.EndTutorial();
+                    CardManager.Instance.EndTutorial();
+                    OnTutorialEnded?.Invoke();
+                }
+                else {
+                    OnTutorialStarted?.Invoke(tutorialLevel);
+                }
             }
 
             state = State.Preparation;
@@ -131,11 +142,9 @@ namespace CSCI526GameJam {
             EnemyManager.Instance.OnEnemiesClear += StartPreparation;
 
             level = 0;
-            tutorialLevel = 0;
             if (doTutorial) {
                 doTutorial = false;
                 isInTutorial = true;
-                OnTutorialStarted?.Invoke();
             }
             StartPreparation();
         }

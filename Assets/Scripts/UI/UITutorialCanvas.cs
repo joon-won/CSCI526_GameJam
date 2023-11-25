@@ -23,15 +23,26 @@ namespace CSCI526GameJam {
         private InputManager inputManager;
         private CardManager cardManager;
         private Player player;
+
+        private Coroutine doTutorialRoutine;
         #endregion
 
         #region Publics
+        public void EnableRaycastBlocker() {
+            raycastBlocker.SetActive(true);
+        }
+
+        public void DisableRaycastBlocker() {
+            raycastBlocker.SetActive(false);
+        }
         #endregion
 
         #region Internals
         private void InitTutorials() {
             tutorialSteps.Clear();
             foreach (Transform tutorial in tutorialsHolder) {
+                tutorial.gameObject.SetActive(true);
+
                 var steps = new List<UIPerforatableMask>();
                 foreach (Transform child in tutorial) {
                     if (child.TryGetComponent<UIPerforatableMask>(out var step)) {
@@ -46,153 +57,131 @@ namespace CSCI526GameJam {
             }
         }
 
-        private void Begin() {
+        private void Begin(int tutorialLevel) {
             gameObject.SetActive(true);
-            StartCoroutine(BeginRoutine());
+            DoTutorial(tutorialLevel, 0, startDelay);
         }
 
-        private IEnumerator BeginRoutine() {
-            inputManager.Toggle(false);
-            raycastBlocker.SetActive(true);
-
-            yield return new WaitForSeconds(startDelay);
-
-            inputManager.Toggle(true);
-            raycastBlocker.SetActive(false);
-            DoTutorial(0, 0);
+        private void DoTutorial(int tutorialIndex, int stepIndex, float delay) {
+            if (doTutorialRoutine != null) {
+                Debug.LogWarning("A tutorial routine already exists. ");
+                return;
+            }
+            doTutorialRoutine = StartCoroutine(DoTutorialRoutine(tutorialIndex, stepIndex, delay));
         }
 
-
-        private void DoTutorial(int tutorialIndex, int stepIndex) {
-            void DoNext() {
-                DoTutorial(tutorialIndex, stepIndex + 1);
+        private IEnumerator DoTutorialRoutine(int tutorialIndex, int stepIndex, float delay) {
+            void DoNext(float delayToDoNext = 0f) {
+                var nextIndex = stepIndex + 1;
+                if (nextIndex >= tutorialSteps[tutorialIndex].Count) {
+                    Debug.Log($"Tutorial {tutorialIndex} has completed. ");
+                    return;
+                }
+                DoTutorial(tutorialIndex, nextIndex, delayToDoNext);
             }
 
             void Close() {
                 tutorialSteps[tutorialIndex][stepIndex].gameObject.SetActive(false);
             }
 
+            void SetUpViewOnly(float delayToDoNext = 0f) {
+                EnableRaycastBlocker();
+
+                Action handler = null;
+                handler = () => {
+                    Close();
+                    DoNext(delayToDoNext);
+                    inputManager.OnMouseLeftUp -= handler;
+                };
+                inputManager.OnMouseLeftUp += handler;
+            }
+
+            void SetUpCardSelection(Func<bool> validator, float delayToDoNext = 0f) {
+                Action<Card> handler = null;
+                handler = _ => {
+                    if (!validator.Invoke()) return;
+
+                    Close();
+                    DoNext(delayToDoNext);
+                    cardManager.OnCardSelected -= handler;
+                };
+                cardManager.OnCardSelected += handler;
+            }
+
+            void SetUpCardPlay(Func<bool> validator, float delayToDoNext = 0f) {
+                Action<Card[]> handler = null;
+                handler = _ => {
+                    if (!validator.Invoke()) return;
+
+                    Close();
+                    DoNext(delayToDoNext);
+                    cardManager.OnCardsPlayed -= handler;
+                };
+                cardManager.OnCardsPlayed += handler;
+            }
+
+            if (delay > 0f) {
+                inputManager.Toggle(false);
+                EnableRaycastBlocker();
+                yield return new WaitForSeconds(delay);
+            }
+
+            inputManager.Toggle(true);
+            DisableRaycastBlocker();
             tutorialSteps[tutorialIndex][stepIndex].gameObject.SetActive(true);
 
             switch (tutorialIndex) {
 
-                // Tutorial level 1
+                // Tutorial level 1. 
                 case 0: {
                     switch (stepIndex) {
 
                         // Introduce card cost. 
                         case 0: {
-                            raycastBlocker.SetActive(true);
-
-                            Action handler = null;
-                            handler = () => {
-                                Close();
-                                DoNext();
-                                inputManager.OnMouseLeftUp -= handler;
-                            };
-                            inputManager.OnMouseLeftUp += handler;
-
+                            SetUpViewOnly();
                             break;
                         }
-                        
+
                         // Introduce card name. 
                         case 1: {
-                            Action handler = null;
-                            handler = () => {
-                                Close();
-                                DoNext();
-                                inputManager.OnMouseLeftUp -= handler;
-                            };
-                            inputManager.OnMouseLeftUp += handler;
-
+                            SetUpViewOnly();
                             break;
                         }
-                        
+
                         // Introduce card level. 
                         case 2: {
-                            Action handler = null;
-                            handler = () => {
-                                Close();
-                                DoNext();
-                                inputManager.OnMouseLeftUp -= handler;
-                            };
-                            inputManager.OnMouseLeftUp += handler;
-
+                            SetUpViewOnly();
                             break;
                         }
-                        
+
                         // Introduce card effect. 
                         case 3: {
-                            Action handler = null;
-                            handler = () => {
-                                Close();
-                                DoNext();
-                                inputManager.OnMouseLeftUp -= handler;
-                            };
-                            inputManager.OnMouseLeftUp += handler;
-
+                            SetUpViewOnly();
                             break;
                         }
 
                         // Introduce card selection. 
                         case 4: {
-                            raycastBlocker.SetActive(false);
-
-                            Action<Card> handler = null;
-                            handler = _ => {
-                                if (cardManager.NumSelected != cardManager.NumOnHand) return;
-
-                                Close();
-                                DoNext();
-                                cardManager.OnCardSelected -= handler;
-                            };
-                            cardManager.OnCardSelected += handler;
-
+                            SetUpCardSelection(
+                                () => cardManager.CurrentPattern == CardManager.Pattern.X);
                             break;
                         }
 
                         // Introduce play and unselect buttons.  
                         case 5: {
-                            raycastBlocker.SetActive(true);
-
-                            Action handler = null;
-                            handler = () => {
-                                Close();
-                                DoNext();
-                                inputManager.OnMouseLeftUp -= handler;
-                            };
-                            inputManager.OnMouseLeftUp += handler;
-
+                            SetUpViewOnly();
                             break;
                         }
 
                         // Introduce selected info.  
                         case 6: {
-                            Action handler = null;
-                            handler = () => {
-                                Close();
-                                DoNext();
-                                inputManager.OnMouseLeftUp -= handler;
-                            };
-                            inputManager.OnMouseLeftUp += handler;
-
+                            SetUpViewOnly();
                             break;
                         }
 
                         // Wait for player to play a card.  
                         case 7: {
-                            raycastBlocker.SetActive(false);
-
-                            Action<Card[]> handler = null;
-                            handler = _ => {
-                                if (cardManager.NumOnHand != 0) return;
-
-                                Close();
-                                DoNext();
-                                cardManager.OnCardsPlayed -= handler;
-                            };
-                            cardManager.OnCardsPlayed += handler;
-
+                            SetUpCardPlay(() => true);
                             break;
                         }
 
@@ -229,22 +218,76 @@ namespace CSCI526GameJam {
                             break;
                         }
                     }
-
                     break;
                 }
 
-                // Tutorial level 2
+                // Tutorial level 2. 
                 case 1: {
+                    switch (stepIndex) {
 
+                        // Introduce XX. 
+                        case 0: {
+                            SetUpViewOnly();
+                            break;
+                        }
+
+                        // Wait to select XX. 
+                        case 1: {
+                            SetUpCardSelection(
+                                () => cardManager.CurrentPattern == CardManager.Pattern.XX);
+                            break;
+                        }
+
+                        // Note the change of level and effect. 
+                        case 2: {
+                            SetUpViewOnly();
+                            break;
+                        }
+
+                        // Play XX. 
+                        case 3: {
+                            SetUpCardPlay(() => true, startDelay);
+                            break;
+                        }
+
+                        // Introduce XXXY. 
+                        case 4: {
+                            SetUpViewOnly();
+                            break;
+                        }
+
+                        // Wait to select XXXY. 
+                        case 5: {
+                            SetUpCardSelection(
+                                () => cardManager.CurrentPattern == CardManager.Pattern.XXXY);
+                            break;
+                        }
+
+                        // Note the reduced cost. 
+                        case 6: {
+                            SetUpViewOnly();
+                            break;
+                        }
+
+                        // Play XXXY. 
+                        case 7: {
+                            SetUpCardPlay(() => true);
+                            break;
+                        }
+
+                    }
                     break;
                 }
 
-                // Tutorial level 3
+                // Tutorial level 3. 
                 case 2: {
 
                     break;
                 }
             }
+            yield return null;
+            
+            doTutorialRoutine = null;
         }
         #endregion
 
