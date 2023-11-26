@@ -79,7 +79,7 @@ namespace CSCI526GameJam {
             }
 
             void Close() {
-                tutorialSteps[tutorialIndex][stepIndex].gameObject.SetActive(false);
+                tutorialSteps[tutorialIndex][stepIndex].Hide();
             }
 
             void SetUpViewOnly(float delayToDoNext = 0f) {
@@ -126,7 +126,7 @@ namespace CSCI526GameJam {
 
             inputManager.Toggle(true);
             DisableRaycastBlocker();
-            tutorialSteps[tutorialIndex][stepIndex].gameObject.SetActive(true);
+            tutorialSteps[tutorialIndex][stepIndex].Show(); ;
 
             switch (tutorialIndex) {
 

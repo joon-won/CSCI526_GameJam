@@ -4,6 +4,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
+using DG.Tweening;
+using System.Linq;
 
 namespace CSCI526GameJam {
 
@@ -11,12 +13,36 @@ namespace CSCI526GameJam {
 
         #region Fields
         [MandatoryFields]
+        [SerializeField] private float animDuration;
+        [SerializeField] private Ease easeMode;
+        [SerializeField] private Color shadeColor;
+
         [SerializeField] private Transform cutoutHolder;
         [SerializeField] private PerforatableImage perforatableImage;
+
+        private List<UICutout> cutouts = new();
+        private Tween showTween;
         #endregion
 
         #region Publics
         public event Action<PointerEventData> OnClicked;
+
+
+        public void Show() {
+            gameObject.SetActive(true);
+            perforatableImage.color = Color.clear;
+
+            showTween.Kill();
+            showTween = perforatableImage.DOColor(shadeColor, animDuration).SetEase(easeMode);
+
+            cutouts.ForEach(x => x.Show(animDuration, easeMode));
+        }
+
+        public void Hide() {
+            gameObject.SetActive(false);
+            showTween.Kill();
+            cutouts.ForEach(x => x.Hide());
+        }
 
         public void ToggleCutoutRaycast(bool isEnabled) {
             perforatableImage.AllowCutoutRaycast = isEnabled;
@@ -36,10 +62,8 @@ namespace CSCI526GameJam {
 
         #region Unity Methods
         private void Awake() {
-            List<RectTransform> cutouts = new();
             foreach (RectTransform cutout in cutoutHolder.transform) {
-                cutout.GetComponent<Image>().raycastTarget = false;
-                cutouts.Add(cutout);
+                cutouts.Add(cutout.GetComponent<UICutout>());
             }
             perforatableImage.AddCutouts(cutouts);
         }

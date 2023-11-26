@@ -9,7 +9,7 @@ namespace CSCI526GameJam {
     public class PerforatableImage : Image {
 
         #region Fields
-        [SerializeField] private List<RectTransform> cutouts = new();
+        [SerializeField] private List<UICutout> cutouts = new();
         private bool allowCutoutRaycast = true;
         #endregion
 
@@ -23,18 +23,18 @@ namespace CSCI526GameJam {
             }
         }
 
-        public void AddCutout(RectTransform cutout) {
+        public void AddCutout(UICutout cutout) {
             cutouts.Add(cutout);
         }
 
-        public void AddCutouts(IEnumerable<RectTransform> cutouts) {
+        public void AddCutouts(IEnumerable<UICutout> cutouts) {
             this.cutouts.AddRange(cutouts);
         }
 
         public override bool IsRaycastLocationValid(Vector2 screenPoint, Camera eventCamera) {
             if (allowCutoutRaycast && cutouts.Any(
                 cutout => cutout.gameObject.activeInHierarchy 
-                && IsScreenPointInCutout(cutout, screenPoint, eventCamera))) {
+                && IsScreenPointInCutout((RectTransform)cutout.transform, screenPoint, eventCamera))) {
                 return false;
             }
             return base.IsRaycastLocationValid(screenPoint, eventCamera);
