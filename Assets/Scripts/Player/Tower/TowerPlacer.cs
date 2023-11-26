@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using DG.Tweening;
 
 namespace CSCI526GameJam {
 
@@ -9,6 +10,7 @@ namespace CSCI526GameJam {
 
         #region Fields
         [MandatoryFields]
+        [SerializeField] private float moveAnimDuration;
         [SerializeField] private LayerMask blockerLayer;
         [SerializeField] private Transform rangeIndicator;
 
@@ -21,6 +23,7 @@ namespace CSCI526GameJam {
         [SerializeField] private bool canBuild;
 
         private SpriteRenderer spriteRenderer;
+        private Tween moveTween;
         #endregion
 
         #region Publics
@@ -70,36 +73,32 @@ namespace CSCI526GameJam {
                 // TODO: Invoke OnBuildBlocked
                 return false;
             }
-            if (!IsBaseReachable(cachedSpot)) {
-                // TODO: Invoke OnPathBlocked
-                return false;
-            }
 
+            var placedConfig = cachedTower.Config;
             cachedTower.Build(cachedSpot);
-            OnPlaced?.Invoke(cachedTower.Config);
-
             CancelPreview();
+
+            OnPlaced?.Invoke(placedConfig);
             return true;
         }
         #endregion
 
         #region Internals
-        private bool IsBaseReachable(Spot spot) {
-            var path = new Path(MapManager.Instance.Spots[0, 0], TowerManager.Instance.PlayerBase.Spot, new() { spot });
-            return path.GroundSpots.Count > 0;
-        }
-
         private void Refresh(Spot spot = null) {
             if (!isPreviewing) return;
 
             cachedSpot = spot ? spot : MapManager.Instance.MouseSpot;
 
             var isBlocked = Physics2D.OverlapBox(cachedSpot.Position, new(Configs.CellSize, Configs.CellSize), 0f, blockerLayer);
-            canBuild = isBlocked || !IsBaseReachable(spot)
+            canBuild = isBlocked || !EnemyManager.Instance.CanEnemiesReachBase(spot)
                 ? false : cachedTower.CanBuild(cachedSpot);
-            spriteRenderer.color = canBuild ? Color.white : Color.red;
 
-            transform.position = cachedSpot.Position;
+            var color = canBuild ? Color.white : Color.red;
+            color.a = spriteRenderer.color.a;
+            spriteRenderer.color = color;
+
+            moveTween.Kill();
+            moveTween = transform.DOMove(cachedSpot.Position, moveAnimDuration).SetEase(Ease.OutQuad);
         }
         #endregion
 

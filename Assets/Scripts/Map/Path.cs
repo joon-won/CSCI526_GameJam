@@ -20,7 +20,7 @@ namespace CSCI526GameJam {
         public List<Spot> GroundSpots => groundSpots;
         public List<Spot> AirSpots => airSpots;
 
-        public Path(Spot start, Spot end, HashSet<Spot> extraBlocks = null) {
+        public Path(Spot start, Spot end, IEnumerable<Spot> extraBlocks = null) {
             if (extraBlocks != null) {
                 this.extraBlocks = new(extraBlocks);
             }

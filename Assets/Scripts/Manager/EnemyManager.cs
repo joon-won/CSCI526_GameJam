@@ -41,6 +41,14 @@ namespace CSCI526GameJam {
             Debug.Log($"Found {enemyPrefabs.Count} enemy prefabs under {enemyPrefabsPath}. ");
         }
 #endif
+
+        public bool CanEnemiesReachBase(params Spot[] blocks) {
+            return spawnSpotToWave.Keys.All(
+                spot => {
+                    var path = new Path(spot, TowerManager.Instance.PlayerBase.Spot, blocks);
+                    return path.GroundSpots.Count > 0;
+                });
+        }
         #endregion
 
         #region Internals

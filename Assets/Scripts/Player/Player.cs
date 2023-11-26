@@ -97,7 +97,10 @@ namespace CSCI526GameJam {
         /// </summary>
         /// <param name="index">Index of the tower in pool. </param>
         public void PickTower(TowerConfig config) {
-            if (GetTowerNum(config) <= 0) return;
+            if (GetTowerNum(config) <= 0) {
+                ChangeMode(Mode.None);
+                return;
+            }
 
             var tower = TowerManager.Instance.CreateTower(config);
             if (!placer.IsPreviewing) {
@@ -187,7 +190,6 @@ namespace CSCI526GameJam {
                 case Mode.Build:
                     if (!placer.TryPlace()) return;
 
-                    ChangeMode(Mode.None);
                     break;
 
                 case Mode.Demolish:
@@ -212,12 +214,15 @@ namespace CSCI526GameJam {
             ChangeMode(Mode.None);
         }
 
-        private void ConsumeOnPlaced(TowerConfig config) {
+        private void OnPlacedHandler(TowerConfig config) {
             if (!towerConfigToNum.ContainsKey(config)) {
                 Debug.LogWarning($"{config} is not in the dict. ");
                 return;
             }
             towerConfigToNum[config]--;
+            OnTowerPlaced?.Invoke(config);
+
+            PickTower(config);
         }
 
         [ContextMenu("<Debug> Add all towers")]
@@ -237,8 +242,7 @@ namespace CSCI526GameJam {
             changeModeToDemolish = () => ChangeMode(Mode.Demolish);
 
             placer = GetComponentInChildren<TowerPlacer>();
-            placer.OnPlaced += ConsumeOnPlaced;
-            placer.OnPlaced += config => OnTowerPlaced?.Invoke(config);
+            placer.OnPlaced += OnPlacedHandler;
 
             GameManager.Instance.OnPreparationStarted += Unlock;
             GameManager.Instance.OnCombatStarted += Lock;
