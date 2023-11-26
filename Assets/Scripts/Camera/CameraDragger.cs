@@ -10,6 +10,9 @@ namespace CSCI526GameJam {
         [SerializeField] private float dragSmoothTime = 2f;
         [SerializeField] private float inertiaMagnitude = 1f;
 
+        public Vector2 MinBounds;
+        public Vector2 MaxBounds;
+
         private Vector3 origin;
         private Vector3 delta;
         private Vector3 prev;
@@ -52,7 +55,16 @@ namespace CSCI526GameJam {
                 underInertia = false;
                 time = 0f;
             }
+
+
+            Camera.main.transform.position = ClampCameraPosition(Camera.main.transform.position);
         }
 
+        private Vector3 ClampCameraPosition(Vector3 position) {
+            position.x = Mathf.Clamp(position.x, MinBounds.x, MaxBounds.x);
+            position.y = Mathf.Clamp(position.y, MinBounds.y, MaxBounds.y);
+
+            return position;
+        }
     }
 }

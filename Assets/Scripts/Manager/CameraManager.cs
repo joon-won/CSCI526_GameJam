@@ -38,9 +38,11 @@ namespace CSCI526GameJam {
             var z = Camera.main.transform.position.z;
             camera.transform.position = new(mapCenter.x, mapCenter.y, z);
 
-            //var rectHeight = MapManager.Instance.MapSize * Configs.CellSize;
-            //var aspectRatio = camera.aspect;
-            //camera.orthographicSize = (rectHeight / 2) / aspectRatio;
+            var spots = MapManager.Instance.Spots;
+            var leftBottom = spots[0, 0].Position;
+            var rightTop = spots[spots.Width - 1, spots.Height - 1].Position;
+            cameraDragger.MinBounds = leftBottom;
+            cameraDragger.MaxBounds = rightTop;
         }
 
         /// <summary>
