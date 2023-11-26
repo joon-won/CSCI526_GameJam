@@ -13,8 +13,6 @@ namespace CSCI526GameJam {
         [SerializeField] private float startDelay;
         [SerializeField] private GameObject raycastBlocker;
 
-        [SerializeField] private GameObject groundPathTip;
-
         [SerializeField] private Transform tutorialsHolder;
 
         private List<List<UIPerforatableMask>> tutorialSteps = new();
@@ -74,7 +72,7 @@ namespace CSCI526GameJam {
             void DoNext(float delayToDoNext = 0f) {
                 var nextIndex = stepIndex + 1;
                 if (nextIndex >= tutorialSteps[tutorialIndex].Count) {
-                    Debug.Log($"Tutorial {tutorialIndex} has completed. ");
+                    Debug.Log($"Tutorial {tutorialIndex} reaches the end. ");
                     return;
                 }
                 DoTutorial(tutorialIndex, nextIndex, delayToDoNext);
@@ -190,15 +188,19 @@ namespace CSCI526GameJam {
                             Action<TowerConfig> onPickedHandler = null;
                             onPickedHandler = _ => {
                                 Close();
-                                groundPathTip.SetActive(true);
+                                DoNext();
                                 player.OnTowerPicked -= onPickedHandler;
                             };
                             player.OnTowerPicked += onPickedHandler;
 
+                            break;
+                        }
+
+                        case 9: {
                             Action<TowerConfig> onPlacedHandler = null;
                             onPlacedHandler = _ => {
+                                Close();
                                 DoNext();
-                                groundPathTip.SetActive(false);
                                 player.OnTowerPlaced -= onPlacedHandler;
                             };
                             player.OnTowerPlaced += onPlacedHandler;
@@ -207,7 +209,7 @@ namespace CSCI526GameJam {
                         }
 
                         // Introduce start combat button. 
-                        case 9: {
+                        case 10: {
                             Action handler = null;
                             handler = () => {
                                 Close();
@@ -275,6 +277,17 @@ namespace CSCI526GameJam {
                             break;
                         }
 
+                        // Wait for combat.  
+                        case 8: {
+                            Action handler = null;
+                            handler = () => {
+                                Close();
+                                gameManager.OnCombatStarted -= handler;
+                            };
+                            gameManager.OnCombatStarted += handler;
+
+                            break;
+                        }
                     }
                     break;
                 }
@@ -299,7 +312,6 @@ namespace CSCI526GameJam {
             player = Player.Instance;
 
             InitTutorials();
-            groundPathTip.SetActive(false);
 
             gameManager.OnTutorialStarted += Begin;
             gameManager.OnCurrentSceneExiting += () => {

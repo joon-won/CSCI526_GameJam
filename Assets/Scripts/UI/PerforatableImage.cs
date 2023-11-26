@@ -32,7 +32,9 @@ namespace CSCI526GameJam {
         }
 
         public override bool IsRaycastLocationValid(Vector2 screenPoint, Camera eventCamera) {
-            if (allowCutoutRaycast && cutouts.Any(cutout => IsScreenPointInCutout(cutout, screenPoint, eventCamera))) {
+            if (allowCutoutRaycast && cutouts.Any(
+                cutout => cutout.gameObject.activeInHierarchy 
+                && IsScreenPointInCutout(cutout, screenPoint, eventCamera))) {
                 return false;
             }
             return base.IsRaycastLocationValid(screenPoint, eventCamera);

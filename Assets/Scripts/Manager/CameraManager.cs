@@ -61,7 +61,7 @@ namespace CSCI526GameJam {
 
         private void DragCamera(bool enabled) {
             if (!isFree) return;
-            if (InputManager.IsMouseOverUI) return;
+            if (enabled && InputManager.IsMouseOverUI) return;
             cameraDragger.ToggleDragToMoveCamera(enabled);
         }
 

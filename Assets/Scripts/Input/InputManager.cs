@@ -97,8 +97,6 @@ namespace CSCI526GameJam {
         #region Internals
         private void OnMouseLeftDown_performed() {
             isMouseLeftPressed = true;
-            //if (UIManager.IsMouseOverUI) return;
-
             OnMouseLeftDown?.Invoke();
         }
 
@@ -108,8 +106,6 @@ namespace CSCI526GameJam {
         }
 
         private void OnMouseRightDown_performed() {
-            //if (UIManager.IsMouseOverUI) return;
-
             OnMouseRightDown?.Invoke();
         }
         #endregion
