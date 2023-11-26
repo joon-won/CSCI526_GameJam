@@ -33,8 +33,8 @@ namespace CSCI526GameJam {
             };
             gameObject.SetActive(false);
 
-            restartButton.onClick.AddListener(() => GameManager.Instance.LoadGameplayScene(Configs.GameplaySceneIndex));
-            mainMenuButton.onClick.AddListener(() => GameManager.Instance.LoadGameplayScene(Configs.MainMenuSceneIndex));
+            restartButton.onClick.AddListener(() => GameManager.Instance.LoadScene(Configs.GameplaySceneIndex));
+            mainMenuButton.onClick.AddListener(() => GameManager.Instance.LoadScene(Configs.MainMenuSceneIndex));
         }
 
         private void OnEnable() {

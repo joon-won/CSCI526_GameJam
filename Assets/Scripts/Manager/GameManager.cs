@@ -53,30 +53,21 @@ namespace CSCI526GameJam {
         public int Level => level;
         public float GameTime => gameTime;
         public bool IsInTutorial => isInTutorial;
-        public bool DoTutorial {
-            get {
-                return doTutorial;
-            }
-            set {
-                doTutorial = value;
-            }
-        }
-        public int TutorialLevel {
-            get {
-                return tutorialLevel;
-            }
-            set {
-                tutorialLevel = Mathf.Clamp(value, 0, tutorialConfig.TutorialInfos.Length);
-            }
-        }
+        public bool DoTutorial => doTutorial;
+        public int TutorialLevel => tutorialLevel;
 
         /// <summary>
         /// Load into a scene. 
         /// </summary>
         /// <param name="profileIndex">Profile data index. </param>
-        public void LoadGameplayScene(int sceneIndex) {
+        public void LoadScene(int sceneIndex) {
             OnCurrentSceneExiting?.Invoke();
             SceneManager.LoadScene(sceneIndex);
+        }
+
+        public void SetTutorial(bool doTutorial, int tutorialLevel = 0) {
+            this.doTutorial = doTutorial;
+            this.tutorialLevel = tutorialLevel;
         }
 
         public void StartCombat() {

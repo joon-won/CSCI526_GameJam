@@ -126,7 +126,7 @@ namespace CSCI526GameJam {
 
             inputManager.Toggle(true);
             DisableRaycastBlocker();
-            tutorialSteps[tutorialIndex][stepIndex].Show(); ;
+            tutorialSteps[tutorialIndex][stepIndex].Show();
 
             switch (tutorialIndex) {
 
