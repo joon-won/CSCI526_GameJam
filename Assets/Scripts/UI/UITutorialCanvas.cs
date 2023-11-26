@@ -294,12 +294,75 @@ namespace CSCI526GameJam {
 
                 // Tutorial level 3. 
                 case 2: {
+                    switch (stepIndex) {
 
+                        // Introduce XXXYY. 
+                        case 0: {
+                            SetUpViewOnly();
+                            break;
+                        }
+
+                        // Wait to select XXXYY. 
+                        case 1: {
+                            SetUpCardSelection(
+                                () => cardManager.CurrentPattern == CardManager.Pattern.XXXYY);
+                            break;
+                        }
+
+                        // Note the change of level and effect and the reduced cost. 
+                        case 2: {
+                            SetUpViewOnly();
+                            break;
+                        }
+
+                        // Play XXXYY. 
+                        case 3: {
+                            SetUpCardPlay(() => true, startDelay);
+                            break;
+                        }
+
+                        // Introduce XXXX. 
+                        case 4: {
+                            SetUpViewOnly();
+                            break;
+                        }
+
+                        // Wait to select XXXX. 
+                        case 5: {
+                            SetUpCardSelection(
+                                () => cardManager.CurrentPattern == CardManager.Pattern.XXXX);
+                            break;
+                        }
+
+                        // Note the change of level and effect. 
+                        case 6: {
+                            SetUpViewOnly();
+                            break;
+                        }
+
+                        // Play XXXX. 
+                        case 7: {
+                            SetUpCardPlay(() => true);
+                            break;
+                        }
+
+                        // Wait for combat. 
+                        case 8: {
+                            Action handler = null;
+                            handler = () => {
+                                Close();
+                                gameManager.OnCombatStarted -= handler;
+                            };
+                            gameManager.OnCombatStarted += handler;
+
+                            break;
+                        }
+                    }
                     break;
                 }
             }
             yield return null;
-            
+
             doTutorialRoutine = null;
         }
         #endregion
