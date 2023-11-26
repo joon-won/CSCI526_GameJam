@@ -227,58 +227,64 @@ namespace CSCI526GameJam {
                 case 1: {
                     switch (stepIndex) {
 
-                        // Introduce XX. 
+                        // Introduce deck. 
                         case 0: {
                             SetUpViewOnly();
                             break;
                         }
 
-                        // Wait to select XX. 
+                        // Introduce XX. 
                         case 1: {
+                            SetUpViewOnly();
+                            break;
+                        }
+
+                        // Wait to select XX. 
+                        case 2: {
                             SetUpCardSelection(
                                 () => cardManager.CurrentPattern == CardManager.Pattern.XX);
                             break;
                         }
 
                         // Note the change of level and effect. 
-                        case 2: {
+                        case 3: {
                             SetUpViewOnly();
                             break;
                         }
 
                         // Play XX. 
-                        case 3: {
+                        case 4: {
                             SetUpCardPlay(() => true, startDelay);
                             break;
                         }
 
                         // Introduce XXXY. 
-                        case 4: {
+                        case 5: {
                             SetUpViewOnly();
                             break;
                         }
 
                         // Wait to select XXXY. 
-                        case 5: {
+                        case 6: {
                             SetUpCardSelection(
                                 () => cardManager.CurrentPattern == CardManager.Pattern.XXXY);
                             break;
                         }
 
                         // Note the reduced cost. 
-                        case 6: {
+                        case 7: {
                             SetUpViewOnly();
                             break;
                         }
 
                         // Play XXXY. 
-                        case 7: {
+                        case 8: {
                             SetUpCardPlay(() => true);
                             break;
                         }
 
                         // Wait for combat.  
-                        case 8: {
+                        case 9: {
                             Action handler = null;
                             handler = () => {
                                 Close();
@@ -348,6 +354,52 @@ namespace CSCI526GameJam {
 
                         // Wait for combat. 
                         case 8: {
+                            Action handler = null;
+                            handler = () => {
+                                Close();
+                                gameManager.OnCombatStarted -= handler;
+                            };
+                            gameManager.OnCombatStarted += handler;
+
+                            break;
+                        }
+                    }
+                    break;
+                }
+
+                // Tutorial level 4. 
+                case 3: {
+                    switch (stepIndex) {
+
+                        // Introduce ABCD. 
+                        case 0: {
+                            SetUpViewOnly();
+                            break;
+                        }
+
+                        // Wait to select ABCD. 
+                        case 1: {
+                            SetUpCardSelection(
+                                () => 
+                                cardManager.CurrentPattern == CardManager.Pattern.ABCD
+                                && cardManager.NumSelected == cardManager.NumOnHand);
+                            break;
+                        }
+
+                        // Note the change of level and effect. 
+                        case 2: {
+                            SetUpViewOnly();
+                            break;
+                        }
+
+                        // Play ABCD. 
+                        case 3: {
+                            SetUpCardPlay(() => true);
+                            break;
+                        }
+
+                        // Wait for combat. 
+                        case 4: {
                             Action handler = null;
                             handler = () => {
                                 Close();
