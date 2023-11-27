@@ -9,11 +9,13 @@ namespace CSCI526GameJam {
         
         #region Fields
         [MandatoryFields]
-        [SerializeField] private UITowerInfo towerInfo;
+        [SerializeField] private UITowerInfoPopup towerInfo;
+        [SerializeField] private UIEffectInfoPopup effectInfo;
         #endregion
 
         #region Publics
-        public UITowerInfo TowerInfo => towerInfo;
+        public UITowerInfoPopup TowerInfo => towerInfo;
+        public UIEffectInfoPopup EffectInfo => effectInfo;
         #endregion
 
         #region Internals
@@ -24,6 +26,7 @@ namespace CSCI526GameJam {
             base.Awake();
 
             towerInfo.Init();
+            effectInfo.Init();
         }
         #endregion
     }

@@ -20,6 +20,9 @@ namespace CSCI526GameJam {
 
         #region Publics
         public EffectConfig Config => config;
+        public int NumStacks => numStacks;
+        public int Duration => duration;
+        public int Elapsed => elapsed;
 
         public bool IsExpired {
             get {

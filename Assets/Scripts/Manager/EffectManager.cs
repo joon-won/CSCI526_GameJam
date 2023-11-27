@@ -15,31 +15,47 @@ namespace CSCI526GameJam {
         #endregion
 
         #region Publics
+        public event Action<Effect> OnEffectAdded;
+        public event Action<Effect[]> OnEffectUpdated;
+        public event Action<Effect[]> OnEffectRemoved;
+
         /// <summary>
         /// Add a new effect. 
         /// </summary>
         public void AddEffect(Effect effect) {
-            if (effects.TryGetValue(effect.Config, out var existingBuff)) {
-                existingBuff.Apply();
+            if (effects.TryGetValue(effect.Config, out var existingEffect)) {
+                existingEffect.Apply();
+                OnEffectAdded?.Invoke(existingEffect);
             }
             else {
                 orderedConfigs.Add(effect.Config);
                 effects[effect.Config] = effect;
                 effect.Apply();
+                OnEffectAdded?.Invoke(effect);
             }
         }
         #endregion
 
         #region Internals
         private void UpdateAll() {
+            var updated = new List<Effect>();
+            var removed = new List<Effect>();
             foreach (var effect in effects.Values.ToList()) {
                 effect.Update();
-                if (!effect.IsExpired) continue;
+                if (effect.IsExpired) {
+                    effect.End();
+                    orderedConfigs.Remove(effect.Config);
+                    effects.Remove(effect.Config);
 
-                effect.End();
-                orderedConfigs.Remove(effect.Config);
-                effects.Remove(effect.Config);
+                    removed.Add(effect);
+                }
+                else {
+                    updated.Add(effect);
+                }
             }
+
+            OnEffectUpdated?.Invoke(updated.ToArray());
+            OnEffectRemoved?.Invoke(removed.ToArray());
         }
         #endregion
 

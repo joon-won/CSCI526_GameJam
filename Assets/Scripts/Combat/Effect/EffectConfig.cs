@@ -11,8 +11,13 @@ namespace CSCI526GameJam {
         #region Fields
         [ClassHeader(typeof(EffectConfig))]
 
+        [Title("UI")]
         [SerializeField] private Sprite image;
+        [SerializeField] private Color tint;
+        [SerializeField, TextArea(5, 10)] 
+        private string description;
 
+        [Title("Data")]
         [SerializeField] protected bool isPermanent;
         [SerializeField, HideIf("isPermanent")] 
         protected int duration;
@@ -20,11 +25,12 @@ namespace CSCI526GameJam {
         protected bool isDurationStackable;
 
         [SerializeField] protected bool isEffectStackable;
-
         #endregion
 
         #region Publics
         public Sprite Image => image;
+        public Color Tint => tint;
+        public string Description => description;
 
         public bool IsPermanent => isPermanent;
         public int Duration => isPermanent ? -1 : duration;
