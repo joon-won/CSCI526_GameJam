@@ -26,6 +26,7 @@ namespace CSCI526GameJam {
         private Coroutine freezeRoutine;
 
         private SpriteRenderer spriteRenderer;
+        private DamageFlasher damageFlasher;
         #endregion
 
         #region Public
@@ -55,6 +56,7 @@ namespace CSCI526GameJam {
 
         public void TakeDamage(float damage) {
             currentHitPoint -= damage;
+            damageFlasher.Flash();
 
             if (isAlive && currentHitPoint <= 0f) {
                 isAlive = false;
@@ -99,6 +101,7 @@ namespace CSCI526GameJam {
         private void Awake() {
             spriteRenderer = GetComponent<SpriteRenderer>();
             spriteRenderer.sprite = config.RegularSprite;
+            damageFlasher = GetComponent<DamageFlasher>();
 
             InitNumerics();
             currentHitPoint = maxHitPoint;

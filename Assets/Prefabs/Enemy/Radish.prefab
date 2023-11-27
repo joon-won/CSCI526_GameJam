@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: -7073844933530562394}
   - component: {fileID: 494018975286139428}
   - component: {fileID: 5850992664518237915}
+  - component: {fileID: -5748093368161668373}
   m_Layer: 9
   m_Name: Radish
   m_TagString: Untagged
@@ -57,7 +58,7 @@ SpriteRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: 50fb09de2bc006747ad12f63b402193f, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -265,6 +266,20 @@ MonoBehaviour:
       type: {class: Numeric/ModifierCollection, ns: CSCI526GameJam, asm: Assembly-CSharp}
       data:
         modifiers: []
+--- !u!114 &-5748093368161668373
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5138150492238087183}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d7090da94ce0b5d428b0fbfb48a8a8a9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  color: {r: 1, g: 1, b: 1, a: 1}
+  duration: 0.15
 --- !u!1001 &6837563182225764686
 PrefabInstance:
   m_ObjectHideFlags: 0

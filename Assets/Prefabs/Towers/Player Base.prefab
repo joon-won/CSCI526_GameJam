@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 6547411410269924689}
   - component: {fileID: 7667782118476514626}
   - component: {fileID: 4040350164986812327}
+  - component: {fileID: 1442333559895692629}
   m_Layer: 7
   m_Name: Entity
   m_TagString: Building
@@ -54,7 +55,7 @@ SpriteRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: 50fb09de2bc006747ad12f63b402193f, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -133,6 +134,20 @@ MonoBehaviour:
     RefIds:
     - rid: -2
       type: {class: , ns: , asm: }
+--- !u!114 &1442333559895692629
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5149023646929046421}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d7090da94ce0b5d428b0fbfb48a8a8a9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  color: {r: 1, g: 1, b: 1, a: 1}
+  duration: 0.15
 --- !u!1 &5346132812338363964
 GameObject:
   m_ObjectHideFlags: 0
@@ -197,6 +212,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 0
   maxHealth: 30
+  damageFlasher: {fileID: 1442333559895692629}
   health: 100
   references:
     version: 2

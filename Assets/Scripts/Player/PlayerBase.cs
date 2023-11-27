@@ -11,6 +11,7 @@ namespace CSCI526GameJam {
 
         [MandatoryFields]
         [SerializeField] private float maxHealth;
+        [SerializeField] private DamageFlasher damageFlasher;
 
         [ComputedFields]
         [SerializeField] private float health;
@@ -29,6 +30,7 @@ namespace CSCI526GameJam {
             
             health -= damage;
             health = Mathf.Max(0f, health);
+            damageFlasher.Flash();
 
             OnDamaged?.Invoke();
 

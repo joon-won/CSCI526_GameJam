@@ -12,6 +12,7 @@ namespace CSCI526GameJam {
         [ClassHeader(typeof(GunTower))]
 
         [MandatoryFields]
+        [SerializeField] protected Transform muzzle;
         [SerializeField] protected float rotateSpeed = 60f;
         [SerializeField] protected float attackDegree = 30f;
         [SerializeField] protected float bulletSpeed = 30f;
@@ -40,14 +41,14 @@ namespace CSCI526GameJam {
             // calculate spread and fire
             var randomDegree = Random.Range(-bulletSpread * 0.5f, bulletSpread * 0.5f);
             var rot = Quaternion.AngleAxis(randomDegree, Vector3.forward);
-            bullet.Setup(transform.position, attackDamage);
+            bullet.Setup(muzzle.position, attackDamage);
             bullet.Fire(rot * entity.transform.up, bulletSpeed, attackRange);
         }
 
         protected override void PerformUpdate() {
             // Find a target. 
             if (!target) {
-                target = transform.position.FindClosestByAngle(transform.up, attackRange, targetLayerMask);
+                target = transform.position.FindClosestByDistance(attackRange, targetLayerMask);
             }
             if (!target) return;
 

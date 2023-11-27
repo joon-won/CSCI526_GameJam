@@ -10,6 +10,7 @@ namespace CSCI526GameJam {
         [ClassHeader(typeof(IceTower))]
 
         [MandatoryFields]
+        [SerializeField] protected Transform muzzle;
         [SerializeField] private float iceSpeed = 3f;
         [SerializeField] private float iceFreezeDuration = 1f;
 
@@ -30,7 +31,7 @@ namespace CSCI526GameJam {
             var ice = ProjectilePooler.Instance.Get<Ice>();
 
             // calculate spread and fire
-            ice.Setup(transform.position, attackDamage);
+            ice.Setup(muzzle.position, attackDamage);
             ice.Fire(target.transform.position - entity.transform.position, iceSpeed, attackRange, iceFreezeDuration);
         }
 

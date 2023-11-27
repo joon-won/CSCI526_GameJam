@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 4057482738588278006}
   - component: {fileID: -3377939546242167668}
   - component: {fileID: 7663806781496647365}
+  - component: {fileID: -4891731113219846417}
   m_Layer: 9
   m_Name: Trunk
   m_TagString: Enemy
@@ -57,7 +58,7 @@ SpriteRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: 50fb09de2bc006747ad12f63b402193f, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -266,6 +267,20 @@ MonoBehaviour:
       type: {class: Numeric/ModifierCollection, ns: CSCI526GameJam, asm: Assembly-CSharp}
       data:
         modifiers: []
+--- !u!114 &-4891731113219846417
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2591050519041031364}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d7090da94ce0b5d428b0fbfb48a8a8a9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  color: {r: 1, g: 1, b: 1, a: 1}
+  duration: 0.15
 --- !u!1001 &7927677537063546926
 PrefabInstance:
   m_ObjectHideFlags: 0
