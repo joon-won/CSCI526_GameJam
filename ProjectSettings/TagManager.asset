@@ -65,7 +65,7 @@ TagManager:
   - name: UI
     uniqueID: 3005923827
     locked: 0
-  - name: Tutorial Overlay UI
+  - name: Tutorial UI
     uniqueID: 3838424087
     locked: 0
   - name: Pause Menu UI

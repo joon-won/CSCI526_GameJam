@@ -47,6 +47,7 @@ namespace CSCI526GameJam {
             rangeIndicator.gameObject.SetActive(true);
             rangeIndicator.localScale = tower.Config.AttackRange * 2f * Vector3.one;
 
+            transform.position = MapManager.Instance.MouseSpot.Position;
             Refresh();
         }
 

@@ -283,8 +283,14 @@ namespace CSCI526GameJam {
                             break;
                         }
 
-                        // Wait for combat.  
+                        // Note effect info. 
                         case 9: {
+                            SetUpViewOnly();
+                            break;
+                        }
+
+                        // Wait for combat.  
+                        case 10: {
                             Action handler = null;
                             handler = () => {
                                 Close();
