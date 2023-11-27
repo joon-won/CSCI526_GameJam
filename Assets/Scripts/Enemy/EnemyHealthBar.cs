@@ -26,6 +26,8 @@ namespace CSCI526GameJam {
         }
 
         public void SetPercentage(float percentage) {
+            percentage = Mathf.Clamp01(percentage);
+            
             healthBar.localScale =
                 new Vector3(percentage,
                 healthBar.localScale.y,

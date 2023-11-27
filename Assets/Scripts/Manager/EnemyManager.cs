@@ -49,6 +49,13 @@ namespace CSCI526GameJam {
                     return path.GroundSpots.Count > 0;
                 });
         }
+
+        [ContextMenu("Kill All")]
+        public void Debug_killAll() {
+            enemyInstances
+                .ToArray()
+                .ForEach(x => x.TakeDamage(float.PositiveInfinity));
+        }
         #endregion
 
         #region Internals

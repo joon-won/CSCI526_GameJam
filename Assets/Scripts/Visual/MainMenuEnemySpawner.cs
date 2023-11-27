@@ -83,6 +83,7 @@ namespace CSCI526GameJam {
 
                 var enemy = Instantiate(enemyPrefabs[Random.Range(0, enemyPrefabs.Length)], enemyHolder.transform);
                 enemy.transform.position = point;
+                enemy.GetComponentInChildren<EnemyHealthBar>().gameObject.SetActive(false);
 
                 var direction = transform.position - point;
                 StartCoroutine(MoveEnemyRoutine(enemy, direction.normalized));
