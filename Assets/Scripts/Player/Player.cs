@@ -131,6 +131,15 @@ namespace CSCI526GameJam {
             towerConfigToNum[config] = num;
         }
 
+        public void ToggleDemolish() {
+            if (mode != Mode.Demolish) {
+                ChangeMode(Mode.Demolish);
+            }
+            else {
+                ChangeMode(Mode.None);
+            }
+        }
+        
         public void LoadTutorial(TutorialInfo info) {
             gold = info.Gold;
             OnGoldChanged?.Invoke(gold);
