@@ -566,13 +566,18 @@ MonoBehaviour:
   startScale: 0.5
   playAnimDuration: 0.5
   playOffsetY: 50
-  selectedColor: {r: 0, g: 0.754717, b: 0.04271975, a: 1}
+  materialOnUnselected: {fileID: 2100000, guid: 87783fe79f52e3e44974e74152ac4f4f, type: 2}
+  materialOnHighlighted: {fileID: 2100000, guid: d93bd657d66720c46bdaf98a8c0d2fe5, type: 2}
+  levelMaterials:
+  - {fileID: 2100000, guid: f3ddb902a73d13445a2b2a74459b575b, type: 2}
+  - {fileID: 2100000, guid: 46932e14f879b5e448202c436b992ab5, type: 2}
+  - {fileID: 2100000, guid: 90f0a567f36843941977b5db80796b0e, type: 2}
+  levelColors:
+  - {r: 0.8962264, g: 0.8273625, b: 0.2654859, a: 1}
+  - {r: 0, g: 0.5442721, b: 0.8980392, a: 1}
+  - {r: 0.8773585, g: 0.17712708, b: 0.17712708, a: 1}
   costRegularColor: {r: 0.99607843, g: 0.8666667, b: 0.36862746, a: 1}
   costReducedColor: {r: 0.41925037, g: 1, b: 0.3150943, a: 1}
-  levelColors:
-  - {r: 0.9960785, g: 0.86666673, b: 0.36862746, a: 1}
-  - {r: 0.26817372, g: 0.8773585, b: 0.8773585, a: 1}
-  - {r: 0.8396226, g: 0.25381792, b: 0.22495545, a: 1}
   onHoveredSortingLayer: UI
   costIcon: {fileID: 9050721005583415051}
   levelIcon: {fileID: 87717746259892327}
@@ -584,10 +589,12 @@ MonoBehaviour:
   image: {fileID: 7019330946579883525}
   button: {fileID: 6316024417927124495}
   body: {fileID: 57602776406024781}
+  backgroundImage: {fileID: 7091000170824146591}
   card:
     config: {fileID: 0}
     level: 0
     isCostHalved: 0
+  isSelected: 0
 --- !u!1 &3015054620647794258
 GameObject:
   m_ObjectHideFlags: 0
@@ -703,7 +710,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 150, y: 225}
+  m_SizeDelta: {x: 160, y: 240}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &5334746305462423934
 CanvasRenderer:
@@ -725,7 +732,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 2100000, guid: 87783fe79f52e3e44974e74152ac4f4f, type: 2}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
@@ -742,7 +749,7 @@ MonoBehaviour:
   m_FillClockwise: 1
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
-  m_PixelsPerUnitMultiplier: 1
+  m_PixelsPerUnitMultiplier: 12.03
 --- !u!1 &4724931836082403304
 GameObject:
   m_ObjectHideFlags: 0

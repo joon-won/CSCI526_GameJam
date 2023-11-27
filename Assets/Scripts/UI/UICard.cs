@@ -21,10 +21,13 @@ namespace CSCI526GameJam {
         [SerializeField] private float playAnimDuration;
         [SerializeField] private float playOffsetY;
 
-        [SerializeField] private Color selectedColor;
+        [SerializeField] private Material materialOnUnselected;
+
+        [SerializeField] private Material[] levelMaterials;
+        [SerializeField] private Color[] levelColors;
+
         [SerializeField] private Color costRegularColor;
         [SerializeField] private Color costReducedColor;
-        [SerializeField] private Color[] levelColors;
 
         [Title("UI")]
         [SerializeField] private string onHoveredSortingLayer;
@@ -39,8 +42,11 @@ namespace CSCI526GameJam {
         [SerializeField] private Button button;
         [SerializeField] private RectTransform body;
 
+        [SerializeField] private Image backgroundImage;
+
         [ComputedFields]
         [SerializeField] private Card card;
+        [SerializeField] private bool isSelected;
 
         private RectTransform rectTransform;
         private LayoutElement layoutElement;
@@ -63,6 +69,8 @@ namespace CSCI526GameJam {
 
             layoutElement.preferredWidth = 0f;
             body.localScale = Vector3.one * startScale;
+
+            UnSelect();
         }
 
         public void DoStartAnim(Vector3 startPos) {
@@ -96,11 +104,13 @@ namespace CSCI526GameJam {
         }
 
         public void Select() {
-            body.GetComponent<Image>().color = selectedColor;
+            backgroundImage.material = levelMaterials[0];
+            isSelected = true;
         }
 
         public void UnSelect() {
-            body.GetComponent<Image>().color = Color.white;
+            backgroundImage.material = materialOnUnselected;
+            isSelected = false;
         }
 
         public void Refresh() {
@@ -115,6 +125,10 @@ namespace CSCI526GameJam {
             nameText.text = card.Name;
             descriptionText.text = card.GetDescription();
             image.sprite = card.Image;
+
+            if (isSelected) {
+                backgroundImage.material = levelMaterials[level];
+            }
         }
         
         public void OnPointerEnter(PointerEventData eventData) {
