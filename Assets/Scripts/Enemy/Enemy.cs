@@ -1,36 +1,42 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Sirenix.OdinInspector;
 using UnityEngine;
 
 namespace CSCI526GameJam {
-    public abstract class Enemy : Buffable {
+    
+    public class Enemy : Buffable {
 
         #region Fields
         [ClassHeader(typeof(Enemy))]
         
         [MandatoryFields]
-        [SerializeField] protected EnemyConfig config;
+        [SerializeField] private EnemyConfig config;
 
         [ComputedFields]
-        [SerializeField] protected Numeric attackDamage;
-        [SerializeField] private Numeric moveSpeed;
         [SerializeField] private float currentHitPoint;
         [SerializeField] private Numeric maxHitPoint;
+        
+        [SerializeField] private Numeric attackDamage;
         [SerializeField] private Numeric armor;
+        [SerializeField] private Numeric moveSpeed;
+        
         [SerializeField] private Numeric gold;
 
-        [SerializeField] protected bool isAlive = true;
+        [SerializeField] private bool isAlive = true;
 
         private Coroutine pathRoutine;
         private Coroutine freezeRoutine;
 
         private SpriteRenderer spriteRenderer;
         private DamageFlasher damageFlasher;
+        private Animator animator;
         #endregion
 
         #region Public
-        public Action onDeath;
+        public event Action OnDied;
+        public event Action<float> OnHitPointChanged;
 
         public EnemyConfig Config => config;
         public bool IsAlive => isAlive;
@@ -38,23 +44,39 @@ namespace CSCI526GameJam {
 
         public float CurrentHitPoint => currentHitPoint;
         public float MaxHitPoint => maxHitPoint;
-        public event Action<float> OnHitPointChanged;
 
         public Numeric AttackDamage => attackDamage;
         public Numeric MoveSpeed => moveSpeed;
         public Numeric Armor => armor;
         public Numeric Gold => gold;
-        #endregion
+
 
         public void InitNumerics() {
+            var stats = StatSystem.Instance.Enemy;
+            
             maxHitPoint = new(config.MaxHitPoint);
+            maxHitPoint.AddModifierSet(stats.MaxHealth);
+            
             attackDamage = new(config.AttackDamage);
+            attackDamage.AddModifierSet(stats.Damage);
+            
             moveSpeed = new(config.MoveSpeed);
+            moveSpeed.AddModifierSet(stats.MoveSpeed);
+            moveSpeed.OnChanged += () => {
+                var speed = moveSpeed / config.MoveSpeed;
+                animator.speed = Mathf.Max(0f, speed);
+            };
+            
             armor = new(config.Armor);
+            armor.AddModifierSet(stats.Armor);
+            
             gold = new(config.GoldDrop);
+            gold.AddModifierSet(stats.Gold);
         }
 
         public void TakeDamage(float damage) {
+            var finalRatio = 100f / (100f + armor);
+            var finalDamage = Mathf.Max(0f, damage * finalRatio);
             currentHitPoint -= damage;
             damageFlasher.Flash();
 
@@ -63,48 +85,7 @@ namespace CSCI526GameJam {
                 Die();
             }
 
-            OnHitPointChanged?.Invoke(-damage);
-        }
-
-        private void Die(bool dropGold = true) {
-            Destroy(gameObject);
-            if (dropGold) {
-                Player.Instance.AddGold((int)gold);
-            }
-            onDeath?.Invoke();
-        }
-
-        public void FreezeEntity(float duration) {
-            if (!isAlive)
-                return;
-
-            if (freezeRoutine != null) return;
-
-            freezeRoutine = StartCoroutine(FreezeRoutine(duration));
-        }
-
-        private IEnumerator FreezeRoutine(float duration) {
-            var cooldown = 3f; // Get from config later
-
-            var prevSpeed = moveSpeed;
-            moveSpeed = new(0f);
-            spriteRenderer.sprite = config.FrozenSprite;
-            yield return new WaitForSeconds(duration);
-
-            moveSpeed = prevSpeed;
-            spriteRenderer.sprite = config.RegularSprite;
-            yield return new WaitForSeconds(cooldown);
-
-            freezeRoutine = null;
-        }
-
-        private void Awake() {
-            spriteRenderer = GetComponent<SpriteRenderer>();
-            spriteRenderer.sprite = config.RegularSprite;
-            damageFlasher = GetComponent<DamageFlasher>();
-
-            InitNumerics();
-            currentHitPoint = maxHitPoint;
+            OnHitPointChanged?.Invoke(-finalDamage);
         }
 
         public void Follow(Path path) {
@@ -117,8 +98,9 @@ namespace CSCI526GameJam {
             }
             pathRoutine = StartCoroutine(FollowPathRoutine(pathSpots));
         }
+        #endregion
 
-        // Set the json output to get the in game values.
+        #region Internals
         private IEnumerator FollowPathRoutine(List<Spot> pathSpots) {
             var index = 0;
             transform.position = pathSpots[index].Position;
@@ -128,12 +110,12 @@ namespace CSCI526GameJam {
                 yield return null;
 
                 var targetPos = pathSpots[index].Position;
-                
+
                 var xDiff = (targetPos - transform.position).x;
                 if (xDiff > 0f) spriteRenderer.flipX = true;
                 else if (xDiff < 0f) spriteRenderer.flipX = false;
-                
-                var step = moveSpeed * Time.deltaTime;
+
+                var step = Mathf.Max(0f, moveSpeed) * Time.deltaTime;
                 transform.position = Vector3.MoveTowards(transform.position, targetPos, step);
                 distance -= step;
                 if (distance <= 0f) {
@@ -154,5 +136,26 @@ namespace CSCI526GameJam {
 
             pathRoutine = null;
         }
+
+        private void Die(bool dropGold = true) {
+            Destroy(gameObject);
+            if (dropGold) {
+                Player.Instance.AddGold((int)gold);
+            }
+            OnDied?.Invoke();
+        }
+        #endregion
+
+        #region Unity Methods
+        private void Awake() {
+            spriteRenderer = GetComponent<SpriteRenderer>();
+            spriteRenderer.sprite = config.RegularSprite;
+            damageFlasher = GetComponent<DamageFlasher>();
+            animator = GetComponent<Animator>();
+
+            InitNumerics();
+            currentHitPoint = maxHitPoint;
+        }
+        #endregion
     }
 }

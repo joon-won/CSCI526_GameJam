@@ -43,11 +43,11 @@ namespace CSCI526GameJam.Effects {
 
             #region Internals
             protected override void ApplyEffect() {
-                Stats.Instance.Tower.CritChance.Value.IncreaseValue(Config.CritChance);
+                StatSystem.Instance.Tower.CritChance.Value.IncreaseValue(Config.CritChance);
             }
 
             protected override void EndEffect() {
-                Stats.Instance.Tower.CritChance.Value.DecreaseValue(Config.CritChance);
+                StatSystem.Instance.Tower.CritChance.Value.DecreaseValue(Config.CritChance);
             }
 
             protected override void UpdateEffect() {

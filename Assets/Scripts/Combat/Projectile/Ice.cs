@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using CSCI526GameJam.Buffs.EnemyBuffs;
 using UnityEngine;
 
 namespace CSCI526GameJam {
@@ -11,6 +12,8 @@ namespace CSCI526GameJam {
         [ClassHeader(typeof(Ice))]
 
         [MandatoryFields]
+        [SerializeField] private FrozenConfig frozenConfig;
+        
         [SerializeField] private Vector2 scaleRange;
         [SerializeField] private float fadingThreshold = 0.8f;
 
@@ -79,7 +82,7 @@ namespace CSCI526GameJam {
             if (!target) return;
 
             target.TakeDamage(damage);
-            target.FreezeEntity(freezeDuration);
+            target.AddBuff(frozenConfig.ToBuff(target));
         }
         #endregion
     }

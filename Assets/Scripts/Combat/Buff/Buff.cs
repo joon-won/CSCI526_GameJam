@@ -30,6 +30,8 @@ namespace CSCI526GameJam.Buffs {
         }
 
         public void Apply() {
+            elapsed = 0f;
+            
             if (numStacks == 0 || config.IsDurationStackable) {
                 duration += config.Duration;
             }

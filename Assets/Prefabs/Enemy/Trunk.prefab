@@ -13,8 +13,8 @@ GameObject:
   - component: {fileID: 307079634751858902}
   - component: {fileID: 4057482738588278006}
   - component: {fileID: -3377939546242167668}
-  - component: {fileID: 7663806781496647365}
   - component: {fileID: -4891731113219846417}
+  - component: {fileID: 6552396546539557076}
   m_Layer: 9
   m_Name: Trunk
   m_TagString: Enemy
@@ -158,115 +158,6 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
---- !u!114 &7663806781496647365
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2591050519041031364}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d4994b7f3ba30467695a40e4a745193e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  config: {fileID: 11400000, guid: 6e6f6070545271b4683f0045ff62b6c7, type: 2}
-  attackDamage:
-    baseValue: 0
-    valueModifiers:
-      rid: 1979114918915342352
-    bonusValue: 0
-    scalarModifiers:
-      rid: 1979114918915342353
-    bonusScalar: 0
-    isDirty: 1
-    resolvedValue: 0
-  moveSpeed:
-    baseValue: 0
-    valueModifiers:
-      rid: 1979114918915342354
-    bonusValue: 0
-    scalarModifiers:
-      rid: 1979114918915342355
-    bonusScalar: 0
-    isDirty: 1
-    resolvedValue: 0
-  currentHitPoint: 0
-  maxHitPoint:
-    baseValue: 0
-    valueModifiers:
-      rid: 1979114918915342356
-    bonusValue: 0
-    scalarModifiers:
-      rid: 1979114918915342357
-    bonusScalar: 0
-    isDirty: 1
-    resolvedValue: 0
-  armor:
-    baseValue: 0
-    valueModifiers:
-      rid: 1979114918915342358
-    bonusValue: 0
-    scalarModifiers:
-      rid: 1979114918915342359
-    bonusScalar: 0
-    isDirty: 1
-    resolvedValue: 0
-  gold:
-    baseValue: 0
-    valueModifiers:
-      rid: 1000
-    bonusValue: 0
-    scalarModifiers:
-      rid: 1001
-    bonusScalar: 0
-    isDirty: 1
-    resolvedValue: 0
-  isAlive: 1
-  altname: Bug
-  references:
-    version: 2
-    RefIds:
-    - rid: 1000
-      type: {class: Numeric/ModifierCollection, ns: CSCI526GameJam, asm: Assembly-CSharp}
-      data:
-        modifiers: []
-    - rid: 1001
-      type: {class: Numeric/ModifierCollection, ns: CSCI526GameJam, asm: Assembly-CSharp}
-      data:
-        modifiers: []
-    - rid: 1979114918915342352
-      type: {class: Numeric/ModifierCollection, ns: CSCI526GameJam, asm: Assembly-CSharp}
-      data:
-        modifiers: []
-    - rid: 1979114918915342353
-      type: {class: Numeric/ModifierCollection, ns: CSCI526GameJam, asm: Assembly-CSharp}
-      data:
-        modifiers: []
-    - rid: 1979114918915342354
-      type: {class: Numeric/ModifierCollection, ns: CSCI526GameJam, asm: Assembly-CSharp}
-      data:
-        modifiers: []
-    - rid: 1979114918915342355
-      type: {class: Numeric/ModifierCollection, ns: CSCI526GameJam, asm: Assembly-CSharp}
-      data:
-        modifiers: []
-    - rid: 1979114918915342356
-      type: {class: Numeric/ModifierCollection, ns: CSCI526GameJam, asm: Assembly-CSharp}
-      data:
-        modifiers: []
-    - rid: 1979114918915342357
-      type: {class: Numeric/ModifierCollection, ns: CSCI526GameJam, asm: Assembly-CSharp}
-      data:
-        modifiers: []
-    - rid: 1979114918915342358
-      type: {class: Numeric/ModifierCollection, ns: CSCI526GameJam, asm: Assembly-CSharp}
-      data:
-        modifiers: []
-    - rid: 1979114918915342359
-      type: {class: Numeric/ModifierCollection, ns: CSCI526GameJam, asm: Assembly-CSharp}
-      data:
-        modifiers: []
 --- !u!114 &-4891731113219846417
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -281,6 +172,114 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   color: {r: 1, g: 1, b: 1, a: 1}
   duration: 0.15
+--- !u!114 &6552396546539557076
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2591050519041031364}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ad6ee6391b7e38c46931395a95da7270, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  config: {fileID: 11400000, guid: 6e6f6070545271b4683f0045ff62b6c7, type: 2}
+  attackDamage:
+    baseValue: 0
+    valueModifiers:
+      rid: 8905453269226619005
+    bonusValue: 0
+    scalarModifiers:
+      rid: 8905453269226619006
+    bonusScalar: 0
+    isDirty: 1
+    resolvedValue: 0
+  moveSpeed:
+    baseValue: 0
+    valueModifiers:
+      rid: 8905453269226619007
+    bonusValue: 0
+    scalarModifiers:
+      rid: 8905453269226619008
+    bonusScalar: 0
+    isDirty: 1
+    resolvedValue: 0
+  currentHitPoint: 0
+  maxHitPoint:
+    baseValue: 0
+    valueModifiers:
+      rid: 8905453269226619009
+    bonusValue: 0
+    scalarModifiers:
+      rid: 8905453269226619010
+    bonusScalar: 0
+    isDirty: 1
+    resolvedValue: 0
+  armor:
+    baseValue: 0
+    valueModifiers:
+      rid: 8905453269226619011
+    bonusValue: 0
+    scalarModifiers:
+      rid: 8905453269226619012
+    bonusScalar: 0
+    isDirty: 1
+    resolvedValue: 0
+  gold:
+    baseValue: 0
+    valueModifiers:
+      rid: 8905453269226619013
+    bonusValue: 0
+    scalarModifiers:
+      rid: 8905453269226619014
+    bonusScalar: 0
+    isDirty: 1
+    resolvedValue: 0
+  isAlive: 1
+  references:
+    version: 2
+    RefIds:
+    - rid: 8905453269226619005
+      type: {class: Numeric/ModifierCollection, ns: CSCI526GameJam, asm: Assembly-CSharp}
+      data:
+        modifiers: []
+    - rid: 8905453269226619006
+      type: {class: Numeric/ModifierCollection, ns: CSCI526GameJam, asm: Assembly-CSharp}
+      data:
+        modifiers: []
+    - rid: 8905453269226619007
+      type: {class: Numeric/ModifierCollection, ns: CSCI526GameJam, asm: Assembly-CSharp}
+      data:
+        modifiers: []
+    - rid: 8905453269226619008
+      type: {class: Numeric/ModifierCollection, ns: CSCI526GameJam, asm: Assembly-CSharp}
+      data:
+        modifiers: []
+    - rid: 8905453269226619009
+      type: {class: Numeric/ModifierCollection, ns: CSCI526GameJam, asm: Assembly-CSharp}
+      data:
+        modifiers: []
+    - rid: 8905453269226619010
+      type: {class: Numeric/ModifierCollection, ns: CSCI526GameJam, asm: Assembly-CSharp}
+      data:
+        modifiers: []
+    - rid: 8905453269226619011
+      type: {class: Numeric/ModifierCollection, ns: CSCI526GameJam, asm: Assembly-CSharp}
+      data:
+        modifiers: []
+    - rid: 8905453269226619012
+      type: {class: Numeric/ModifierCollection, ns: CSCI526GameJam, asm: Assembly-CSharp}
+      data:
+        modifiers: []
+    - rid: 8905453269226619013
+      type: {class: Numeric/ModifierCollection, ns: CSCI526GameJam, asm: Assembly-CSharp}
+      data:
+        modifiers: []
+    - rid: 8905453269226619014
+      type: {class: Numeric/ModifierCollection, ns: CSCI526GameJam, asm: Assembly-CSharp}
+      data:
+        modifiers: []
 --- !u!1001 &7927677537063546926
 PrefabInstance:
   m_ObjectHideFlags: 0

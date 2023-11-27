@@ -5,7 +5,7 @@ using UnityEngine;
 
 namespace CSCI526GameJam.Buffs.TowerBuffs {
 
-    [CreateAssetMenu(menuName = "Buffs/Tower Buffs/Increase Attack Speed")]
+    [CreateAssetMenu(menuName = "Buffs/Tower/Increase Attack Speed")]
     public class ExtraAttackSpeedConfig : BuffConfig {
 
         #region Fields

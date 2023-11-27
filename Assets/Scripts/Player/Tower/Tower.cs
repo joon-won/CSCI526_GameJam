@@ -103,22 +103,22 @@ namespace CSCI526GameJam {
         protected abstract void PerformUpdate();
 
         protected virtual void InitNumerics() {
-            var stats = Stats.Instance.Tower;
+            var stats = StatSystem.Instance.Tower;
 
             critChance = new(config.CritChance);
-            critChance.AddNumericSet(stats.CritChance);
+            critChance.AddModifierSet(stats.CritChance);
 
             critDamage = new(config.CritDamage);
-            critDamage.AddNumericSet(stats.CritDamage);
+            critDamage.AddModifierSet(stats.CritDamage);
 
             attackDamage = new(config.AttackDamage, critChance, critDamage);
-            attackDamage.AddNumericSet(stats.AttackDamage);
+            attackDamage.AddModifierSet(stats.AttackDamage);
 
             attackSpeed = new(config.AttackSpeed);
-            attackSpeed.AddNumericSet(stats.AttackSpeed);
+            attackSpeed.AddModifierSet(stats.AttackSpeed);
 
             attackRange = new(config.AttackRange);
-            attackRange.AddNumericSet(stats.AttackRange);
+            attackRange.AddModifierSet(stats.AttackRange);
         }
 
         protected virtual void TryAttack() {

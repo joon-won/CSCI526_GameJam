@@ -36,14 +36,14 @@ namespace CSCI526GameJam {
     /// Shortcut for creating a pair of value and scalar modifier. 
     /// </summary>
     [Serializable]
-    public class NumericSet {
+    public class ModifierSet {
         [SerializeField] private Numeric value; // extra value
         [SerializeField] private Numeric scalar; // extra scalar
 
         public Numeric Value => value;
         public Numeric Scalar => scalar;
 
-        public NumericSet() {
+        public ModifierSet() {
             value = new();
             scalar = new();
         }
@@ -187,7 +187,7 @@ namespace CSCI526GameJam {
             AddModifier(scalarModifiers, ratio, numeric);
         }
 
-        public void AddNumericSet(NumericSet set) {
+        public void AddModifierSet(ModifierSet set) {
             AddValueModifier(1f, set.Value);
             AddScalarModifier(1f, set.Scalar);
         }

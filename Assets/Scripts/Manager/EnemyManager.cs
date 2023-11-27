@@ -129,7 +129,7 @@ namespace CSCI526GameJam {
                     var enemy = Instantiate(enemyConfigToPrefab[config], wave.Path.GroundSpots[0].Position, Quaternion.identity);
                     enemy.transform.SetParent(enemyHolder.transform);
                     enemy.Follow(wave.Path);
-                    enemy.onDeath += () => OnEnemyDied(enemy);
+                    enemy.OnDied += () => OnEnemyDied(enemy);
                     enemyInstances.Add(enemy);
 
                     elapsed = 0f;

@@ -43,11 +43,11 @@ namespace CSCI526GameJam.Effects {
 
             #region Internals
             protected override void ApplyEffect() {
-                Stats.Instance.Tower.AttackDamage.Scalar.IncreaseValue(Config.DamagePercentage);
+                StatSystem.Instance.Tower.AttackDamage.Scalar.IncreaseValue(Config.DamagePercentage);
             }
 
             protected override void EndEffect() {
-                Stats.Instance.Tower.AttackDamage.Scalar.DecreaseValue(Config.DamagePercentage);
+                StatSystem.Instance.Tower.AttackDamage.Scalar.DecreaseValue(Config.DamagePercentage);
             }
 
             protected override void UpdateEffect() {
