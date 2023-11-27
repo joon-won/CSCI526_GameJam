@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using CSCI526GameJam.Effects;
 
 namespace CSCI526GameJam {
 
@@ -11,33 +12,22 @@ namespace CSCI526GameJam {
         #region Fields
         [ClassHeader(typeof(IncreaseCritChance))]
 
-        [SerializeField] private float lv1Increase;
-        [SerializeField] private float lv2Increase;
-        [SerializeField] private float lv3Increase;
+        [SerializeField] private EffectConfig lv1Config;
+        [SerializeField] private EffectConfig lv2Config;
+        [SerializeField] private EffectConfig lv3Config;
         #endregion
 
         #region Publics
         public override void PlayLv1() {
-            EffectManager.Instance.AddEffect(
-                () => Stats.Instance.Tower.CritChance.Scalar.IncreaseValue(lv1Increase),
-                () => Stats.Instance.Tower.CritChance.Scalar.DecreaseValue(lv1Increase),
-                duration: 1
-            );
+            EffectManager.Instance.AddEffect(lv1Config.ToEffect());
         }
 
         public override void PlayLv2() {
-            EffectManager.Instance.AddEffect(
-                () => Stats.Instance.Tower.CritChance.Scalar.IncreaseValue(lv2Increase),
-                () => Stats.Instance.Tower.CritChance.Scalar.DecreaseValue(lv2Increase),
-                duration: 1
-            );
+            EffectManager.Instance.AddEffect(lv2Config.ToEffect());
         }
 
         public override void PlayLv3() {
-            EffectManager.Instance.AddEffect(
-                () => Stats.Instance.Tower.CritChance.Scalar.IncreaseValue(lv3Increase),
-                () => Stats.Instance.Tower.CritChance.Scalar.DecreaseValue(lv3Increase)
-            );
+            EffectManager.Instance.AddEffect(lv3Config.ToEffect());
         }
         #endregion
 

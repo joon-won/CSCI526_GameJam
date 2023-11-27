@@ -1,0 +1,24 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f47d0d5c9fab22341b1d63358fa66e22, type: 3}
+  m_Name: Increase Damage
+  m_EditorClassIdentifier: 
+  cardName: Increase Damage
+  cost: 5
+  descriptions:
+  - 'Increase 5% damage for the next combat. '
+  - 'Increase 10% damage for the next combat. '
+  - 'Increase 10% damage permanently. '
+  image: {fileID: 0}
+  lv1Config: {fileID: 11400000, guid: 45cce95e50f1c49499dbf7effc36246c, type: 2}
+  lv2Config: {fileID: 11400000, guid: 2179e2db9c617344e9db9dcee6b4f858, type: 2}
+  lv3Config: {fileID: 11400000, guid: 5d0c263b4e0ad8c4e86ce29fbf960d54, type: 2}

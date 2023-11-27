@@ -12,15 +12,15 @@ EditorBuildSettings:
     path: Assets/Scenes/Gameplay.unity
     guid: 2cda990e2423bbf4892e6590ba056729
   - enabled: 1
-    path: Assets/Scenes/GameContinue.unity
+    path: Assets/Scenes/Old/GameContinue.unity
     guid: 9b83aa1f8f38d4c2fadb05d91c8f2030
   - enabled: 1
-    path: Assets/Scenes/GameOver.unity
+    path: Assets/Scenes/Old/GameOver.unity
     guid: e89561f34c40c4d19b4f5600ed936069
   - enabled: 1
-    path: Assets/Scenes/Rule.unity
+    path: Assets/Scenes/Old/Rule.unity
     guid: f36e84961ea31461e8a5e3440c062261
   - enabled: 1
-    path: Assets/Scenes/HelpPanel.unity
+    path: Assets/Scenes/Old/HelpPanel.unity
     guid: 96384390440794d1d97c77097e2bee4b
   m_configObjects: {}

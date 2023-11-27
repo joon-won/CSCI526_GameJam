@@ -1,0 +1,24 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 81f116acacc1d469f9545f0ce7f86723, type: 3}
+  m_Name: Increase Crit Chance
+  m_EditorClassIdentifier: 
+  cardName: Increase Crit Chance
+  cost: 5
+  descriptions:
+  - 'Increase 10% critical chance for the next combat. '
+  - 'Increase 20% critical chance for the next combat. '
+  - 'Increase 20% critical chance permanently. '
+  image: {fileID: 0}
+  lv1Config: {fileID: 11400000, guid: 0323a736d1e0bcb40a8fbc92902f43fc, type: 2}
+  lv2Config: {fileID: 11400000, guid: cf038144d353c9744942c2f6b514b381, type: 2}
+  lv3Config: {fileID: 11400000, guid: 272bff7d1c896104283298b35730ef9e, type: 2}

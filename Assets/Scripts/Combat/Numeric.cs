@@ -243,6 +243,7 @@ namespace CSCI526GameJam {
             OnChanged?.Invoke();
         }
 
+        [Button("Update", ButtonSizes.Medium), EnableGUI]
         private void Update() {
             resolvedValue = (baseValue + valueModifiers.Value + bonusValue)
                 * (1f + scalarModifiers.Value + bonusScalar);

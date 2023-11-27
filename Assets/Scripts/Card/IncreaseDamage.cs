@@ -8,37 +8,25 @@ namespace CSCI526GameJam {
     [CreateAssetMenu(menuName = "Config/Card/Increase Damage")]
     public class IncreaseDamage : CardConfig {
 
-
         #region Fields
         [ClassHeader(typeof(IncreaseDamage))]
 
-        [SerializeField] private float lv1Increase;
-        [SerializeField] private float lv2Increase;
-        [SerializeField] private float lv3Increase;
+        [SerializeField] private EffectConfig lv1Config;
+        [SerializeField] private EffectConfig lv2Config;
+        [SerializeField] private EffectConfig lv3Config;
         #endregion
 
         #region Publics
         public override void PlayLv1() {
-            EffectManager.Instance.AddEffect(
-                () => Stats.Instance.Tower.AttackDamage.Scalar.IncreaseValue(lv1Increase),
-                () => Stats.Instance.Tower.AttackDamage.Scalar.DecreaseValue(lv1Increase),
-                duration: 1
-                );
+            EffectManager.Instance.AddEffect(lv1Config.ToEffect());
         }
 
         public override void PlayLv2() {
-            EffectManager.Instance.AddEffect(
-                () => Stats.Instance.Tower.AttackDamage.Scalar.IncreaseValue(lv2Increase),
-                () => Stats.Instance.Tower.AttackDamage.Scalar.DecreaseValue(lv2Increase),
-                duration: 1
-                );
+            EffectManager.Instance.AddEffect(lv2Config.ToEffect());
         }
 
         public override void PlayLv3() {
-            EffectManager.Instance.AddEffect(
-                () => Stats.Instance.Tower.AttackDamage.Scalar.IncreaseValue(lv3Increase),
-                () => Stats.Instance.Tower.AttackDamage.Scalar.DecreaseValue(lv3Increase)
-                );
+            EffectManager.Instance.AddEffect(lv3Config.ToEffect());
         }
         #endregion
 
