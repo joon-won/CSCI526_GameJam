@@ -47,6 +47,7 @@ namespace CSCI526GameJam {
         public event Action<TowerConfig> OnTowerPlaced;
         public event Action<TowerConfig> OnTowerDemolished;
 
+        public Mode CurrentMode => mode;
         public int Gold => gold;
 
         /// <summary>
