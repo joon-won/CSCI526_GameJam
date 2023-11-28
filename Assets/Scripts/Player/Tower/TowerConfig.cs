@@ -10,7 +10,6 @@ namespace CSCI526GameJam {
     public class TowerConfig : ScriptableObject {
 
         #region Fields
-        [SerializeField] private Sprite preview;
         [SerializeField] private Sprite image;
         [TextArea(5, 10)]
         [SerializeField] private string description;
@@ -23,7 +22,6 @@ namespace CSCI526GameJam {
         #endregion
 
         #region Publics
-        public Sprite Preview => preview;
         public Sprite Image => image;
         public string Description => description;
 

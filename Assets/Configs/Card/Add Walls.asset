@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3f5f40d4155014f6d9d3176a33df599a, type: 3}
   m_Name: Add Walls
   m_EditorClassIdentifier: 
-  cardName: Add Walls
+  cardName: Wall
   cost: 1
   descriptions:
   - 'Add 2 walls. '

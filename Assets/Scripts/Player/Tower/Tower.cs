@@ -20,7 +20,6 @@ namespace CSCI526GameJam {
         [SerializeField] protected TowerConfig config;
 
         [ComputedFields]
-        [SerializeField] protected Sprite previewImage;
         [SerializeField] protected Sprite regularImage;
         [SerializeField] protected TowerEntity entity;
 
@@ -40,7 +39,6 @@ namespace CSCI526GameJam {
 
         public TowerConfig Config => config;
         public string TowerName => config.name;
-        public Sprite Preview => previewImage;
         public Sprite Image => regularImage;
         public Spot Spot => entity.Spot;
         public Collider2D Collider2D => entity.Collider2D;
@@ -137,7 +135,6 @@ namespace CSCI526GameJam {
 
         #region Unity Methods
         protected virtual void Awake() {
-            previewImage = config.Preview;
             regularImage = config.Image;
 
             entity = GetComponentInChildren<TowerEntity>();

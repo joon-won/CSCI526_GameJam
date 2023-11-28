@@ -41,7 +41,7 @@ namespace CSCI526GameJam {
                 CancelPreview();
             }
             isPreviewing = true;
-            spriteRenderer.sprite = tower.Config.Preview;
+            spriteRenderer.sprite = tower.Config.Image;
             cachedTower = tower;
 
             rangeIndicator.gameObject.SetActive(true);

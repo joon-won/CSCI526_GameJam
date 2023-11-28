@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d1d019fd95da3074fb3f7cd72ffede7a, type: 3}
   m_Name: Add Buff Towers
   m_EditorClassIdentifier: 
-  cardName: Add Buff Towers
+  cardName: Buff Tower
   cost: 2
   descriptions:
   - 'Add 1 buff tower. '

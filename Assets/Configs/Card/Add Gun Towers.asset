@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b41dab5d92aa94e76852fd7cc5d3159c, type: 3}
   m_Name: Add Gun Towers
   m_EditorClassIdentifier: 
-  cardName: Add Gun Towers
+  cardName: Gun Tower
   cost: 2
   descriptions:
   - 'Add 1 gun tower. '
