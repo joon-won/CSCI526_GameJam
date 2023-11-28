@@ -16,10 +16,10 @@ MonoBehaviour:
   cost: 6
   descriptions:
   - 'Add 1 laser tower. '
+  - 'Add 2 laser towers. '
   - 'Add 3 laser towers. '
-  - 'Add 6 laser towers. '
   image: {fileID: 0}
   config: {fileID: 11400000, guid: d100f1521901e0b4a80f2162a06be743, type: 2}
   numLv1: 1
-  numLv2: 3
-  numLv3: 6
+  numLv2: 2
+  numLv3: 3

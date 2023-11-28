@@ -16,8 +16,8 @@ MonoBehaviour:
   cost: 3
   descriptions:
   - 'Add 1 buff tower. '
+  - 'Add 2 buff towers. '
   - 'Add 3 buff towers. '
-  - 'Add 6 buff towers. '
   image: {fileID: 0}
   config: {fileID: 11400000, guid: bd915f10ef27e8b48b074e4284a75b2d, type: 2}
   numLv1: 1

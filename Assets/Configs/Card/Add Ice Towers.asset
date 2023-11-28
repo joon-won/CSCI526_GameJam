@@ -16,8 +16,8 @@ MonoBehaviour:
   cost: 5
   descriptions:
   - 'Add 1 ice tower. '
+  - 'Add 2 ice towers. '
   - 'Add 3 ice towers. '
-  - 'Add 6 ice towers. '
   image: {fileID: 0}
   config: {fileID: 11400000, guid: a7fae8a0445f9b84ab7a7060a509152d, type: 2}
   numLv1: 1

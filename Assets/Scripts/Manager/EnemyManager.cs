@@ -196,7 +196,10 @@ namespace CSCI526GameJam {
             public bool HasFlyingEnemies => hasFlyingEnemies;
 
             public EnemyWave(WaveInfo waveInfo) {
-                enemies = waveInfo.Enemies.Reverse().ToList();
+                enemies = waveInfo.EnemyInfos
+                    .SelectMany(enemyInfo => Enumerable.Repeat(enemyInfo.Config, enemyInfo.Num))
+                    .Reverse()
+                    .ToList();
 
                 hasFlyingEnemies = enemies.Any(x => x.IsFlying);
             }

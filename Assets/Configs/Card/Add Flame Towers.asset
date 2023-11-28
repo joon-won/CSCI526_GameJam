@@ -16,10 +16,10 @@ MonoBehaviour:
   cost: 4
   descriptions:
   - 'Add 1 flame tower. '
+  - 'Add 2 flame towers. '
   - 'Add 3 flame towers. '
-  - 'Add 6 flame towers. '
   image: {fileID: 0}
   config: {fileID: 11400000, guid: 74dcbdc5b7f92c346ab500f307e4df2c, type: 2}
   numLv1: 1
-  numLv2: 3
-  numLv3: 6
+  numLv2: 2
+  numLv3: 3

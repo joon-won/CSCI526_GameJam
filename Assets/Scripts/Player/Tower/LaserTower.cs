@@ -42,6 +42,10 @@ namespace CSCI526GameJam {
         #endregion
 
         #region Unity Methods
+        protected override void Awake() {
+            base.Awake();
+            laserShooter.positionCount = 2;
+        }
         #endregion
     }
 }
