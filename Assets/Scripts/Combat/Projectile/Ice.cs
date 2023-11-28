@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using CSCI526GameJam.Buffs;
 using CSCI526GameJam.Buffs.EnemyBuffs;
 using UnityEngine;
 
@@ -12,7 +13,7 @@ namespace CSCI526GameJam {
         [ClassHeader(typeof(Ice))]
 
         [MandatoryFields]
-        [SerializeField] private FrozenConfig frozenConfig;
+        [SerializeField] private BuffConfig buffConfig;
         
         [SerializeField] private Vector2 scaleRange;
         [SerializeField] private float fadingThreshold = 0.8f;
@@ -21,7 +22,6 @@ namespace CSCI526GameJam {
         [SerializeField] private float speed;
         [SerializeField] private float elapsed = 0f;
         [SerializeField] private float duration;
-        [SerializeField] private float freezeDuration = 1f;
 
         private SpriteRenderer spriteRenderer;
         #endregion
@@ -34,11 +34,10 @@ namespace CSCI526GameJam {
         /// <param name="direction">Shooting direction. </param>
         /// <param name="speed">Bullet speed. </param>
         /// <param name="range">Max shooting distance. </param>
-        public void Fire(Vector3 direction, float speed, float range, float freezeDuration) {
+        public void Fire(Vector3 direction, float speed, float range) {
             transform.FaceTo(direction.normalized);
             this.speed = speed;
             duration = range / speed;
-            this.freezeDuration = freezeDuration;
             elapsed = 0f;
             transform.localScale = Vector3.one * scaleRange.x;
             spriteRenderer.color = Color.white;
@@ -82,7 +81,7 @@ namespace CSCI526GameJam {
             if (!target) return;
 
             target.TakeDamage(damage);
-            target.AddBuff(frozenConfig.ToBuff(target));
+            target.AddBuff(buffConfig.ToBuff(target));
         }
         #endregion
     }

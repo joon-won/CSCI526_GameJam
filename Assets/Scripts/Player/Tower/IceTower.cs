@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 namespace CSCI526GameJam {
+
     public class IceTower : Tower {
 
         #region Fields
@@ -12,7 +13,6 @@ namespace CSCI526GameJam {
         [MandatoryFields]
         [SerializeField] protected Transform muzzle;
         [SerializeField] private float iceSpeed = 3f;
-        [SerializeField] private float iceFreezeDuration = 1f;
 
         [ComputedFields]
         [SerializeField] private Enemy target;
@@ -32,7 +32,7 @@ namespace CSCI526GameJam {
 
             // calculate spread and fire
             ice.Setup(muzzle.position, attackDamage);
-            ice.Fire(target.transform.position - entity.transform.position, iceSpeed, attackRange, iceFreezeDuration);
+            ice.Fire(target.transform.position - entity.transform.position, iceSpeed, attackRange);
         }
 
         protected override void PerformUpdate() {

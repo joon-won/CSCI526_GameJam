@@ -116,10 +116,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   isDisposed: 0
   damage: 0
-  frozenConfig: {fileID: 11400000, guid: f3fa55371c34947cf8191cf330205d71, type: 2}
+  buffConfig: {fileID: 11400000, guid: f3fa55371c34947cf8191cf330205d71, type: 2}
   scaleRange: {x: 0.5, y: 2}
   fadingThreshold: 0.8
   speed: 0
   elapsed: 0
   duration: 0
-  freezeDuration: 1

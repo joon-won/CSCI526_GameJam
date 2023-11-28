@@ -1,0 +1,25 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a11a28258030d1a449cdc0643e13c989, type: 3}
+  m_Name: Add Flame Towers
+  m_EditorClassIdentifier: 
+  cardName: Flame Tower
+  cost: 5
+  descriptions:
+  - 'Add 1 flame tower. '
+  - 'Add 3 flame towers. '
+  - 'Add 6 flame towers. '
+  image: {fileID: 0}
+  config: {fileID: 11400000, guid: 74dcbdc5b7f92c346ab500f307e4df2c, type: 2}
+  numLv1: 1
+  numLv2: 3
+  numLv3: 6
