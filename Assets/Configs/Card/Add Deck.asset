@@ -18,7 +18,7 @@ MonoBehaviour:
   - 'Add 5 cards to the deck. '
   - 'Add 10 cards to the deck. '
   - 'Add 20 cards to the deck. '
-  image: {fileID: 0}
+  image: {fileID: 21300000, guid: b41e60a3c7cba524ea7a7856505f4e89, type: 3}
   lv1: 5
   lv2: 10
   lv3: 20

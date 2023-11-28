@@ -18,7 +18,7 @@ MonoBehaviour:
   - 'Add 1 flame tower. '
   - 'Add 2 flame towers. '
   - 'Add 3 flame towers. '
-  image: {fileID: 0}
+  image: {fileID: 21300000, guid: a3725a3a8b7f4c149a2d0ff3e5b3d656, type: 3}
   config: {fileID: 11400000, guid: 74dcbdc5b7f92c346ab500f307e4df2c, type: 2}
   numLv1: 1
   numLv2: 2

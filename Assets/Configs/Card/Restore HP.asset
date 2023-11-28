@@ -18,7 +18,7 @@ MonoBehaviour:
   - 'Restore 2 HP. '
   - 'Restore 5 HP. '
   - 'Restore 10 HP. '
-  image: {fileID: 0}
+  image: {fileID: 21300000, guid: 2f5b4837555d5b0439b905fb85bfab76, type: 3}
   lv1Heal: 2
   lv2Heal: 5
   lv3Heal: 10

@@ -12,13 +12,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bbcff02b2a92bd74d84ccb79844cdfe1, type: 3}
   m_Name: Reduce Armor
   m_EditorClassIdentifier: 
-  cardName: Corrupt
+  cardName: Cracking
   cost: 4
   descriptions:
   - 'Decrease the armor of enemies by 10% for the next combat. '
   - 'Decrease the armor of enemies by 15% for the next 2 combats. '
   - 'Decrease the armor of enemies by 20% permanently. '
-  image: {fileID: 0}
+  image: {fileID: 21300000, guid: dfc562e0755d3c64d950823ae11ad237, type: 3}
   lv1: {fileID: 11400000, guid: 84675d24fc6c7bb4c95b4a468a856757, type: 2}
   lv2: {fileID: 11400000, guid: b955664da38721e4fa1f731729c1b937, type: 2}
   lv3: {fileID: 11400000, guid: ebbaa5846baedd44cb22f6c203739e37, type: 2}

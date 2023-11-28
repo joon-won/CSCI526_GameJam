@@ -18,7 +18,7 @@ MonoBehaviour:
   - 'Increase 20% critical damage for the next combat. '
   - 'Increase 40% critical damage for the next 2 combats. '
   - 'Increase 50% critical damage permanently. '
-  image: {fileID: 0}
+  image: {fileID: 21300000, guid: 6ffa8ca51ad88354f98bac0198d82518, type: 3}
   lv1: {fileID: 11400000, guid: 31465db66dc6450469053990a6a2ef1c, type: 2}
   lv2: {fileID: 11400000, guid: 7fcb315dfdb9c1f479360e499b04e773, type: 2}
   lv3: {fileID: 11400000, guid: bca640a11c4096d4b8c904bffe8385a0, type: 2}

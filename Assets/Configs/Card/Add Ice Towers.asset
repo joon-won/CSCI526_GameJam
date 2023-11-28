@@ -18,7 +18,7 @@ MonoBehaviour:
   - 'Add 1 ice tower. '
   - 'Add 2 ice towers. '
   - 'Add 3 ice towers. '
-  image: {fileID: 0}
+  image: {fileID: 21300000, guid: 3b56633a336a53c46aa663c2c8814094, type: 3}
   config: {fileID: 11400000, guid: a7fae8a0445f9b84ab7a7060a509152d, type: 2}
   numLv1: 1
   numLv2: 2

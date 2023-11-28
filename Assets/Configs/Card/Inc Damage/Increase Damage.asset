@@ -18,7 +18,7 @@ MonoBehaviour:
   - 'Increase 10% damage for the next combat. '
   - 'Increase 15% damage for the next 2 combats. '
   - 'Increase 20% damage permanently. '
-  image: {fileID: 0}
+  image: {fileID: 21300000, guid: 5c99f86e470ecc94ab0e7beec96f0f52, type: 3}
   lv1Config: {fileID: 11400000, guid: 45cce95e50f1c49499dbf7effc36246c, type: 2}
   lv2Config: {fileID: 11400000, guid: 2179e2db9c617344e9db9dcee6b4f858, type: 2}
   lv3Config: {fileID: 11400000, guid: 5d0c263b4e0ad8c4e86ce29fbf960d54, type: 2}

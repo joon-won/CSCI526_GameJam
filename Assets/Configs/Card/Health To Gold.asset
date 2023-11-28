@@ -18,7 +18,7 @@ MonoBehaviour:
   - 'Convert 5 HP to 2 gold. '
   - 'Convert 5 HP to 5 gold. '
   - 'Convert 5 HP to 10 gold. '
-  image: {fileID: 0}
+  image: {fileID: 21300000, guid: 4c6b591f43f1d3240920400d2bd23a32, type: 3}
   healthCost: 5
   lv1Gold: 2
   lv2Gold: 5

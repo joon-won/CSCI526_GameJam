@@ -18,7 +18,7 @@ MonoBehaviour:
   - 'Add 2 walls. '
   - 'Add 4 walls. '
   - 'Add 6 walls. '
-  image: {fileID: 0}
+  image: {fileID: 21300000, guid: b9a6abe448baa5949928dd27c50a25b9, type: 3}
   config: {fileID: 11400000, guid: 512ff0b50bbfeef4ea79999559f67d82, type: 2}
   numLv1: 2
   numLv2: 4

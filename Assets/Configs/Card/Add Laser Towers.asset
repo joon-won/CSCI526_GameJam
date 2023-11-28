@@ -18,7 +18,7 @@ MonoBehaviour:
   - 'Add 1 laser tower. '
   - 'Add 2 laser towers. '
   - 'Add 3 laser towers. '
-  image: {fileID: 0}
+  image: {fileID: 21300000, guid: 5da22e1981071ba458c1a6b6946fede1, type: 3}
   config: {fileID: 11400000, guid: d100f1521901e0b4a80f2162a06be743, type: 2}
   numLv1: 1
   numLv2: 2
