@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Add Buff Towers
   m_EditorClassIdentifier: 
   cardName: Buff Tower
-  cost: 2
+  cost: 3
   descriptions:
   - 'Add 1 buff tower. '
   - 'Add 3 buff towers. '

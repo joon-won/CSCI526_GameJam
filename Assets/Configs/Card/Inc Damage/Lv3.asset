@@ -14,9 +14,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   image: {fileID: 21300000, guid: 66d839904f9e3b843a39e884c85736ab, type: 3}
   tint: {r: 1, g: 0, b: 0, a: 1}
-  description: 'Increase 10% damage. '
+  description: 'Increase 20% damage. '
   isPermanent: 1
   duration: 0
   isDurationStackable: 0
   isEffectStackable: 1
-  damagePercentage: 0.1
+  damagePercentage: 0.2

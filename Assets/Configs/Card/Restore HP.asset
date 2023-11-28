@@ -12,12 +12,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dd5c618d9b6d3a94d88cd9101b22c1ea, type: 3}
   m_Name: Restore HP
   m_EditorClassIdentifier: 
-  cardName: Restore HP
-  cost: 3
+  cardName: Emergency Repair
+  cost: 2
   descriptions:
   - 'Restore 2 HP. '
   - 'Restore 5 HP. '
-  - 'Restore 15 HP. '
+  - 'Restore 10 HP. '
   image: {fileID: 0}
   lv1Heal: 2
   lv2Heal: 5

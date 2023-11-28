@@ -12,12 +12,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f47d0d5c9fab22341b1d63358fa66e22, type: 3}
   m_Name: Increase Damage
   m_EditorClassIdentifier: 
-  cardName: Increase Damage
-  cost: 5
+  cardName: Overload
+  cost: 6
   descriptions:
-  - 'Increase 5% damage for the next combat. '
   - 'Increase 10% damage for the next combat. '
-  - 'Increase 10% damage permanently. '
+  - 'Increase 15% damage for the next 2 combats. '
+  - 'Increase 20% damage permanently. '
   image: {fileID: 0}
   lv1Config: {fileID: 11400000, guid: 45cce95e50f1c49499dbf7effc36246c, type: 2}
   lv2Config: {fileID: 11400000, guid: 2179e2db9c617344e9db9dcee6b4f858, type: 2}

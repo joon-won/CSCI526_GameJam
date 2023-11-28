@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Add Flame Towers
   m_EditorClassIdentifier: 
   cardName: Flame Tower
-  cost: 5
+  cost: 4
   descriptions:
   - 'Add 1 flame tower. '
   - 'Add 3 flame towers. '
