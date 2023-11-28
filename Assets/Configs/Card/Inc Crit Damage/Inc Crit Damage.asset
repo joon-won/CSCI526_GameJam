@@ -1,0 +1,24 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d21214cbea1bc694f8a1fe1782300e06, type: 3}
+  m_Name: Inc Crit Damage
+  m_EditorClassIdentifier: 
+  cardName: Precise Strike
+  cost: 7
+  descriptions:
+  - 'Increase 20% critical damage for the next combat. '
+  - 'Increase 40% critical damage for the next 2 combats. '
+  - 'Increase 50% critical damage permanently. '
+  image: {fileID: 0}
+  lv1: {fileID: 11400000, guid: 31465db66dc6450469053990a6a2ef1c, type: 2}
+  lv2: {fileID: 11400000, guid: 7fcb315dfdb9c1f479360e499b04e773, type: 2}
+  lv3: {fileID: 11400000, guid: bca640a11c4096d4b8c904bffe8385a0, type: 2}

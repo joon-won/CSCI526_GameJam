@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b74d57b0fa82d5044b76ddd7f59e87e2, type: 3}
   m_Name: Draw Cards
   m_EditorClassIdentifier: 
-  cardName: Draw Cards
+  cardName: Enlightenment
   cost: 3
   descriptions:
   - 'Draw 1 card. '

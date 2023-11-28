@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Add Ice Towers
   m_EditorClassIdentifier: 
   cardName: Ice Tower
-  cost: 4
+  cost: 5
   descriptions:
   - 'Add 1 ice tower. '
   - 'Add 3 ice towers. '

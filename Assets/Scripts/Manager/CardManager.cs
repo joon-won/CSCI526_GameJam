@@ -49,6 +49,13 @@ namespace CSCI526GameJam {
         public int NumOnHand => hand.Count;
         public Dictionary<CardConfig, int> CardConfigToUsageNum => cardConfigToUsageNum;
 
+
+        public void AddDeck(int num) {
+            for (int i = 0; i < num; i++) {
+                deck.Add(new(cardConfigs[Random.Range(0, cardConfigs.Count)]));
+            }
+        }
+
         /// <summary>
         /// Get a card on hand. 
         /// </summary>
@@ -339,6 +346,13 @@ namespace CSCI526GameJam {
                 default:
                     Debug.LogWarning($"Undefined pattern {currentPattern}");
                     return;
+            }
+        }
+
+        [Button("Anaylze", ButtonSizes.Medium)]
+        private void AnalyzeCards() {
+            for (int i = 0; i < 11; i++) {
+                Debug.Log($"Cost {i}: {cardConfigs.Count(x => x.Cost == i)}");
             }
         }
         #endregion

@@ -12,12 +12,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 81f116acacc1d469f9545f0ce7f86723, type: 3}
   m_Name: Increase Crit Chance
   m_EditorClassIdentifier: 
-  cardName: Increase Crit Chance
+  cardName: Aiming
   cost: 5
   descriptions:
   - 'Increase 10% critical chance for the next combat. '
-  - 'Increase 20% critical chance for the next combat. '
-  - 'Increase 20% critical chance permanently. '
+  - 'Increase 20% critical chance for the next 2 combats. '
+  - 'Increase 25% critical chance permanently. '
   image: {fileID: 0}
   lv1Config: {fileID: 11400000, guid: 0323a736d1e0bcb40a8fbc92902f43fc, type: 2}
   lv2Config: {fileID: 11400000, guid: cf038144d353c9744942c2f6b514b381, type: 2}

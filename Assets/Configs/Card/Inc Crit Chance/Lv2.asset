@@ -16,7 +16,7 @@ MonoBehaviour:
   tint: {r: 0, g: 0, b: 1, a: 1}
   description: 'Increase 20% critical chance. '
   isPermanent: 0
-  duration: 1
+  duration: 2
   isDurationStackable: 0
   isEffectStackable: 1
   critChance: 0.2
