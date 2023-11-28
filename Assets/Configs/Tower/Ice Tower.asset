@@ -12,9 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 96fb17265ad1383478010d2f040c821a, type: 3}
   m_Name: Ice Tower
   m_EditorClassIdentifier: 
-  preview: {fileID: 21300000, guid: 1db54d41ec0be6c479ea94b1a74c7916, type: 3}
   image: {fileID: 21300000, guid: 1db54d41ec0be6c479ea94b1a74c7916, type: 3}
-  description: Todo
+  description: Slow attacking tower, freezes enemies at their location
   attackDamage: 0.5
   attackSpeed: 1
   attackRange: 8

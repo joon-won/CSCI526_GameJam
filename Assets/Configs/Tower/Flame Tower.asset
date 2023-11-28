@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Flame Tower
   m_EditorClassIdentifier: 
   image: {fileID: 21300000, guid: 74ea27f0eec696f4e923dcdb10cc3a27, type: 3}
-  description: 
+  description: Flame towers inflicts damage on time to enemies
   attackDamage: 0.5
   attackSpeed: 1
   attackRange: 8
