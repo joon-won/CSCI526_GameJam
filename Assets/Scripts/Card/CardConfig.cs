@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Serialization;
 using System.Linq;
+using Sirenix.OdinInspector;
 
 namespace CSCI526GameJam {
 
@@ -15,9 +16,10 @@ namespace CSCI526GameJam {
         [SerializeField] private string cardName;
         [SerializeField] private int cost;
 
-        [TextArea(5, 10)]
-        [SerializeField] private string[] descriptions;
-        [SerializeField] private Sprite image;
+        [SerializeField, TextArea(5, 10)]
+        private string[] descriptions;
+        [SerializeField, PreviewField(200f)]
+        private Sprite image;
         #endregion
 
         #region Publics

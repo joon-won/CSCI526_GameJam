@@ -567,7 +567,6 @@ MonoBehaviour:
   playAnimDuration: 0.5
   playOffsetY: 50
   materialOnUnselected: {fileID: 2100000, guid: 87783fe79f52e3e44974e74152ac4f4f, type: 2}
-  materialOnHighlighted: {fileID: 2100000, guid: d93bd657d66720c46bdaf98a8c0d2fe5, type: 2}
   levelMaterials:
   - {fileID: 2100000, guid: f3ddb902a73d13445a2b2a74459b575b, type: 2}
   - {fileID: 2100000, guid: 46932e14f879b5e448202c436b992ab5, type: 2}
@@ -1267,6 +1266,7 @@ GameObject:
   - component: {fileID: 7589016563167434155}
   - component: {fileID: 5452362548132150742}
   - component: {fileID: 7019330946579883525}
+  - component: {fileID: 8901888841645561286}
   m_Layer: 5
   m_Name: Card Image
   m_TagString: Untagged
@@ -1289,10 +1289,10 @@ RectTransform:
   m_Father: {fileID: 8053836432342729525}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 0.5}
-  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 1, y: 1}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 100, y: 100}
+  m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &5452362548132150742
 CanvasRenderer:
@@ -1322,9 +1322,9 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: dc94daf9b469d2b4ebe27746bc31ced8, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 2a55f3707f768cf4a9be99b452df73e2, type: 3}
   m_Type: 0
-  m_PreserveAspect: 0
+  m_PreserveAspect: 1
   m_FillCenter: 1
   m_FillMethod: 4
   m_FillAmount: 1
@@ -1332,3 +1332,17 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
+--- !u!114 &8901888841645561286
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7978123797975330906}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 86710e43de46f6f4bac7c8e50813a599, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_AspectMode: 1
+  m_AspectRatio: 1

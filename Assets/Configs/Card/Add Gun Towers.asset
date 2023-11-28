@@ -18,7 +18,7 @@ MonoBehaviour:
   - 'Add 1 gun tower. '
   - 'Add 2 gun towers. '
   - 'Add 3 gun towers. '
-  image: {fileID: 0}
+  image: {fileID: 21300000, guid: dbbf9550a6fb8534fb3b6086ff543572, type: 3}
   config: {fileID: 11400000, guid: 4d28b0091e746f24da518fceee136802, type: 2}
   numLv1: 1
   numLv2: 2
