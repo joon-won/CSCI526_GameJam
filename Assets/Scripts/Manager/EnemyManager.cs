@@ -45,6 +45,8 @@ namespace CSCI526GameJam {
         public bool CanEnemiesReachBase(params Spot[] blocks) {
             return spawnSpotToWave.Keys.All(
                 spot => {
+                    if (blocks.Contains(spot)) return false;
+
                     var path = new Path(spot, TowerManager.Instance.PlayerBase.Spot, blocks);
                     return path.GroundSpots.Count > 0;
                 });
