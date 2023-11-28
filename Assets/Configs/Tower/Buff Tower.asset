@@ -12,9 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 96fb17265ad1383478010d2f040c821a, type: 3}
   m_Name: Buff Tower
   m_EditorClassIdentifier: 
-  preview: {fileID: 21300000, guid: 0b5fe17436f2c0f4aa7ea978f2818eff, type: 3}
   image: {fileID: 21300000, guid: 0b5fe17436f2c0f4aa7ea978f2818eff, type: 3}
-  description: 
+  description: Buff tower grants stationary attack speed buff to nearby towers
   attackDamage: 0
   attackSpeed: 0.25
   attackRange: 2.5
